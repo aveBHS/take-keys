@@ -1,9 +1,9 @@
 <?php
 
-function render($className, $classMethod)
+function render($className, $classMethod, $args = [])
 {
     $controller = new $className;
-    echo $controller->$classMethod();
+    echo $controller->$classMethod(...$args);
 }
 
 function env($paramName)
@@ -21,7 +21,44 @@ function env($paramName)
         fclose($file);
     }
     if(array_key_exists($paramName, $env)){
+        switch ($env[$paramName])
+        {
+            case "TRUE":
+                return true;
+            case "FALSE":
+                return false;
+        }
         return $env[$paramName];
     }
     return Null;
+}
+
+
+function getTableName($className): string
+{
+    $className = explode("\\", $className);
+    $className = strtolower($className[count($className)-1]);
+    switch (mb_substr($className, 0, -2))
+    {
+        case "ss":
+        case "sh":
+        case "ch":
+            return $className."es";
+        case "fe":
+            return mb_substr($className, 0, -2)."ves";
+        default:
+            switch (mb_substr($className, 0, -1))
+            {
+                case "s":
+                case "x":
+                case "o":
+                    return $className."es";
+                case "y":
+                    return mb_substr($className, 0, -1)."ies";
+                case "f":
+                    return mb_substr($className, 0, -2)."ves";
+                default:
+                    return $className."s";
+            }
+    }
 }
