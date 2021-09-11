@@ -2,7 +2,9 @@
 
 namespace Site\Middleware;
 
+use Site\Core\HttpRequest;
+
 interface Middleware
 {
-    public function handle($callback, $args);
+    public function handle(HttpRequest $request, $callback, $args);
 }
