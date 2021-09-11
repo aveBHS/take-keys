@@ -2,10 +2,12 @@
 
 namespace Site\Controllers\Exceptions;
 
+use Site\Core\HttpRequest;
+
 class NotFoundController
 {
-    public function view(): string
+    public function view(HttpRequest $request)
     {
-        return "404 Not Found";
+        $request->show("404 Not Found");
     }
 }

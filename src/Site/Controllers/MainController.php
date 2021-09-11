@@ -2,10 +2,12 @@
 
 namespace Site\Controllers;
 
+use \Site\Core\HttpRequest;
+
 class MainController
 {
-    public function index(): string
+    public function index(HttpRequest $request)
     {
-        return "<h1>Hello World</h1>";
+        $request->show("<h1>Hello World</h1>");
     }
 }
