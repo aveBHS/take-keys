@@ -2,24 +2,37 @@
 
 namespace Site\Core;
 
+use Site\Controllers\Controller;
+
 class HttpRequest
 {
     protected $url;
     protected $get;
     protected $post;
+    protected $method;
 
 
     public function __construct(string $url = null)
     {
         $this->url = $url ?? $_GET['route'];
+        $this->method = $_SERVER['REQUEST_METHOD'];
         $this->get = $_GET;
         $this->post = $_POST;
     }
     public function fetchRoute(string $regex)
     {
-        preg_match($regex, $this->url, $match);
-        if(!empty($match)){
-            return array_slice($match, 1);
+        $method = explode("::", $regex);
+        if(count($method) > 1) {
+            $method = $method[0];
+            $regex = substr($regex, strlen($method) + 2);
+        } else {
+            $method = "GET";
+        }
+        if($method == "MIXED" || $method == $this->method){
+            preg_match($regex, $this->url, $match);
+            if(!empty($match)){
+                return array_slice($match, 1);
+            }
         }
         return null;
     }
@@ -57,6 +70,12 @@ class HttpRequest
         }
     }
 
+    public function returnException(Controller $exception, int $code)
+    {
+        header("HTTP/1.1 $code", true, $code);
+        $exception->view($this, []);
+        die();
+    }
     public function redirect(string $url)
     {
         header("Location: $url");
