@@ -28,7 +28,12 @@ abstract class Model
         if($query->execute()){
             $result = $query->get_result();
             if($result->num_rows < 1) return Null;
-            return (object) $result->fetch_assoc();
+            $result = $result->fetch_assoc();
+            foreach ($result as $key => $value)
+            {
+                $this->$key = $value;
+            }
+            return $this;
         }
         return Null;
     }
