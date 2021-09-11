@@ -3,7 +3,7 @@
 namespace Site\Controllers\Objects;
 
 use Site\Controllers\Controller;
-use Site\Controllers\Exceptions;
+use Site\Controllers\Exceptions\NotFoundController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
 
@@ -15,7 +15,7 @@ class CardController implements Controller
         if(!is_null($object)){
             view("objects.card", ["object" => $object]);
         } else {
-            render($request, Exceptions\NotFoundController::class, "view");
+            $request->returnException(new NotFoundController(), 404);
         }
     }
 }
