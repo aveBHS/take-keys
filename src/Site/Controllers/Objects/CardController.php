@@ -10,12 +10,7 @@ class CardController
     function view(int $object_id){
         $object = (new ObjectModel())->find($object_id);
         if(!is_null($object)){
-            echo "
-            <h1>{$object->title}</h1>
-            <p>{$object->description}</p>
-            <p><i>{$object->address}</i></p>
-            <p><b>Цена: </b>{$object->cost}</p>
-            ";
+            view("objects.card", ["object" => $object]);
         } else {
             render(Exceptions\NotFoundController::class, "view");
         }

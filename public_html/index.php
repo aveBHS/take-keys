@@ -8,7 +8,6 @@ require_once __DIR__ . "/../src/Site/helpers.php";
 $route = $_GET['route'] ?? '';
 $routes = require __DIR__ . "/../src/Site/routes.php";
 
-$route_found = false;
 foreach ($routes['routes'] as $regex => $render)
 {
     preg_match($regex,$route, $match);

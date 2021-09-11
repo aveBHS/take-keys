@@ -33,7 +33,6 @@ function env($paramName)
     return Null;
 }
 
-
 function getTableName($className): string
 {
     $className = explode("\\", $className);
@@ -61,4 +60,20 @@ function getTableName($className): string
                     return $className."s";
             }
     }
+}
+
+function view(string $viewName, array $args)
+{
+    foreach ($args as $argName => $argValue)
+    {
+        if(is_array($argValue))
+            $$argName = (object) $argValue;
+        else
+            $$argName = $argValue;
+    }
+    define("VIEW_PATH", $_SERVER['DOCUMENT_ROOT'] . "/../src/Site/Views/");
+    $viewName = str_replace(".", "/", $viewName);
+    if(mb_substr($viewName, 0, -4) != ".php")
+        $viewName .= ".php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/../src/Site/Views/$viewName";
 }
