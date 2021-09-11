@@ -4,9 +4,9 @@ namespace Site\Controllers;
 
 use \Site\Core\HttpRequest;
 
-class MainController
+class MainController implements Controller
 {
-    public function index(HttpRequest $request)
+    public function view(HttpRequest $request, $args)
     {
         $request->show("<h1>Hello World</h1>");
     }

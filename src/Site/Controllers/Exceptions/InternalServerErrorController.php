@@ -2,10 +2,13 @@
 
 namespace Site\Controllers\Exceptions;
 
-class InternalServerErrorController
+use Site\Controllers\Controller;
+use Site\Core\HttpRequest;
+
+class InternalServerErrorController implements Controller
 {
-    public function view(): string
+    public function view(HttpRequest $request, $args)
     {
-        return "500 Internal Server Error";
+        $request->show("500 Internal Server Error");
     }
 }

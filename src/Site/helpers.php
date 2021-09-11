@@ -5,12 +5,12 @@ use Site\Middleware\Middleware;
 function render($request, $className, $classMethod, $args = [])
 {
     $controller = new $className;
-    $controller->$classMethod($request, ...$args);
+    $controller->$classMethod($request, $args);
 }
 
-function middleware(Middleware $middleware, $callback, $args = [])
+function middleware(Middleware $middleware, $request, $callback, $args = [])
 {
-    $middleware->handle($callback, $args);
+    $middleware->handle($request, $callback, $args);
 }
 
 function env($paramName)
@@ -69,7 +69,7 @@ function getTableName($className): string
     }
 }
 
-function view(string $viewName, array $args)
+function view(string $viewName, array $args = [])
 {
     foreach ($args as $argName => $argValue)
     {
@@ -82,5 +82,11 @@ function view(string $viewName, array $args)
     $viewName = str_replace(".", "/", $viewName);
     if(mb_substr($viewName, 0, -4) != ".php")
         $viewName .= ".php";
+
+    ob_start();
     include $_SERVER['DOCUMENT_ROOT'] . "/../src/Site/Views/$viewName";
+    $content = ob_get_contents();
+    ob_end_clean();
+
+    return $content;
 }

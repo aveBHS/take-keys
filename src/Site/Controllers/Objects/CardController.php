@@ -2,13 +2,16 @@
 
 namespace Site\Controllers\Objects;
 
+use Site\Controllers\Controller;
 use Site\Controllers\Exceptions;
+use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
 
-class CardController
+class CardController implements Controller
 {
-    function view($request, int $object_id){
-        $object = (new ObjectModel())->find($object_id);
+    function view(HttpRequest $request, $args){
+        if(!$args[0]) $request->redirect("/");
+        $object = (new ObjectModel())->find($args[0]);
         if(!is_null($object)){
             view("objects.card", ["object" => $object]);
         } else {
