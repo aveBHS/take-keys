@@ -16,10 +16,14 @@ foreach ($routes['routes'] as $regex => $render)
 {
     $fetch = $request->fetchRoute($regex);
     if(!is_null($fetch)){
-        $middleware = $render[2] ?? $routes['defaultMiddleware'];
-        middleware(new $middleware(), function ($request, $controller, $controllerMethod, $args) {
-            render($request, $controller, $controllerMethod, $args);
-        }, [$request, $render[0], $render[1], $fetch]);
+        if($render[2]) {
+            $middleware = $render[2];
+            middleware(new $middleware(), $request, function ($request, $controller, $controllerMethod, $args) {
+                render($request, $controller, $controllerMethod, $args);
+            }, [$request, $render[0], $render[1], $fetch]);
+        } else {
+            render($request, $render[0], $render[1], $fetch);
+        }
         return;
     }
 }

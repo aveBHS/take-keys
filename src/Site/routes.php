@@ -1,7 +1,6 @@
 <?php
 
 return [
-    "defaultMiddleware" => \Site\Middleware\GuestMiddleware::class,
     "routes" => [
         "~^$~" => [\Site\Controllers\MainController::class, "index"],
         "~id/(\d+)$~" => [\Site\Controllers\Objects\CardController::class, "view"]
