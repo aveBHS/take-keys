@@ -1,9 +1,16 @@
 <?php
 
-function render($className, $classMethod, $args = [])
+use Site\Middleware\Middleware;
+
+function render($request, $className, $classMethod, $args = [])
 {
     $controller = new $className;
-    echo $controller->$classMethod(...$args);
+    $controller->$classMethod($request, ...$args);
+}
+
+function middleware(Middleware $middleware, $callback, $args = [])
+{
+    $middleware->handle($callback, $args);
 }
 
 function env($paramName)
