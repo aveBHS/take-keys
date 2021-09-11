@@ -16,7 +16,7 @@
         </label><br>
         <label>
             Пароль:
-            <input type="password" name="login">
+            <input type="password" name="passwd">
         </label><br>
         <button>Войти</button>
     </form>

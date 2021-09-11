@@ -16,7 +16,7 @@ return [
             "middleware" => GuestMiddleware::class
         ],
         "POST::~login[/]?$~" => [
-            "controller" => [\Site\Controllers\User\LoginController::class, "view"],
+            "controller" => [\Site\Controllers\User\LoginController::class, "auth"],
             "middleware" => GuestMiddleware::class
         ],
         "~private[/]?$~" => [

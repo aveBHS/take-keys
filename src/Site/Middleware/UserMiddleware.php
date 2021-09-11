@@ -12,6 +12,7 @@ class UserMiddleware implements Middleware
         if(isset($_SESSION['id'])){
             return call_user_func_array($callback, $args);
         }
+        $request->setFlash("login_redirect", $request->getUrl());
         $request->redirect("/login");
         return null;
     }

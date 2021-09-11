@@ -1,7 +1,7 @@
 <?php
 session_start();
 use Site\Core\HttpRequest;
-$_SESSION['id'] = 1;
+
 spl_autoload_register(function (string $className) {
     require_once __DIR__ . '/../src/' . $className . '.php';
 });

@@ -42,6 +42,19 @@ class HttpRequest
         echo $html;
     }
 
+    public function getUrl()
+    {
+        return $this->url;
+    }
+    public function post(string $param)
+    {
+        return $this->post[$param];
+    }
+    public function get(string $param)
+    {
+        return $this->get[$param];
+    }
+
     public function setHeader(string $name, string $value)
     {
         header("$name: $value");
