@@ -32,7 +32,20 @@ class AuthService
         $_SESSION['id'] = $user->id;
     }
 
-    private function logout()
+    public function login(string $login, string $password)
+    {
+        if($this->model) return null;
+        $user = UserModel::find($login, "login");
+        if($user){
+            if($user->password == md5($password)){
+                $this->authenticate($user);
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function logout()
     {
         session_destroy();
     }

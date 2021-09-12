@@ -12,8 +12,12 @@ class LoginController implements Controller
     }
 
     function auth(HttpRequest $request, $args){
-        $_SESSION['id'] = 1;
-        $_SESSION['name'] = $request->post("login");
-        $request->redirect($request->getFlash("login_redirect") ?? "/");
+        global $auth;
+        if($auth->login($request->post("login"), $request->post("password"))) {
+            $request->redirect($request->getFlash("login_redirect") ?? "/");
+        } else {
+            $request->setFlash("login_error", "Логин или пароль неверные");
+            $request->redirect_back();
+        }
     }
 }
