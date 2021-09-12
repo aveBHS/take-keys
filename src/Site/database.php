@@ -1,6 +1,7 @@
 <?php
 
 use Site\Controllers\Exceptions\InternalServerErrorController;
+use Site\Core\HttpRequest;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/../src/Site/helpers.php";
 
@@ -15,7 +16,7 @@ if(!$link){
     if(env("debug")){
         echo($link->error);
     }
-    render(InternalServerErrorController::class, "view");
+    render(new HttpRequest(), InternalServerErrorController::class, "view");
     die();
 }
 
