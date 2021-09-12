@@ -9,6 +9,8 @@ class InternalServerErrorController implements Controller
 {
     public function view(HttpRequest $request, $args)
     {
-        $request->show("500 Internal Server Error");
+        $request->show(view("exception",
+            ["error" => (object) ["code" => 500, "message" => "Internal Server Error"]]
+        ));
     }
 }

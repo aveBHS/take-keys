@@ -9,6 +9,8 @@ class NotFoundController implements Controller
 {
     public function view(HttpRequest $request, $args)
     {
-        $request->show("404 Not Found");
+        $request->show(view("exception",
+            ["error" => (object) ["code" => 404, "message" => "Not Found"]]
+        ));
     }
 }
