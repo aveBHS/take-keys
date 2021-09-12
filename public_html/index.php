@@ -1,11 +1,16 @@
 <?php
 session_start();
+
+use Site\Core\AuthService;
 use Site\Core\HttpRequest;
 
 spl_autoload_register(function (string $className) {
     require_once __DIR__ . '/../src/' . $className . '.php';
 });
 require_once __DIR__ . "/../src/Site/helpers.php";
+
+$db = require_once __DIR__ . "/../src/Site/database.php";
+$auth = new AuthService();
 
 $route = $_GET['route'] ?? '';
 $routes = require __DIR__ . "/../src/Site/routes.php";

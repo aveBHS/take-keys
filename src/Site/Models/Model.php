@@ -12,12 +12,12 @@ abstract class Model
         $this->db = $db;
     }
 
-    public static function find($objectId)
+    public static function find($objectId, string $index = null)
     {
         $className = static::class;
         $model = new $className();
 
-        $tableName = $model->tableName ?? getTableName(get_class(static::class));
+        $tableName = $index ?? $model->tableName ?? getTableName(get_class(static::class));
         $tableIndex = $model->tableId ?? 'id';
 
         $query = $model->db->prepare(
