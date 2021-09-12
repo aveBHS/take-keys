@@ -73,10 +73,7 @@ function view(string $viewName, array $args = [])
 {
     foreach ($args as $argName => $argValue)
     {
-        if(is_array($argValue))
-            $$argName = (object) $argValue;
-        else
-            $$argName = $argValue;
+        $$argName = $argValue;
     }
     define("VIEW_PATH", $_SERVER['DOCUMENT_ROOT'] . "/../src/Site/Views/");
     $viewName = str_replace(".", "/", $viewName);
