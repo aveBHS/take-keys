@@ -8,7 +8,6 @@ use Site\Models\UserModel;
 
 class AuthService
 {
-    protected $id;
     protected $model = null;
 
     public function __construct()
