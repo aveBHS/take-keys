@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/settings.css">
     <link rel="stylesheet" href="/css/style.css">
     <title><?=$object->title?></title>
@@ -202,47 +203,72 @@
     <div class="container">
         <div class="card__wrapper">
             <div class="card__slider">
-                <div class="card__slide-picture">
-                    <img class="card__slide-img" src="<?=$images[0]->path?>" alt="#">
-                    <ul class="card__tag-list">
-                        <li class="card__tag-unit _red">Лучшая цена</li>
-                        <li class="card__tag-unit _green">Новое</li>
-                        <li class="card__tag-unit _yellow">Горячее</li>
-                    </ul>
+                <div class="card__slider-inner">
+                    <?php
+                    foreach($images as $image){ ?>
+                        <div class="card__slider-item">
+                            <img class="card__slider-img" src="<?=$image->path?>" alt="#">
+                        </div>
+                    <?php }
+                    ?>
                 </div>
+                <ul class="card__tag-list">
+                    <li class="card__tag-unit _red">Лучшая цена</li>
+                    <li class="card__tag-unit _green">Новое</li>
+                    <li class="card__tag-unit _yellow">Горячее</li>
+                </ul>
             </div>
             <div class="card__cta">
-                <h3 class="card__cta-title">Связаться с продавцом</h3>
+                <button class="card__cta-title">Связаться с продавцом</button>
                 <div class="card__cta-box">
                     <ul class="card__cta-list">
-                        <li class="card__cta-unit">
+                        <li class="card__cta-unit _desktop">
                             <button class="card__cta-btn">Написать</button>
                         </li>
-                        <li class="card__cta-unit">
+                        <li class="card__cta-unit _desktop">
                             <button class="card__cta-btn">Позвонить</button>
                         </li>
                         <li class="card__cta-unit">
                             <button class="card__cta-btn">Бронировать</button>
                         </li>
                     </ul>
-                    <p class="card__cta-descr">
+                    <p class="card__cta-descr _desktop">
                         <span>Хватит тратить время на ручной поиск лучшего варианта, включите автоподбор </span>
-                        <a class="acrd__cta-link" href="#">Подробнее</a>
+                        <a class="card__cta-link" href="#">Подробнее</a>
                     </p>
-                    <button class="card__notify-btn">
-						<span class="card__notify-icon">
-							<svg>
-								<use xlink:href="#iconPlus"></use>
-							</svg>
-						</span>
+                    <button class="card__notify-btn _desktop">
+							<span class="card__notify-icon">
+								<svg>
+									<use xlink:href="#iconPlus"></use>
+								</svg>
+							</span>
                         <span class="card__notify-text">Включить уведомления</span>
                     </button>
                 </div>
             </div>
+            <div class="card__pagination">
+                <div class="card__pagination-box">
+                    <svg>
+                        <use xlink:href="#iconPhoto"></use>
+                    </svg>
+                    <span class="card__pagination-sum"></span>
+                </div>
+                <div class="card__pagination-slider" data-mobile="false">
+                    <div class="card__pagination-inner">
+                        <?php
+                        foreach($images as $image){ ?>
+                            <div class="card__pagination-item">
+                                <img class="card__slider-img" src="<?=$image->path?>" alt="#">
+                            </div>
+                        <?php }
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <br><br><br>
-</section>
+</section>    <br><br><br>
+<script src="/js/swiper.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

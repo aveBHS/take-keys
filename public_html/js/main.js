@@ -28,3 +28,36 @@ rentUnits.forEach((item) => {
 		closeRentSelect()
 	})
 })
+// 
+const cardSlider = document.querySelector('.card__slider')
+const cardSwiper = new Swiper(cardSlider, {
+	wrapperClass: 'card__slider-inner',
+	slideClass: 'card__slider-item',
+	slidesPerView: 1
+})
+
+const paginationItems = document.querySelectorAll('.card__pagination-item')
+const paginationSum = document.querySelector('.card__pagination-sum')
+paginationSum.innerText = paginationItems.length
+
+const cardPaginationSlider = document.querySelector('.card__pagination-slider')
+
+function mobilePagination () {
+	if(window.innerWidth <= 992 && cardPaginationSlider.dataset.mobile == 'false') {
+		let cardPaginationSwiper = new Swiper(cardPaginationSlider, {
+			wrapperClass: 'card__pagination-inner',
+			slideClass: 'card__pagination-item',
+			slidesPerView: 7,
+			spaceBetween: 8
+		})
+		cardPaginationSlider.dataset.mobile = 'true'
+	}
+	if(window.innerWidth > 992) {
+		cardPaginationSlider.dataset.mobile = 'false'
+		if(cardPaginationSlider.classList.contains('swiper-initialized')) {
+			cardPaginationSwiper.destroy()
+		}
+	}
+}
+mobilePagination()
+document.addEventListener('resize', mobilePagination)
