@@ -208,11 +208,14 @@
 .rent__select-description {
 	padding: 0 16px 24px;
 }
-.card-set {
-	padding: 24px 0;
+.separator{
 	border-width: 1px 0;
 	border-style: solid;
 	border-color: var(--light);
+}
+.card-set {
+	padding: 24px 0;
+	border-bottom: 1px solid var(--light);
 }
 .card-set__wrapper {
 	display: flex;
@@ -661,4 +664,24 @@
 	.card__notify-text {
 		padding: 12px;
 	}
+}
+.address-title{
+	margin-top: 30px;
+}
+.address{
+	margin-top: 10px;
+	font-size: 3rem;
+}
+.description-title{
+	margin-top: 10px;
+	font-size: 2.2rem;
+	font-weight: 600;
+	line-height: 150%;
+	margin-bottom: 10px;
+}
+
+.description-content pre{
+	white-space:pre-wrap;
+	font-family: inherit;
+	line-height: 150%;
 }

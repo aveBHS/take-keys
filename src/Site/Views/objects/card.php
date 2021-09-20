@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/settings.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title><?=$object->title?></title>
 </head>
 <body>
@@ -61,10 +62,10 @@
             <div class="breadcrumb">
                 <ul class="breadcrumb__list">
                     <li class="breadcrumb__unit">
-                        <a class="breadcrumb__link" href="#">Каталог</a>
+                        <a class="breadcrumb__link">Каталог</a>
                     </li>
                     <li class="breadcrumb__unit">
-                        <a class="breadcrumb__link" href="#">Аренда недвижимости</a>
+                        <a class="breadcrumb__link">Аренда недвижимости</a>
                     </li>
                 </ul>
             </div>
@@ -75,18 +76,18 @@
                         <li class="card__head-unit">
                             <span>Сегодня, 12:03</span>
                         </li>
-                        <li class="card__head-unit _green">
+                        <!--li class="card__head-unit _green">
                             <svg>
                                 <use xlink:href="#iconEye"></use>
                             </svg>
                             <span>0 просмотров</span>
-                        </li>
+                        </li-->
                     </ul>
                 </div>
                 <div class="card__head-right">
                     <ul class="card__price-list">
                         <li class="card__price-unit _new"><?=$object->cost?> ₽/мес.</li>
-                        <li class="card__price-unit _old"><?=$object->cost * 1.25?> ₽</li>
+                        <!--li class="card__price-unit _old"><?=$object->cost * 1.25?> ₽</li-->
                     </ul>
                     <div class="rent__select">
                         <div class="rent__select-overlay"></div>
@@ -115,7 +116,7 @@
                                         <input class="rent__select-radio" type="radio" name="rent" value="Посуточная аренда">
                                         <span class="rent__select-content">
 												<span class="rent__select-name">Посуточная аренда</span>
-												<span class="rent__select-data">? ₽</span>
+												<span class="rent__select-data"><span style="color: silver">Не указана</span></span>
 											</span>
                                     </label>
                                 </li>
@@ -124,7 +125,7 @@
                                         <input class="rent__select-radio" type="radio" name="rent" value="Продажа">
                                         <span class="rent__select-content">
 												<span class="rent__select-name">Продажа</span>
-												<span class="rent__select-data">? ₽</span>
+												<span class="rent__select-data"><span style="color: silver">Не указана</span></span>
 											</span>
                                     </label>
                                 </li>
@@ -136,7 +137,7 @@
             </div>
         </div>
     </div>
-    <div class="card-set">
+    <!--div class="card-set">
         <div class="container">
             <div class="card-set__wrapper">
                 <ul class="card-set__list">
@@ -182,7 +183,7 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="card-set__btn-unit">
+                    <!li class="card-set__btn-unit">
                         <button class="card-set__btn">
                             <svg>
                                 <use xlink:href="#iconLike"></use>
@@ -199,7 +200,8 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div-->
+    <div class="separator"></div>
     <div class="container">
         <div class="card__wrapper">
             <div class="card__slider">
@@ -207,44 +209,46 @@
                     <?php
                     foreach($images as $image){ ?>
                         <div class="card__slider-item">
-                            <img class="card__slider-img" src="<?=$image->path?>" alt="#">
+                            <img class="card__slider-img" src="<?=$image->path?>">
                         </div>
                     <?php }
                     ?>
                 </div>
                 <ul class="card__tag-list">
-                    <li class="card__tag-unit _red">Лучшая цена</li>
+                    <!--li class="card__tag-unit _red">Лучшая цена</li-->
                     <li class="card__tag-unit _green">Новое</li>
                     <li class="card__tag-unit _yellow">Горячее</li>
                 </ul>
             </div>
             <div class="card__cta">
-                <button class="card__cta-title">Связаться с продавцом</button>
-                <div class="card__cta-box">
-                    <ul class="card__cta-list">
-                        <li class="card__cta-unit _desktop">
-                            <button class="card__cta-btn">Написать</button>
-                        </li>
-                        <li class="card__cta-unit _desktop">
-                            <button class="card__cta-btn">Позвонить</button>
-                        </li>
-                        <li class="card__cta-unit">
-                            <button class="card__cta-btn">Бронировать</button>
-                        </li>
-                    </ul>
-                    <p class="card__cta-descr _desktop">
-                        <span>Хватит тратить время на ручной поиск лучшего варианта, включите автоподбор </span>
-                        <a class="card__cta-link" href="#">Подробнее</a>
-                    </p>
-                    <button class="card__notify-btn _desktop">
-							<span class="card__notify-icon">
-								<svg>
-									<use xlink:href="#iconPlus"></use>
-								</svg>
-							</span>
-                        <span class="card__notify-text">Включить уведомления</span>
-                    </button>
-                </div>
+                <form action="https://take-keys.com/go-buy" method="post">
+                    <button class="card__cta-title">Связаться с продавцом</button>
+                    <div class="card__cta-box">
+                        <ul class="card__cta-list">
+                            <li class="card__cta-unit _desktop">
+                                <button class="card__cta-btn">Написать</button>
+                            </li>
+                            <li class="card__cta-unit _desktop">
+                                <button class="card__cta-btn">Позвонить</button>
+                            </li>
+                            <li class="card__cta-unit">
+                                <button class="card__cta-btn">Бронировать</button>
+                            </li>
+                        </ul>
+                        <!--p class="card__cta-descr _desktop">
+                            <span>Хватит тратить время на ручной поиск лучшего варианта, включите автоподбор </span>
+                            <a class="card__cta-link" href="#">Подробнее</a>
+                        </p>
+                        <button class="card__notify-btn _desktop">
+                                <span class="card__notify-icon">
+                                    <svg>
+                                        <use xlink:href="#iconPlus"></use>
+                                    </svg>
+                                </span>
+                            <span class="card__notify-text">Включить уведомления</span>
+                        </button-->
+                    </div>
+                </form>
             </div>
             <div class="card__pagination">
                 <div class="card__pagination-box">
@@ -258,13 +262,25 @@
                         <?php
                         foreach($images as $image){ ?>
                             <div class="card__pagination-item">
-                                <img class="card__slider-img" src="<?=$image->path?>" alt="#">
+                                <img class="card__slider-img" src="<?=$image->path?>">
                             </div>
                         <?php }
                         ?>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 class="description-title address-title">Адрес: </h2>
+        <ul class="card__head-list address">
+            <li class="card__head-unit">
+                <span style="line-height: 150%;margin-bottom: 10px;" class="address"><?=$object->address?></span>
+            </li>
+        </ul>
+        <h2 class="description-title">Описание: </h2>
+        <div class="description-content">
+            <pre><?=trim($object->description)?></pre>
         </div>
     </div>
 </section>    <br><br><br>
