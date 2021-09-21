@@ -5,7 +5,6 @@ namespace Site\Models;
 /**
  * @property string phone
  * @property string email
- * @property string name
  * @property float lat
  * @property float lng
  * @property int price
@@ -16,7 +15,7 @@ namespace Site\Models;
 class Request extends Model
 {
     protected $fields = [
-        'email', 'phone', 'messenger', 'object_type', 'price', 'distance', 'address',
+        'email', 'phone', 'object_type', 'price', 'distance', 'address',
         'lat', 'lng', 'min_send_time', 'max_send_time'
     ];
 }

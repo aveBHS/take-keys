@@ -11,12 +11,12 @@ class TildaWebHookController implements Controller
 
     public function view(HttpRequest $request, $args) { }
 
-    public function process(HttpRequest  $request, $args) {
+    public function process(HttpRequest  $request, $args): bool
+    {
         $object = new Request();
         $objectInfo = json_decode($request->post('object'));
         if(!$objectInfo) return false;
 
-        $object->name = $request->post('name');
         $object->phone = $request->post('phone');
         $object->email = $request->post("email");
         $object->lat = (float) $objectInfo->lat;
