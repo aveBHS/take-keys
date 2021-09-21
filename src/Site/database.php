@@ -20,4 +20,6 @@ if(!$link){
     die();
 }
 
+mysqli_set_charset($link, "utf8");
+
 return $link;
