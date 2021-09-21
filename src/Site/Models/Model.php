@@ -1,10 +1,13 @@
-<?php
+<?php /** @noinspection PhpUndefinedVariableInspection */
 
 namespace Site\Models;
+
+use Exception;
 
 abstract class Model
 {
     private $db;
+    protected $fields = [];
 
     function __construct()
     {
@@ -12,12 +15,21 @@ abstract class Model
         $this->db = $db;
     }
 
+    public function __get(string $name)
+    {
+        if (in_array($name, $this->fields))
+        {
+            return $this->$name;
+        }
+        return null;
+    }
+
     public static function find($objectId, string $index = null)
     {
         $className = static::class;
         $model = new $className();
 
-        $tableName = $index ?? $model->tableName ?? getTableName(get_class(static::class));
+        $tableName = $index ?? $model->tableName ?? getTableName(static::class);
         $tableIndex = $model->tableId ?? 'id';
 
         $query = $model->db->prepare(
@@ -39,6 +51,55 @@ abstract class Model
             return $model;
         }
         return Null;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function save(): bool
+    {
+        $indexField = $this->tableId ?? 'id';
+        $tableName = $model->tableName ?? getTableName(get_class($this));
+
+        $fields = [];
+        $values = [];
+        $types = "";
+        foreach ($this->fields as $field){
+            if ($field == $indexField) continue;
+            array_push($fields, "$field");
+            array_push($values, $this->$field ?? '');
+            $types .= "s";
+        }
+
+        if($this->$indexField){
+            $updateFields = [];
+            foreach($fields as $field){
+                array_push($updateFields, "`$field`=?");
+            }
+            array_push($values, $this->$indexField);
+
+            $updateFields = implode(",", $updateFields);
+            $sql = "UPDATE `$tableName` SET $fields WHERE `id` = ?";
+        } else {
+            $insertFields = [];
+            $insertPlaces = [];
+            foreach($fields as $field){
+                array_push($insertFields, "`$field`");
+                array_push($insertPlaces, "?");
+            }
+            $insertFields = implode(",", $insertFields);
+            $insertPlaces = implode(",", $insertPlaces);
+
+            $sql = "INSERT INTO `$tableName` ($insertFields) VALUES ($insertPlaces)";
+        }
+        var_dump($this->fields);
+        var_dump($values);
+        $query = $this->db->prepare($sql);
+        if($query && $query->bind_param($types, ...$values) && $query->execute()){
+            return true;
+        } else {
+            throw new Exception($this->db->error);
+        }
     }
 
     protected function query(string $query, array $params, string $types)
