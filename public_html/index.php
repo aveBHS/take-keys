@@ -1,11 +1,12 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 session_start();
 
 use Site\Core\AuthService;
 use Site\Core\HttpRequest;
 
 spl_autoload_register(function (string $className) {
-    require_once __DIR__ . '/../src/' . $className . '.php';
+    require_once __DIR__ . '/../src/' . str_replace("\\", "/", $className) . '.php';
 });
 require_once __DIR__ . "/../src/Site/helpers.php";
 
