@@ -46,8 +46,9 @@ class HttpRequest
     {
         return $this->url;
     }
-    public function post(string $param)
+    public function post(string $param = null)
     {
+        if(is_null($param)) return $this->post;
         return $this->post[$param];
     }
     public function get(string $param)
