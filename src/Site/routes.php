@@ -24,6 +24,12 @@ return [
             "method" => "GET",
             "middleware" => UserMiddleware::class
         ],
+
+        // Tilda webhook
+        "POST::~whook[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "process"],
+            "middleware" => GuestMiddleware::class
+        ],
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
