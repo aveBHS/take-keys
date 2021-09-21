@@ -21,7 +21,7 @@ class AuthService
         }
     }
 
-    public function __invoke(): Model
+    public function __invoke()
     {
         return $this->model;
     }
