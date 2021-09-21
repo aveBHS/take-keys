@@ -218,7 +218,7 @@ $page_url = $page_url[0];
                     <?php
                     foreach($images as $image){ ?>
                         <div class="card__slider-item">
-                            <img class="card__slider-img" src="<?=$image->path?>">
+                            <img class="card__slider-img" style="height: 600px" src="<?=$image->path?>">
                         </div>
                     <?php }
                     ?>

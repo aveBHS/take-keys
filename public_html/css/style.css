@@ -318,7 +318,10 @@
 .card__slider-img {
 	height: 100%;
 }
-/**/
+.card__slider-item img{
+	object-fit: contain;
+}
+	/**/
 .card__tag-list {
 	position: absolute;
 	top: 16px;
@@ -684,4 +687,13 @@
 	white-space:pre-wrap;
 	font-family: inherit;
 	line-height: 150%;
+}
+
+.card__slider-item{
+	background: #EEE;
+}
+
+.swiper-slide-active{
+	height: 600px;
+	object-fit: contain;
 }
