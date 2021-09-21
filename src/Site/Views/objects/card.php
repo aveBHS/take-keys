@@ -2,8 +2,10 @@
 /**
  * @var object $object
  * @var array $images
- * @var string VIEW_PATH
- **/
+ * @var string VIEW_PATH**/
+$page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$page_url = explode('?', $page_url);
+$page_url = $page_url[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +16,13 @@
     <link rel="stylesheet" href="/css/settings.css">
     <link rel="stylesheet" href="/css/style.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title><?=$object->title?></title>
+
+    <meta property="og:title" content="<?=$object->title?><?=strlen($object->title) > 0 ? " | " : ""?>Take Keys">
+    <meta property="og:description" content="<?=substr($object->description, 0, 100)?>...">
+    <meta property="og:image" content="<?=$images[0]->path?>">
+    <meta property="og:url" content="<?=$page_url?>">
+    
+    <title><?=$object->title?><?=strlen($object->title) > 0 ? " | " : ""?>Take Keys</title>
 </head>
 <body>
 <symbol style="display: none;">
