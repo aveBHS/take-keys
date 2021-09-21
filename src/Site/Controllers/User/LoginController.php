@@ -12,6 +12,10 @@ class LoginController implements Controller
     }
 
     function auth(HttpRequest $request, $args){
+        if(empty($request->post("login")) || empty($request->post("password"))){
+            $request->setFlash("login_error", "Форма заполнена некорректно");
+            $request->redirect_back();
+        }
         global $auth;
         if($auth->login($request->post("login"), $request->post("password"))) {
             $request->redirect($request->getFlash("login_redirect") ?? "/");

@@ -1,3 +1,9 @@
+<?php
+
+global $request;
+$flash_error = $request->getFlash("login_error");
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,13 +16,16 @@
 <body>
     <form method="POST">
         <h1>Авторизация</h1><hr>
+        <?php if($flash_error) { ?>
+            <p style="color: red; font-weight: 600"><?=$flash_error?></p>
+        <?php } ?>
         <label>
             Логин:
             <input type="text" name="login">
         </label><br>
         <label>
             Пароль:
-            <input type="password" name="passwd">
+            <input type="password" name="password">
         </label><br>
         <button>Войти</button>
     </form>
