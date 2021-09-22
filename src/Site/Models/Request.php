@@ -17,6 +17,6 @@ class Request extends Model
 {
     protected $fields = [
         'email', 'phone', 'object_type', 'price',
-        'distance', 'address', 'lat', 'lng'
+        'distance', 'address', 'lat', 'lng', 'purchased'
     ];
 }
