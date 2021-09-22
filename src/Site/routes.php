@@ -25,9 +25,13 @@ return [
             "middleware" => UserMiddleware::class
         ],
 
-        // Tilda webhook
-        "POST::~whook[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "process"],
+        // Tilda webhooks
+        "POST::~whook[/]request[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "createRequest"],
+            "middleware" => GuestMiddleware::class
+        ],
+        "POST::~whook[/]payment[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "processPayment"],
             "middleware" => GuestMiddleware::class
         ],
     ],

@@ -11,6 +11,7 @@ namespace Site\Models;
  * @property string address
  * @property int object_type
  * @property int distance
+ * @property int purchased
  */
 class Request extends Model
 {

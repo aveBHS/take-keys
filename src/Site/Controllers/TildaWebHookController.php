@@ -2,6 +2,7 @@
 
 namespace Site\Controllers;
 
+use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectType;
 use Site\Models\Request;
@@ -11,7 +12,7 @@ class TildaWebHookController implements Controller
 
     public function view(HttpRequest $request, $args) { }
 
-    public function process(HttpRequest  $request, $args): bool
+    public function createRequest(HttpRequest  $request, $args): bool
     {
         $object = new Request();
         $objectInfo = json_decode($request->post('Object'));
@@ -41,6 +42,22 @@ class TildaWebHookController implements Controller
         } catch (\Exception $exception){
              $request->show($exception->getMessage());
              return false;
+        }
+    }
+
+    public function processPayment(HttpRequest $request, $args)
+    {
+        $userPhone = $request->post("Phone");
+        $requestObject = Request::find($userPhone, "phone");
+        if($requestObject){
+            $requestObject->purchased = 1;
+            try{
+                $requestObject->save();
+            } catch (\Exception $exception){
+                $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
+            }
+        } else {
+            $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
         }
     }
 }
