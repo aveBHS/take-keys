@@ -40,17 +40,26 @@ class TildaWebHookController implements Controller
         try{
             return $object->save();
         } catch (\Exception $exception){
-             $request->show($exception->getMessage());
-             return false;
+            $request->show($exception->getMessage());
+            return false;
         }
     }
 
     public function processPayment(HttpRequest $request, $args)
     {
-        $userPhone = $request->post("Phone");
-        if($userPhone) {
+
+        $userPhone = trim($request->post("Phone"));
+        $userPhone = str_replace(" ", "", $userPhone);
+        $userPhone = str_replace("-", "", $userPhone);
+        $userPhone = str_replace("+", "", $userPhone);
+        $userPhone = str_replace("(", "", $userPhone);
+        $userPhone = str_replace(")", "", $userPhone);
+        if ($userPhone[0] == "8") $userPhone = "7" . substr($userPhone, 1);
+
+
+        if(!empty($userPhone)) {
             $requestObject = Request::find($userPhone, "phone");
-            if ($requestObject) {
+            if (!is_null($requestObject)) {
                 $requestObject->purchased = 1;
                 try {
                     $requestObject->save();
