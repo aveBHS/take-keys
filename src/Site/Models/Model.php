@@ -17,11 +17,8 @@ abstract class Model
 
     public function __get(string $name)
     {
-        if (in_array($name, $this->fields))
-        {
-            return $this->$name;
-        }
-        return null;
+        if(in_array($name, get_class_vars(static::class))) return $this->$name;
+        return (in_array($name, $this->fields) or $name == ($this->tableId ?? 'id')) ? $this->$name : null;
     }
 
     public static function find($objectId, string $index = null)
@@ -29,8 +26,8 @@ abstract class Model
         $className = static::class;
         $model = new $className();
 
-        $tableName = $index ?? $model->tableName ?? getTableName(static::class);
-        $tableIndex = $model->tableId ?? 'id';
+        $tableName = $model->tableName ?? getTableName(static::class);
+        $tableIndex = $index ?? $model->tableId ?? 'id';
 
         $query = $model->db->prepare(
             "SELECT * FROM `$tableName` WHERE `$tableIndex`=? LIMIT 1"
@@ -77,9 +74,10 @@ abstract class Model
                 array_push($updateFields, "`$field`=?");
             }
             array_push($values, $this->$indexField);
+            $types .= "s";
 
             $updateFields = implode(",", $updateFields);
-            $sql = "UPDATE `$tableName` SET $fields WHERE `id` = ?";
+            $sql = "UPDATE `$tableName` SET $updateFields WHERE `$indexField` = ?";
         } else {
             $insertFields = [];
             $insertPlaces = [];
@@ -92,8 +90,6 @@ abstract class Model
 
             $sql = "INSERT INTO `$tableName` ($insertFields) VALUES ($insertPlaces)";
         }
-        var_dump($this->fields);
-        var_dump($values);
         $query = $this->db->prepare($sql);
         if($query && $query->bind_param($types, ...$values) && $query->execute()){
             return true;
