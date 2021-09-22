@@ -48,16 +48,20 @@ class TildaWebHookController implements Controller
     public function processPayment(HttpRequest $request, $args)
     {
         $userPhone = $request->post("Phone");
-        $requestObject = Request::find($userPhone, "phone");
-        if($requestObject){
-            $requestObject->purchased = 1;
-            try{
-                $requestObject->save();
-            } catch (\Exception $exception){
-                $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
+        if($userPhone) {
+            $requestObject = Request::find($userPhone, "phone");
+            if ($requestObject) {
+                $requestObject->purchased = 1;
+                try {
+                    $requestObject->save();
+                } catch (\Exception $exception) {
+                    $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
+                }
+            } else {
+                $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 400);
             }
         } else {
-            $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
+            $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 200);
         }
     }
 }
