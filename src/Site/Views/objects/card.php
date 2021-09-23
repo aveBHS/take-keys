@@ -31,7 +31,11 @@ $page_url = $page_url[0];
     <meta property="og:url" content="<?=$page_url?>">
 
     <link rel="stylesheet" href="/css/app.min.css">
-
+    <!-- Chatra {literal} -->
+    <script>
+        (function(d, w, c) { w.ChatraID = 'FZAHKeBARdKZ8PQeu'; var s = d.createElement('script'); w[c] = w[c] || function() { (w[c].q = w[c].q || []).push(arguments); }; s.async = true; s.src = 'https://call.chatra.io/chatra.js'; if (d.head) d.head.appendChild(s); })(document, window, 'Chatra');
+    </script>
+    <!-- /Chatra {/literal} -->
 </head>
 
 <body style="padding-bottom: 96px;">
@@ -189,7 +193,7 @@ $page_url = $page_url[0];
                                 ) ?>
                             </button>
                         </a>
-                        <a href="#"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
+                        <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else { ?>
                         <form action="https://take-keys.com/go-buy" method="post">
                             <button class="btn btn-48 btn-primary w-100 mb-3">Связаться</button>
@@ -211,7 +215,7 @@ $page_url = $page_url[0];
                             <div class="fw-normal fs-14">Частное лицо</div>
                         </div>
                     </div>
-                    <div class="mt-5">
+                    <!--div class="mt-5">
                         <button class="btn btn-primary btn-icon btn-bell">
                             <i class="icon"><img src="/images/icons/bell.svg"></i>
                         </button>
@@ -219,7 +223,7 @@ $page_url = $page_url[0];
                     <div class="fs-18 mt-2">
                         Уведомлять о похожих<br/>вариантах
                     </div>
-                    <button class="btn btn-48 fs-14 fw-normal">Включить</button>
+                    <button class="btn btn-48 fs-14 fw-normal">Включить</button-->
                 </div>
             </div>
 
@@ -270,7 +274,7 @@ $page_url = $page_url[0];
                 </div>
                 <div class="item__desc-2 pb-lg-5 mt-2 mt-lg-0 d-lg-block collapse show">
                     <dl class="item__desc-list">
-                        <dt>Тип дома</dt><?=!empty($object->materialSlug) ? '<dd>'.$object->materialSlug.'</dd>' : '<dd style="color:silver">Не указано</dd>' ?>
+                        <dt>Тип дома</dt><?=!empty($object->materialSlug) ? '<dd style="text-transform: capitalize;">'.$object->materialSlug.'</dd>' : '<dd style="color:silver">Не указано</dd>' ?>
                         <dt>Год постойки</dt><dd style="color:silver">Не указано</dd>
                         <dt>Тип перекрытий</dt><dd style="color:silver">Не указано</dd>
                         <dt>Подъезд</dt><dd style="color:silver">Не указано</dd>
@@ -333,7 +337,7 @@ $page_url = $page_url[0];
                         <div class="col">
                             Коммунальные услуги
                             <div class="item__addictional-info text-primary">Включено в стоимость</div>
-                            <div class="fs-12">*Включает оплату за газ, свет и холодную воду</div>
+                            <div class="fs-12">*Окончательную стоимость уточняйте у владельца</div>
                         </div>
                         <div class="col">
                             Право собственности
@@ -480,7 +484,7 @@ $page_url = $page_url[0];
                 (string) $object->phones
             ) ?>
         </a>
-        <a href="#" style="padding-top: 12px;" class="btn btn-48 btn-dark">Бронировать</a>
+        <a href="https://take-keys.com/booking" style="padding-top: 12px;" class="btn btn-48 btn-dark">Бронировать</a>
     <?php } else { ?>
         <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-primary" style="padding-top: 12px;">Связаться</a>
         <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-dark" style="padding-top: 12px;">Бронировать</a>
