@@ -87,3 +87,19 @@ function view(string $viewName, array $args = [])
 
     return $content;
 }
+
+function cuteDate($date)
+{
+    $today = date('d.m.Y', time());
+    $yesterday = date('d.m.Y', time() - 86400);
+    $dbDate = date('d.m.Y', strtotime($date));
+    $dbTime = date('H:i', strtotime($date));
+
+    switch ($dbDate)
+    {
+        case $today : $output = 'Сегодня в '. $dbTime; break;
+        case $yesterday : $output = 'Вчера в '. $dbTime; break;
+        default : $output = $dbDate;
+    }
+    return $output;
+}

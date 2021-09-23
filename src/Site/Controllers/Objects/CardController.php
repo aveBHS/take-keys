@@ -13,7 +13,7 @@ class CardController implements Controller
 {
     function view(HttpRequest $request, $args){
         if(!$args[0]) $request->redirect("/");
-        if(ctype_digit($args[0]))
+        if(!strrpos(base64_decode($args[0]), ":"))
             $requestParams = [(int) $args[0]];
         else
             $requestParams = explode(":", base64_decode($args[0]));
