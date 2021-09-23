@@ -3,6 +3,7 @@
  * @var object $object
  * @var array $images
  * @var string VIEW_PATH
+ * @var bool $purchased
  **/
 $page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $page_url = explode('?', $page_url);
@@ -64,6 +65,11 @@ $page_url = $page_url[0];
     <svg id="iconPlus" viewBox="0 0 24 24">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8413 7.73442C12.7851 7.31967 12.4298 7 12 7C11.5311 7 11.1509 7.38044 11.1509 7.84973V11.1503H7.84906L7.73384 11.158C7.31942 11.2143 7 11.5698 7 12C7 12.4693 7.38014 12.8497 7.84906 12.8497H11.1509V16.1503L11.1587 16.2656C11.2149 16.6803 11.5701 17 12 17C12.4689 17 12.8491 16.6196 12.8491 16.1503V12.8497H16.1509L16.2662 12.842C16.6806 12.7857 17 12.4302 17 12C17 11.5307 16.6199 11.1503 16.1509 11.1503H12.8491V7.84973L12.8413 7.73442Z"/>
     </svg>
+    <svg id="iconPhoto" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.23541 5.1708C8.3146 5.17075 7.52869 5.79134 7.37722 6.63812L7.11449 8.1069C7.05727 8.42678 6.7604 8.66122 6.41255 8.66122H6.13956C5.0992 8.66122 4.25582 9.4475 4.25582 10.4174V17.073C4.25582 18.0429 5.0992 18.8292 6.13956 18.8292L17.86 18.8292C18.9003 18.8292 19.7437 18.043 19.7437 17.0731L19.7442 10.4175C19.7442 9.44757 18.9008 8.66122 17.8604 8.66122H17.6081C17.2589 8.66122 16.9613 8.42496 16.9056 8.10353L16.6534 6.64736C16.506 5.79656 15.7182 5.17117 14.7938 5.17112L9.23541 5.1708ZM6.13851 6.44553C6.39096 5.03422 7.70079 3.99991 9.23549 4L14.7939 4.00031C16.3346 4.0004 17.6475 5.04272 17.8931 6.46072L18.0726 7.497C19.7077 7.59873 21.0001 8.86747 21 10.4176L20.9996 17.0732C20.9995 18.6896 19.5939 20 17.86 20L6.13956 20C4.40563 20 3 18.6895 3 17.073V10.4174C3 8.86002 4.30468 7.5867 5.95066 7.49563L6.13851 6.44553Z" fill="#151A40"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 10.609C10.9076 10.609 10.022 11.4425 10.022 12.4706C10.022 13.4988 10.9076 14.3323 12 14.3323C13.0924 14.3323 13.978 13.4988 13.978 12.4706C13.978 11.4425 13.0924 10.609 12 10.609ZM9 12.4706C9 10.9112 10.3431 9.64709 12 9.64709C13.6569 9.64709 15 10.9112 15 12.4706C15 14.03 13.6569 15.2942 12 15.2942C10.3431 15.2942 9 14.03 9 12.4706Z" fill="#151A40"/>
+    </svg>
+
 </symbol>
 <section class="card">
     <div class="container">
@@ -230,34 +236,35 @@ $page_url = $page_url[0];
                 </ul>
             </div>
             <div class="card__cta">
-                <form action="https://take-keys.com/go-buy" method="post">
-                    <button class="card__cta-title">Связаться с продавцом</button>
+                <?php if($purchased) { ?>
+                    <a href="tel:<?=$object->phones?>">
+                        <button type="button" class="card__cta-title">
+                            <?= preg_replace(
+                                '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
+                                '+\1 (\2) \3-\4-\5',
+                                (string) $object->phones
+                            ) ?>
+                        </button>
+                    </a>
                     <div class="card__cta-box">
                         <ul class="card__cta-list">
-                            <li class="card__cta-unit _desktop">
-                                <button class="card__cta-btn">Написать</button>
-                            </li>
-                            <li class="card__cta-unit _desktop">
-                                <button class="card__cta-btn">Позвонить</button>
-                            </li>
                             <li class="card__cta-unit">
-                                <button class="card__cta-btn">Бронировать</button>
+                                <a href="#"><button class="card__cta-btn">Бронировать</button></a>
                             </li>
                         </ul>
-                        <!--p class="card__cta-descr _desktop">
-                            <span>Хватит тратить время на ручной поиск лучшего варианта, включите автоподбор </span>
-                            <a class="card__cta-link" href="#">Подробнее</a>
-                        </p>
-                        <button class="card__notify-btn _desktop">
-                                <span class="card__notify-icon">
-                                    <svg>
-                                        <use xlink:href="#iconPlus"></use>
-                                    </svg>
-                                </span>
-                            <span class="card__notify-text">Включить уведомления</span>
-                        </button-->
                     </div>
-                </form>
+                <?php } else { ?>
+                    <form action="https://take-keys.com/go-buy" method="post">
+                        <button class="card__cta-title">Связаться с продавцом</button>
+                        <div class="card__cta-box">
+                            <ul class="card__cta-list">
+                                <li class="card__cta-unit">
+                                    <button class="card__cta-btn">Бронировать</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                <?php } ?>
             </div>
             <div class="card__pagination">
                 <div class="card__pagination-box">

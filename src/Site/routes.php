@@ -8,7 +8,7 @@ return [
         "~^[/]?$~" => [
             "controller" => [\Site\Controllers\MainController::class, "view"],
         ],
-        "~id/(\d+)[/]?$~" => [
+        "~id/(.+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
         ],
         "~login[/]?$~" => [
