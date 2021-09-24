@@ -1,6 +1,7 @@
 <?php
 
 use Site\Middleware\GuestMiddleware;
+use Site\Middleware\MegafonMiddleware;
 use Site\Middleware\UserMiddleware;
 
 return [
@@ -23,6 +24,12 @@ return [
             "controller" => [\Site\Controllers\User\CabinetController::class, "view"],
             "method" => "GET",
             "middleware" => UserMiddleware::class
+        ],
+
+        // Megafon CRM
+        "MIXED::~business[/]mcrm[/]?$~" => [
+            "controller" => [\Site\Controllers\MegafonController::class, "request"],
+            "middleware" => MegafonMiddleware::class
         ],
 
         // Tilda webhooks
