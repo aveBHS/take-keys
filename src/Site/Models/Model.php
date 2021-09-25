@@ -55,7 +55,7 @@ abstract class Model
         $tableName = $model->tableName ?? getTableName(get_class($this));
         $tableIndex = $this->tableId ?? 'id';
 
-        $query = $model->db->prepare(
+        $query = $this->db->prepare(
             "DELETE FROM `$tableName` WHERE `$tableIndex`=?"
         );
         if(!$query){

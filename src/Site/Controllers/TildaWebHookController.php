@@ -13,8 +13,9 @@ class TildaWebHookController implements Controller
 
     public function view(HttpRequest $request, $args) { }
 
-    function getPhone(string $phone)
+    function getPhone($phone)
     {
+        if (is_null($phone)) return null;
         $phone = trim($phone);
         $phone = str_replace(" ", "", $phone);
         $phone = str_replace("-", "", $phone);
@@ -49,6 +50,7 @@ class TildaWebHookController implements Controller
         if(!$object_found) {
             $object->phone = $userPhone;
             $object->email = trim($request->post("Email"));
+            $object->purchased = 0;
         }
         $object->lat = (float)$objectInfo->lat;
         $object->lng = (float)$objectInfo->lng;
@@ -56,8 +58,6 @@ class TildaWebHookController implements Controller
         $object->address = $objectInfo->address;
         $object->distance = (int)($objectInfo->distance ?? 1000);
         if ($object->distance < 1) $object->distance = 1000;
-
-        $object->purchased = 0;
 
         $objectType = ObjectType::find($objectInfo->type);
         $object->object_type = (int)($objectType->object_type_id ?? 1);
@@ -73,9 +73,14 @@ class TildaWebHookController implements Controller
     public function removeRequest(HttpRequest $request, $args)
     {
         $userPhone = $this->getPhone($request->post('Phone'));
-        $object = Request::find($userPhone, 'phone');
-        if(!is_null($object)) {
-            $object->remove();
+        if(!empty($userPhone)) {
+            $object = Request::find($userPhone, 'phone');
+            file_put_contents("remove1.txt", var_export($object, true));
+            if(!is_null($object)) {
+                $object->remove();
+            }
+        } else {
+            $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 200);
         }
     }
 

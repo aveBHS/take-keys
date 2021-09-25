@@ -4,6 +4,6 @@ namespace Site\Models;
 
 class ObjectType extends Model
 {
-    private $index = "object_type_slug";
-    private $tableName = "object_types";
+    protected $tableId = "object_type_slug";
+    protected $tableName = "object_types";
 }
