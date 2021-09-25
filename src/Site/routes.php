@@ -29,12 +29,20 @@ return [
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
             "controller" => [\Site\Controllers\MegafonController::class, "request"],
-            "middleware" => MegafonMiddleware::class
+            "middleware" => GuestMiddleware::class
         ],
 
         // Tilda webhooks
-        "POST::~whook[/]processRequest[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "createRequest"],
+        "POST::~whook[/]createRequest[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "processRequest"],
+            "middleware" => GuestMiddleware::class
+        ],
+        "POST::~whook[/]editRequest[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "processRequest"],
+            "middleware" => GuestMiddleware::class
+        ],
+        "POST::~whook[/]removeRequest[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "removeRequest"],
             "middleware" => GuestMiddleware::class
         ],
         "POST::~whook[/]payment[/]?$~" => [

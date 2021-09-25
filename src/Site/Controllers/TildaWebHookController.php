@@ -13,7 +13,8 @@ class TildaWebHookController implements Controller
 
     public function view(HttpRequest $request, $args) { }
 
-    function getPhone(string $phone){
+    function getPhone(string $phone)
+    {
         $phone = trim($phone);
         $phone = str_replace(" ", "", $phone);
         $phone = str_replace("-", "", $phone);
@@ -66,6 +67,15 @@ class TildaWebHookController implements Controller
         } catch (\Exception $exception){
             $request->show($exception->getMessage());
             return false;
+        }
+    }
+
+    public function removeRequest(HttpRequest $request, $args)
+    {
+        $userPhone = $this->getPhone($request->post('Phone'));
+        $object = Request::find($userPhone, 'phone');
+        if(!is_null($object)) {
+            $object->remove();
         }
     }
 
