@@ -33,7 +33,7 @@ return [
         ],
 
         // Tilda webhooks
-        "POST::~whook[/]request[/]?$~" => [
+        "POST::~whook[/]processRequest[/]?$~" => [
             "controller" => [\Site\Controllers\TildaWebHookController::class, "createRequest"],
             "middleware" => GuestMiddleware::class
         ],

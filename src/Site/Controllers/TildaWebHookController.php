@@ -6,27 +6,49 @@ use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectType;
 use Site\Models\Request;
+use stdClass;
 
 class TildaWebHookController implements Controller
 {
 
     public function view(HttpRequest $request, $args) { }
 
-    public function createRequest(HttpRequest  $request, $args): bool
+    function getPhone(string $phone){
+        $phone = trim($phone);
+        $phone = str_replace(" ", "", $phone);
+        $phone = str_replace("-", "", $phone);
+        $phone = str_replace("+", "", $phone);
+        $phone = str_replace("(", "", $phone);
+        $phone = str_replace(")", "", $phone);
+        if ($phone[0] == "8") $phone = "7" . substr($phone, 1);
+        return $phone;
+    }
+
+    public function processRequest(HttpRequest $request, $args): bool
     {
-        $object = new Request();
-        $objectInfo = json_decode($request->post('Object'));
-        if (!$objectInfo) return false;
+        $userPhone = $this->getPhone($request->post('Phone'));
+        $object = Request::find($userPhone, 'phone');
+        $object_found = false;
+        if(is_null($object)){
+            $object = new Request();
+            $objectInfo = json_decode($request->post('Object'));
+            if (!$objectInfo) return false;
+        } else {
+            $object_found = true;
+            $objectInfo = new stdClass();
+            $objectInfo->lat = 0;
+            $objectInfo->lng = 0;
+            $objectInfo->address = $request->post("Address");
+            $objectInfo->price = $request->post("Price");
+            $objectInfo->distance = (int) $request->post("AreaRange") * 1000;
+            if($objectInfo->distance < 1) $objectInfo->distance = null;
+            $objectInfo->type = $request->post("ObjectType");
+        }
 
-        $object->phone = trim($request->post('Phone'));
-        $object->phone = str_replace(" ", "", $object->phone);
-        $object->phone = str_replace("-", "", $object->phone);
-        $object->phone = str_replace("+", "", $object->phone);
-        $object->phone = str_replace("(", "", $object->phone);
-        $object->phone = str_replace(")", "", $object->phone);
-        if ($object->phone[0] == "8") $object->phone = "7" . substr($object->phone, 1);
-
-        $object->email = trim($request->post("Email"));
+        if(!$object_found) {
+            $object->phone = $userPhone;
+            $object->email = trim($request->post("Email"));
+        }
         $object->lat = (float)$objectInfo->lat;
         $object->lng = (float)$objectInfo->lng;
         $object->price = (int)$objectInfo->price;
@@ -50,14 +72,7 @@ class TildaWebHookController implements Controller
     public function processPayment(HttpRequest $request, $args)
     {
 
-        $userPhone = trim($request->post("Phone"));
-        $userPhone = str_replace(" ", "", $userPhone);
-        $userPhone = str_replace("-", "", $userPhone);
-        $userPhone = str_replace("+", "", $userPhone);
-        $userPhone = str_replace("(", "", $userPhone);
-        $userPhone = str_replace(")", "", $userPhone);
-        if ($userPhone[0] == "8") $userPhone = "7" . substr($userPhone, 1);
-
+        $userPhone = $this->getPhone($request->post("Phone"));
 
         if(!empty($userPhone)) {
             $requestObject = Request::find($userPhone, "phone");
