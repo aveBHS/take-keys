@@ -50,6 +50,24 @@ abstract class Model
         return Null;
     }
 
+    public function remove()
+    {
+        $tableName = $model->tableName ?? getTableName(get_class($this));
+        $tableIndex = $this->tableId ?? 'id';
+
+        $query = $model->db->prepare(
+            "DELETE FROM `$tableName` WHERE `$tableIndex`=?"
+        );
+        if(!$query){
+            return Null;
+        }
+        $query->bind_param("s", $this->$tableIndex);
+        if($query->execute()){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @throws Exception
      */
