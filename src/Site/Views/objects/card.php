@@ -35,6 +35,14 @@ $page_url = $page_url[0];
     <script>
         (function(d, w, c) { w.ChatraID = 'FZAHKeBARdKZ8PQeu'; var s = d.createElement('script'); w[c] = w[c] || function() { (w[c].q = w[c].q || []).push(arguments); }; s.async = true; s.src = 'https://call.chatra.io/chatra.js'; if (d.head) d.head.appendChild(s); })(document, window, 'Chatra');
     </script>
+    <style>
+        #chatra:not(.chatra--expanded) {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none;
+            transition: none;
+        }
+    </style>
     <!-- /Chatra {/literal} -->
 </head>
 
@@ -50,7 +58,7 @@ $page_url = $page_url[0];
 <div class="item">
     <div class="item__top-menu-mobile">
         <i class="icon"><img src="/images/icons/arrow-left-dark.svg"></i>
-        <button class="btn btn-primary btn-icon btn-chat-top ms-3">
+        <button onclick="Chatra('openChat', true)" class="btn btn-primary btn-icon btn-chat-top ms-3">
             <i class="icon"><img src="/images/icons/chat-16.svg"></i>
         </button>
         <i class="icon ms-auto"><img src="/images/icons/search.svg"></i>
@@ -490,7 +498,7 @@ $page_url = $page_url[0];
         <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-dark" style="padding-top: 12px;">Бронировать</a>
     <?php } ?>
 </div>
-<button class="btn btn-warning btn-icon btn-chat">
+<button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
 
