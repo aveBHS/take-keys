@@ -49,6 +49,10 @@ return [
             "controller" => [\Site\Controllers\TildaWebHookController::class, "processPayment"],
             "middleware" => GuestMiddleware::class
         ],
+        "POST::~whook[/]booking[/]?$~" => [
+            "controller" => [\Site\Controllers\TildaWebHookController::class, "booking"],
+            "middleware" => GuestMiddleware::class
+        ],
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
