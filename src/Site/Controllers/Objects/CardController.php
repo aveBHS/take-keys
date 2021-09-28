@@ -27,7 +27,22 @@ class CardController implements Controller
         }
 
         if(!is_null($object)){
-            $images = (new ImageModel())->selectObjectImages($object->id);
+            $recently_viewed = $request->getCookie("recently_viewed", true);
+            if(is_null($recently_viewed)){
+                $request->setCookie("recently_viewed", [$object->id], true);
+            } else {
+                try {
+                    $recently_viewed = json_decode($recently_viewed);
+                    if (!is_null($recently_viewed)) {
+                        if (!in_array($object->id, $recently_viewed)) {
+                            array_push($recently_viewed, $object->id);
+                            $request->setCookie("recently_viewed", $recently_viewed, true);
+                        }
+                    }
+                } catch (\Exception $exception) {}
+            }
+
+            $images = ImageModel::selectObjectImages($object->id);
             $request->show(view("objects.card", ["object" => $object, "images" => $images, "purchased" => $purchased]));
         } else {
             $request->returnException(new NotFoundController(), 404);

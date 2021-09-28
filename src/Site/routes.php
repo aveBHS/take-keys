@@ -26,6 +26,12 @@ return [
             "middleware" => UserMiddleware::class
         ],
 
+        // Objects API
+        "GET::~api[/]objects[/]recent[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"],
+            "middleware" => GuestMiddleware::class
+        ],
+
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
             "controller" => [\Site\Controllers\MegafonController::class, "request"],
