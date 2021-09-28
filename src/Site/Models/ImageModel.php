@@ -6,9 +6,10 @@ use Site\Core\HttpRequest;
 
 class ImageModel extends \Site\Models\Model
 {
-    function selectObjectImages(int $objectId)
+    public static function selectObjectImages(int $objectId)
     {
-        return $this->query(
+        $model = new self();
+        return $model->query(
             "SELECT `path` FROM `images` WHERE `object_id` = ?",
             [$objectId],
             "i"
