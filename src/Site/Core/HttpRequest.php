@@ -56,6 +56,24 @@ class HttpRequest
         return $this->get[$param];
     }
 
+    public function getCookie(string $param = null, bool $decode = false)
+    {
+        if(is_null($param)) return $_COOKIE;
+        if(empty($_COOKIE[md5("cookie_".$param)])) return null;
+        if($decode) return base64_decode($_COOKIE[md5("cookie_".$param)], true);
+        return $_COOKIE[md5("cookie_".$param)];
+    }
+
+    public function setCookie(string $name, $value, bool $encode = false, int $timeout = 0): bool
+    {
+        if(gettype($value) != "string" || gettype($value) != "integer")
+            $value = json_encode($value);
+        if($encode)
+            $value = base64_encode($value);
+        $name = md5("cookie_".$name);
+        return setcookie($name, strval($value), $timeout, "/");
+    }
+
     public function setHeader(string $name, string $value)
     {
         header("$name: $value");
