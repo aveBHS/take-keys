@@ -50,6 +50,44 @@ abstract class Model
         return Null;
     }
 
+    public static function findAll(array $objectIds, string $index = null, int $limit = null, int $offset = null)
+    {
+        $className = static::class;
+        $model = new $className();
+
+        $tableName = $model->tableName ?? getTableName(static::class);
+        $tableIndex = $index ?? $model->tableId ?? 'id';
+
+        $idFields = implode(",", array_fill(0, count($objectIds), "?"));
+        $idFTypes = implode("", array_fill(0, count($objectIds), "s"));
+        $query = $model->db->prepare(
+            "SELECT * FROM `$tableName` WHERE `$tableIndex` IN ($idFields) " .
+                (!is_null($limit) ? " LIMIT $limit " : "") .
+                (!is_null($offset) ? " OFFSET $offset" : "")
+        );
+        if(!$query){
+            return Null;
+        }
+        $query->bind_param($idFTypes, ...$objectIds);
+        if($query->execute()){
+            $result = $query->get_result();
+            if($result->num_rows < 1) return null;
+
+            $elements = [];
+            while ($element = $result->fetch_assoc()){
+                $model = new $className();
+                foreach ($element as $key => $value)
+                {
+                    $model->$key = $value;
+                }
+                array_push($elements, $model);
+            }
+
+            return $elements;
+        }
+        return Null;
+    }
+
     public function remove()
     {
         $tableName = $model->tableName ?? getTableName(get_class($this));
