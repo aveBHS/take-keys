@@ -4,6 +4,7 @@ namespace Site\Controllers;
 
 use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
+use Site\Models\ObjectModel;
 use Site\Models\ObjectType;
 use Site\Models\Request;
 use stdClass;
@@ -114,6 +115,46 @@ class TildaWebHookController implements Controller
             file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/../booker_requests/$phone.txt", $title);
         } else {
             $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 200);
+        }
+    }
+
+    public function createAdObject(HttpRequest $request, $args): bool
+    {
+        $object = new ObjectModel();
+
+        $object->title = $request->post("ObjectTitle");
+        $object->description = $request->post("ObjectDesc");
+        $object->address = $request->post("ObjectAddress");
+
+        $object->lat = (float) $request->post("ObjectLat");
+        $object->lng = (float) $request->post("ObjectLng");
+        $object->cost = (int) $request->post("ObjectCost");
+
+        $object->name = $request->post("ObjectOwnerName");
+        $object->phones = $request->post("ObjectOwnerPhone");
+
+        $object->rooms = (int) $request->post("ObjectRooms");
+        $object->floor = (int) $request->post("ObjectFloor");
+        $object->floors = (int) $request->post("ObjectFloors");
+        $object->sq = (int) $request->post("ObjectSQ");
+
+        $object->categoryId = (int) $request->post("ObjectCategoryId");
+        $object->sectionId = (int) $request->post("ObjectSectionId");
+        $object->typeAd = (int) $request->post("ObjectTypeAd");
+        $object->cityId = (int) $request->post("ObjectCityId");
+        $object->regionId = (int) $request->post("ObjectRegionId");
+
+        $object->metroSlug = $request->post("ObjectMetroName");
+        $object->materialSlug = $request->post("ObjectMaterial");
+
+        $object->isAd = 1;
+        $object->status = 0;
+
+        try{
+            return $object->save();
+        } catch (\Exception $exception){
+            $request->show($exception->getMessage());
+            return false;
         }
     }
 }
