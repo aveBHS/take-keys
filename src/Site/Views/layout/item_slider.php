@@ -24,7 +24,7 @@
 
     <div class="swiper-pagination-counter mb-2 d-lg-none">
         <span class="current">1</span>/
-        <span class="total"></span>
+        <span class="total"><?=count($images)?></span>
     </div>
 
     <!-- If we need navigation buttons -->
@@ -46,7 +46,7 @@
 <div class="slider__gallery clearfix">
 
 	<span class="slider__gallery__thumb icon-photo">
-		<img class="me-2" src="/images/icons/photo.svg"><span class="total"></span>
+		<img class="me-2" src="/images/icons/photo.svg"><span class="total"><?=count($images)?></span>
 	</span>
     <span class="swiper-pagination-custom"></span>
 </div>

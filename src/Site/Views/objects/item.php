@@ -26,7 +26,7 @@
 
         <div class="swiper-pagination-counter d-lg-none mb-2">
             <span class="current">1</span>/
-            <span class="total"></span>
+            <span class="total"><?=count($images)?></span>
         </div>
 
         <div class="swiper-pagination"></div>
@@ -38,7 +38,7 @@
 
         <div class="swiper-alt-photo">
             <img class="me-2" src="/images/icons/photo-white.svg">
-            <span class="total"></span>
+            <span class="total"><?=count($images)?></span>
         </div>
 
         <div class="item__tags">
