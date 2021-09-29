@@ -8,6 +8,8 @@
 $page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $page_url = explode('?', $page_url);
 $page_url = $page_url[0];
+
+global $auth;
 ?>
 
 <?=view("layout.header", ["_page_title" => $object->title])?>
@@ -309,34 +311,29 @@ $page_url = $page_url[0];
                     </div>
                 </div>
 
-
-                <div class="h1 item__desc-title d-block mt-3 mt-lg-0 mb-0">Вас может заитересовать</div>
-                <div class="h-48">
-                    <div class="text-secondary fw-normal fs-14">Изменить параметры поиска</div>
-                </div>
-                <div class="catalog pb-4 pb-lg-5 row-scroll-x">
-                    <div class="row gx-2 flex-nowrap">
-                        <!--#set var="col-class" value="col-9 col-lg-5" -->
-
-                        <?=view("objects.item", ['object' => $object, 'images' => $images, "col_class" => "col-9 col-lg-5"])?>
-                        <?=view("objects.item", ['object' => $object, 'images' => $images, "col_class" => "col-9 col-lg-5"])?>
-                        <?=view("objects.item", ['object' => $object, 'images' => $images, "col_class" => "col-9 col-lg-5"])?>
-                        <?=view("objects.item", ['object' => $object, 'images' => $images, "col_class" => "col-9 col-lg-5"])?>
-                        <!--#include virtual="/parts/catalog-item.html" -->
+                <?php if(!is_null($auth())) { ?>
+                    <div class="h1 item__desc-title d-block mt-3 mt-lg-0 mb-0">Вас может заитересовать</div>
+                    <div class="h-48">
+                        <div class="text-secondary fw-normal fs-14">Изменить параметры поиска</div>
                     </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-auto ms-lg-auto order-lg-2">
-                        <a href="#" class="btn btn-icon">
-                            <div class="d-flex align-items-center">
-                                Перейти в каталог<i class="icon ms-auto"><img src="/images/icons/arrow-big-right.svg"></i>
-                            </div>
-                        </a>
+                    <div class="catalog pb-4 pb-lg-5 row-scroll-x">
+                        <div class="row gx-2 flex-nowrap">
+                            <div class="row gx-2 flex-nowrap" id="recommendations-list"></div>
+                        </div>
                     </div>
-                    <div class="col-lg-auto order-lg-1">
-                        <!--#include virtual="/parts/pagination.html" -->
+                    <div class="row mt-4">
+                        <div class="col-auto ms-lg-auto order-lg-2">
+                            <a href="#" class="btn btn-icon">
+                                <div class="d-flex align-items-center">
+                                    Перейти в каталог<i class="icon ms-auto"><img src="/images/icons/arrow-big-right.svg"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-auto order-lg-1">
+                            <!--#include virtual="/parts/pagination.html" -->
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
 
 
                 <div class="h1 item__desc-title d-block mt-3 mt-lg-5">Недавно просмотренные</div>
@@ -371,5 +368,6 @@ $page_url = $page_url[0];
 
 <?=view("layout.footer")?>
 <script>
-    $.ajax({url: "http://take-keys/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
+    $.ajax({url: "//take-keys/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
+    $.ajax({url: "//take-keys/api/objects/recommendations/", success: data => {$("#recommendations-list").html(data);}})
 </script>

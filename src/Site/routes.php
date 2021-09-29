@@ -28,8 +28,11 @@ return [
 
         // Objects API
         "GET::~api[/]objects[/]recent[/]?$~" => [
-            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"],
-            "middleware" => GuestMiddleware::class
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"]
+        ],
+        "GET::~api[/]objects[/]recommendations[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recommendations"],
+            "middleware" => UserMiddleware::class
         ],
 
         // Megafon CRM
