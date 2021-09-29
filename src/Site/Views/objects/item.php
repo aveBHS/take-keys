@@ -77,7 +77,9 @@
                 </button>
             </div>
             <div class="col-12 col-lg-auto order-lg-1">
-                <button class="btn btn-outline-dark catalog__item__btn-show">Смотреть</button>
+                <a href="/id/<?=$object->id?>">
+                    <button class="btn btn-outline-dark catalog__item__btn-show">Смотреть</button>
+                </a>
             </div>
         </div>
     </div>

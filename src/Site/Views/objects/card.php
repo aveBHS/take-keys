@@ -161,7 +161,7 @@ global $auth;
                     <div class="col-12 order-lg-2">
                         <div class="row g-0">
                             <div class="col-auto item__metro">
-                                <img class="me-2" src="/icons/metro.svg"><?=$object->metroSlug?>
+                                <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
                             </div>
                         </div>
                     </div>
@@ -264,7 +264,7 @@ global $auth;
                         <div class="row row-cols-1 row-cols-lg-3 g-3">
                             <div class="col">
                                 Коммунальные услуги
-                                <div class="item__addictional-info text-primary">Включено в стоимость</div>
+                                <div class="item__addictional-info text-primary">Все включено</div>
                                 <div class="fs-12">*Окончательную стоимость уточняйте у владельца</div>
                             </div>
                             <div class="col">
@@ -368,6 +368,6 @@ global $auth;
 
 <?=view("layout.footer")?>
 <script>
-    $.ajax({url: "//take-keys/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
-    $.ajax({url: "//take-keys/api/objects/recommendations/", success: data => {$("#recommendations-list").html(data);}})
+    $.ajax({url: "//<?=env("url")?>/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
+    $.ajax({url: "//<?=env("url")?>/api/objects/recommendations/", success: data => {$("#recommendations-list").html(data);}})
 </script>
