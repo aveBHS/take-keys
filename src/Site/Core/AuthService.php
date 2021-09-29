@@ -4,6 +4,7 @@ namespace Site\Core;
 
 use http\Client\Curl\User;
 use Site\Models\Model;
+use Site\Models\Request;
 use Site\Models\UserModel;
 
 class AuthService
@@ -13,7 +14,7 @@ class AuthService
     public function __construct()
     {
         if(isset($_SESSION['id'])){
-            $model = UserModel::find($_SESSION['id']);
+            $model = Request::find($_SESSION['id']);
             if($model) $this->model = $model;
         } else if($_COOKIE['auth_token']){
             $model = UserModel::find($_COOKIE['auth_token'], "token");
@@ -47,5 +48,11 @@ class AuthService
     public function logout()
     {
         session_destroy();
+    }
+
+    public function tempLogin(int $id)
+    {
+        $request = Request::find($id);
+        if (!is_null($request)) $this->authenticate($request);
     }
 }
