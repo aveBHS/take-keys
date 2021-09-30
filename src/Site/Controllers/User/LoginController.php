@@ -24,4 +24,11 @@ class LoginController implements Controller
             $request->redirect_back();
         }
     }
+
+    function logout(HttpRequest $request, $args)
+    {
+        global $auth;
+        $auth->logout();
+        $request->redirect("/login");
+    }
 }
