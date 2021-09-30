@@ -1,5 +1,6 @@
 <?php
 
+use Site\Middleware\AdminMiddleware;
 use Site\Middleware\GuestMiddleware;
 use Site\Middleware\MegafonMiddleware;
 use Site\Middleware\UserMiddleware;
@@ -9,9 +10,8 @@ return [
         "~^[/]?$~" => [
             "controller" => [\Site\Controllers\MainController::class, "view"],
         ],
-        "~id/(.+)[/]?$~" => [
-            "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
-        ],
+
+        // Users
         "~login[/]?$~" => [
             "controller" => [\Site\Controllers\User\LoginController::class, "view"],
             "middleware" => GuestMiddleware::class
@@ -20,13 +20,21 @@ return [
             "controller" => [\Site\Controllers\User\LoginController::class, "auth"],
             "middleware" => GuestMiddleware::class
         ],
-        "~private[/]?$~" => [
-            "controller" => [\Site\Controllers\User\CabinetController::class, "view"],
-            "method" => "GET",
+        "~logout[/]?$~" => [
+            "controller" => [\Site\Controllers\User\LoginController::class, "logout"],
             "middleware" => UserMiddleware::class
         ],
 
-        // Objects API
+        // Admin Panel
+        "GET::~panel[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\MainController::class, "view"],
+            "middleware" => AdminMiddleware::class
+        ],
+
+        // Objects
+        "~id/(.+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
+        ],
         "GET::~api[/]objects[/]recent[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"]
         ],
