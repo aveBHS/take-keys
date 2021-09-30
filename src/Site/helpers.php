@@ -43,7 +43,10 @@ function env($paramName)
 function getTableName($className): string
 {
     $className = explode("\\", $className);
-    $className = strtolower($className[count($className)-1]);
+    $className = $className[count($className)-1];
+    if(mb_substr($className, strlen($className) - 5) == "Model")
+        $className = mb_substr($className, 0, -5);
+    $className = strtolower($className);
     switch (mb_substr($className, 0, -2))
     {
         case "ss":
