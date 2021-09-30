@@ -115,6 +115,6 @@ class HttpRequest
     }
     public function redirect_back()
     {
-        $this->redirect($_SERVER['HTTP_REFERER']);
+        $this->redirect($_SERVER['HTTP_REFERER'] ?? "/");
     }
 }
