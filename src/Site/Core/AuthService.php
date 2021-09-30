@@ -10,14 +10,16 @@ use Site\Models\UserModel;
 class AuthService
 {
     protected $model = null;
+    private $authMethod = null;
 
-    public function __construct()
+    public function __construct($authMethod = UserModel::class)
     {
+        $this->authMethod = $authMethod;
         if(isset($_SESSION['id'])){
-            $model = Request::find($_SESSION['id']);
+            $model = $this->authMethod::find($_SESSION['id']);
             if($model) $this->model = $model;
         } else if($_COOKIE['auth_token']){
-            $model = UserModel::find($_COOKIE['auth_token'], "token");
+            $model = $this->authMethod::find($_COOKIE['auth_token'], "token");
             if($model) $this->authenticate($model);
         }
     }
@@ -32,17 +34,19 @@ class AuthService
         $_SESSION['id'] = $user->id;
     }
 
-    public function login(string $login, string $password)
+    public function login(string $login, string $password): bool
     {
-        if($this->model) return null;
-        $user = UserModel::find($login, "login");
+        if($this->model) return true;
+        $user = $this->authMethod::find(strtolower($login), "login");
         if($user){
             if($user->password == md5($password)){
                 $this->authenticate($user);
+                return true;
             } else {
-                return null;
+                return false;
             }
         }
+        return false;
     }
 
     public function logout()
