@@ -9,6 +9,6 @@ class MainController implements \Site\Controllers\Controller
 
     public function view(HttpRequest $request, $args)
     {
-        $request->show("Admin Panel");
+        $request->show(view("admin.index"));
     }
 }

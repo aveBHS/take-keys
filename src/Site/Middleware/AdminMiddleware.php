@@ -12,7 +12,6 @@ class AdminMiddleware implements Middleware
     {
         global $auth;
         if(!is_null($auth())){
-            var_dump($auth());
             if($auth()->admin){
                 return call_user_func_array($callback, $args);
             } else {
