@@ -51,23 +51,23 @@ return [
 
         // Tilda webhooks
         "POST::~whook[/]createRequest[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "processRequest"],
+            "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "processRequest"],
             "middleware" => GuestMiddleware::class
         ],
         "POST::~whook[/]editRequest[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "processRequest"],
+            "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "processRequest"],
             "middleware" => GuestMiddleware::class
         ],
         "POST::~whook[/]removeRequest[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "removeRequest"],
+            "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "removeRequest"],
             "middleware" => GuestMiddleware::class
         ],
         "POST::~whook[/]payment[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "processPayment"],
+            "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "processPayment"],
             "middleware" => GuestMiddleware::class
         ],
         "POST::~whook[/]booking[/]?$~" => [
-            "controller" => [\Site\Controllers\TildaWebHookController::class, "booking"],
+            "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "booking"],
             "middleware" => GuestMiddleware::class
         ],
     ],

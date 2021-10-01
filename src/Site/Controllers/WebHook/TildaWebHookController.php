@@ -1,7 +1,8 @@
 <?php
 
-namespace Site\Controllers;
+namespace Site\Controllers\WebHook;
 
+use Site\Controllers\Controller;
 use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
