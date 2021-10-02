@@ -47,6 +47,8 @@ class TildaWebHookController implements Controller
             $objectInfo->distance = (int) $request->post("AreaRange") * 1000;
             if($objectInfo->distance < 1) $objectInfo->distance = null;
             $objectInfo->type = $request->post("ObjectType");
+            $object->password = md5($request->post("Password"));
+            $object->status = 1;
         }
 
         if(!$object_found) {
