@@ -49,6 +49,9 @@ class TildaWebHookController implements Controller
             $objectInfo->type = $request->post("ObjectType");
             $object->password = md5($request->post("Password"));
             $object->status = 1;
+            $object->is_free = (int) ($request->post("EFM") ?? 1);
+            if($object->is_free != 1 or $object->is_free != 0)
+                $object->is_free = 1;
         }
 
         if(!$object_found) {
