@@ -16,8 +16,8 @@ namespace Site\Models;
 class Request extends Model
 {
     protected $fields = [
-        'email', 'phone', 'password', 'object_type', 'price',
+        'email', 'phone', 'object_type', 'price',
         'distance', 'address', 'lat', 'lng', 'purchased',
-        'status'
+        'is_free', 'status'
     ];
 }

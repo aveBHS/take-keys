@@ -9,5 +9,8 @@ namespace Site\Models;
  */
 class UserModel extends Model
 {
-
+    protected $fields = [
+        'login', 'password', 'request_id', 'remember_token',
+        'email_token', 'reset_token'
+    ];
 }

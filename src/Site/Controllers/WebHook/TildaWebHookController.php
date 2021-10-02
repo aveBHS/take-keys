@@ -8,6 +8,7 @@ use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectType;
 use Site\Models\Request;
+use Site\Models\UserModel;
 use stdClass;
 
 class TildaWebHookController implements Controller
@@ -37,6 +38,11 @@ class TildaWebHookController implements Controller
             $object = new Request();
             $objectInfo = json_decode($request->post('Object'));
             if (!$objectInfo) return false;
+
+            $object->status = 1;
+            $object->is_free = (int) ($request->post("EFM") ?? 1);
+            if($object->is_free != 1 or $object->is_free != 0)
+                $object->is_free = 1;
         } else {
             $object_found = true;
             $objectInfo = new stdClass();
@@ -47,11 +53,6 @@ class TildaWebHookController implements Controller
             $objectInfo->distance = (int) $request->post("AreaRange") * 1000;
             if($objectInfo->distance < 1) $objectInfo->distance = null;
             $objectInfo->type = $request->post("ObjectType");
-            $object->password = md5($request->post("Password"));
-            $object->status = 1;
-            $object->is_free = (int) ($request->post("EFM") ?? 1);
-            if($object->is_free != 1 or $object->is_free != 0)
-                $object->is_free = 1;
         }
 
         if(!$object_found) {
@@ -70,7 +71,15 @@ class TildaWebHookController implements Controller
         $object->object_type = (int)($objectType->object_type_id ?? 1);
 
         try{
-            return $object->save();
+            $result = $object->save();
+            if(!$object_found){
+                $user = new UserModel();
+                $user->login = $userPhone;
+                $user->password = md5($request->post("Password"));
+                $user->request_id = $object->id;
+                return $user->save();
+            }
+            return $result;
         } catch (\Exception $exception){
             $request->show($exception->getMessage());
             return false;
