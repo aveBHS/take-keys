@@ -45,6 +45,7 @@ class TildaWebHookController implements Controller
                 $object->is_free = 1;
         } else {
             $object_found = true;
+            if (!is_null($request->post("Registration"))) return false;
             $objectInfo = new stdClass();
             $objectInfo->lat = 0;
             $objectInfo->lng = 0;
