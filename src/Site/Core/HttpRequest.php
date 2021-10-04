@@ -42,6 +42,10 @@ class HttpRequest
         echo $html;
     }
 
+    public function getMethod()
+    {
+        return $this->method;
+    }
     public function getUrl()
     {
         return $this->url;

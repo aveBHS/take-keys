@@ -12,6 +12,10 @@ return [
         ],
 
         // Users
+        "~lk[/]?$~" => [
+            "controller" => [\Site\Controllers\User\CabinetController::class, "view"],
+            "middleware" => UserMiddleware::class
+        ],
         "~login[/]?$~" => [
             "controller" => [\Site\Controllers\User\LoginController::class, "view"],
             "middleware" => GuestMiddleware::class
