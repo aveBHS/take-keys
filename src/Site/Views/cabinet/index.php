@@ -1,9 +1,6 @@
 <?php
 /**
- * @var object $object
- * @var array $images
- * @var string VIEW_PATH
- * @var bool $purchased
+ * @var object $request
  **/
 
 global $auth;
@@ -28,7 +25,7 @@ global $auth;
 
 
         <div class="col">
-            <div class="setting-item active">
+            <div class="setting-item <?=$request->status == 0 ? "" : "active"?>">
                 <div class="setting-item__icon">
                     <button class="btn btn-primary btn-icon btn-aura">
                         <i class="icon"><img src="/images/icons/bell.svg"></i>
@@ -60,7 +57,7 @@ global $auth;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         $('.btn-switch').click(function(e) {
-            console.log('click');
+            $.ajax({"url": "/api/rec/", "method": "POST"});
             $(this).parents('.setting-item').toggleClass('active')
         })
     })

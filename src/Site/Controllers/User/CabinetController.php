@@ -10,19 +10,26 @@ class CabinetController implements \Site\Controllers\Controller
 
     public function view(HttpRequest $request, $args)
     {
-        $request->show(view("cabinet.index"));
+        global $auth;
+        $requestModel = Request::find($auth()->request_id);
+        if(is_null($requestModel)){
+            $auth->logout();
+            $request->redirect("/login");
+        }
+        $request->show(view("cabinet.index", ["request" => $requestModel]));
     }
 
     public function disableRecommendations(HttpRequest $request, $args)
     {
-        $requestId = (int) base64_decode($args[0]);
-        $requestModel = Request::find($requestId);
+        global $auth;
+        $requestModel = Request::find($auth()->request_id);
         if($request->getMethod() == "POST"){
             if(!is_null($requestModel)){
-                if ($requestModel->enabled == 0)
-                    $requestModel->enabled = 0;
-                else
-                    $requestModel->enabled = 1;
+                if ($requestModel->status == 0)
+                    $requestModel->status = 4;
+                else if($requestModel->status == 4)
+                    $requestModel->status = 0;
+                else return null;
                 try{
                     $requestModel->save();
                 } catch (\Exception $ex){

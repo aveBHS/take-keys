@@ -29,6 +29,12 @@ return [
             "middleware" => UserMiddleware::class
         ],
 
+        // PC
+        "POST::~api[/]rec[/]?$~" => [
+            "controller" => [\Site\Controllers\User\CabinetController::class, "disableRecommendations"],
+            "middleware" => UserMiddleware::class
+        ],
+
         // Admin Panel
         "GET::~panel[/]?$~" => [
             "controller" => [\Site\Controllers\Admin\MainController::class, "view"],
