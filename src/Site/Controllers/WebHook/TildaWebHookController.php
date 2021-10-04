@@ -91,9 +91,13 @@ class TildaWebHookController implements Controller
         $userPhone = $this->getPhone($request->post('Phone'));
         if(!empty($userPhone)) {
             $object = Request::find($userPhone, 'phone');
-            file_put_contents("remove1.txt", var_export($object, true));
             if(!is_null($object)) {
-                $object->remove();
+                $object->status = 0;
+                try{
+                    $object->save();
+                } catch (\Exception $exception) {
+                    $request->show($exception->getMessage());
+                }
             }
         } else {
             $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 200);
@@ -109,6 +113,9 @@ class TildaWebHookController implements Controller
             $requestObject = Request::find($userPhone, "phone");
             if (!is_null($requestObject)) {
                 $requestObject->purchased = 1;
+                if($requestObject->status == 3){
+                    $requestObject->status = 4;
+                }
                 try {
                     $requestObject->save();
                 } catch (\Exception $exception) {
