@@ -23,7 +23,10 @@ class CardController implements Controller
         if (count($requestParams) > 1) {
             $object = (new ObjectModel())->find($requestParams[1]);
             $requestUser = Request::find($requestParams[0], 'id');
-            if (!is_null($requestUser)) $auth->tempLogin($requestUser->id);
+            if (!is_null($requestUser)){
+                $auth->tempLogin($requestUser->id);
+                $auth = new AuthService();
+            }
             $purchased = !is_null($requestUser) && (($requestUser->purchased ?? 0) == 1);
         } else {
             $purchased = false;
