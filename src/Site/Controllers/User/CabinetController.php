@@ -27,7 +27,7 @@ class CabinetController implements \Site\Controllers\Controller
             if(!is_null($requestModel)){
                 if ($requestModel->status == 0)
                     $requestModel->status = 4;
-                else if($requestModel->status == 4)
+                else if($requestModel->status == 4 || $requestModel->status == 5)
                     $requestModel->status = 0;
                 else return null;
                 try{
