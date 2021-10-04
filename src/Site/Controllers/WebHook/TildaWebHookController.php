@@ -93,7 +93,11 @@ class TildaWebHookController implements Controller
         if(!empty($userPhone)) {
             $object = Request::find($userPhone, 'phone');
             if(!is_null($object)) {
-                $object->status = 0;
+                if ($object->status == 0)
+                    $object->status = 4;
+                else if($object->status == 4 || $object->status == 5)
+                    $object->status = 0;
+                else return null;
                 try{
                     $object->save();
                 } catch (\Exception $exception) {
