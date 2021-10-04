@@ -56,7 +56,7 @@ class AuthService
 
     public function tempLogin(int $id)
     {
-        $request = Request::find($id);
+        $request = UserModel::find($id, "request_id");
         if (!is_null($request)) $this->authenticate($request);
     }
 }

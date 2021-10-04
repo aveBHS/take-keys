@@ -53,7 +53,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
     public function recommendations(HttpRequest $request, $args)
     {
         global $auth;
-        $requestModel = $auth();
+        $requestModel = Request::find($auth()->request_id);
         if($requestModel){
             $objectsIds = array_slice(array_reverse(explode(",", $requestModel->last_result)), 0, 10);
             $objects = ObjectModel::findAll($objectsIds);

@@ -28,7 +28,7 @@ class CardController implements Controller
         } else {
             $purchased = false;
             if($auth()){
-                $requestUser = Request::find($auth()->id, 'id');
+                $requestUser = Request::find($auth()->request_id, 'id');
                 $purchased = !is_null($requestUser) && (($requestUser->purchased ?? 0) == 1);
             }
             $object = (new ObjectModel())->find($requestParams[0]);
