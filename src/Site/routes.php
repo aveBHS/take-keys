@@ -80,6 +80,10 @@ return [
             "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "booking"],
             "middleware" => GuestMiddleware::class
         ],
+
+        "POST::~whook[/]pact[/]?$~" => [
+            "controller" => [\Site\Controllers\WebHook\PactNotifyController::class, "view"]
+        ],
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
