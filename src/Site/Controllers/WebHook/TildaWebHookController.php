@@ -41,7 +41,7 @@ class TildaWebHookController implements Controller
 
             $object->status = 1;
             $object->is_free = (int) ($request->post("EFM") ?? 1);
-            if($object->is_free != 1 or $object->is_free != 0)
+            if($object->is_free != 1 and $object->is_free != 0)
                 $object->is_free = 1;
         } else {
             $object_found = true;
@@ -137,7 +137,7 @@ class TildaWebHookController implements Controller
     public function booking(HttpRequest $request, $args)
     {
         $phone = $this->getPhone($request->post("Phone"));
-        $title = $request->post("ObjectTitle");
+        $title = $request->post("ObjectTitle") ?? " ";
         if(!is_null($phone) and !is_null($title)){
             file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/../booker_requests/$phone.txt", $title);
         } else {
