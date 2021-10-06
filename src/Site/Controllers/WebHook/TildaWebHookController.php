@@ -138,7 +138,8 @@ class TildaWebHookController implements Controller
     {
         $phone = $this->getPhone($request->post("Phone"));
         $title = $request->post("ObjectTitle") ?? " ";
-        if(!is_null($phone) and !is_null($title)){
+        if(is_null($title)) $title = " ";
+        if(!is_null($phone)){
             file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/../booker_requests/$phone.txt", $title);
         } else {
             $request->returnException(new \Site\Controllers\Exceptions\BadRequestController(), 200);
