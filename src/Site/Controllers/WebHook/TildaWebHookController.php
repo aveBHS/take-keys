@@ -35,17 +35,13 @@ class TildaWebHookController implements Controller
         $object = Request::find($userPhone, 'phone');
         $object_found = false;
         if(is_null($object)){
+            if (is_null($request->post("Registration"))) return false;
             $object = new Request();
-            $objectInfo = json_decode($request->post('Object'));
-            if (!$objectInfo) return false;
-
+            $objectInfo = new stdClass();
             $object->status = 1;
-            $object->is_free = (int) ($request->post("EFM") ?? 1);
-            if($object->is_free != 1 and $object->is_free != 0)
-                $object->is_free = 1;
+            $object->is_free = 0;
         } else {
             $object_found = true;
-            if (!is_null($request->post("Registration"))) return false;
             $objectInfo = new stdClass();
             $objectInfo->lat = 0;
             $objectInfo->lng = 0;
@@ -58,7 +54,7 @@ class TildaWebHookController implements Controller
 
         if(!$object_found) {
             $object->phone = $userPhone;
-            $object->email = trim($request->post("Email"));
+            $object->email = strtolower(trim($request->post("Email")));
             $object->purchased = 0;
         }
         $object->lat = (float)$objectInfo->lat;
@@ -77,6 +73,7 @@ class TildaWebHookController implements Controller
                 $user = new UserModel();
                 $user->login = $userPhone;
                 $user->password = md5($request->post("Password"));
+                $user->name = $request->post("Name");
                 $user->request_id = $object->id;
                 return $user->save();
             }

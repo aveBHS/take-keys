@@ -7,6 +7,8 @@ use Exception;
 abstract class Model
 {
     private $db;
+    protected $tableId = null;
+    protected $tableName = null;
     protected $fields = [];
 
     function __construct()
