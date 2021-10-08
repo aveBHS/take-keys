@@ -41,6 +41,8 @@ class TildaWebHookController implements Controller
             $object->status = 1;
             $object->is_free = 0;
         } else {
+            if (is_null($request->post("Edit"))) return false;
+            if ($object->purchased != 1) return false;
             $object_found = true;
             $objectInfo = new stdClass();
             $objectInfo->lat = 0;
@@ -56,6 +58,12 @@ class TildaWebHookController implements Controller
             $object->phone = $userPhone;
             $object->email = strtolower(trim($request->post("Email")));
             $object->purchased = 0;
+        } else {
+            if($object->status == 5){
+                $object->status = 3;
+            } else {
+                $object->status = 4;
+            }
         }
         $object->lat = (float)$objectInfo->lat;
         $object->lng = (float)$objectInfo->lng;
@@ -64,7 +72,7 @@ class TildaWebHookController implements Controller
         $object->distance = (int)($objectInfo->distance ?? 1000);
         if ($object->distance < 1) $object->distance = 1000;
 
-        $objectType = ObjectType::find($objectInfo->type);
+        $objectType = ObjectType::find($objectInfo->type ?? "");
         $object->object_type = (int)($objectType->object_type_id ?? 1);
 
         try{
