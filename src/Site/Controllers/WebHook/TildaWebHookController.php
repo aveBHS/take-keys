@@ -59,7 +59,7 @@ class TildaWebHookController implements Controller
             $object->email = strtolower(trim($request->post("Email")));
             $object->purchased = 0;
         } else {
-            if($object->status == 5){
+            if($object->status == 5 || $object->status == 2){
                 $object->status = 3;
             } else {
                 $object->status = 4;
