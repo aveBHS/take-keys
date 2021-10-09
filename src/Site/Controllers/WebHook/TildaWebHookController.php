@@ -7,6 +7,7 @@ use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectType;
+use Site\Models\PhoneCall;
 use Site\Models\Request;
 use Site\Models\UserModel;
 use stdClass;
@@ -83,7 +84,12 @@ class TildaWebHookController implements Controller
                 $user->password = md5($request->post("Password"));
                 $user->name = $request->post("Name");
                 $user->request_id = $object->id;
-                return $user->save();
+                $user->save();
+
+                $call = new PhoneCall();
+                $call->phone = $userPhone;
+                $call->call_type = PhoneCall::callTypes['REGISTRATION'];
+                return $call->save();
             }
             return $result;
         } catch (\Exception $exception){
