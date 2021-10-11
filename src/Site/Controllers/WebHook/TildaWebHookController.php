@@ -38,7 +38,10 @@ class TildaWebHookController implements Controller
         if(is_null($object)){
             if (is_null($request->post("Registration"))) return false;
             $object = new Request();
-            $objectInfo = new stdClass();
+                $objectInfo = new stdClass();
+            if(!is_null($request->post("ObjectInfo")) && !empty($request->post("ObjectInfo")))
+                $objectInfo = json_decode($request->post("ObjectInfo"));
+                if (is_null($objectInfo)) $objectInfo = new stdClass();
             $object->status = 1;
             $object->is_free = 0;
         } else {
