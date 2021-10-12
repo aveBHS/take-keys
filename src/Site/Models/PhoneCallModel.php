@@ -2,7 +2,7 @@
 
 namespace Site\Models;
 
-class PhoneCall extends Model
+class PhoneCallModel extends Model
 {
     protected $tableName = "calls";
     protected $fields = ['phone', 'call_type'];

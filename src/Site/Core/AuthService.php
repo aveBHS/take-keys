@@ -4,7 +4,7 @@ namespace Site\Core;
 
 use http\Client\Curl\User;
 use Site\Models\Model;
-use Site\Models\Request;
+use Site\Models\RequestModel;
 use Site\Models\UserModel;
 
 class AuthService

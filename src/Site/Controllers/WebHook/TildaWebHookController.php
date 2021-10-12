@@ -6,9 +6,9 @@ use Site\Controllers\Controller;
 use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
 use Site\Models\ObjectModel;
-use Site\Models\ObjectType;
-use Site\Models\PhoneCall;
-use Site\Models\Request;
+use Site\Models\ObjectTypeModel;
+use Site\Models\PhoneCallModel;
+use Site\Models\RequestModel;
 use Site\Models\UserModel;
 use stdClass;
 
@@ -33,11 +33,11 @@ class TildaWebHookController implements Controller
     public function processRequest(HttpRequest $request, $args): bool
     {
         $userPhone = $this->getPhone($request->post('Phone'));
-        $object = Request::find($userPhone, 'phone');
+        $object = RequestModel::find($userPhone, 'phone');
         $object_found = false;
         if(is_null($object)){
             if (is_null($request->post("Registration"))) return false;
-            $object = new Request();
+            $object = new RequestModel();
                 $objectInfo = new stdClass();
             if(!is_null($request->post("ObjectInfo")) && !empty($request->post("ObjectInfo")))
                 $objectInfo = json_decode($request->post("ObjectInfo"));
@@ -76,7 +76,7 @@ class TildaWebHookController implements Controller
         $object->distance = (int)($objectInfo->distance ?? 1000);
         if ($object->distance < 1) $object->distance = 1000;
 
-        $objectType = ObjectType::find($objectInfo->type ?? "");
+        $objectType = ObjectTypeModel::find($objectInfo->type ?? "");
         $object->object_type = (int)($objectType->object_type_id ?? 1);
 
         try{
@@ -89,9 +89,9 @@ class TildaWebHookController implements Controller
                 $user->request_id = $object->id;
                 $user->save();
 
-                $call = new PhoneCall();
+                $call = new PhoneCallModel();
                 $call->phone = $userPhone;
-                $call->call_type = PhoneCall::callTypes['REGISTRATION'];
+                $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
                 return $call->save();
             }
             return $result;
@@ -105,7 +105,7 @@ class TildaWebHookController implements Controller
     {
         $userPhone = $this->getPhone($request->post('Phone'));
         if(!empty($userPhone)) {
-            $object = Request::find($userPhone, 'phone');
+            $object = RequestModel::find($userPhone, 'phone');
             if(!is_null($object)) {
                 if ($object->status == 0)
                     $object->status = 4;
@@ -129,7 +129,7 @@ class TildaWebHookController implements Controller
         $userPhone = $this->getPhone($request->post("Phone"));
 
         if(!empty($userPhone)) {
-            $requestObject = Request::find($userPhone, "phone");
+            $requestObject = RequestModel::find($userPhone, "phone");
             if (!is_null($requestObject)) {
                 $requestObject->purchased = 1;
                 if($requestObject->status == 3){

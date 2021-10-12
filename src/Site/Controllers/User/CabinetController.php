@@ -3,7 +3,7 @@
 namespace Site\Controllers\User;
 
 use Site\Core\HttpRequest;
-use Site\Models\Request;
+use Site\Models\RequestModel;
 
 class CabinetController implements \Site\Controllers\Controller
 {
@@ -11,7 +11,7 @@ class CabinetController implements \Site\Controllers\Controller
     public function view(HttpRequest $request, $args)
     {
         global $auth;
-        $requestModel = Request::find($auth()->request_id);
+        $requestModel = RequestModel::find($auth()->request_id);
         if(is_null($requestModel)){
             $auth->logout();
             $request->redirect("/login");
@@ -22,7 +22,7 @@ class CabinetController implements \Site\Controllers\Controller
     public function disableRecommendations(HttpRequest $request, $args)
     {
         global $auth;
-        $requestModel = Request::find($auth()->request_id);
+        $requestModel = RequestModel::find($auth()->request_id);
         if($request->getMethod() == "POST"){
             if(!is_null($requestModel)){
                 if ($requestModel->status == 0)

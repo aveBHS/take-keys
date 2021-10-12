@@ -5,7 +5,7 @@ namespace Site\Controllers\Objects;
 use Site\Core\HttpRequest;
 use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
-use Site\Models\Request;
+use Site\Models\RequestModel;
 
 class ObjectAPIController implements \Site\Controllers\Controller
 {
@@ -53,7 +53,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
     public function recommendations(HttpRequest $request, $args)
     {
         global $auth;
-        $requestModel = Request::find($auth()->request_id);
+        $requestModel = RequestModel::find($auth()->request_id);
         if($requestModel){
             $objectsIds = array_slice(array_reverse(explode(",", $requestModel->last_result)), 0, 10);
             $objects = ObjectModel::findAll($objectsIds);

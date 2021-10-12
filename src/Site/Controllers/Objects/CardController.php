@@ -8,7 +8,7 @@ use Site\Core\AuthService;
 use Site\Core\HttpRequest;
 use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
-use Site\Models\Request;
+use Site\Models\RequestModel;
 
 class CardController implements Controller
 {
@@ -22,7 +22,7 @@ class CardController implements Controller
             $requestParams = explode(":", base64_decode($args[0]));
         if (count($requestParams) > 1) {
             $object = (new ObjectModel())->find($requestParams[1]);
-            $requestUser = Request::find($requestParams[0], 'id');
+            $requestUser = RequestModel::find($requestParams[0], 'id');
             if (!is_null($requestUser)){
                 $auth->tempLogin($requestUser->id);
                 $auth = new AuthService();
@@ -31,7 +31,7 @@ class CardController implements Controller
         } else {
             $purchased = false;
             if($auth()){
-                $requestUser = Request::find($auth()->request_id, 'id');
+                $requestUser = RequestModel::find($auth()->request_id, 'id');
                 $purchased = !is_null($requestUser) && (($requestUser->purchased ?? 0) == 1);
             }
             $object = (new ObjectModel())->find($requestParams[0]);

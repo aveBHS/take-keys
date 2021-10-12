@@ -13,7 +13,7 @@ namespace Site\Models;
  * @property int distance
  * @property int purchased
  */
-class Request extends Model
+class RequestModel extends Model
 {
     protected $fields = [
         'email', 'phone', 'object_type', 'price',
