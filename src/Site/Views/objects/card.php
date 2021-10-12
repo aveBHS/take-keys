@@ -130,7 +130,7 @@ global $auth;
                     <?php } ?>
                     <div class="item__owner"> <!-- 'active' class для онлайна-->
                         <div class="item__owner__avatar">
-                            <img src="/images/dist/ava.png" alt="Чат с владельцем">
+                            <img src="/images/dist/ava.png" alt="Чат с владельцем" style="width: 50px;">
                         </div>
                         <div class="ms-3 text-start">
                             <div class="fw-semibold">
