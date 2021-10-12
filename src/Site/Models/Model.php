@@ -92,7 +92,7 @@ abstract class Model
 
     public function remove()
     {
-        $tableName = $model->tableName ?? getTableName(get_class($this));
+        $tableName = $this->tableName ?? getTableName(get_class($this));
         $tableIndex = $this->tableId ?? 'id';
 
         $query = $this->db->prepare(
@@ -114,7 +114,7 @@ abstract class Model
     public function save(): bool
     {
         $indexField = $this->tableId ?? 'id';
-        $tableName = $model->tableName ?? getTableName(get_class($this));
+        $tableName = $this->tableName ?? getTableName(get_class($this));
 
         $fields = [];
         $values = [];
