@@ -55,7 +55,7 @@ return [
 
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
-            "controller" => [\Site\Controllers\MegafonController::class, "request"],
+            "controller" => [\Site\Controllers\WebHook\MegafonController::class, "request"],
             "middleware" => GuestMiddleware::class
         ],
 

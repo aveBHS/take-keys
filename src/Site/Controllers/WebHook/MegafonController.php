@@ -1,10 +1,10 @@
 <?php
 
-namespace Site\Controllers;
+namespace Site\Controllers\WebHook;
 
 use Site\Core\HttpRequest;
 
-class MegafonController implements Controller
+class MegafonController implements \Site\Controllers\Controller
 {
 
     public function view(HttpRequest $request, $args){ }
