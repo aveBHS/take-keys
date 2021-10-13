@@ -9,6 +9,7 @@ class HttpRequest
     protected $url;
     protected $get;
     protected $post;
+    protected $input;
     protected $method;
 
 
@@ -18,6 +19,7 @@ class HttpRequest
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->get = $_GET;
         $this->post = $_POST;
+        $this->input = file_get_contents("php://input");
     }
     public function fetchRoute(string $regex)
     {
@@ -58,6 +60,19 @@ class HttpRequest
     public function get(string $param)
     {
         return $this->get[$param];
+    }
+    public function json(string $param = null)
+    {
+        $json = json_decode($this->input, true);
+        if(!is_null($json)){
+            if(!is_null($param)){
+                return $json[$param] ?? null;
+            } else {
+                return $json;
+            }
+        } else {
+            return null;
+        }
     }
 
     public function getCookie(string $param = null, bool $decode = false)
