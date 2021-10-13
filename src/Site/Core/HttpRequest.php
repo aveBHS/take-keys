@@ -9,7 +9,7 @@ class HttpRequest
     protected $url;
     protected $get;
     protected $post;
-    protected $input;
+    protected $body;
     protected $method;
 
 
@@ -19,8 +19,22 @@ class HttpRequest
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->get = $_GET;
         $this->post = $_POST;
-        $this->input = file_get_contents("php://input");
+        $this->body = file_get_contents("php://input");
     }
+    public function __get(string $param)
+    {
+        switch ($param){
+            case "body":
+                return $this->body;
+            case "method":
+                return $this->method;
+            case "url":
+                return $this->url;
+            default:
+                return null;
+        }
+    }
+
     public function fetchRoute(string $regex)
     {
         $method = explode("::", $regex);
@@ -63,7 +77,7 @@ class HttpRequest
     }
     public function json(string $param = null)
     {
-        $json = json_decode($this->input, true);
+        $json = json_decode($this->body, true);
         if(!is_null($json)){
             if(!is_null($param)){
                 return $json[$param] ?? null;
@@ -82,7 +96,6 @@ class HttpRequest
         if($decode) return base64_decode($_COOKIE[md5("cookie_".$param)], true);
         return $_COOKIE[md5("cookie_".$param)];
     }
-
     public function setCookie(string $name, $value, bool $encode = false, int $timeout = 0): bool
     {
         if(gettype($value) != "string" || gettype($value) != "integer")
@@ -97,6 +110,11 @@ class HttpRequest
     {
         header("$name: $value");
     }
+    public function getHeader(string $name)
+    {
+        return $_SERVER["HTTP_{$name}"];
+    }
+
     public function setFlash(string $name, string $value)
     {
         $_SESSION["flash_".$name] = $value;
