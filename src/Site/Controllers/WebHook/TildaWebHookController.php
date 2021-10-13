@@ -5,6 +5,7 @@ namespace Site\Controllers\WebHook;
 use Site\Controllers\Controller;
 use Site\Controllers\Exceptions\InternalServerErrorController;
 use Site\Core\HttpRequest;
+use Site\Models\NotifyModel;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
 use Site\Models\PhoneCallModel;
@@ -32,6 +33,7 @@ class TildaWebHookController implements Controller
 
     public function processRequest(HttpRequest $request, $args): bool
     {
+        error_reporting(E_ALL); ini_set('display_errors', '1');
         $userPhone = $this->getPhone($request->post('Phone'));
         $object = RequestModel::find($userPhone, 'phone');
         $object_found = false;
@@ -132,11 +134,16 @@ class TildaWebHookController implements Controller
             $requestObject = RequestModel::find($userPhone, "phone");
             if (!is_null($requestObject)) {
                 $requestObject->purchased = 1;
+                $notify = new NotifyModel();
+                $notify->user_id = UserModel::find($requestObject->id, "request_id")->id;
+                $notify->text = view("notifies.payment_success");
+                $notify->type = NotifyModel::notifyType['WHATSAPP'];
                 if($requestObject->status == 3){
                     $requestObject->status = 4;
                 }
                 try {
                     $requestObject->save();
+                    $notify->save();
                 } catch (\Exception $exception) {
                     $request->returnException(new \Site\Controllers\Exceptions\InternalServerErrorController(), 503);
                 }
