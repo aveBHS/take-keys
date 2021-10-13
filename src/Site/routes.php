@@ -45,6 +45,11 @@ return [
         "~id/(.+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
         ],
+
+        // API
+        "POST::~api[/]address[/]?$~" => [
+            "controller" => [\Site\Controllers\DaDataController::class, "view"]
+        ],
         "GET::~api[/]objects[/]recent[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"]
         ],
