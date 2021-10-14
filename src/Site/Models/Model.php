@@ -90,7 +90,7 @@ abstract class Model
         return Null;
     }
 
-    public static function select(array $where, int $limit = null, int $offset = null, bool $need_total = false)
+    public static function select(array $where, array $order = null, int $limit = null, int $offset = null, bool $need_total = false)
     {
         $className = static::class;
         $model = new $className();
@@ -110,8 +110,25 @@ abstract class Model
         $conditionTypes = implode("", array_fill(0, count($where), "s"));
         $conditionsPlaces = implode(" AND ", $conditionsPlaces);
 
+        $orderBy = [];
+        if(!is_null($order)) {
+            foreach ($order as $sorter) {
+                if (is_array($sorter)) {
+                    if (strtoupper($sorter[1]) == "DESC"){
+                        array_push($orderBy, "`{$sorter[0]}` DESC");
+                    } else {
+                        array_push($orderBy, "`{$sorter[0]}` ASC");
+                    }
+                } else {
+                    array_push($orderBy, "`$sorter` ASC");
+                }
+            }
+            $orderBy = implode(",", $orderBy);
+        }
+
         $query = $model->db->prepare(
             "SELECT * FROM `$tableName` WHERE $conditionsPlaces " .
+            (!is_null($order) ? " ORDER BY $orderBy " : "") .
             (!is_null($limit) ? " LIMIT $limit " : "") .
             (!is_null($offset) ? " OFFSET $offset" : "")
         );
