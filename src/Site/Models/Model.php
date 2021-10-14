@@ -90,6 +90,70 @@ abstract class Model
         return Null;
     }
 
+    public static function select(array $where, int $limit = null, int $offset = null, bool $need_total = false)
+    {
+        $className = static::class;
+        $model = new $className();
+        $tableName = $model->tableName ?? getTableName(static::class);
+
+        $conditionsValues = [];
+        $conditionsPlaces = [];
+        foreach($where as $conditionName => $conditionValue){
+            if(is_array($conditionValue)){
+                array_push($conditionsValues, $conditionValue[0]);
+                array_push($conditionsPlaces, "`$conditionName`{$conditionValue[1]}?");
+            } else {
+                array_push($conditionsValues, $conditionValue);
+                array_push($conditionsPlaces, "`$conditionName`=?");
+            }
+        }
+        $conditionTypes = implode("", array_fill(0, count($where), "s"));
+        $conditionsPlaces = implode(" AND ", $conditionsPlaces);
+
+        $query = $model->db->prepare(
+            "SELECT * FROM `$tableName` WHERE $conditionsPlaces " .
+            (!is_null($limit) ? " LIMIT $limit " : "") .
+            (!is_null($offset) ? " OFFSET $offset" : "")
+        );
+        if(!$query){
+            return Null;
+        }
+        $query->bind_param($conditionTypes, ...$conditionsValues);
+        if($query->execute()){
+            $result = $query->get_result();
+            if($result->num_rows < 1) return null;
+
+            $elements = [];
+            while ($element = $result->fetch_assoc()){
+                $model = new $className();
+                foreach ($element as $key => $value)
+                {
+                    $model->$key = $value;
+                }
+                array_push($elements, $model);
+            }
+
+            if($need_total) {
+                $query = $model->db->prepare(
+                    "SELECT COUNT(*) as `total` FROM `$tableName` WHERE $conditionsPlaces"
+                );
+                if (!$query) {
+                    return Null;
+                }
+                $query->bind_param($conditionTypes, ...$conditionsValues);
+                if($query->execute()){
+                    $result = $query->get_result();
+                    $result = $result->fetch_assoc();
+                    return ["result" => $elements, "total" => $result['total']];
+                }
+            } else {
+                return $elements;
+            }
+
+        }
+        return Null;
+    }
+
     public function remove()
     {
         $tableName = $this->tableName ?? getTableName(get_class($this));
