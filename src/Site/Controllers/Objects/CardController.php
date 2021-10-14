@@ -56,6 +56,7 @@ class CardController implements Controller
             $images = ImageModel::selectObjectImages($object->id);
             $request->show(view("objects.card", ["object" => $object, "images" => $images, "requestId" => $requestUser->id ?? 0, "purchased" => $purchased]));
         } else {
+            var_dump("notf");
             $request->returnException(new NotFoundController(), 404);
         }
     }
