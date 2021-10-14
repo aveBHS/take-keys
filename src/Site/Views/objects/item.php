@@ -143,7 +143,9 @@ if(is_null($mode)) $mode = "tile";
                         </div>
                         <div class="catalog__item__address"><?=$object->address?></div>
                         <div class="catalog__item__desc">
-                            <?=substr($object->description, 0, 250)?>...
+                            <?=mb_strlen($object->description) > 250 ?
+                                mb_substr($object->description, 0, 250) . "..." :
+                                $object->description?>
                         </div>
                         <div class="row gx-0 justify-content-between mt-auto">
                             <div class="col-auto">

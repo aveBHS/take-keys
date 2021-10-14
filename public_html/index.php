@@ -1,6 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods', "GET, POST, PUT, DELETE");
+mb_internal_encoding('UTF-8');
 session_start();
 
 use Site\Core\AuthService;
