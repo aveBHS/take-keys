@@ -30,7 +30,7 @@ global $auth;
     <div class="container">
         <div class="row position-relative">
             <div class="col-lg-8 col-xxl-9 pb-lg-5 order-lg-3">
-                <?=view("layout.item_slider", ["images" => $images, "checking" => true])?>
+                <?=view("layout.item_slider", ["images" => $images, "object" => $object])?>
             </div>
 
             <div class="col-lg-8 col-xxl-9 order-lg-1">
@@ -111,7 +111,12 @@ global $auth;
 
             <div class="col-lg-4 col-xxl-3 order-lg-4 item__contact-wrp">
                 <div class="item__contact">
-                    <?php if($purchased) { ?>
+                    <?php if($object->isAd == 1) { ?>
+                        <form>
+                            <button class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
+                            <button class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
+                        </form>
+                    <?php } else if($purchased) { ?>
                         <a href="tel:<?=$object->phones?>">
                             <button class="btn btn-48 btn-primary w-100 mb-3">
                                 <?= preg_replace(
@@ -290,7 +295,11 @@ global $auth;
                                     <div class="text-warning">Ожидает проверки</div>
 
                                 </div>
-                                <div class="item__addictional-info text-primary">Пройдено</div>
+                                <?php if($object->isAd == 1){ ?>
+                                    <div class="item__addictional-info text-warning">На проверке</div>
+                                <?php } else { ?>
+                                    <div class="item__addictional-info text-primary">Пройдено</div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -348,7 +357,10 @@ global $auth;
 </div>
 
 <div class="item__fixed-buttons p-3">
-    <?php if($purchased) { ?>
+    <?php if($object->isAd == 1) { ?>
+        <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Связаться</a>
+        <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Бронировать</a>
+    <?php } else if($purchased) { ?>
         <a href="tel:<?=$object->phones?>" style="padding-top: 12px;" class="btn btn-48 btn-primary">
             <?= preg_replace(
                 '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',

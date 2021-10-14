@@ -1,7 +1,11 @@
 <?php
 /**
+ * @var object $object
  * @var array $images
  */
+
+global $auth;
+
 ?>
 
 <!-- Slider main container -->
@@ -32,11 +36,15 @@
     <div class="swiper-button-next"><i class="icon"><img src="/images/icons/arrow-right.svg"></i></div>
 
     <div class="item__tags">
-        <span class="btn-colored bg-danger">Лучшая цена</span>
-        <span class="btn-colored bg-primary">Новое</span>
-        <span class="btn-colored bg-warning">Горячее</span>
-        <span class="btn-colored bg-info">Рекомендуемые</span>
-        <?php if(isset($checking)) { ?>
+        <!--span class="btn-colored bg-danger">Лучшая цена</span-->
+        <?php if(isNew($object->created)) { ?>
+            <span class="btn-colored bg-primary">Новое</span>
+        <?php } ?>
+        <!--span class="btn-colored bg-warning">Горячее</span-->
+        <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+            <span class="btn-colored bg-info">Рекомендуемые</span>
+        <?php } ?>
+        <?php if($object->isAd || $object->isAd == 1) { ?>
             <span class="btn-colored bg-white text-dark">На проверке</span>
         <?php } ?>
     </div>

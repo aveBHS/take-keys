@@ -12,7 +12,7 @@ if(count($images) == 0){
 }
 
 if(is_null($mode)) $mode = "tiles";
-
+global $auth;
 ?>
 <?php if($mode != "lines") { ?>
     <div class="<?=$col_class ?? 'col'?>">
@@ -54,6 +54,12 @@ if(is_null($mode)) $mode = "tiles";
                     <!--span class="btn-colored bg-danger">Лучшая цена</span-->
                     <?php if(isNew($object->created)) { ?>
                         <span class="btn-colored bg-primary">Новое</span>
+                    <?php } ?>
+                    <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+                        <span class="btn-colored bg-info">Рекомендуемые</span>
+                    <?php } ?>
+                    <?php if($object->isAd || $object->isAd == 1) { ?>
+                        <span class="btn-colored bg-white text-dark">На проверке</span>
                     <?php } ?>
                 </div>
 
@@ -136,6 +142,12 @@ if(is_null($mode)) $mode = "tiles";
                             <!--span class="btn-colored bg-danger">Лучшая цена</span-->
                             <?php if(isNew($object->created)) { ?>
                                 <span class="btn-colored bg-primary">Новое</span>
+                            <?php } ?>
+                            <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+                                <span class="btn-colored bg-info">Рекомендуемые</span>
+                            <?php } ?>
+                            <?php if($object->isAd || $object->isAd == 1) { ?>
+                                <span class="btn-colored bg-white text-dark">На проверке</span>
                             <?php } ?>
                         </div>
 
