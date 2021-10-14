@@ -34,10 +34,10 @@ global $request;
         </div>
         <div class="w-100 d-sm-none"></div>
         <div class="col-auto">
-            <button class="btn btn-icon"><span class="catalog__view-list"></span></button>
+            <button onclick="setCatalogView('lines')" class="btn btn-icon"><span class="catalog__view-list"></span></button>
         </div>
         <div class="col-auto">
-            <button class="btn btn-icon"><span class="catalog__view-card"></span></button>
+            <button onclick="setCatalogView('tiles')" class="btn btn-icon"><span class="catalog__view-card"></span></button>
         </div>
     </div>
         <?php if($request->getCookie("catalog_view_mode") == "lines") { ?>
@@ -51,7 +51,7 @@ global $request;
                     'object' => $object,
                     'images' => $object->images,
                     'col_class' => "col",
-                    'mode' => $request->getCookie("catalog_view_mode") ?? 'tile'
+                    'mode' => $request->getCookie("catalog_view_mode") ?? 'tiles'
                 ]);
             }
             ?>
@@ -74,3 +74,5 @@ global $request;
 </button>
 
 <?=view("layout.footer")?>
+
+<script src="/js/catalog.js"></script>

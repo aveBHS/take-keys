@@ -64,6 +64,9 @@ return [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recommendations"],
             "middleware" => UserMiddleware::class
         ],
+        "POST::~api[/]settings[/](.+)[/]?$~" => [
+            "controller" => [\Site\Controllers\User\CookieSettingsController::class, "config"]
+        ],
 
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
