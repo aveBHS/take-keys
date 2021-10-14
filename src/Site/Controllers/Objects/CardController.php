@@ -16,7 +16,7 @@ class CardController implements Controller
         global $auth;
 
         if(!$args[0]) $request->redirect("/");
-        if(!strrpos(base64_decode($args[0]), ":"))
+        if(ctype_digit($args[0]))
             $requestParams = [(int) $args[0]];
         else
             $requestParams = explode(":", base64_decode($args[0]));
@@ -56,6 +56,7 @@ class CardController implements Controller
             $images = ImageModel::selectObjectImages($object->id);
             $request->show(view("objects.card", ["object" => $object, "images" => $images, "requestId" => $requestUser->id ?? 0, "purchased" => $purchased]));
         } else {
+            var_dump("notf");
             $request->returnException(new NotFoundController(), 404);
         }
     }
