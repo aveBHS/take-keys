@@ -98,7 +98,7 @@ class HttpRequest
     }
     public function setCookie(string $name, $value, bool $encode = false, int $timeout = 0): bool
     {
-        if(gettype($value) != "string" || gettype($value) != "integer")
+        if(gettype($value) != "string" && gettype($value) != "integer")
             $value = json_encode($value);
         if($encode)
             $value = base64_encode($value);
