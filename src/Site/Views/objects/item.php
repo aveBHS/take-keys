@@ -6,7 +6,12 @@
  * @var string $mode
  */
 
-if(is_null($mode)) $mode = "tile";
+if(count($images) == 0){
+    $images = [new stdClass()];
+    $images[0]->path = "//".env('url')."/uploads/default.jpg";
+}
+
+if(is_null($mode)) $mode = "tiles";
 
 ?>
 <?php if($mode != "lines") { ?>
@@ -18,7 +23,7 @@ if(is_null($mode)) $mode = "tile";
                 <div class="swiper-wrapper">
 
                     <!-- Slides -->
-                    <?php foreach($images as $image) { $image->path = "/images/dist/item-slide-1.jpg"; ?>
+                    <?php foreach($images as $image) { ?>
                     <div class="swiper-slide catalog__item-slider__slide">
                         <div class="catalog__item-slider__blur-bg" style="background-image: url('<?=$image->path?>');">
                         </div>
@@ -46,8 +51,10 @@ if(is_null($mode)) $mode = "tile";
                 </div>
 
                 <div class="item__tags">
-                    <span class="btn-colored bg-danger">Лучшая цена</span>
-                    <span class="btn-colored bg-primary">Новое</span>
+                    <!--span class="btn-colored bg-danger">Лучшая цена</span-->
+                    <?php if(isNew($object->created)) { ?>
+                        <span class="btn-colored bg-primary">Новое</span>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -98,7 +105,7 @@ if(is_null($mode)) $mode = "tile";
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <?php foreach($images as $image) { $image->path = "/images/dist/item-slide-1.jpg"; ?>
+                            <?php foreach($images as $image) { ?>
                                 <div class="swiper-slide catalog__item-slider__slide">
                                     <div class="catalog__item-slider__blur-bg" style="background-image: url('<?=$image->path?>');">
                                     </div>

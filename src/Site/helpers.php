@@ -106,3 +106,18 @@ function cuteDate($date)
     }
     return $output;
 }
+
+function isNew($date): bool
+{
+    $today = date('d.m.Y', time());
+    $yesterday = date('d.m.Y', time() - 86400);
+    $dbDate = date('d.m.Y', strtotime($date));
+    $dbTime = date('H:i', strtotime($date));
+
+    switch ($dbDate)
+    {
+        case $today :
+        case $yesterday : return true;
+        default : return false;
+    }
+}
