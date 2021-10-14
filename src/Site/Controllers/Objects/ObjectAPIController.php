@@ -36,11 +36,11 @@ class ObjectAPIController implements \Site\Controllers\Controller
             if (is_null($objects)){
                 $this->nothing_found($request);
             } else {
+                $objects = ImageModel::selectObjectsImages($objects);
                 foreach($objects as $object){
-                    $images = ImageModel::selectObjectImages($object->id);
                     $request->show(view("objects.item", [
                         'object' => $object,
-                        'images' => $images,
+                        'images' => $object->images,
                         'col_class' => "col-9 col-lg-5"
                     ]));
                 }
@@ -60,11 +60,11 @@ class ObjectAPIController implements \Site\Controllers\Controller
             if (is_null($objects)){
                 $this->nothing_found($request);
             } else {
+                $objects = ImageModel::selectObjectsImages($objects);
                 foreach ($objects as $object) {
-                    $images = ImageModel::selectObjectImages($object->id);
                     $request->show(view("objects.item", [
                         'object' => $object,
-                        'images' => $images,
+                        'images' => $object->images,
                         'col_class' => "col-9 col-lg-5"
                     ]));
                 }
