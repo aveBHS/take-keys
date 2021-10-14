@@ -8,6 +8,7 @@
 
 $max_pages = 5;
 $pages_count = ceil($elements_count / $elements_per_page);
+if($pages_count == 0) return;
 
 $next_page = $current_page+2 > $pages_count ? $pages_count : $current_page+2;
 $previous_page = $current_page-2 < 1 ? 1 : $current_page-2;
