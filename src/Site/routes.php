@@ -45,6 +45,13 @@ return [
         "~id/(.+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
         ],
+        "~catalog[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\CatalogController::class, "view"],
+        ],
+        "~catalog/recommendations[/]?(\d+)?[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\CatalogController::class, "recommendations"],
+            "middleware" => UserMiddleware::class
+        ],
 
         // API
         "POST::~api[/]address[/]?$~" => [
