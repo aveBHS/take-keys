@@ -1,19 +1,21 @@
 <?php
 /**
  * @var array $objects
+ * @var int $objects_count
  * @var array $images
  * @var bool $purchased
+ * @var string $title
  **/
 
 global $auth;
 global $request;
 ?>
 
-<?=view("layout.header", ["_page_title" => "Рекомендации недвижимости"])?>
+<?=view("layout.header", ["_page_title" => $title])?>
 
 <div class="container">
-    <h1 class="h1 item__title my-2 my-lg-0">Заголовок категории</h1>
-    <div class="h-48 fs-18">23 724 вариантов</div>
+    <h1 class="h1 item__title my-2 my-lg-0"><?=$title?></h1>
+    <div class="h-48 fs-18"><?=$objects_count?> вариантов</div>
 
     <div class="row gx-3 gy-2 align-items-center mb-3">
         <div class="col-auto">
@@ -34,28 +36,22 @@ global $request;
             <button class="btn btn-icon"><span class="catalog__view-card"></span></button>
         </div>
     </div>
-
-    <?php if($request->getCookie("catalog_view_mode") == "list") { ?>
-        <div class="row g-4 row-cols-1 mb-4">
-            <!--#set var="col-class" value="col" -->
-            <!--#include virtual="/parts/catalog-item-list.html" -->
-            <!--#include virtual="/parts/catalog-item-list.html" -->
-        </div>
-    <?php } else { ?>
-        <!-- Отображение плитками -->
-        <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <?php if($request->getCookie("catalog_view_mode") == "lines") { ?>
+            <div class="row g-4 row-cols-1 mb-4">
+        <?php } else { ?>
+            <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <?php } ?>
             <?php
             foreach ($objects as $object) {
-                //var_dump($object);
                 echo view("objects.item", [
                     'object' => $object,
                     'images' => $object->images,
-                    'col_class' => "col-9 col-lg-5"
+                    'col_class' => "col",
+                    'mode' => $request->getCookie("catalog_view_mode") ?? 'tile'
                 ]);
             }
             ?>
         </div>
-    <?php } ?>
 
     <div class="mt-4">
         <!--#include virtual="/parts/pagination.html" -->

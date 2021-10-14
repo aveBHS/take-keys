@@ -45,7 +45,7 @@ return [
         "~id/(.+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
         ],
-        "~catalog[/]?$~" => [
+        "~catalog[/]?(\d+)?[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CatalogController::class, "view"],
         ],
         "~catalog/recommendations[/]?(\d+)?[/]?$~" => [

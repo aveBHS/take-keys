@@ -12,7 +12,34 @@ class CatalogController implements \Site\Controllers\Controller
 
     public function view(HttpRequest $request, $args)
     {
-        // TODO: Main catalog view
+        global $auth;
+
+        $page = 0;
+        if(isset($args[0])){
+            $page = ((int) $args[0]) - 1;
+            if ($page < 0) $page = 0;
+        }
+
+        $objects = ObjectModel::select(
+            [ "status" => 0 ],
+            env("elements_per_page") ?? 25,
+            env("elements_per_page") ?? 25 * $page,
+            true
+        );
+        $totalObjects = $objects['total'];
+        $objects = $objects['result'];
+
+        $objects = ImageModel::selectObjectsImages($objects);
+
+        if(is_null($request->getCookie("catalog_view_mode"))){
+            $request->setCookie("catalog_view_mode", "tile");
+        }
+
+        $request->show(view("objects.catalog", [
+            "objects_count" => $totalObjects,
+            "objects"       => $objects,
+            "title"         => "Каталог недвижимости"
+        ]));
     }
 
     public function recommendations(HttpRequest $request, $args)
@@ -35,6 +62,10 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects = ImageModel::selectObjectsImages($objects);
 
-        $request->show(view("objects.catalog", ["objects" => $objects]));
+        $request->show(view("objects.catalog", [
+            "objects_count" => count(explode(",", $req->last_result)),
+            "objects"       => $objects,
+            "title"         => "Рекомендации недвижимости",
+        ]));
     }
 }
