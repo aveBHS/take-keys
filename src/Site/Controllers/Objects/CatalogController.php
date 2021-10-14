@@ -36,9 +36,12 @@ class CatalogController implements \Site\Controllers\Controller
         }
 
         $request->show(view("objects.catalog", [
-            "objects_count" => $totalObjects,
-            "objects"       => $objects,
-            "title"         => "Каталог недвижимости"
+            "objects_count"     => $totalObjects,
+            "objects"           => $objects,
+            "title"             => "Каталог недвижимости",
+            "elements_per_page" => env("elements_per_page") ?? 25,
+            "current_page"      => $page,
+            "origin_url"        => "/catalog"
         ]));
     }
 
@@ -66,6 +69,9 @@ class CatalogController implements \Site\Controllers\Controller
             "objects_count" => count(explode(",", $req->last_result)),
             "objects"       => $objects,
             "title"         => "Рекомендации недвижимости",
+            "elements_per_page" => env("elements_per_page") ?? 25,
+            "current_page"      => $page,
+            "origin_url"        => "/catalog/recommendations"
         ]));
     }
 }

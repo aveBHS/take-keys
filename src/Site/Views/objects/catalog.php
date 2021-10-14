@@ -1,10 +1,14 @@
 <?php
 /**
  * @var array $objects
- * @var int $objects_count
  * @var array $images
  * @var bool $purchased
  * @var string $title
+ *
+ * @var int $objects_count
+ * @var int $current_page
+ * @var int $elements_per_page
+ * @var string $origin_url
  **/
 
 global $auth;
@@ -54,7 +58,12 @@ global $request;
         </div>
 
     <div class="mt-4">
-        <!--#include virtual="/parts/pagination.html" -->
+        <?=view("layout.pagination", [
+            "elements_count"    => $objects_count,
+            "current_page"      => $current_page,
+            "elements_per_page" => $elements_per_page,
+            "origin_url"        => $origin_url
+        ])?>
     </div>
 </div>
 
@@ -63,3 +72,5 @@ global $request;
 <button class="btn btn-dark btn-icon btn-chat">
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
+
+<?=view("layout.footer")?>
