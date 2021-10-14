@@ -17,7 +17,10 @@ class AuthService
         $this->authMethod = $authMethod;
         if(isset($_SESSION['id'])){
             $model = $this->authMethod::find($_SESSION['id']);
-            if($model) $this->model = $model;
+            if($model){
+                $this->model = $model;
+                $this->model->request = RequestModel::find($this->model->request_id);
+            }
         } else if($_COOKIE['auth_token']){
             $model = $this->authMethod::find($_COOKIE['auth_token'], "token");
             if($model) $this->authenticate($model);
