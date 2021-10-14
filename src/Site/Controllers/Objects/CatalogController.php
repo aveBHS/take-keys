@@ -27,8 +27,13 @@ class CatalogController implements \Site\Controllers\Controller
             env("elements_per_page") ?? 25 * $page,
             true
         );
-        $totalObjects = $objects['total'];
-        $objects = $objects['result'];
+        if(is_null($objects) and $page > 0){
+            $request->redirect("/catalog");
+            return;
+        }
+
+        $totalObjects = $objects['total'] ?? 0;
+        $objects = $objects['result'] ?? [];
 
         $objects = ImageModel::selectObjectsImages($objects);
 
@@ -62,9 +67,14 @@ class CatalogController implements \Site\Controllers\Controller
             null,
             env("elements_per_page") ?? 25,
             env("elements_per_page") ?? 25 * $page
-        );
+        ) ?? [];
+        if(empty($objects) and $page > 0){
+            $request->redirect("/catalog/recommendations");
+            return;
+        }
 
         $objects = ImageModel::selectObjectsImages($objects);
+        $objects = array_reverse($objects);
 
         $request->show(view("objects.catalog", [
             "objects_count" => count(explode(",", $req->last_result)),
