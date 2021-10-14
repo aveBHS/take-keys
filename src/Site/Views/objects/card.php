@@ -323,9 +323,9 @@ global $auth;
                     </div>
                     <div class="row mt-4">
                         <div class="col-auto ms-lg-auto order-lg-2">
-                            <a href="#" class="btn btn-icon">
+                            <a href="/catalog/recommendations" class="btn btn-icon">
                                 <div class="d-flex align-items-center">
-                                    Перейти в каталог<i class="icon ms-auto"><img src="/images/icons/arrow-big-right.svg"></i>
+                                    Все рекомендации<i class="icon ms-auto"><img src="/images/icons/arrow-big-right.svg"></i>
                                 </div>
                             </a>
                         </div>

@@ -32,7 +32,7 @@ class CatalogController implements \Site\Controllers\Controller
         $objects = ImageModel::selectObjectsImages($objects);
 
         if(is_null($request->getCookie("catalog_view_mode"))){
-            $request->setCookie("catalog_view_mode", "tile");
+            $request->setCookie("catalog_view_mode", "tiles");
         }
 
         $request->show(view("objects.catalog", [
