@@ -18,6 +18,6 @@ class RequestModel extends Model
     protected $fields = [
         'email', 'phone', 'object_type', 'price',
         'distance', 'address', 'lat', 'lng', 'purchased',
-        'is_free', 'status'
+        'is_free', 'recommendations', 'status'
     ];
 }

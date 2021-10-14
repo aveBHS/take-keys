@@ -81,6 +81,8 @@ class TildaWebHookController implements Controller
         $objectType = ObjectTypeModel::find($objectInfo->type ?? "");
         $object->object_type = (int)($objectType->object_type_id ?? 1);
 
+        $object->recommendations = "";
+
         try{
             $result = $object->save();
             if(!$object_found){
