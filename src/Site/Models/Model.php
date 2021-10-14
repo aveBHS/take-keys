@@ -157,14 +157,19 @@ abstract class Model
         }
     }
 
-    protected function query(string $query, array $params, string $types)
+    protected static function query(string $query, array $params=null, string $types=null)
     {
-        $query = $this->db->prepare($query);
+        $className = static::class;
+        $model = new $className();
+
+        $query = $model->db->prepare($query);
         if(!$query){
             return null;
         }
-        if(!$query->bind_param($types, ...$params)){
-            return null;
+        if(!is_null($params) && !is_null($types)) {
+            if (!$query->bind_param($types, ...$params)) {
+                return null;
+            }
         }
         if($query->execute()){
             $results = $query->get_result();
@@ -172,7 +177,7 @@ abstract class Model
 
             $models = [];
             while($result = $results->fetch_assoc()){
-                $className = get_class($this);
+                $className = get_class($model);
                 $model = new $className();
                 foreach ($result as $key => $value)
                 {
