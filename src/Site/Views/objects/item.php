@@ -133,8 +133,10 @@ if(is_null($mode)) $mode = "tiles";
                         </div>
 
                         <div class="item__tags">
-                            <span class="btn-colored bg-danger">Лучшая цена</span>
-                            <span class="btn-colored bg-primary">Новое</span>
+                            <!--span class="btn-colored bg-danger">Лучшая цена</span-->
+                            <?php if(isNew($object->created)) { ?>
+                                <span class="btn-colored bg-primary">Новое</span>
+                            <?php } ?>
                         </div>
 
                     </div>

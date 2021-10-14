@@ -22,6 +22,7 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects = ObjectModel::select(
             [ "status" => 0 ],
+            [ ["created", "DESC"] ],
             env("elements_per_page") ?? 25,
             env("elements_per_page") ?? 25 * $page,
             true
