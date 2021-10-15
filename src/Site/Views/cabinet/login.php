@@ -82,9 +82,9 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                         <form class="auth__form-signin" novalidate>
                                                             <div class="mb-3">
-                                                                <input form="auth__send-signin" type="text" name="login" placeholder="E-mail или телефон" class="form-control"
+                                                                <input form="auth__send-signin" type="tel" name="login" placeholder="Номер телефона" class="form-control"
                                                                        required>
-                                                                <div class="invalid-feedback">Пожалуйста, введите корректный Email или телефон
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный номер телефона
                                                                 </div>
                                                             </div>
                                                             <div class="row align-items-center">

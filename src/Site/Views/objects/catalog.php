@@ -75,7 +75,7 @@ global $request;
 
 
 
-<button class="btn btn-dark btn-icon btn-chat">
+<button onclick="Chatra('openChat', true)" class="btn btn-dark btn-icon btn-chat">
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
 

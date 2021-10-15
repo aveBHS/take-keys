@@ -58,9 +58,9 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-lg-auto mx-auto mt-3 mt-lg-0">
                             <ul class="topline__menu">
-                                <li><a href="/about">Как это работает</a></li>
+                                <li><a href="https://take-keys.com/">Как это работает</a></li>
                                 <li><a href="/catalog">Каталог</a></li>
-                                <li><a href="/help">Справочный центр</a></li>
+                                <li><a href="https://take-keys.com/help">Справочный центр</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto">
