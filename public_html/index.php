@@ -13,12 +13,12 @@ spl_autoload_register(function (string $className) {
 require_once __DIR__ . "/../src/Site/helpers.php";
 
 $db = require_once __DIR__ . "/../src/Site/database.php";
-$auth = new AuthService();
 
 $route = $_GET['route'] ?? '';
 $routes = require __DIR__ . "/../src/Site/routes.php";
 
 $request = new HttpRequest($_GET['route']);
+$auth = new AuthService($request);
 
 foreach ($routes['routes'] as $regex => $render)
 {
