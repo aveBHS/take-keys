@@ -18,7 +18,7 @@ class LoginController implements Controller
             $request->redirect_back();
         }
         global $auth;
-        if($auth->login($request->post("login"), $request->post("password"))) {
+        if($auth->login(getPhone($request->post("login")), $request->post("password"))) {
             $request->redirect($request->getFlash("login_redirect") ?? "/");
         } else {
             $request->setFlash("login_error", "Логин или пароль неверные");
