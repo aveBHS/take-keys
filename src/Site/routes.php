@@ -28,6 +28,9 @@ return [
             "controller" => [\Site\Controllers\User\LoginController::class, "logout"],
             "middleware" => UserMiddleware::class
         ],
+        "~a[/]([A-Za-z0-9=]+)[/]?(.+)?$~" => [
+            "controller" => [\Site\Controllers\User\LoginController::class, "tokenAuth"]
+        ],
 
         // PC
         "POST::~api[/]rec[/]?$~" => [
