@@ -78,6 +78,7 @@ class AuthService
     public function logout()
     {
         session_destroy();
+        $this->httpRequest->setCookie("auth_token", "", false, -1);
         session_start();
     }
 
