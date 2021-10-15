@@ -121,3 +121,16 @@ function isNew($date): bool
         default : return false;
     }
 }
+
+function getPhone($phone)
+{
+    if (is_null($phone)) return null;
+    $phone = trim($phone);
+    $phone = str_replace(" ", "", $phone);
+    $phone = str_replace("-", "", $phone);
+    $phone = str_replace("+", "", $phone);
+    $phone = str_replace("(", "", $phone);
+    $phone = str_replace(")", "", $phone);
+    if ($phone[0] == "8") $phone = "7" . substr($phone, 1);
+    return $phone;
+}

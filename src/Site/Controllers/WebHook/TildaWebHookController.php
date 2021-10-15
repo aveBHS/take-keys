@@ -18,23 +18,10 @@ class TildaWebHookController implements Controller
 
     public function view(HttpRequest $request, $args) { }
 
-    function getPhone($phone)
-    {
-        if (is_null($phone)) return null;
-        $phone = trim($phone);
-        $phone = str_replace(" ", "", $phone);
-        $phone = str_replace("-", "", $phone);
-        $phone = str_replace("+", "", $phone);
-        $phone = str_replace("(", "", $phone);
-        $phone = str_replace(")", "", $phone);
-        if ($phone[0] == "8") $phone = "7" . substr($phone, 1);
-        return $phone;
-    }
-
     public function processRequest(HttpRequest $request, $args): bool
     {
         error_reporting(E_ALL); ini_set('display_errors', '1');
-        $userPhone = $this->getPhone($request->post('Phone'));
+        $userPhone = getPhone($request->post('Phone'));
         $object = RequestModel::find($userPhone, 'phone');
         $object_found = false;
         if(is_null($object)){
@@ -107,7 +94,7 @@ class TildaWebHookController implements Controller
 
     public function removeRequest(HttpRequest $request, $args)
     {
-        $userPhone = $this->getPhone($request->post('Phone'));
+        $userPhone = getPhone($request->post('Phone'));
         if(!empty($userPhone)) {
             $object = RequestModel::find($userPhone, 'phone');
             if(!is_null($object)) {
@@ -130,7 +117,7 @@ class TildaWebHookController implements Controller
     public function processPayment(HttpRequest $request, $args)
     {
 
-        $userPhone = $this->getPhone($request->post("Phone"));
+        $userPhone = getPhone($request->post("Phone"));
 
         if(!empty($userPhone)) {
             $requestObject = RequestModel::find($userPhone, "phone");
@@ -159,7 +146,7 @@ class TildaWebHookController implements Controller
 
     public function booking(HttpRequest $request, $args)
     {
-        $phone = $this->getPhone($request->post("Phone"));
+        $phone = getPhone($request->post("Phone"));
         $title = $request->post("ObjectTitle") ?? " ";
         if(is_null($title)) $title = " ";
         if(!is_null($phone)){
