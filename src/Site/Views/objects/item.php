@@ -55,7 +55,7 @@ global $auth;
                     <?php if(isNew($object->created)) { ?>
                         <span class="btn-colored bg-primary">Новое</span>
                     <?php } ?>
-                    <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+                    <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
                         <span class="btn-colored bg-info">Рекомендуемые</span>
                     <?php } ?>
                     <?php if($object->isAd || $object->isAd == 1) { ?>
@@ -143,7 +143,7 @@ global $auth;
                             <?php if(isNew($object->created)) { ?>
                                 <span class="btn-colored bg-primary">Новое</span>
                             <?php } ?>
-                            <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+                            <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
                                 <span class="btn-colored bg-info">Рекомендуемые</span>
                             <?php } ?>
                             <?php if($object->isAd || $object->isAd == 1) { ?>

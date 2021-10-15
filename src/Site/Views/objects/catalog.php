@@ -19,7 +19,7 @@ global $request;
 
 <div class="container">
     <h1 class="h1 item__title my-2 my-lg-0"><?=$title?></h1>
-    <div class="h-48 fs-18"><?=$objects_count?> вариантов</div>
+    <div class="h-48 fs-18"><?=(count($objects) > 0) ? $objects_count : "Нет"?> вариантов</div>
 
     <div class="row gx-3 gy-2 align-items-center mb-3">
         <div class="col-auto">
@@ -40,22 +40,28 @@ global $request;
             <button onclick="setCatalogView('tiles')" class="btn btn-icon"><span class="catalog__view-card"></span></button>
         </div>
     </div>
-        <?php if($request->getCookie("catalog_view_mode") == "lines") { ?>
-            <div class="row g-4 row-cols-1 mb-4">
+        <?php if(count($objects) > 0) { ?>
+            <?php if($request->getCookie("catalog_view_mode") == "lines") { ?>
+                <div class="row g-4 row-cols-1 mb-4">
+            <?php } else { ?>
+                <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <?php } ?>
+                <?php
+                foreach ($objects as $object) {
+                    echo view("objects.item", [
+                        'object' => $object,
+                        'images' => $object->images,
+                        'col_class' => "col",
+                        'mode' => $request->getCookie("catalog_view_mode") ?? 'tiles'
+                    ]);
+                }
+                ?>
         <?php } else { ?>
-            <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <div class="text-center text-primary py-5 fs-3">
+                Ничего не найдено
+            </div>
         <?php } ?>
-            <?php
-            foreach ($objects as $object) {
-                echo view("objects.item", [
-                    'object' => $object,
-                    'images' => $object->images,
-                    'col_class' => "col",
-                    'mode' => $request->getCookie("catalog_view_mode") ?? 'tiles'
-                ]);
-            }
-            ?>
-        </div>
+    </div>
 
     <div class="mt-4">
         <?=view("layout.pagination", [

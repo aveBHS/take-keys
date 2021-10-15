@@ -41,7 +41,7 @@ global $auth;
             <span class="btn-colored bg-primary">Новое</span>
         <?php } ?>
         <!--span class="btn-colored bg-warning">Горячее</span-->
-        <?php if(!is_null($auth()) && strpos($auth()->request->last_result, "{$object->id}") !== false) { ?>
+        <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
             <span class="btn-colored bg-info">Рекомендуемые</span>
         <?php } ?>
         <?php if($object->isAd || $object->isAd == 1) { ?>

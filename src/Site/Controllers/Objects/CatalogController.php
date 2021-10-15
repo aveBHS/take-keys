@@ -63,7 +63,7 @@ class CatalogController implements \Site\Controllers\Controller
 
         $req = RequestModel::find($auth()->request_id);
         $objects = ObjectModel::findAll(
-            explode(",", $req->last_result),
+            explode(",", $req->recommendations),
             null,
             env("elements_per_page") ?? 25,
             env("elements_per_page") ?? 25 * $page
@@ -77,7 +77,7 @@ class CatalogController implements \Site\Controllers\Controller
         $objects = array_reverse($objects);
 
         $request->show(view("objects.catalog", [
-            "objects_count" => count(explode(",", $req->last_result)),
+            "objects_count" => count(explode(",", $req->recommendations)),
             "objects"       => $objects,
             "title"         => "Рекомендации недвижимости",
             "elements_per_page" => env("elements_per_page") ?? 25,

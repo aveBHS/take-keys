@@ -55,7 +55,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
         global $auth;
         $requestModel = RequestModel::find($auth()->request_id);
         if($requestModel){
-            $objectsIds = array_slice(array_reverse(explode(",", $requestModel->last_result)), 0, 10);
+            $objectsIds = array_slice(array_reverse(explode(",", $requestModel->recommendations)), 0, 10);
             $objects = ObjectModel::findAll($objectsIds);
             if (is_null($objects)){
                 $this->nothing_found($request);
