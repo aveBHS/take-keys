@@ -24,6 +24,14 @@ return [
             "controller" => [\Site\Controllers\User\LoginController::class, "auth"],
             "middleware" => GuestMiddleware::class
         ],
+        "~join[/]?$~" => [
+            "controller" => [\Site\Controllers\User\JoinController::class, "view"],
+            "middleware" => GuestMiddleware::class
+        ],
+        "POST::~join[/]?$~" => [
+            "controller" => [\Site\Controllers\User\JoinController::class, "join"],
+            "middleware" => GuestMiddleware::class
+        ],
         "~logout[/]?$~" => [
             "controller" => [\Site\Controllers\User\LoginController::class, "logout"],
             "middleware" => UserMiddleware::class

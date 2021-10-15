@@ -24,16 +24,17 @@ global $auth;
 
                     <!-- Slides -->
                     <?php foreach($images as $image) { ?>
-                    <div class="swiper-slide catalog__item-slider__slide">
-                        <div class="catalog__item-slider__blur-bg" style="background-image: url('<?=$image->path?>');">
+                        <div class="swiper-slide catalog__item-slider__slide">
+                            <div class="catalog__item-slider__blur-bg swiper-lazy" data-background="<?=$image->path?>">
+                            </div>
+                            <div class="catalog__item-slider__bg ratio swiper-lazy" data-background="<?=$image->path?>">
+                            </div>
+                            <div class="swiper-lazy-preloader"></div>
                         </div>
-                        <div class="catalog__item-slider__bg ratio" style="background-image: url('<?=$image->path?>');">
-                        </div>
-                    </div>
                     <?php } ?>
                 </div>
 
-                <div class="swiper-pagination-counter d-lg-none mb-2">
+                <div class="swiper-pagination-counter d-none mb-2">
                     <span class="current">1</span>/
                     <span class="total"><?=count($images)?></span>
                 </div>
@@ -113,10 +114,11 @@ global $auth;
                             <!-- Slides -->
                             <?php foreach($images as $image) { ?>
                                 <div class="swiper-slide catalog__item-slider__slide">
-                                    <div class="catalog__item-slider__blur-bg" style="background-image: url('<?=$image->path?>');">
+                                    <div class="catalog__item-slider__blur-bg swiper-lazy" data-background="<?=$image->path?>">
                                     </div>
-                                    <div class="catalog__item-slider__bg ratio" style="background-image: url('<?=$image->path?>');">
+                                    <div class="catalog__item-slider__bg ratio swiper-lazy" data-background="<?=$image->path?>">
                                     </div>
+                                    <div class="swiper-lazy-preloader"></div>
                                 </div>
                             <?php } ?>
                         </div>

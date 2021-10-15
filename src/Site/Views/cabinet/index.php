@@ -21,7 +21,7 @@ global $auth;
 </style>
 
 <div class="main-container container mt-5">
-    <h1>Личный кабинет</h1><hr><br>
+    <h1>Личный кабинет</h1><br>
     <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-3 gy-3">
 
 

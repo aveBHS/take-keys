@@ -1,10 +1,11 @@
+</div>
 <div class="footer">
     <div class="container pb-3">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4">
             <div class="col">
                 <div class="logo-wrp">
-                    <img class="logo-footer" src="/images/icons/logo.svg" alt="Take Keys">
-                    <a target="_blank" class="mail-link" href="mailto:suport@take-keys.ru">suport@take-keys.ru</a>
+                    <a class="logo logo-footer" href="/"><img src="/images/icons/logo.svg" alt="Take Keys"></a>
+                    <a target="_blank" class="mail-link" href="mailto:suport@take-keys.ru">suport@take-keys.com</a>
                 </div>
             </div>
             <div class="col">
@@ -55,7 +56,7 @@
     </div>
 </div>
 
-<script src="/js/app.min.js?5"></script>
+<script src="js/app.min.js?5"></script>
 
 </body>
 

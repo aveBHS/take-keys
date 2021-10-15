@@ -5,7 +5,7 @@
 
 global $request;
 $flash_error = $request->getFlash("login_error");
-$_page_title = "Войти в кабинет | Take Keys";
+$_page_title = "Регистрация | Take Keys";
 
 ?>
 
@@ -68,27 +68,27 @@ $_page_title = "Войти в кабинет | Take Keys";
                     <div class="col-12 col-lg-auto">
 
                         <div class="accordion auth h-100" id="auth-accordion">
-                            <div class="auth__signin h-100 collapse show" data-bs-parent="#auth-accordion">
+                            <div class="auth__reg h-100 collapse show" data-bs-parent="#auth-accordion">
                                 <div class="auth__text h-100">
                                     <div class="auth__steps-wrp flex-grow-1">
-                                        <div class="swiper auth__steps-signin">
+                                        <div class="swiper auth__steps-reg">
                                             <div class="swiper-wrapper">
                                                 <!-- Slides -->
                                                 <div class="swiper-slide">
                                                     <div class="" data-swiper-parallax="100%">
-                                                        <div class="auth__title">Войдите в учетную запись, чтобы продолжить пользоваться сервисом</div>
+                                                        <div class="auth__title">Создать учетную запись, чтобы продолжить пользоваться сервисом</div>
                                                         <div class="auth__desc">Единая городская база недвижимости</div>
                                                     </div>
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
-                                                        <form class="auth__form-signin" novalidate>
+                                                        <form class="auth__form-reg" novalidate>
                                                             <div class="mb-3">
-                                                                <input form="auth__send-signin" type="text" name="login" placeholder="E-mail или телефон" class="form-control"
+                                                                <input form="auth__send-reg" type="email" name="email" placeholder="Ваш E-mail" class="form-control"
                                                                        required>
-                                                                <div class="invalid-feedback">Пожалуйста, введите корректный Email или телефон
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный Email
                                                                 </div>
                                                             </div>
                                                             <div class="row align-items-center">
-                                                                <div class="col">Шаг 1/2</div>
+                                                                <div class="col">Шаг 1/3</div>
                                                                 <div class="col-auto">
                                                                     <button class="btn btn-primary auth__btn">
                                                                         <div class="d-flex align-items-center" type="submit">
@@ -105,12 +105,6 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <?php if(!is_null($flash_error)) { ?>
-                                                            <br>
-                                                            <div class="alert alert-danger">
-                                                                <b>Ошибка: </b><?=$flash_error?>
-                                                            </div>
-                                                            <?php } ?>
                                                         </form>
                                                         <!--div class="auth__soc">
                                                             <div class="auth__soc__title mb-3"><span>Продолжить используя:</span></div>
@@ -139,18 +133,72 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                 </div>
                                                 <div class="swiper-slide">
                                                     <div class="" data-swiper-parallax="100%">
-                                                        <div class="auth__title">Войдите в учетную запись, чтобы продолжить пользоваться сервисом</div>
+                                                        <div class="auth__title">Создать учетную запись, чтобы продолжить пользоваться сервисом</div>
                                                         <div class="auth__desc">Единая городская база недвижимости</div>
                                                     </div>
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
-                                                        <form id="auth__send-signin" class="needs-validation" novalidate method="POST">
+                                                        <form class="auth__form-reg" novalidate>
                                                             <div class="mb-3">
-                                                                <input type="password" name="password" placeholder="Введите пароль"
-                                                                       class="form-control" required>
-                                                                <div class="invalid-feedback">Введите пароль</div>
+                                                                <input form="auth__send-reg" type="text" name="name" placeholder="Как Вас зовут?"
+                                                                       class="form-control">
+                                                                <div class="invalid-feedback">Пожалуйста, введите Ваше имя</div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="tel" name="phone" placeholder="Телефон"
+                                                                       class="form-control" required data-mask="+{7} (000) 000-00-00"
+                                                                       autocomplete="phone">
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный номер
+                                                                    телефона</div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="password" name="password" placeholder="Пароль" class="form-control"
+                                                                       autocomplete="current-password" required>
+                                                                <div class="invalid-feedback">Пожалуйста, введите пароль</div>
                                                             </div>
                                                             <div class="row align-items-center">
-                                                                <div class="col">Шаг 2/2</div>
+                                                                <div class="col">Шаг 2/3</div>
+                                                                <div class="col-auto">
+                                                                    <button class="btn btn-primary auth__btn" type="submit">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <i class="svg-wrp me-3">
+                                                                                <svg width="6" height="10" viewBox="0 0 6 10"
+                                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                                          d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+                                                                                          fill="#A3CC4A" />
+                                                                                </svg>
+                                                                            </i>
+                                                                            Продолжить
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <div class="" data-swiper-parallax="100%">
+                                                        <div class="auth__title">Ответьте на несколько вопросов, чтобы начать работу в Take-Keys</div>
+                                                        <div class="auth__desc"></div>
+                                                    </div>
+                                                    <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
+                                                        <form id="auth__send-reg" class="needs-validation" novalidate>
+                                                            <div class="mb-3">
+                                                                <input type="text" name="rentorbuy" placeholder="Вы хотите сдать или купить?"
+                                                                       class="form-control">
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input type="text" name="budget" placeholder="Ваш бюджет?" class="form-control">
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input type="date" name="date" placeholder="В какой день планируете заселиться?"
+                                                                       class="form-control">
+                                                                <div class="invalid-feedback"></div>
+                                                            </div>
+                                                            <div class="row align-items-center">
+                                                                <div class="col">Шаг 3/3</div>
                                                                 <div class="col-auto">
                                                                     <button class="btn btn-dark auth__btn" type="submit">
                                                                         <div class="d-flex align-items-center">
@@ -162,17 +210,16 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                                                           fill="#151A40" />
                                                                                 </svg>
                                                                             </i>
-                                                                            Войти
+                                                                            Создать
                                                                         </div>
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <div class="auth__terms form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" value="" name="terms" id="auth__terms-signin" checked required>
-                                                                <label class="form-check-label" for="auth__terms-signin">
+                                                                <input class="form-check-input" type="checkbox" value="" name="terms" id="auth__terms-reg" checked required>
+                                                                <label class="form-check-label" for="auth__terms-reg">
                                                                     Нажимая на кнопку Создать вы подтверждаете согласие с <a href="#">условиями использования</a> Take-Keys и <a href="#">политикой</a> о <a href="#">данных пользователей</a>
                                                                 </label>
-                                                                <div class="invalid-feedback">Это обязательное поле</div>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -181,8 +228,8 @@ $_page_title = "Войти в кабинет | Take Keys";
                                         </div>
                                     </div>
                                     <div class="auth__switch">
-                                        У вас еще нет аккаунта?
-                                        <a class="ms-3 link text-primary" href="/join">Создать</a>
+                                        У вас есть аккаунт?
+                                        <a class="ms-3 link text-primary" href="/login">Войти</a>
                                     </div>
                                 </div>
                             </div>

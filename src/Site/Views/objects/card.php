@@ -117,15 +117,7 @@ global $auth;
                             <button class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                         </form>
                     <?php } else if($purchased) { ?>
-                        <a href="tel:<?=$object->phones?>">
-                            <button class="btn btn-48 btn-primary w-100 mb-3">
-                                <?= preg_replace(
-                                    '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
-                                    '+\1 (\2) \3-\4-\5',
-                                    (string) $object->phones
-                                ) ?>
-                            </button>
-                        </a>
+                        <a href="https://take-keys.com/proverka"><button class="btn btn-48 btn-primary w-100 mb-4">Связаться</button></a>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else { ?>
                         <form action="https://take-keys.com/go-buy" method="post">
@@ -361,13 +353,7 @@ global $auth;
         <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Связаться</a>
         <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Бронировать</a>
     <?php } else if($purchased) { ?>
-        <a href="tel:<?=$object->phones?>" style="padding-top: 12px;" class="btn btn-48 btn-primary">
-            <?= preg_replace(
-                '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
-                '+\1 (\2) \3-\4-\5',
-                (string) $object->phones
-            ) ?>
-        </a>
+        <a href="https://take-keys.com/proverka" style="padding-top: 12px;" class="btn btn-48 btn-primary">Связаться</a>
         <a href="https://take-keys.com/booking" style="padding-top: 12px;" class="btn btn-48 btn-dark">Бронировать</a>
     <?php } else { ?>
         <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-primary" style="padding-top: 12px;">Связаться</a>
@@ -378,7 +364,8 @@ global $auth;
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
 
-<?=view("layout.footer")?>
+<!--?=view("layout.footer")?-->
+<script src="/js/app.min.js?5"></script>
 <script>
     $.ajax({url: "//<?=env("url")?>/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
     $.ajax({url: "//<?=env("url")?>/api/objects/recommendations/", success: data => {$("#recommendations-list").html(data);}})
