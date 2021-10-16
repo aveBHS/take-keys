@@ -90,8 +90,8 @@ $_page_title = "Регистрация | Take Keys";
                                                             <div class="row align-items-center">
                                                                 <div class="col">Шаг 1/3</div>
                                                                 <div class="col-auto">
-                                                                    <button class="btn btn-primary auth__btn">
-                                                                        <div class="d-flex align-items-center" type="submit">
+                                                                    <button class="btn btn-primary auth__btn" type="submit">
+                                                                        <div class="d-flex align-items-center">
                                                                             <i class="svg-wrp me-3">
                                                                                 <svg width="6" height="10" viewBox="0 0 6 10"
                                                                                      fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -367,6 +367,15 @@ global $auth;
 <!--?=view("layout.footer")?-->
 <script src="/js/app.min.js?5"></script>
 <script>
-    $.ajax({url: "//<?=env("url")?>/api/objects/recent/", success: data => {$("#recent-viewed").html(data);}})
-    $.ajax({url: "//<?=env("url")?>/api/objects/recommendations/", success: data => {$("#recommendations-list").html(data);}})
+    document.addEventListener('DOMContentLoaded', () => {
+        function dynamicContent() {
+            lazyAjaxCatalog('#recent-viewed', '//<?=env("url")?>/api/objects/recent/', {})
+            lazyAjaxCatalog('#recommendations-list', '//<?=env("url")?>/api/objects/recommendations/', {})
+        }
+        dynamicContent()
+
+        $(window).scroll(function () {
+            dynamicContent()
+        })
+    })
 </script>

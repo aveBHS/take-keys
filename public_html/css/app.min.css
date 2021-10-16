@@ -584,7 +584,7 @@ progress {
     color: #6c757d;
 }
 .blockquote-footer::before {
-    content: "— ";
+    content: "— ";
 }
 
 .img-fluid {
@@ -13468,7 +13468,6 @@ body .content {
     min-width: 100%;
     overflow: hidden;
     position: relative;
-    height: 100%;
 }
 .catalog__item-slider .swiper-wrapper {
     height: 100%;

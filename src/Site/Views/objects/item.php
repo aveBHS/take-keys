@@ -17,53 +17,53 @@ global $auth;
 <?php if($mode != "lines") { ?>
     <div class="<?=$col_class ?? 'col'?>">
         <div class="catalog__item">
-            <div class="catalog__item-slider">
+            <div class="catalog__item-slider lazy">
+                <div class="catalog__item-slider">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
 
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-
-                    <!-- Slides -->
-                    <?php foreach($images as $image) { ?>
-                        <div class="swiper-slide catalog__item-slider__slide">
-                            <div class="catalog__item-slider__blur-bg swiper-lazy" data-background="<?=$image->path?>">
+                        <!-- Slides -->
+                        <?php foreach($images as $image) { ?>
+                            <div class="swiper-slide catalog__item-slider__slide">
+                                <div class="catalog__item-slider__blur-bg swiper-lazy" data-background="<?=$image->path?>">
+                                </div>
+                                <div class="catalog__item-slider__bg ratio swiper-lazy" data-background="<?=$image->path?>">
+                                </div>
+                                <div class="swiper-lazy-preloader"></div>
                             </div>
-                            <div class="catalog__item-slider__bg ratio swiper-lazy" data-background="<?=$image->path?>">
-                            </div>
-                            <div class="swiper-lazy-preloader"></div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
+
+                    <div class="swiper-pagination-counter d-none mb-2">
+                        <span class="current">1</span>/
+                        <span class="total"><?=count($images)?></span>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+
+                    <div class="swiper-alt-clock">
+                        <img class="me-2" src="/images/icons/clock.svg">
+                        <span><?=cuteDate($object->created)?></span>
+                    </div>
+
+                    <div class="swiper-alt-photo">
+                        <img class="me-2" src="/images/icons/photo-white.svg">
+                        <span class="total"><?=count($images)?></span>
+                    </div>
+
+                    <div class="item__tags">
+                        <!--span class="btn-colored bg-danger">Лучшая цена</span-->
+                        <?php if(isNew($object->created)) { ?>
+                            <span class="btn-colored bg-primary">Новое</span>
+                        <?php } ?>
+                        <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
+                            <span class="btn-colored bg-info">Рекомендуемые</span>
+                        <?php } ?>
+                        <?php if($object->isAd || $object->isAd == 1) { ?>
+                            <span class="btn-colored bg-white text-dark">На проверке</span>
+                        <?php } ?>
+                    </div>
                 </div>
-
-                <div class="swiper-pagination-counter d-none mb-2">
-                    <span class="current">1</span>/
-                    <span class="total"><?=count($images)?></span>
-                </div>
-
-                <div class="swiper-pagination"></div>
-
-                <div class="swiper-alt-clock">
-                    <img class="me-2" src="/images/icons/clock.svg">
-                    <span><?=cuteDate($object->created)?></span>
-                </div>
-
-                <div class="swiper-alt-photo">
-                    <img class="me-2" src="/images/icons/photo-white.svg">
-                    <span class="total"><?=count($images)?></span>
-                </div>
-
-                <div class="item__tags">
-                    <!--span class="btn-colored bg-danger">Лучшая цена</span-->
-                    <?php if(isNew($object->created)) { ?>
-                        <span class="btn-colored bg-primary">Новое</span>
-                    <?php } ?>
-                    <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
-                        <span class="btn-colored bg-info">Рекомендуемые</span>
-                    <?php } ?>
-                    <?php if($object->isAd || $object->isAd == 1) { ?>
-                        <span class="btn-colored bg-white text-dark">На проверке</span>
-                    <?php } ?>
-                </div>
-
             </div>
             <div class="catalog__item__info">
                 <div class="catalog__item__title">
@@ -107,8 +107,8 @@ global $auth;
     <div class="<?=$col_class ?? 'col'?>">
         <div class="catalog__item">
             <div class="row">
-                <div class="col-5">
-                    <div class="catalog__item-slider">
+                <div class="col-12 col-lg-5">
+                    <div class="catalog__item-slider h-100">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
@@ -155,7 +155,7 @@ global $auth;
 
                     </div>
                 </div>
-                <div class="col-7">
+                <div class="col-12 col-lg-7">
                     <div class="catalog__item__info h-100">
                         <div class="catalog__item__title">
                             <?=$object->title?>
