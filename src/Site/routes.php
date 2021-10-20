@@ -110,6 +110,9 @@ return [
         "POST::~whook[/]pact[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\PactNotifyController::class, "view"]
         ],
+        "MIXED::~whook[/]mtt[/]?$~" => [
+            "controller" => [\Site\Controllers\WebHook\MTTWebHookController::class, "view"]
+        ],
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
