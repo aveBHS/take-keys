@@ -71,8 +71,9 @@ class HttpRequest
         if(is_null($param)) return $this->post;
         return $this->post[$param];
     }
-    public function get(string $param)
+    public function get(string $param = null)
     {
+        if(is_null($param)) return $this->get;
         return $this->get[$param];
     }
     public function json(string $param = null)
