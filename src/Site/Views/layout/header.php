@@ -67,9 +67,6 @@
                             <div class="row">
                                 <?php if(is_null($auth())) { ?>
                                     <div class="col-12 col-lg-auto">
-                                        <a href="/join" class="btn btn-primary topline__btn">Регистрация</a>
-                                    </div>
-                                    <div class="col-12 col-lg-auto">
                                         <a href="/login" class="btn btn-dark topline__btn">Войти</a>
                                     </div>
                                 <?php } else { ?>

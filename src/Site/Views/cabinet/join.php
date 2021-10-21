@@ -184,12 +184,13 @@ $_page_title = "Регистрация | Take Keys";
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                         <form id="auth__send-reg" class="needs-validation" novalidate>
                                                             <div class="mb-3">
-                                                                <input type="text" name="rentorbuy" placeholder="Вы хотите сдать или купить?"
-                                                                       class="form-control">
-                                                                <div class="invalid-feedback"></div>
+                                                                <select name="rentorbuy" placeholder="Вы хотите сдать или купить?">
+                                                                    <option value="rent">Снять или купить</option>
+                                                                    <option value="sell">Сдать или продать</option>
+                                                                </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <input type="text" name="budget" placeholder="Ваш бюджет?" class="form-control">
+                                                                <input type="int" name="budget" placeholder="Ваш бюджет?" class="form-control">
                                                                 <div class="invalid-feedback"></div>
                                                             </div>
                                                             <div class="mb-3">

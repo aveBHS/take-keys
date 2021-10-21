@@ -182,7 +182,7 @@ $_page_title = "Войти в кабинет | Take Keys";
                                     </div>
                                     <div class="auth__switch">
                                         У вас еще нет аккаунта?
-                                        <a class="ms-3 link text-primary" href="/join">Создать</a>
+                                        <a class="ms-3 link text-primary" href="/catalog">Перейти в каталог</a>
                                     </div>
                                 </div>
                             </div>
