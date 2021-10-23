@@ -117,7 +117,8 @@ global $auth;
                             <button class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                         </form>
                     <?php } else if($purchased) { ?>
-                        <a href="https://take-keys.com/proverka"><button class="btn btn-48 btn-primary w-100 mb-4">Связаться</button></a>
+                        <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button></a>
+                        <?=view("layout.popup.autocall")?>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else { ?>
                         <form action="https://take-keys.com/go-buy" method="post">
@@ -353,7 +354,7 @@ global $auth;
         <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Связаться</a>
         <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Бронировать</a>
     <?php } else if($purchased) { ?>
-        <a href="https://take-keys.com/proverka" style="padding-top: 12px;" class="btn btn-48 btn-primary">Связаться</a>
+        <a style="padding-top: 12px;" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</a>
         <a href="https://take-keys.com/booking" style="padding-top: 12px;" class="btn btn-48 btn-dark">Бронировать</a>
     <?php } else { ?>
         <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-primary" style="padding-top: 12px;">Связаться</a>
