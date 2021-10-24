@@ -118,13 +118,10 @@ global $auth;
                         </form>
                     <?php } else if($purchased) { ?>
                         <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button></a>
-                        <?=view("layout.popup.autocall")?>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else { ?>
-                        <form action="https://take-keys.com/go-buy" method="post">
-                            <button class="btn btn-48 btn-primary w-100 mb-3">Связаться</button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button>
-                        </form>
+                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
+                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
                     <?php } ?>
                     <div class="item__owner"> <!-- 'active' class для онлайна-->
                         <div class="item__owner__avatar">
@@ -366,6 +363,9 @@ global $auth;
 </button>
 
 <!--?=view("layout.footer")?-->
+<?=view("layout.popup.autocall")?>
+<?=view("layout.popup.payment")?>
+<?=view("layout.popup.auth", ['forceReg' => true])?>
 <script src="/js/app.min.js?5"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
