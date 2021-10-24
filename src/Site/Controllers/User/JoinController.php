@@ -13,8 +13,21 @@ class JoinController implements Controller
     function join(HttpRequest $request, $args){
         $user = new UserModel();
         $user->login = $request->post("email");
+        $user->phone = getPhone($request->post("phone"));
         $user->password = md5($request->post("password"));
         $user->name = $request->post("name");
-        $user->type = $request->post("rentbuy");
+
+        $request->setHeader("Content-Type", "application/json");
+        if ($user->save()){
+            $request->show(json_encode([
+                "result"  => "OK",
+                "user_id" => $user->id
+            ]));
+        } else {
+            $request->show(json_encode([
+                "result"  => "ERROR",
+                "reason"  => "Телефон или почта уже заняты"
+            ]));
+        }
     }
 }

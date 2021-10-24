@@ -119,6 +119,9 @@ global $auth;
                     <?php } else if($purchased) { ?>
                         <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button></a>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
+                    <?php } else if(!is_null($auth())) { ?>
+                        <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button></a>
+                        <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else { ?>
                             <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
                             <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
@@ -363,9 +366,17 @@ global $auth;
 </button>
 
 <!--?=view("layout.footer")?-->
-<?=view("layout.popup.autocall")?>
-<?=view("layout.popup.payment")?>
-<?=view("layout.popup.auth", ['forceReg' => true])?>
+<?php 
+echo(view("layout.popup.autocall"));
+echo(view("layout.popup.payment"));
+echo(view("layout.popup.payment_result"));
+echo(view("layout.payment_widget", ["amount" => 99]));
+if(is_null($auth())) {
+    echo(view("layout.popup.auth", ['forceReg' => true]));
+} else {
+    echo("<script>let user_id = {$auth()->id}</script>");
+}
+?>
 <script src="/js/app.min.js?5"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {

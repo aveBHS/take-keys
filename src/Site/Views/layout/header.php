@@ -32,6 +32,7 @@
     <!-- /Chatra {/literal} -->
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=<?=env("yandex_maps_key")?>&lang=ru_RU" type="text/javascript"></script>
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
 
 </head>
 

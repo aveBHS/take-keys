@@ -86,7 +86,7 @@ if (!isset($forceReg))
 														<div class="row align-items-center">
 															<div class="col">Шаг 1/2</div>
 															<div class="col-auto">
-																<button class="btn btn-primary auth__btn" type="submit">
+															<button class="btn btn-primary auth__btn" type="submit">
 																	<div class="d-flex align-items-center">
 																		<i class="svg-wrp me-3">
 																			<svg width="6" height="10" viewBox="0 0 6 10"
