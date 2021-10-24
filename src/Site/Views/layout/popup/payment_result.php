@@ -1,3 +1,16 @@
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        $('#popup-tarif-pay-fail-retry').submit(function (event) {
+            Modal.getOrCreateInstance($('#popup-tarif-pay-fail')).hide()
+            pay(user_id)
+            event.preventDefault()
+            event.stopPropagation()
+        })
+
+    });
+
+</script>
 <div class="modal fade main-modal" id="popup-tarif-pay-fail" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -11,7 +24,9 @@
 					<div class="popup__title text-white">Платёж отклонен</div>
 
 					<div class="popup__buttons ms-auto ms-lg-0 ml-lg-auto">
-						<button class="btn btn-white px-3 ms-auto" onclick="pay(123);">Повторить оплату</button>
+                        <form id="popup-tarif-pay-fail-retry">
+						    <button class="btn btn-white px-3 ms-auto">Повторить оплату</button>
+                        </form>
 					</div>
 				</div>
 			</div>
