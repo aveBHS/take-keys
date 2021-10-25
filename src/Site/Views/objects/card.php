@@ -366,16 +366,17 @@ global $auth;
 </button>
 
 <!--?=view("layout.footer")?-->
-<?php 
+<script>
+    let object_id = <?=$object->id?>;
+    let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
+</script>
+
+<?php if(is_null($auth()))
+    echo(view("layout.popup.auth", ['forceReg' => true]));
 echo(view("layout.popup.autocall"));
-echo(view("layout.popup.payment"));
+echo(view("layout.popup.purchase", ['name' => $auth()->name]));
 echo(view("layout.popup.payment_result"));
 echo(view("layout.payment_widget", ["amount" => 99]));
-if(is_null($auth())) {
-    echo(view("layout.popup.auth", ['forceReg' => true]));
-} else {
-    echo("<script>let user_id = {$auth()->id}</script>");
-}
 ?>
 <script src="/js/app.min.js?5"></script>
 <script>

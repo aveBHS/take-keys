@@ -16,6 +16,7 @@
     <meta property="og:image" content="/images/favicon.svg">
 
     <link rel="stylesheet" href="/css/app.min.css?5">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Chatra {literal} -->
     <script>
