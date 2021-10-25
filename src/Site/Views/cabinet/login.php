@@ -13,6 +13,7 @@ $_page_title = "Войти в кабинет | Take Keys";
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        $('[data-bs-target="#auth__modal"]').click()
 
         $('.auth__form-reg').submit(function (event) {
             if (checkValidate(this)) {
@@ -67,7 +68,7 @@ $_page_title = "Войти в кабинет | Take Keys";
                     </div>
                     <div class="col-12 col-lg-auto">
 
-                        <div class="accordion auth h-100" id="auth-accordion">
+                        <div class="accordion auth loading h-100" id="auth-accordion">
                             <div class="auth__signin h-100 collapse show" data-bs-parent="#auth-accordion">
                                 <div class="auth__text h-100">
                                     <div class="auth__steps-wrp flex-grow-1">
@@ -82,9 +83,9 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                         <form class="auth__form-signin" novalidate>
                                                             <div class="mb-3">
-                                                                <input form="auth__send-signin" type="tel" name="login" placeholder="Номер телефона" class="form-control"
+                                                                <input form="auth__send-signin" type="email" name="login" placeholder="Ваш логин (E-mail)" class="form-control"
                                                                        required>
-                                                                <div class="invalid-feedback">Пожалуйста, введите корректный номер телефона
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный Email
                                                                 </div>
                                                             </div>
                                                             <div class="row align-items-center">
@@ -167,7 +168,7 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="auth__terms form-check mt-2">
+                                                            <div class="auth__terms form-check form-check-box mt-2">
                                                                 <input class="form-check-input" type="checkbox" value="" name="terms" id="auth__terms-signin" checked required>
                                                                 <label class="form-check-label" for="auth__terms-signin">
                                                                     Нажимая на кнопку Создать вы подтверждаете согласие с <a href="#">условиями использования</a> Take-Keys и <a href="#">политикой</a> о <a href="#">данных пользователей</a>

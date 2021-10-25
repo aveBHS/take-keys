@@ -208,7 +208,7 @@ if (!isset($forceReg))
                                 </div>
                                 <div class="auth__switch">
                                     У вас есть аккаунт?
-                                    <span class="ms-3 link text-primary" href="#" data-bs-toggle="collapse" data-bs-target=".auth__signin">Войти</span>
+                                    <a class="ms-3 link text-primary" href="/login">Войти</a>
                                 </div>
                             </div>
                         </div>
