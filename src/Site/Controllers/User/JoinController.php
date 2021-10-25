@@ -4,6 +4,9 @@ namespace Site\Controllers\User;
 
 use Site\Controllers\Controller;
 use Site\Core\HttpRequest;
+use Site\Models\ObjectModel;
+use Site\Models\ObjectTypeModel;
+use Site\Models\RequestModel;
 use Site\Models\UserModel;
 
 class JoinController implements Controller
@@ -11,23 +14,72 @@ class JoinController implements Controller
     function view(HttpRequest $request, $args){ }
 
     function join(HttpRequest $request, $args){
+        $request->setHeader("Content-Type", "application/json");
+        if (!preg_match('/[7]\d{10,12}/',
+            getPhone($request->post("phone")))){
+            $request->show(json_encode([
+                "result"  => "ERROR",
+                "reason"  => "Телефон указан некорректно"
+            ]));
+            return;
+        }
+        if (!filter_var($request->post("email"), FILTER_VALIDATE_EMAIL)){
+            $request->show(json_encode([
+                "result"  => "ERROR",
+                "reason"  => "Почта указана некорректно"
+            ]));
+            return;
+        }
+        global $auth;
+
         $user = new UserModel();
-        $user->login = $request->post("email");
+        $user->login = strtolower($request->post("email"));
         $user->phone = getPhone($request->post("phone"));
         $user->password = md5($request->post("password"));
         $user->name = $request->post("name");
+        $reqInfo = ObjectModel::find((int) $request->post("object"));
 
-        $request->setHeader("Content-Type", "application/json");
-        if ($user->save()){
-            $request->show(json_encode([
-                "result"  => "OK",
-                "user_id" => $user->id
-            ]));
-        } else {
+        if(is_null($reqInfo)){
             $request->show(json_encode([
                 "result"  => "ERROR",
-                "reason"  => "Телефон или почта уже заняты"
+                "reason"  => "Обновите страницу и повторите попытку"
             ]));
+            return;
         }
+
+        $req = new RequestModel();
+        $req->phone = getPhone($request->post("phone"));
+        $req->email = strtolower(trim($request->post("email")));
+        $req->purchased = 0;
+        $req->is_free = 0;
+        $req->status = 1;
+
+        $req->lat = $reqInfo->lat;
+        $req->lng = $reqInfo->lng;
+        $req->price = $reqInfo->cost;
+        $req->address = $reqInfo->address;
+        $req->distance = 1000;
+
+        $reqType = ObjectTypeModel::find($reqInfo->category_id, "inpars_id");
+        $req->object_type = (int)($reqType->object_type_id ?? 1);
+        $req->recommendations = "";
+
+        try {
+            if ($req->save()) {
+                $user->request_id = $req->id;
+                if ($user->save()) {
+                    $auth->directLogin($user->id, false);
+                    $request->show(json_encode([
+                        "result" => "OK",
+                        "user_id" => $user->id
+                    ]));
+                    return;
+                }
+            }
+        } catch (\Exception $ex) { }
+        $request->show(json_encode([
+            "result"  => "ERROR",
+            "reason"  => "Телефон или почта уже заняты"
+        ]));
     }
 }
