@@ -117,14 +117,14 @@ global $auth;
                             <button class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                         </form>
                     <?php } else if($purchased) { ?>
-                        <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button></a>
+                        <button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else if(!is_null($auth())) { ?>
-                        <a><button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button></a>
-                        <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
+                        <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
+                        <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1" >Бронировать</button>
                     <?php } else { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
+                        <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
+                        <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
                     <?php } ?>
                     <div class="item__owner"> <!-- 'active' class для онлайна-->
                         <div class="item__owner__avatar">
@@ -351,14 +351,17 @@ global $auth;
 
 <div class="item__fixed-buttons p-3">
     <?php if($object->isAd == 1) { ?>
-        <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Связаться</a>
-        <a class="btn btn-48 btn-secondary" style="padding-top: 12px;">Бронировать</a>
+        <button class="btn btn-48 btn-secondary">Связаться</button>
+        <button class="btn btn-48 btn-secondary">Бронировать</button>
     <?php } else if($purchased) { ?>
-        <a style="padding-top: 12px;" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</a>
-        <a href="https://take-keys.com/booking" style="padding-top: 12px;" class="btn btn-48 btn-dark">Бронировать</a>
+        <button type="button" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
+        <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
+    <?php } else if(!is_null($auth())) { ?>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1" >Бронировать</button>
     <?php } else { ?>
-        <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-primary" style="padding-top: 12px;">Связаться</a>
-        <a href="https://take-keys.com/go-buy" class="btn btn-48 btn-dark" style="padding-top: 12px;">Бронировать</a>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
     <?php } ?>
 </div>
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
@@ -371,12 +374,17 @@ global $auth;
     let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
 </script>
 
-<?php if(is_null($auth()))
+<?php
+if(is_null($auth())) {
     echo(view("layout.popup.auth", ['forceReg' => true]));
-echo(view("layout.popup.autocall"));
-echo(view("layout.popup.purchase", ['name' => $auth()->name]));
-echo(view("layout.popup.payment_result"));
-echo(view("layout.payment_widget", ["amount" => 99]));
+}
+if(!$purchased || is_null($auth())){
+    echo(view("layout.popup.purchase", ['name' => $auth()->name]));
+    echo(view("layout.payment_widget", ["amount" => 99]));
+    echo(view("layout.popup.payment_result"));
+} else {
+    echo(view("layout.popup.autocall"));
+}
 ?>
 <script src="/js/app.min.js?5"></script>
 <script>
