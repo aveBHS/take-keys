@@ -62,24 +62,32 @@ class CatalogController implements \Site\Controllers\Controller
         }
 
         $req = RequestModel::find($auth()->request_id);
-        $objects = ObjectModel::findAll(
-            explode(",", $req->recommendations),
-            null,
+        $objects = ObjectModel::select(
+            [
+                "status" => 0,
+                "id" => [explode(",", $req->recommendations), "in"]
+            ],
+            [ ["created", "DESC"] ],
             env("elements_per_page") ?? 25,
-            env("elements_per_page") ?? 25 * $page
+            env("elements_per_page") ?? 25 * $page,
+            true
         ) ?? [];
-        if(empty($objects) and $page > 0){
+
+        if(is_null($objects) and $page > 0){
             $request->redirect("/catalog/recommendations");
             return;
         }
+
+        $totalObjects = $objects['total'] ?? 0;
+        $objects = $objects['result'] ?? [];
 
         $objects = ImageModel::selectObjectsImages($objects);
         $objects = array_reverse($objects);
 
         $request->show(view("objects.catalog", [
-            "objects_count" => count(explode(",", $req->recommendations)),
-            "objects"       => $objects,
-            "title"         => "Рекомендации недвижимости",
+            "objects_count"     => $totalObjects,
+            "objects"           => $objects,
+            "title"             => "Рекомендации недвижимости",
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
             "origin_url"        => "/catalog/recommendations"

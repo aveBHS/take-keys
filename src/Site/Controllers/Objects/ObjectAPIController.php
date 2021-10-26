@@ -55,13 +55,21 @@ class ObjectAPIController implements \Site\Controllers\Controller
         global $auth;
         $requestModel = RequestModel::find($auth()->request_id);
         if($requestModel){
-            $objectsIds = array_slice(array_reverse(explode(",", $requestModel->recommendations)), 0, 10);
-            $objects = ObjectModel::findAll($objectsIds);
+            $objects = ObjectModel::select(
+                [
+                    "status" => 0,
+                    "id" => [explode(",", $requestModel->recommendations), "in"]
+                ],
+                [ ["created", "DESC"] ],
+                10, 0, true
+            ) ?? [];
             if (is_null($objects)){
                 $this->nothing_found($request);
             } else {
+                $objects = $objects['result'];
                 $objects = ImageModel::selectObjectsImages($objects);
                 foreach ($objects as $object) {
+                    if($object->status > 1) continue;
                     $request->show(view("objects.item", [
                         'object' => $object,
                         'images' => $object->images,
