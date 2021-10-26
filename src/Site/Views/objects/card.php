@@ -111,10 +111,10 @@ global $auth;
 
             <div class="col-lg-4 col-xxl-3 order-lg-4 item__contact-wrp">
                 <div class="item__contact">
-                    <?php if($object->isAd == 1) { ?>
+                    <?php if($object->isAd == 1 || $object->status > 0) { ?>
                         <form>
-                            <button class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
-                            <button class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
+                            <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
+                            <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                         </form>
                     <?php } else if($purchased) { ?>
                         <button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
@@ -272,24 +272,26 @@ global $auth;
                             <div class="col position-relative">
                                 Статус проверки
                                 <span class="item__check-status-open"></span>
-                                <div class="item__check-status">
-
-                                    <div class="fw-semibold">Результат:</div>
-                                    <div>По базам агентов:</div>
-                                    <div class="text-primary mb-2">Пройдено</div>
-
-                                    <div>По чёрному списку номеров:</div>
-                                    <div class="text-warning mb-2">Ожидает проверки</div>
-
-                                    <div>Алгоритмом предупреждения сомнительных объявлений:</div>
-                                    <div class="text-danger mb-2">Не пройдено</div>
-
-                                    <div>Проверка через ЕГРН:</div>
-                                    <div class="text-warning">Ожидает проверки</div>
-
-                                </div>
-                                <?php if($object->isAd == 1){ ?>
+<!--                                <div class="item__check-status">-->
+<!---->
+<!--                                    <div class="fw-semibold">Результат:</div>-->
+<!--                                    <div>По базам агентов:</div>-->
+<!--                                    <div class="text-primary mb-2">Пройдено</div>-->
+<!---->
+<!--                                    <div>По чёрному списку номеров:</div>-->
+<!--                                    <div class="text-warning mb-2">Ожидает проверки</div>-->
+<!---->
+<!--                                    <div>Алгоритмом предупреждения сомнительных объявлений:</div>-->
+<!--                                    <div class="text-danger mb-2">Не пройдено</div>-->
+<!---->
+<!--                                    <div>Проверка через ЕГРН:</div>-->
+<!--                                    <div class="text-warning">Ожидает проверки</div>-->
+<!---->
+<!--                                </div>-->
+                                <?php if($object->isAd == 1 or $object->status == 1){ ?>
                                     <div class="item__addictional-info text-warning">На проверке</div>
+                                <?php } else if($object->status == 2){ ?>
+                                    <div class="item__addictional-info text-danger">Архив</div>
                                 <?php } else { ?>
                                     <div class="item__addictional-info text-primary">Пройдено</div>
                                 <?php } ?>
@@ -350,9 +352,9 @@ global $auth;
 </div>
 
 <div class="item__fixed-buttons p-3">
-    <?php if($object->isAd == 1) { ?>
-        <button class="btn btn-48 btn-secondary">Связаться</button>
-        <button class="btn btn-48 btn-secondary">Бронировать</button>
+    <?php if($object->isAd == 1 || $object->status > 1) { ?>
+        <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Связаться</button>
+        <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Бронировать</button>
     <?php } else if($purchased) { ?>
         <button type="button" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>

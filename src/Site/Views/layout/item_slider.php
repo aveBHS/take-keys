@@ -47,6 +47,12 @@ global $auth;
         <?php if($object->isAd || $object->isAd == 1) { ?>
             <span class="btn-colored bg-white text-dark">На проверке</span>
         <?php } ?>
+        <?php if($object->status == 1) { ?>
+            <span class="btn-colored bg-warning">На проверке</span>
+        <?php } ?>
+        <?php if($object->status == 2) { ?>
+            <span class="btn-colored bg-secondary">В архиве</span>
+        <?php } ?>
     </div>
 
 </div>
