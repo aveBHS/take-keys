@@ -98,16 +98,30 @@ abstract class Model
 
         $conditionsValues = [];
         $conditionsPlaces = [];
+        $screening_elements = 0;
         foreach($where as $conditionName => $conditionValue){
             if(is_array($conditionValue)){
-                array_push($conditionsValues, $conditionValue[0]);
-                array_push($conditionsPlaces, "`$conditionName`{$conditionValue[1]}?");
+                if(strtolower($conditionValue[1]) == "in"){
+                    if(is_array($conditionValue[0]) && count($conditionValue) > 0){
+                        $values = [];
+                        foreach($conditionValue[0] as $value){
+                            array_push($values, '"'.mysqli_real_escape_string($model->db, $value).'"');
+                        }
+                        $values = implode(",", $values);
+                        array_push($conditionsPlaces, "`$conditionName` IN ({$values})");
+                    }
+                } else {
+                    $screening_elements++;
+                    array_push($conditionsValues, $conditionValue[0]);
+                    array_push($conditionsPlaces, "`$conditionName`{$conditionValue[1]}?");
+                }
             } else {
+                $screening_elements++;
                 array_push($conditionsValues, $conditionValue);
                 array_push($conditionsPlaces, "`$conditionName`=?");
             }
         }
-        $conditionTypes = implode("", array_fill(0, count($where), "s"));
+        $conditionTypes = implode("", array_fill(0, $screening_elements, "s"));
         $conditionsPlaces = implode(" AND ", $conditionsPlaces);
 
         $orderBy = [];
