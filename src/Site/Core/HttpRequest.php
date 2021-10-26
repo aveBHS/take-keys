@@ -113,6 +113,7 @@ class HttpRequest
     }
     public function getHeader(string $name)
     {
+        $name = strtoupper(str_replace("-", "_", $name));
         return $_SERVER["HTTP_{$name}"];
     }
 
