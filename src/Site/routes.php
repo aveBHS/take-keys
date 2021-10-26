@@ -110,6 +110,10 @@ return [
         "POST::~whook[/]pact[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\PactNotifyController::class, "view"]
         ],
+        "POST::~clpay[/]?$~" => [
+            "controller" => [\Site\Controllers\WebHook\CloudPaymentsWebHookController::class, "view"],
+            "middleware" => \Site\Middleware\CloudPaymentsMiddleware::class
+        ],
         "MIXED::~whook[/]mtt[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\MTTWebHookController::class, "view"]
         ],
