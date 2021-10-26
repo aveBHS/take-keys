@@ -3,6 +3,7 @@
 use Site\Middleware\AdminMiddleware;
 use Site\Middleware\GuestMiddleware;
 use Site\Middleware\MegafonMiddleware;
+use Site\Middleware\PaidUserMiddleware;
 use Site\Middleware\UserMiddleware;
 
 return [
@@ -74,6 +75,10 @@ return [
         "GET::~api[/]objects[/]recommendations[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recommendations"],
             "middleware" => UserMiddleware::class
+        ],
+        "GET::~api[/]objects[/]call[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\VerifyOwnerRequestController::class, "request"],
+            "middleware" => PaidUserMiddleware::class
         ],
         "POST::~api[/]settings[/](.+)[/]?$~" => [
             "controller" => [\Site\Controllers\User\CookieSettingsController::class, "config"]
