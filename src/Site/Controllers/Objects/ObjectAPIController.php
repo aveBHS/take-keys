@@ -120,4 +120,11 @@ class ObjectAPIController implements \Site\Controllers\Controller
         }
         $request->show(json_encode($objects_json));
     }
+
+    public function mapRender(HttpRequest $request, $args)
+    {
+        $object = ObjectModel::find($args[0]);
+        $images = ImageModel::selectObjectImages($object->id);
+        $request->show(view("objects.item", ["object" => $object, "images" => $images]));
+    }
 }
