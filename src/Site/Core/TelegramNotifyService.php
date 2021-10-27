@@ -10,10 +10,10 @@ class TelegramNotifyService
         $this->token = $token;
     }
 
-    public function send(array $chats, string $message){
+    public function send($chats, string $message){
         $message = urlencode($message);
+        if(!is_array($chats)) $chats = [$chats];
         foreach($chats as $chat_id){
-            $message = urlencode($message);
             $url = "https://api.telegram.org/bot{$this->token}/sendMessage?chat_id=$chat_id&text=$message";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
