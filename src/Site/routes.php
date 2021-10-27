@@ -69,6 +69,9 @@ return [
         "POST::~api[/]address[/]?$~" => [
             "controller" => [\Site\Controllers\DaDataController::class, "view"]
         ],
+        "POST::~api[/]objects[/]map[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "map"]
+        ],
         "GET::~api[/]objects[/]recent[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recent"]
         ],

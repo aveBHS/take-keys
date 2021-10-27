@@ -81,4 +81,43 @@ class ObjectAPIController implements \Site\Controllers\Controller
             $this->nothing_found($request);
         }
     }
+
+    public function map(HttpRequest $request, $args){
+        $request->setHeader("Content-Type", "application/json");
+        $coords = json_decode($request->post("viewframe"));
+        if(!is_null($coords)){
+            $objects = ObjectModel::select(
+                [
+                    ["status", 0],
+                    ["lat", [$coords[0][0], ">"]],
+                    ["lng", [$coords[0][1], ">"]],
+                    ["lat", [$coords[1][0], "<"]],
+                    ["lng", [$coords[1][1], "<"]],
+                ]
+            );
+        } else {
+            $objects = ObjectModel::select([
+                ["status", 0]
+            ]);
+        }
+
+        $objects_json = [];
+        $site_url = env("URL");
+        foreach($objects as $object){
+            array_push($objects_json, [
+                "id" => $object->id,
+                "geometry" => [
+                    "coordinates" => [
+                        $object->lat,
+                        $object->lng
+                    ],
+                ],
+                "properties" => [
+                    "url" => "//$site_url/id/{$object->id}",
+                    "price" => $object->cost
+                ]
+            ]);
+        }
+        $request->show(json_encode($objects_json));
+    }
 }
