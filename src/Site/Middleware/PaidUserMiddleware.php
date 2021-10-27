@@ -3,7 +3,6 @@
 namespace Site\Middleware;
 
 use Site\Core\HttpRequest;
-use Site\Models\RequestModel;
 
 class PaidUserMiddleware implements Middleware
 {

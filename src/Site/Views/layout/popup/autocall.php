@@ -1,3 +1,23 @@
+<script>
+    function send_call_request() {
+        $.ajax({
+            url: "/api/objects/call",
+            data: `object=${object_id}`,
+            method: "POST"
+        })
+        .done(function(data) {
+            if (data['result'] === "OK") {
+                Modal.getOrCreateInstance($('#popup-autocall')).show()
+            } else {
+                swal("Ошибка", data['reason'], "error");
+            }
+        })
+        .fail(function(data) {
+            swal("Ошибка", "Повторите попытку позже", "error");
+        })
+    }
+
+</script>
 <div class="modal fade main-modal" id="popup-autocall" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -11,7 +31,7 @@
                         <p>В понравившемся объекте кликните кнопку "связаться" и наш робот моментально позвонит владельцу, отсеит посредников и уведомит вас по смс о результате звонка, а если автор объявления не возьмет трубку, то робот перезвонит через время еще раз и снова уведомит вас о результате.</p>
                     </div>
                     <div class="popup__buttons">
-                        <a class="btn btn-primary">Отправить заявку на прозвон</a>
+                        <a href="/catalog/recommendations" class="btn btn-primary">Смотреть другие варианты</a>
                     </div>
                 </div>
             </div>

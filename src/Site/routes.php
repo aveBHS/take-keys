@@ -76,7 +76,7 @@ return [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "recommendations"],
             "middleware" => UserMiddleware::class
         ],
-        "GET::~api[/]objects[/]call[/]?$~" => [
+        "POST::~api[/]objects[/]call[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\VerifyOwnerRequestController::class, "request"],
             "middleware" => PaidUserMiddleware::class
         ],

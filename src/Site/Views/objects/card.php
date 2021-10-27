@@ -111,13 +111,13 @@ global $auth;
 
             <div class="col-lg-4 col-xxl-3 order-lg-4 item__contact-wrp">
                 <div class="item__contact">
-                    <?php if($object->isAd == 1 || $object->status > 0) { ?>
+                    <?php if($object->isAd == 1 || $object->status > 1) { ?>
                         <form>
                             <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
                             <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                         </form>
                     <?php } else if($purchased) { ?>
-                        <button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
+                        <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
                         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                     <?php } else if(!is_null($auth())) { ?>
                         <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
@@ -356,7 +356,7 @@ global $auth;
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Связаться</button>
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Бронировать</button>
     <?php } else if($purchased) { ?>
-        <button type="button" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-autocall">Связаться</button>
+        <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
         <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
@@ -369,6 +369,7 @@ global $auth;
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
+<br><br>
 
 <!--?=view("layout.footer")?-->
 <script>
