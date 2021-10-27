@@ -57,8 +57,8 @@ class ObjectAPIController implements \Site\Controllers\Controller
         if($requestModel){
             $objects = ObjectModel::select(
                 [
-                    "status" => 0,
-                    "id" => [explode(",", $requestModel->recommendations), "in"]
+                    ["status", 0],
+                    ["id", [explode(",", $requestModel->recommendations), "in"]]
                 ],
                 [ ["created", "DESC"] ],
                 10, 0, true

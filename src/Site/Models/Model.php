@@ -99,7 +99,9 @@ abstract class Model
         $conditionsValues = [];
         $conditionsPlaces = [];
         $screening_elements = 0;
-        foreach($where as $conditionName => $conditionValue){
+        foreach($where as $condition){
+            $conditionName = $condition[0];
+            $conditionValue = $condition[1];
             if(is_array($conditionValue)){
                 if(strtolower($conditionValue[1]) == "in"){
                     if(is_array($conditionValue[0]) && count($conditionValue) > 0){
@@ -141,7 +143,8 @@ abstract class Model
         }
 
         $query = $model->db->prepare(
-            "SELECT * FROM `$tableName` WHERE $conditionsPlaces " .
+            "SELECT * FROM `$tableName` " .
+            (!empty($where) ? " WHERE $conditionsPlaces " : "") .
             (!is_null($order) ? " ORDER BY $orderBy " : "") .
             (!is_null($limit) ? " LIMIT $limit " : "") .
             (!is_null($offset) ? " OFFSET $offset" : "")
@@ -149,7 +152,8 @@ abstract class Model
         if(!$query){
             return Null;
         }
-        $query->bind_param($conditionTypes, ...$conditionsValues);
+        if(!empty($conditionTypes))
+            $query->bind_param($conditionTypes, ...$conditionsValues);
         if($query->execute()){
             $result = $query->get_result();
             if($result->num_rows < 1) return null;

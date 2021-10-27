@@ -21,7 +21,7 @@ class CatalogController implements \Site\Controllers\Controller
         }
 
         $objects = ObjectModel::select(
-            [ "status" => 0 ],
+            [ ["status", 0] ],
             [ ["created", "DESC"] ],
             env("elements_per_page") ?? 25,
             env("elements_per_page") ?? 25 * $page,
@@ -64,8 +64,8 @@ class CatalogController implements \Site\Controllers\Controller
         $req = RequestModel::find($auth()->request_id);
         $objects = ObjectModel::select(
             [
-                "status" => 0,
-                "id" => [explode(",", $req->recommendations), "in"]
+                ["status", 0],
+                ["id", [explode(",", $req->recommendations), "in"]]
             ],
             [ ["created", "DESC"] ],
             env("elements_per_page") ?? 25,
