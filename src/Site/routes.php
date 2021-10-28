@@ -60,9 +60,13 @@ return [
         "~catalog[/]?(\d+)?[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CatalogController::class, "view"],
         ],
-        "~catalog/recommendations[/]?(\d+)?[/]?$~" => [
+        "~catalog[/]recommendations[/]?(\d+)?[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CatalogController::class, "recommendations"],
             "middleware" => UserMiddleware::class
+        ],
+
+        "~catalog[/]map[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\CatalogController::class, "map"]
         ],
 
         // API
