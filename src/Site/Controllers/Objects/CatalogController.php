@@ -93,4 +93,9 @@ class CatalogController implements \Site\Controllers\Controller
             "origin_url"        => "/catalog/recommendations"
         ]));
     }
+
+    public function map(HttpRequest $request, $args)
+    {
+        $request->show(view("objects.map"));
+    }
 }

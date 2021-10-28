@@ -211,7 +211,7 @@ $_page_title = "Главная страница | Take Keys";
     <div class="container position-relative">
         <div class="h1 mb-3">Поиск на карте</div>
         <div class="mb-4">Ищите предложения рядом с работой, парком или родственниками</div>
-        <a href="map.html" class="btn btn-outline-dark fw-500 px-4">Смотреть карту</a>
+        <a href="/catalog/map" class="btn btn-outline-dark fw-500 px-4">Смотреть карту</a>
     </div>
 </section>
 <div class="container mt-5">
