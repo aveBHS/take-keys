@@ -69,7 +69,7 @@ return [
         "POST::~api[/]address[/]?$~" => [
             "controller" => [\Site\Controllers\DaDataController::class, "view"]
         ],
-        "GET::~api[/]objects[/]map[/](\d+)[/]?$~" => [
+        "POST::~api[/]objects[/]map[/]view[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "mapRender"]
         ],
         "POST::~api[/]objects[/]map[/]?$~" => [

@@ -123,8 +123,18 @@ class ObjectAPIController implements \Site\Controllers\Controller
 
     public function mapRender(HttpRequest $request, $args)
     {
-        $object = ObjectModel::find($args[0]);
-        $images = ImageModel::selectObjectImages($object->id);
-        $request->show(view("objects.item", ["object" => $object, "images" => $images]));
+        $objects = ObjectModel::select([
+            ["id", [
+                json_decode($request->post("id")),
+                "in"
+            ]]
+        ]);
+        $objects = ImageModel::selectObjectsImages($objects);
+        foreach($objects as $object){
+            $request->show(view("objects.item", [
+                "object" => $object,
+                "images" => $object->images
+            ]));
+        }
     }
 }
