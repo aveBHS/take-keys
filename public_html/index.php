@@ -20,6 +20,8 @@ $routes = require __DIR__ . "/../src/Site/routes.php";
 $request = new HttpRequest($_GET['route']);
 $auth = new AuthService($request);
 
+$request->log();
+
 foreach ($routes['routes'] as $regex => $render)
 {
     $fetch = $request->fetchRoute($regex);

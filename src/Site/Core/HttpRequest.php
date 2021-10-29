@@ -16,6 +16,7 @@ class HttpRequest
     public function __construct(string $url = null)
     {
         $this->url = $url ?? $_GET['route'];
+        if(empty($this->url)) $this->url = "/";
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->get = $_GET;
         $this->post = $_POST;
@@ -32,6 +33,33 @@ class HttpRequest
                 return $this->url;
             default:
                 return null;
+        }
+    }
+
+    public function log()
+    {
+        global $auth;
+
+        $hash = md5($this->method."_".$this->url."_".$this->body);
+        $message = "
+=========================================
+Request time: ".(date('h:i:s'))." UNIX ".time()."
+URL: [{$this->method}] {$this->url}
+BODY: {$this->body}
+HASH: $hash
+
+POST: ".var_export($this->post(), true)."
+JSON: ".var_export($this->json(), true)."
+AUTH: ".var_export($auth()->id, true)."
+
+HEADERS: ".var_export($this->getHeader(), true)."
+=========================================";
+
+        $date = date("d.m.Y");
+        if(file_exists("./logs/Requests_$date.txt")) {
+            file_put_contents("./logs/Requests_$date.txt", $message, FILE_APPEND);
+        } else {
+            file_put_contents("./logs/Requests_$date.txt", $message);
         }
     }
 
@@ -111,10 +139,20 @@ class HttpRequest
     {
         header("$name: $value");
     }
-    public function getHeader(string $name)
+    public function getHeader(string $name = null)
     {
-        $name = strtoupper(str_replace("-", "_", $name));
-        return $_SERVER["HTTP_{$name}"];
+        if(is_null($name)){
+            $headers = [];
+            foreach($_SERVER as $header=>$value){
+                if(substr($header, 0, 5) == "HTTP_"){
+                    $headers[substr($header, 5)] = $value;
+                }
+            }
+            return $headers;
+        } else {
+            $name = strtoupper(str_replace("-", "_", $name));
+            return $_SERVER["HTTP_{$name}"];
+        }
     }
 
     public function setFlash(string $name, string $value)
