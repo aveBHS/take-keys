@@ -64,7 +64,6 @@ return [
             "controller" => [\Site\Controllers\Objects\CatalogController::class, "recommendations"],
             "middleware" => UserMiddleware::class
         ],
-
         "~catalog[/]map[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CatalogController::class, "map"]
         ],
@@ -100,7 +99,7 @@ return [
             "middleware" => GuestMiddleware::class
         ],
 
-        // Tilda webhooks
+        // Webhooks
         "POST::~whook[/]createRequest[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "processRequest"],
             "middleware" => GuestMiddleware::class
@@ -121,7 +120,6 @@ return [
             "controller" => [\Site\Controllers\WebHook\TildaWebHookController::class, "booking"],
             "middleware" => GuestMiddleware::class
         ],
-
         "POST::~whook[/]pact[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\PactNotifyController::class, "view"]
         ],
