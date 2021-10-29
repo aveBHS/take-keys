@@ -24,13 +24,16 @@ this.pay = function (user_id) {
         },
         {
             onSuccess: function (options) { // success
+                $("#mobile_action_block").html(`
+                    <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
+                    <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>`)
+                $("#action_block").html(`
+                    <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
+                    <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>`)
                 Modal.getOrCreateInstance($("#popup-tarif-pay-success")).show()
             },
             onFail: function (reason, options) { // fail
                 Modal.getOrCreateInstance($("#popup-tarif-pay-fail")).show()
-            },
-            onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-                alert("done");
             }
         }
     )

@@ -162,14 +162,14 @@ $name = $name ?? "пользователь";
                         <button type="submit" id="popup-tarif-max-2_submit" class="btn btn-primary px-5 mb-3">Выбрать способ оплаты</button>
 
                         <div class="form-check form-check-box mt-4 tarif-max__terms">
-                            <input class="form-check-input" type="checkbox" value="" name="terms" id="tarif-max__terms" checked required>
+                            <input class="form-check-input" type="checkbox" value="" name="terms" id="tarif-max__terms" required>
                             <div class="invalid-feedback text-primary">
                                 <div class="d-flex align-items-center">
                                     <img src="/images/icons/arrow-down-green.svg">Чтобы продолжить пользоваться сервисом, необходимо согласиться с условиями и порядком оплаты услуг
                                 </div>
                             </div>
                             <label class="form-check-label text-dark fs-10" for="tarif-max__terms">
-                                Подтверждаю, что уведомлен и согласен с условиями и порядком оплаты услуг, а так же обязуюсь оплатить тариф "Найдётся всё" стоимостью 7 990 рублей автоматическим платежом в выбранный день в независимости от факта заселения с банковской карты привязанной к сервису после первой оплаты. Гарантии.
+                                Подтверждаю, что уведомлен и согласен с условиями и порядком оплаты услуг, а так же обязуюсь оплатить тариф "Найдётся всё" стоимостью 5 791 рублей автоматическим платежом в выбранный день в независимости от факта заселения с банковской карты привязанной к сервису после первой оплаты. Гарантии.
                             </label>
                         </div>
                     </div>
