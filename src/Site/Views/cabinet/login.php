@@ -168,13 +168,13 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="auth__terms form-check form-check-box mt-2">
+                                                            <!--div class="auth__terms form-check form-check-box mt-2">
                                                                 <input class="form-check-input" type="checkbox" value="" name="terms" id="auth__terms-signin" checked required>
                                                                 <label class="form-check-label" for="auth__terms-signin">
                                                                     Нажимая на кнопку Создать вы подтверждаете согласие с <a href="#">условиями использования</a> Take-Keys и <a href="#">политикой</a> о <a href="#">данных пользователей</a>
                                                                 </label>
                                                                 <div class="invalid-feedback">Это обязательное поле</div>
-                                                            </div>
+                                                            </div-->
                                                         </form>
                                                     </div>
                                                 </div>

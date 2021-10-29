@@ -132,7 +132,7 @@ if (!isset($forceReg))
                                                             </div>
                                                         </div>
                                                     </form>
-                                                    <div class="auth__soc">
+                                                    <!--div class="auth__soc">
                                                         <div class="auth__soc__title mb-3"><span>Продолжить используя:</span></div>
                                                         <div class="row row-cols-2 gx-3 gy-2">
                                                             <div class="col">
@@ -154,7 +154,7 @@ if (!isset($forceReg))
                                                                 <button class="btn auth__soc__btn"><img src="/images/icons/soc-google.svg">Google</button>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div-->
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
