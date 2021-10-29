@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Окт 16 2021 г., 14:12
--- Версия сервера: 5.7.35-0ubuntu0.18.04.1
--- Версия PHP: 7.2.24-0ubuntu0.18.04.8
+-- Время создания: Окт 29 2021 г., 19:01
+-- Версия сервера: 5.7.36-0ubuntu0.18.04.1
+-- Версия PHP: 7.2.24-0ubuntu0.18.04.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -74,6 +74,63 @@ CREATE TABLE `megafon_links` (
   `number` text NOT NULL,
   `link` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `megafon_links`
+--
+
+INSERT INTO `megafon_links` (`id`, `number`, `link`) VALUES
+(2, '79388715974', 'https://take-keys.com/id17297526'),
+(3, '79388734695', 'https://take-keys.com/id167354685'),
+(4, '79384530942', 'https://take-keys.com/id187535689'),
+(5, '79384719579', 'https://take-keys.com/id137284654'),
+(6, '79384677562', 'https://take-keys.com/id17378004'),
+(7, '79384692672', 'https://take-keys.com/id17297526'),
+(8, '79384933301', 'https://take-keys.com/id163735736'),
+(9, '79384911233', 'https://take-keys.com/id17864728'),
+(10, '79384678883', 'https://take-keys.com/id1834528235'),
+(11, '79384919455', 'https://take-keys.com/id176369369'),
+(12, '79388739174', 'https://take-keys.com/id14268358'),
+(13, '79384527173', 'https://take-keys.com/id18649368'),
+(14, '79384605327', 'https://take-keys.com/id13285367'),
+(15, '79384521496', 'https://take-keys.com/id15473273'),
+(16, '79384637106', 'https://take-keys.com/id163157312'),
+(17, '79384916690', 'https://take-keys.com/id14562357'),
+(18, '79384882515', 'https://take-keys.com/id165367908'),
+(20, '79384547046', 'https://take-keys.com/id14372635'),
+(21, '79384909738', 'https://take-keys.com/id13468345'),
+(22, '79388732644', 'https://take-keys.com/id1546723477'),
+(23, '79388727549', 'https://take-keys.com/id1674374389'),
+(24, '79384606858', 'https://take-keys.com/id19345728'),
+(25, '79384540725', 'https://take-keys.com/id16734573'),
+(26, '79384518676', 'https://take-keys.com/id167278245'),
+(27, '79384967646', 'https://take-keys.com/id173426724'),
+(28, '79384521081', 'https://take-keys.com/id146724778'),
+(29, '79384898057', 'https://take-keys.com/id17346836'),
+(30, '79384662119', 'https://take-keys.com/id14257853'),
+(31, '79384890025', 'https://take-keys.com/id167345832'),
+(32, '79384944936', 'https://take-keys.com/id1529743'),
+(33, '79384521959', 'https://take-keys.com/id1637838'),
+(34, '79384923221', 'https://take-keys.com/id1393678'),
+(35, '79384934871', 'https://take-keys.com/id178463894'),
+(36, '79384910894', 'https://take-keys.com/id15463467'),
+(37, '79388723352', 'https://take-keys.com/id11219826'),
+(38, '79384567668', 'https://take-keys.com/id17563724'),
+(39, '79384569007', 'https://take-keys.com/id1326842'),
+(40, '79384669343', 'https://take-keys.com/id135637345'),
+(41, '79388716235', 'https://take-keys.com/id124356784'),
+(42, '79384974350', 'https://take-keys.com/id14245785'),
+(43, '79388726155', 'https://take-keys.com/id13256346'),
+(44, '79384537116', 'https://take-keys.com/id167437936'),
+(45, '79384954737', 'https://take-keys.com/id12345723'),
+(46, '79384510264', 'https://take-keys.com/id1387337'),
+(47, '79388754536', 'https://take-keys.com/id1352365'),
+(48, '79388700225', 'https://take-keys.com/id1463782'),
+(49, '79388780234', 'https://take-keys.com/id13256725'),
+(50, '79384919066', 'https://take-keys.com/id123452764'),
+(51, '79384633137', 'https://take-keys.com/id145623723'),
+(52, '79384898740', 'https://take-keys.com/id12526634'),
+(53, '79388721563', 'https://take-keys.com/id14562677');
 
 -- --------------------------------------------------------
 
@@ -179,6 +236,31 @@ CREATE TABLE `requests` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `ava` varchar(255) NOT NULL,
+  `text` varchar(1000) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `name`, `ava`, `text`, `created`) VALUES
+(1, 'Иванов Иван', 'ava.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '2021-10-27 18:54:18'),
+(2, 'Иванов Иван', 'ava.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '2021-10-27 18:54:21'),
+(3, 'Иванов Иван', 'ava.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '2021-10-27 18:54:26'),
+(4, 'Иванов Иван', 'ava.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '2021-10-27 18:54:26'),
+(5, 'Иванов Иван', 'ava.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '2021-10-27 18:54:26');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `updates`
 --
 
@@ -193,7 +275,7 @@ CREATE TABLE `updates` (
 --
 
 INSERT INTO `updates` (`id`, `type`, `time`) VALUES
-(1, 'parser', 1634353010);
+(1, 'parser', 1635523251);
 
 -- --------------------------------------------------------
 
@@ -270,6 +352,12 @@ ALTER TABLE `requests`
   ADD UNIQUE KEY `phone` (`phone`);
 
 --
+-- Индексы таблицы `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `updates`
 --
 ALTER TABLE `updates`
@@ -289,7 +377,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `calls`
 --
 ALTER TABLE `calls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT для таблицы `call_results`
 --
@@ -299,7 +387,7 @@ ALTER TABLE `call_results`
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116123;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145969;
 --
 -- AUTO_INCREMENT для таблицы `megafon_links`
 --
@@ -309,7 +397,7 @@ ALTER TABLE `megafon_links`
 -- AUTO_INCREMENT для таблицы `notifies`
 --
 ALTER TABLE `notifies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT для таблицы `object_types`
 --
@@ -319,7 +407,12 @@ ALTER TABLE `object_types`
 -- AUTO_INCREMENT для таблицы `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
+--
+-- AUTO_INCREMENT для таблицы `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `updates`
 --
@@ -329,7 +422,7 @@ ALTER TABLE `updates`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
