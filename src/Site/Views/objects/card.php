@@ -9,6 +9,11 @@ $page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER[
 $page_url = explode('?', $page_url);
 $page_url = $page_url[0];
 
+if(count($images) == 0) {
+    $images = [new stdClass()];
+    $images[0]->path = "//" . env('url') . "/uploads/default.jpg";
+}
+
 global $auth;
 ?>
 
