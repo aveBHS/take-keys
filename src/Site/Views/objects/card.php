@@ -5,6 +5,7 @@
  * @var string VIEW_PATH
  * @var bool $purchased
  **/
+global $auth;
 $page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $page_url = explode('?', $page_url);
 $page_url = $page_url[0];
@@ -14,11 +15,34 @@ if(count($images) == 0) {
     $images[0]->path = "//" . env('url') . "/uploads/default.jpg";
 }
 
-global $auth;
+$is_favorite = false;
+if(!is_null($auth())){
+    if(in_array("{$object->id}", explode(",", $auth()->request->favorites))){
+        $is_favorite = true;
+    }
+}
 ?>
 
 <?=view("layout.header", ["_page_title" => $object->title])?>
-
+<style>
+    .ya-share2__icon{
+        background-image: url("/images/icons/share.svg") !important;
+        height: 3em !important;
+        width: 3em !important;
+        line-height: 1 !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .ya-share2__link, .ya-share2__link_more, .ya-share2__link_more-button-type_short{
+        height: 3em !important;
+        width: 3em !important;
+        line-height: 1 !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+</style>
 <div class="d-none d-lg-block">
     <?=view("layout.breadcrumb", ["url" => ["Каталог", [$object->title, $page_url]]])?>
 </div>
@@ -29,8 +53,16 @@ global $auth;
             <i class="icon"><img src="/images/icons/chat-16.svg"></i>
         </button>
         <i class="icon ms-auto"><img src="/images/icons/search.svg"></i>
-        <i class="icon"><img src="/images/icons/share.svg"></i>
-        <i class="icon"><img src="/images/icons/heart.svg"></i>
+        <div class="ya-share2" data-curtain data-size="l" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,facebook,odnoklassniki,telegram,viber,whatsapp">
+            <i class="icon"><img src="/images/icons/share.svg"></i>
+        </div>
+        <span onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
+        <?php if($is_favorite) { ?>
+            <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
+        <?php } else { ?>
+            <i class="icon"><img src="/images/icons/heart.svg"></i>
+        <?php } ?>
+        </span>
     </div>
     <div class="container">
         <div class="row position-relative">
@@ -52,13 +84,19 @@ global $auth;
                             <span class="views-counter"><?=rand(100, 999)?> просмотров</span>
                         </div>
                         <div class="col-auto ms-auto">
-                            <button class="btn btn-outline-light btn-icon">
-                                <i class="icon"><img src="/images/icons/share.svg"></i>
-                            </button>
+<!--                            <button class="btn btn-outline-light btn-icon">-->
+<!--                                <i class="icon"><img src="/images/icons/share.svg"></i>-->
+<!--                            </button>-->
+                            <div class="ya-share2 btn btn-outline-light btn-icon" data-bare data-curtain data-size="l" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,facebook,odnoklassniki,telegram,viber,whatsapp">
+                            </div>
                         </div>
                         <div class="col-auto ms-2">
-                            <button class="btn btn-outline-light btn-icon">
-                                <i class="icon"><img src="/images/icons/heart.svg"></i>
+                            <button class="btn btn-outline-light btn-icon" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
+                                <?php if($is_favorite) { ?>
+                                    <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
+                                <?php } else { ?>
+                                    <i class="icon"><img src="/images/icons/heart.svg"></i>
+                                <?php } ?>
                             </button>
                         </div>
                     </div>
@@ -396,6 +434,7 @@ if(!$purchased || is_null($auth())){
 echo(view("layout.popup.autocall"));
 ?>
 <script src="/js/app.min.js?5"></script>
+<script src="/js/catalog.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         function dynamicContent() {
@@ -409,3 +448,4 @@ echo(view("layout.popup.autocall"));
         })
     })
 </script>
+<script src="https://yastatic.net/share2/share.js"></script>

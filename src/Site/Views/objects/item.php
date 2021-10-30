@@ -6,13 +6,21 @@
  * @var string $mode
  */
 
+global $auth;
 if(count($images) == 0){
     $images = [new stdClass()];
     $images[0]->path = "//".env('url')."/uploads/default.jpg";
 }
 
 if(is_null($mode)) $mode = "tiles";
-global $auth;
+
+$is_favorite = false;
+if(!is_null($auth())){
+    if(in_array("{$object->id}", explode(",", $auth()->request->favorites))){
+        $is_favorite = true;
+    }
+}
+
 ?>
 <?php if($mode != "lines") { ?>
     <div class="<?=$col_class ?? 'col'?>">
@@ -91,8 +99,12 @@ global $auth;
                         </button>
                     </div>
                     <div class="col-auto order-lg-2">
-                        <button class="btn btn-outline-light btn-icon">
-                            <i class="icon"><img src="/images/icons/heart.svg"></i>
+                        <button class="btn btn-outline-light btn-icon" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
+                            <?php if($is_favorite) { ?>
+                                <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
+                            <?php } else { ?>
+                                <i class="icon"><img src="/images/icons/heart.svg"></i>
+                            <?php } ?>
                         </button>
                     </div>
                     <div class="col-auto order-lg-2 d-lg-none">
@@ -200,8 +212,12 @@ global $auth;
                                 </button>
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-outline-light btn-icon">
-                                    <i class="icon"><img src="/images/icons/heart.svg"></i>
+                                <button class="btn btn-outline-light btn-icon" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
+                                    <?php if($is_favorite) { ?>
+                                        <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
+                                    <?php } else { ?>
+                                        <i class="icon"><img src="/images/icons/heart.svg"></i>
+                                    <?php } ?>
                                 </button>
                             </div>
                         </div>

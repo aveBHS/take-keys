@@ -175,7 +175,8 @@ abstract class Model
                 if (!$query) {
                     return Null;
                 }
-                $query->bind_param($conditionTypes, ...$conditionsValues);
+                if(!empty($conditionTypes))
+                    $query->bind_param($conditionTypes, ...$conditionsValues);
                 if($query->execute()){
                     $result = $query->get_result();
                     $result = $result->fetch_assoc();
