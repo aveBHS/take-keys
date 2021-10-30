@@ -94,8 +94,7 @@ return [
             "middleware" => PaidUserMiddleware::class
         ],
         "POST::~api[/]objects[/]favorite[/](\d+)[/]?$~" => [
-            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "setFavorite"],
-            "middleware" => UserMiddleware::class
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "setFavorite"]
         ],
         "POST::~api[/]settings[/](.+)[/]?$~" => [
             "controller" => [\Site\Controllers\User\CookieSettingsController::class, "config"]

@@ -142,31 +142,34 @@ class ObjectAPIController implements \Site\Controllers\Controller
     {
         global $auth;
         $request->setHeader("Content-Type", "application/json");
-        $object = ObjectModel::find($args[0]);
+        $result = "NOT_ALLOWED";
+        if(!is_null($auth())) {
+            $object = ObjectModel::find($args[0]);
 
-        $result = "NOT_FOUND";
-        if(!is_null($object)){
-            $favorite_objects = explode(",", $auth()->request->favorites);
-            if(is_null($auth()->request->favorites)){
-                $favorite_objects = [];
-            }
-            if(in_array("{$object->id}", $favorite_objects)){
-                unset($favorite_objects[array_search("{$object->id}", $favorite_objects)]);
-                $result = "REMOVED";
-            } else {
-                array_push($favorite_objects, "{$object->id}");
-                $result = "ADDED";
-            }
-            $favorite_objects = implode(",", $favorite_objects);
-            if(substr($favorite_objects, 0, 1) == ",")
-                $favorite_objects = substr($favorite_objects, 1);
-            if(substr($favorite_objects, strlen($favorite_objects)-2, 1) == ",")
-                $favorite_objects = substr($favorite_objects, 0, strlen($favorite_objects)-2);
-            $auth()->request->favorites = $favorite_objects;
-            try{
-                $auth()->request->save();
-            } catch (\Exception $ex) {
-                $result = "ERROR";
+            $result = "NOT_FOUND";
+            if (!is_null($object)) {
+                $favorite_objects = explode(",", $auth()->request->favorites);
+                if (is_null($auth()->request->favorites)) {
+                    $favorite_objects = [];
+                }
+                if (in_array("{$object->id}", $favorite_objects)) {
+                    unset($favorite_objects[array_search("{$object->id}", $favorite_objects)]);
+                    $result = "REMOVED";
+                } else {
+                    array_push($favorite_objects, "{$object->id}");
+                    $result = "ADDED";
+                }
+                $favorite_objects = implode(",", $favorite_objects);
+                if (substr($favorite_objects, 0, 1) == ",")
+                    $favorite_objects = substr($favorite_objects, 1);
+                if (substr($favorite_objects, strlen($favorite_objects) - 2, 1) == ",")
+                    $favorite_objects = substr($favorite_objects, 0, strlen($favorite_objects) - 2);
+                $auth()->request->favorites = $favorite_objects;
+                try {
+                    $auth()->request->save();
+                } catch (\Exception $ex) {
+                    $result = "ERROR";
+                }
             }
         }
         $request->show(json_encode([

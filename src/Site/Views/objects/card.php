@@ -53,9 +53,7 @@ if(!is_null($auth())){
             <i class="icon"><img src="/images/icons/chat-16.svg"></i>
         </button>
         <i class="icon ms-auto"><img src="/images/icons/search.svg"></i>
-        <div class="ya-share2" data-curtain data-size="l" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,facebook,odnoklassniki,telegram,viber,whatsapp">
-            <i class="icon"><img src="/images/icons/share.svg"></i>
-        </div>
+        <i class="icon"><img src="/images/icons/share.svg"></i>
         <span onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
         <?php if($is_favorite) { ?>
             <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
@@ -84,11 +82,7 @@ if(!is_null($auth())){
                             <span class="views-counter"><?=rand(100, 999)?> просмотров</span>
                         </div>
                         <div class="col-auto ms-auto">
-<!--                            <button class="btn btn-outline-light btn-icon">-->
-<!--                                <i class="icon"><img src="/images/icons/share.svg"></i>-->
-<!--                            </button>-->
-                            <div class="ya-share2 btn btn-outline-light btn-icon" data-bare data-curtain data-size="l" data-shape="round" data-limit="0" data-more-button-type="short" data-services="vkontakte,facebook,odnoklassniki,telegram,viber,whatsapp">
-                            </div>
+                            <i class="icon"><img src="/images/icons/share.svg"></i>
                         </div>
                         <div class="col-auto ms-2">
                             <button class="btn btn-outline-light btn-icon" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
