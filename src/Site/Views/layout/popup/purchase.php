@@ -11,7 +11,7 @@ $name = $name ?? "пользователь";
             <div class="popup__wrp px-lg-5">
                 <div class="popup__content mw-100">
                     <div class="popup__title">Найдётся всё</div>
-                    <div class="popup__text text-left">Уважаемый <?=$name?>, благодарим вас за интерес к Take Keys и искренне желаем удачного заселения. Сразу после оплаты тарифа "Всё найдется" вам станут доступны услуги. 98% пользователей заселяются в желаемый день.</div>
+                    <div class="popup__text text-left">Уважаемый <?=$name?>, благодарим вас за интерес к Take Keys и искренне желаем удачного заселения. Сразу после оплаты тарифа "Найдётся всё" вам станут доступны все услуги. По статистике 98% пользователей заселяются в желаемый день.</div>
                     <div class="row gx-4 gy-2 row-cols-1 row-cols-md-2 mb-4">
                         <div class="col">
                             <div class="row gx-3 align-items-center">
@@ -57,7 +57,7 @@ $name = $name ?? "пользователь";
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <div class="fs-14">Гарантия заселения</div>
+                                    <div class="fs-14">Максимальная гарантия заселения</div>
                                 </div>
                             </div>
                         </div>

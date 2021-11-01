@@ -5,33 +5,33 @@
             <div class="col">
                 <div class="logo-wrp">
                     <a class="logo logo-footer" href="/"><img src="/images/icons/logo.svg" alt="Take Keys"></a>
-                    <a target="_blank" class="mail-link" href="mailto:suport@take-keys.ru">suport@take-keys.com</a>
+                    <a target="_blank" class="mail-link" href="mailto:suport@take-keys.ru">support@take-keys.com</a>
                 </div>
             </div>
             <div class="col">
-                <h5>Арендодателям</h5>
+                <h5>Арендаторам</h5>
                 <ul class="list-unstyled">
-                    <li><a class="foot-link" href="#">Снять</a></li>
-                    <li><a class="foot-link" href="#">Купить</a></li>
-                    <li><a class="foot-link" href="#">Тарифы</a></li>
-                    <li><a class="foot-link" href="#">Документы</a></li>
+                    <li><a class="foot-link" href="/catalog">Снять</a></li>
+                    <li><a class="foot-link" href="/catalog">Купить</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/price">Тарифы</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/documents">Документы</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h5>Собственникам</h5>
                 <ul class="list-unstyled">
-                    <li><a class="foot-link" href="#">Сдать</a></li>
-                    <li><a class="foot-link" href="#">Продать</a></li>
-                    <li><a class="foot-link" href="#">Документы</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/#popup:ads">Сдать</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/#popup:ads">Продать</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/documents">Документы</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h5>Take Keys</h5>
                 <ul class="list-unstyled">
-                    <li><a class="foot-link" href="#">О сервисе</a></li>
-                    <li><a class="foot-link" href="#">Контакты</a></li>
-                    <li><a class="foot-link" href="#">Правила сервиса</a></li>
-                    <li><a class="foot-link" href="#">Помощь</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/#rec356317620">О сервисе</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/contacts">Контакты</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/documents">Правила сервиса</a></li>
+                    <li><a class="foot-link" href="https://take-keys.com/help">Помощь</a></li>
                 </ul>
             </div>
         </div>
@@ -45,11 +45,11 @@
                         <a href="#" class="soc-link"><img src="/images/icons/youtube.svg"></a>
                         <a href="#" class="soc-link"><img src="/images/icons/instagram.svg"></a>
                         <a href="#" class="soc-link"><img src="/images/icons/telegram.svg"></a>
-                        <a href="#" class="soc-link"><img src="/images/icons/vk.svg"></a>
+                        <a href="https://vk.com/takekeyscom" class="soc-link"><img src="/images/icons/vk.svg"></a>
                     </div>
                 </div>
                 <div class="col text-center fs-12">
-                    Политика конфиденциальности
+                    <a href="https://take-keys.com/documents">Политика конфиденциальности</a>
                 </div>
             </div>
         </div>

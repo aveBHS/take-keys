@@ -15,8 +15,7 @@ $_page_title = "Главная страница | Take Keys";
             <div class="row gy-4 justify-content-center">
                 <div class="col-12">
                     <h1 class="h1 mb-4">Найдите дом своей мечты</h1>
-                    <div class="home-header__desc mx-auto">Take Keys объединяет объявления по недвижимости со всех площадок рунет,
-                        чтобы ты искал жильё в привычном тебе приложение</div>
+                    <div class="home-header__desc mx-auto">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
                 </div>
                 <div class="col-12 col-lg">
                     <div class="home-header__item">

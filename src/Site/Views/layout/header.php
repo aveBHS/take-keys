@@ -1,6 +1,14 @@
-<?php global $auth; ?>
+<?php
+/**
+ * @var string $_page_title
+ * @var string $_page_desc
+ * @var string $_page_img
+ */
+global $auth;
+
+?>
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
 
@@ -13,7 +21,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="icon" href="/images/favicon.svg">
-    <meta property="og:image" content="/images/favicon.svg">
+
+    <meta property="og:title" content="<?=$_page_title?>">
+    <meta property="og:description" content="<?=$_page_desc?>">
+    <meta property="og:image" content="<?=$_page_img??'/images/favicon.svg'?>">
 
     <link rel="stylesheet" href="/css/app.min.css?5">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -60,7 +71,7 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-lg-auto mx-auto mt-3 mt-lg-0">
                             <ul class="topline__menu">
-                                <li><a href="https://take-keys.com/">Как это работает</a></li>
+                                <li><a href="https://take-keys.com/">О сервисе</a></li>
                                 <li><a href="/catalog">Каталог</a></li>
                                 <li><a href="https://take-keys.com/help">Справочный центр</a></li>
                             </ul>
