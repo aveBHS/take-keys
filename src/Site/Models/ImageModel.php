@@ -6,6 +6,9 @@ use Site\Core\HttpRequest;
 
 class ImageModel extends \Site\Models\Model
 {
+    protected $fields = [
+        "object_id", "path"
+    ];
     public static function selectObjectImagesById(array $objectsIds)
     {
         $objectsIdsString = [];

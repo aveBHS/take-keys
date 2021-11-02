@@ -15,5 +15,14 @@
     <script src="/admin/assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="/admin/js/datatables-simple-demo.js"></script>
+    <?php
+    global $request;
+    $_system_error = $request->getFlash("system_error");
+    if(!is_null($_system_error)){
+    ?>
+        <script>
+            swal("Системная ошибка", "<?=$_system_error?>", "error");
+        </script>
+    <?php } ?>
     </body>
 </html>

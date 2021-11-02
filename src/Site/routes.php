@@ -53,6 +53,15 @@ return [
             "middleware" => AdminMiddleware::class
         ],
 
+        "GET::~panel[/]objects[/]create[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "createView"],
+            "middleware" => AdminMiddleware::class
+        ],
+        "POST::~panel[/]objects[/]create[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "create"],
+            "middleware" => AdminMiddleware::class
+        ],
+
         // Objects
         "~id/(.+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],

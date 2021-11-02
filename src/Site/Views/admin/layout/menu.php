@@ -48,7 +48,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Вы вошли как:</div>
-            <?=$auth()->login?>
+            <?=$auth()->name?>
         </div>
     </nav>
 </div>
