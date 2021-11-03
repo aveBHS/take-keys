@@ -20,8 +20,11 @@ class CatalogController implements \Site\Controllers\Controller
             if ($page < 0) $page = 0;
         }
 
+        $filter = [ ["status", 0] ];
+        if(!is_null($auth()) and $auth()->purchased == 1)
+            $filter = [ ["status", 0], ['isAd', 0] ];
         $objects = ObjectModel::select(
-            [ ["status", 0] ],
+            $filter,
             [ ["created", "DESC"] ],
             env("elements_per_page") ?? 25,
             env("elements_per_page") ?? 25 * $page,
