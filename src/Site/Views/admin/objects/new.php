@@ -60,17 +60,17 @@
         <div class="form-row" style="display: flex">
             <div class="form-group col-md-6">
                 <label for="object_lat" class="form-label">Широта</label>
-                <input type="number" class="form-control" id="object_lat" name="object_lat" placeholder="55.558741" required>
+                <input type="number" class="form-control" id="object_lat" name="object_lat" placeholder="55.558741" step="0.0000000001" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="object_lng" class="form-label">Долгота</label>
-                <input type="number" class="form-control" id="object_lng" name="object_lng" placeholder="37.378847" required>
+                <input type="number" class="form-control" id="object_lng" name="object_lng" placeholder="37.378847" step="0.0000000001" required>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="object_sq" class="form-label">Площадь м<sup>2</sup></label>
-            <input type="number" class="form-control" id="object_sq" name="object_sq" placeholder="20 м²" min="1" max="1000" required>
+            <input type="number" class="form-control" id="object_sq" name="object_sq" placeholder="20 м²" min="1" max="1000" step="0.01" required>
         </div>
         <div class="mb-3">
             <label for="object_floor" class="form-label">Этаж размещения</small></label>

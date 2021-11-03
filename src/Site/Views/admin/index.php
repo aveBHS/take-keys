@@ -5,6 +5,7 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Панель управления Take-Keys CRM</li>
     </ol>
+    <h2>Сама панель еще не готова. <a href="objects/create">Создать объект</a></h2>
 </div>
 
 <?=view("admin.layout.footer")?>
