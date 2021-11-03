@@ -18,7 +18,7 @@ class VerifyOwnerRequestController implements \Site\Controllers\Controller
         $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
         $object = ObjectModel::find($request->post("object"));
         if(!is_null($object)){
-            if($object->status > 1 || $object->isAd == 1){
+            if($object->status > 1){
                 $request->show(json_encode([
                     "result" => "ERROR",
                     "reason" => "Объект уже неактуален"

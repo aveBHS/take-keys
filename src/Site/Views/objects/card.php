@@ -149,7 +149,7 @@ if(!is_null($auth())){
             <div class="col-lg-4 col-xxl-3 order-lg-4 item__contact-wrp">
                 <div class="item__contact">
                     <div id="action_block">
-                        <?php if($object->isAd == 1 || $object->status > 1) { ?>
+                        <?php if($object->status > 1) { ?>
                             <form>
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
