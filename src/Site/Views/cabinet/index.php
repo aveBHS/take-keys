@@ -6,7 +6,10 @@
 global $auth;
 ?>
 
-<?=view("layout.header", ["_page_title" => "Личный Кабинет | Take-Keys"])?>
+<?=view("layout.header", [
+    "_page_title"    => "Личный Кабинет | Take-Keys",
+    "_custom_button" => ["logout", "Выход"]
+])?>
 
 <style>
     span.active{

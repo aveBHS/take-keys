@@ -3,6 +3,7 @@
  * @var string $_page_title
  * @var string $_page_desc
  * @var string $_page_img
+ * @var array $_custom_button
  */
 global $auth;
 
@@ -78,7 +79,11 @@ global $auth;
                         </div>
                         <div class="col-12 col-lg-auto">
                             <div class="row">
-                                <?php if(is_null($auth())) { ?>
+                                <?php if (!is_null($_custom_button)) { ?>
+                                    <div class="col-12 col-lg-auto">
+                                        <a href="/<?=$_custom_button[0]?>" class="btn btn-dark topline__btn"><?=$_custom_button[1]?></a>
+                                    </div>
+                                <?php } else if(is_null($auth())) { ?>
                                     <div class="col-12 col-lg-auto">
                                         <a href="/login" class="btn btn-dark topline__btn">Войти</a>
                                     </div>
