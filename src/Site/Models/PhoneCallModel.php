@@ -12,6 +12,10 @@ class PhoneCallModel extends Model
         "ADS_OBJECT"   => 2
     ];
     const callStatuses = [
-        "NEW", "CREATED", "SUCCESS", "FAIL"
+        "NEW"     => 0,
+        "CREATED" => 1,
+        "SUCCESS" => 2,
+        "FAIL"    => 3,
+        "LIMIT"   => 4
     ];
 }

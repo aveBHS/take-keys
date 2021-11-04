@@ -20,7 +20,9 @@ class MTTWebHookController implements \Site\Controllers\Controller
                     PhoneCallModel::callStatuses["SUCCESS"] : PhoneCallModel::callStatuses["FAIL"];
                 try {
                     $call->save();
-                } catch (\Exception $e) {}
+                } catch (\Exception $e) {
+                    $request->show($e->getMessage());
+                }
             }
         }
     }
