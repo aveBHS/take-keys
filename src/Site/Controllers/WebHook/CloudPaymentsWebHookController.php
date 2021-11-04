@@ -21,16 +21,16 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                 $req->purchased = 1;
                 try{
                     $req->save();
-                    $tg->send(env("TELEGRAM_CHAT"), "Успешная оплата ID{$user->id}");
+                    $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Успешная оплата ID{$user->id}");
                 } catch (\Exception $exception) {
                     $request->show($exception->getMessage());
                 }
             } else {
-                $tg->send(env("TELEGRAM_CHAT"), "Заявка не найдена, оплата успешная, ID{$user->id}");
+                $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Заявка не найдена, оплата успешная, ID{$user->id}");
                 $request->returnException(new BadRequestController(), 400);
             }
         } else {
-            $tg->send(env("TELEGRAM_CHAT"), "Аккаунт не найден, оплата успешная, ID{$request->post('AccountId')}");
+            $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Аккаунт не найден, оплата успешная, ID{$request->post('AccountId')}");
             $request->returnException(new BadRequestController(), 400);
         }
         return null;
