@@ -78,7 +78,7 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                 <div class="swiper-slide">
                                                     <div class="" data-swiper-parallax="100%">
                                                         <div class="auth__title">Войдите в учетную запись, чтобы продолжить пользоваться сервисом</div>
-                                                        <div class="auth__desc">Единая городская база недвижимости</div>
+                                                        <div class="auth__desc">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
                                                     </div>
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                         <form class="auth__form-signin" novalidate>
@@ -141,7 +141,7 @@ $_page_title = "Войти в кабинет | Take Keys";
                                                 <div class="swiper-slide">
                                                     <div class="" data-swiper-parallax="100%">
                                                         <div class="auth__title">Войдите в учетную запись, чтобы продолжить пользоваться сервисом</div>
-                                                        <div class="auth__desc">Единая городская база недвижимости</div>
+                                                        <div class="auth__desc">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
                                                     </div>
                                                     <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                         <form id="auth__send-signin" class="needs-validation" novalidate method="POST">
