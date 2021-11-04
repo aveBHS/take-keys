@@ -4,6 +4,7 @@ namespace Site\Controllers\User;
 
 use Site\Controllers\Controller;
 use Site\Core\HttpRequest;
+use Site\Core\TelegramNotifyService;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
 use Site\Models\RequestModel;
@@ -73,6 +74,10 @@ class JoinController implements Controller
                         "result" => "OK",
                         "user_id" => $user->id
                     ]));
+                    $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
+                    $site_url = env("url");
+                    $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Новая регистрация\n{$user->name} ID{$user->id}"
+                        . "\nНомер: +{$user->phone}\nОбъект-источник: https://$site_url/id/{$reqInfo->id}/");
                     return;
                 }
             }
