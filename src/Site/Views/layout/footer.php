@@ -57,6 +57,7 @@
 </div>
 
 <script src="/js/app.min.js?5"></script>
+<script src="/js/catalog.js"></script>
 
 </body>
 

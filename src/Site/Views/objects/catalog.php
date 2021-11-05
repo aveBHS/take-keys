@@ -25,12 +25,12 @@ global $request;
         <div class="col-auto">
             <button class="btn btn-icon">
                 <img class="me-2" src="/images/icons/swap.svg">
-                Рекомендуемые
+                Новые
                 <img src="/images/icons/arrow-down.svg">
             </button>
         </div>
         <div class="col-auto">
-            <button class="btn btn-icon">Показать на карте</button>
+            <a href="/catalog/map" class="btn btn-icon">Показать на карте</a>
         </div>
         <div class="w-100 d-sm-none"></div>
         <div class="col-auto">

@@ -52,7 +52,7 @@ global $auth;
 <body class="<?=$_body_class ?? ""?>">
 
 <header>
-    <div class="topline py-4">
+    <div class="topline py-2 py-lg-3">
         <div class="container-lg">
             <div class="row align-items-center">
                 <div class="col-auto">

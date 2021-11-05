@@ -410,7 +410,6 @@ if(!is_null($auth())){
 </button>
 <br><br>
 
-<!--?=view("layout.footer")?-->
 <script>
     let object_id = <?=$object->id?>;
     let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
@@ -427,8 +426,8 @@ if(!$purchased || is_null($auth())){
 }
 echo(view("layout.popup.autocall"));
 ?>
-<script src="/js/app.min.js?5"></script>
-<script src="/js/catalog.js"></script>
+<script src="https://yastatic.net/share2/share.js"></script>
+<?=view("layout.footer")?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         function dynamicContent() {
@@ -442,4 +441,3 @@ echo(view("layout.popup.autocall"));
         })
     })
 </script>
-<script src="https://yastatic.net/share2/share.js"></script>
