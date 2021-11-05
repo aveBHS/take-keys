@@ -84,7 +84,6 @@ class CatalogController implements \Site\Controllers\Controller
         $objects = $objects['result'] ?? [];
 
         $objects = ImageModel::selectObjectsImages($objects);
-        $objects = array_reverse($objects);
 
         $request->show(view("objects.catalog", [
             "objects_count"     => $totalObjects,
@@ -110,7 +109,6 @@ class CatalogController implements \Site\Controllers\Controller
                 [
                     ["id", [explode(",", $auth()->request->favorites), "in"]]
                 ],
-                [ ["created", "DESC"] ],
                 env("elements_per_page") ?? 25,
                 env("elements_per_page") ?? 25 * $page,
                 true

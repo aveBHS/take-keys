@@ -63,7 +63,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
                 [ ["created", "DESC"] ],
                 10, 0, true
             ) ?? [];
-            if (is_null($objects)){
+            if (is_null($objects) || is_null($objects['result'])){
                 $this->nothing_found($request);
             } else {
                 $objects = $objects['result'];
@@ -93,7 +93,8 @@ class ObjectAPIController implements \Site\Controllers\Controller
                     ["lng", [$coords[0][1], ">"]],
                     ["lat", [$coords[1][0], "<"]],
                     ["lng", [$coords[1][1], "<"]],
-                ]
+                ],
+                [ ['created', 'DESC'] ]
             );
         } else {
             $objects = ObjectModel::select([
