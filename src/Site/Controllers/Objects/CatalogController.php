@@ -66,7 +66,7 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects = ObjectModel::select(
                 [
-                    ["status", 0],
+                    ["status", [[0, 1], 'in']],
                     ["id", [explode(",", $auth()->request->recommendations), "in"]]
                 ],
                 [ ["created", "DESC"] ],
