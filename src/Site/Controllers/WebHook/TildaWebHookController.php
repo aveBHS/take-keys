@@ -83,6 +83,7 @@ class TildaWebHookController implements Controller
                 $call = new PhoneCallModel();
                 $call->phone = $userPhone;
                 $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
+                $call->call_status = PhoneCallModel::callStatuses['NEW'];
                 return $call->save();
             }
             return $result;
