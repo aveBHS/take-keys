@@ -109,6 +109,7 @@ class CatalogController implements \Site\Controllers\Controller
                 [
                     ["id", [explode(",", $auth()->request->favorites), "in"]]
                 ],
+                null,
                 env("elements_per_page") ?? 25,
                 env("elements_per_page") ?? 25 * $page,
                 true
