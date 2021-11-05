@@ -63,7 +63,7 @@ return [
         ],
 
         // Objects
-        "~id/(\d+)[/]?$~" => [
+        "~id/([^/]+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\CardController::class, "view"],
         ],
         "~catalog[/]?(\d+)?[/]?$~" => [
