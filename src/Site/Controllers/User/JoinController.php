@@ -79,6 +79,7 @@ class JoinController implements Controller
                     $call = new PhoneCallModel();
                     $call->phone = $user->phone;
                     $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
+                    $call->call_status = PhoneCallModel::callStatuses['NEW'];
                     $call->save();
 
                     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
@@ -88,7 +89,11 @@ class JoinController implements Controller
                     return;
                 }
             }
-        } catch (\Exception $ex) { }
+        } catch (\Exception $ex) {
+            $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
+            $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), var_export($ex->getMessage(), true));
+            return;
+        }
         $request->show(json_encode([
             "result"  => "ERROR",
             "reason"  => "Телефон или почта уже заняты"
