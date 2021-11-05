@@ -93,8 +93,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
                     ["lng", [$coords[0][1], ">"]],
                     ["lat", [$coords[1][0], "<"]],
                     ["lng", [$coords[1][1], "<"]],
-                ],
-                [ ['created', 'DESC'] ]
+                ]
             );
         } else {
             $objects = ObjectModel::select([
@@ -129,7 +128,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
                 json_decode($request->post("id")),
                 "in"
             ]]
-        ]);
+        ], [ ['created', 'DESC'] ]);
         $objects = ImageModel::selectObjectsImages($objects);
         foreach($objects as $object){
             $request->show(view("objects.item", [
