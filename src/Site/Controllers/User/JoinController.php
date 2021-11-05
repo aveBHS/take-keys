@@ -7,6 +7,7 @@ use Site\Core\HttpRequest;
 use Site\Core\TelegramNotifyService;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
+use Site\Models\PhoneCallModel;
 use Site\Models\RequestModel;
 use Site\Models\UserModel;
 
@@ -74,6 +75,12 @@ class JoinController implements Controller
                         "result" => "OK",
                         "user_id" => $user->id
                     ]));
+
+                    $call = new PhoneCallModel();
+                    $call->phone = $user->phone;
+                    $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
+                    $call->save();
+
                     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
                     $site_url = env("url");
                     $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Новая регистрация\n{$user->name} ID{$user->id}"
