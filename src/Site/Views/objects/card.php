@@ -340,7 +340,7 @@ if(!is_null($auth())){
                 </div>
                 <div class="item__owner active mt-3 d-lg-none"> <!-- 'active' class для онлайна-->
                     <div class="item__owner__avatar">
-                        <img src="/images/dist/ava.png" alt="Чат с владельцем">
+                        <img src="/images/dist/ava.png" alt="Чат с владельцем" style="width: 50px;">
                     </div>
                     <div class="ms-3 text-start">
                         <div class="fw-semibold">
