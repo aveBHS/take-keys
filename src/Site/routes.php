@@ -108,6 +108,9 @@ return [
         "POST::~api[/]settings[/](.+)[/]?$~" => [
             "controller" => [\Site\Controllers\User\CookieSettingsController::class, "config"]
         ],
+        "POST::~api[/]user[/]checkin-date[/]?$~" => [
+            "controller" => [\Site\Controllers\User\UserSettingsController::class, "setPaymentDate"]
+        ],
 
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
