@@ -103,9 +103,39 @@ $name = $name ?? "пользователь";
     document.addEventListener('DOMContentLoaded', () => {
 
         $('#tarif-max__form').submit(function (event) {
+
+            let form = $(this)
             if (this.checkValidity()) {
-                Modal.getOrCreateInstance($('#popup-tarif-max-2')).hide()
-                pay(user_id);
+
+                form.addClass('active')
+                $.ajax({
+                    url: "/api/user/checkin-date",
+                    data: form.serialize(),
+                    method: "POST"
+                })
+                .done(function(data) {
+                    if(data['result'] === "ok"){
+                        form.removeClass('active');
+                        Modal.getOrCreateInstance($('#popup-tarif-max-2')).hide()
+                        pay(user_id);
+                    } else if(data['result'] === "already_created"){
+                        swal("Ошибка", "Мы уже получили ваш платеж, пожалуйста, обновите страницу", "info").then(() => window.location.reload());
+                    } else if(data['result'] === "incorrect_date"){
+                        $("#date_input")[0].value = null;
+                        swal("Некорректная дата", "Пожалуйста, введите корректную будущую дату, но не позднее одного месяца", "info").then(() => {form.removeClass('active');});
+                    } else {
+                        swal({
+                            title: "Ошибка",
+                            text: "Проверьте ваше интернет-подключение или повторите попытку позже. " +
+                                "Если ошибка повторится, пожалуйста, свяжитесь с технической поддержкой",
+                            icon: "error",
+                            buttons: ["Поддержка", "ОК"]
+                        }).then(data => {if(!data) window.location = "/support"; form.removeClass('active');});
+                    }
+                })
+                .fail(function() {
+                    swal("Ошибка", "Проверьте ваше интернет-подключение или повторите попытку позже", "error");
+                });
             }
             $(this).addClass('was-validated')
 
@@ -121,14 +151,14 @@ $name = $name ?? "пользователь";
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="popup__wrp">
-                <form id="tarif-max__form" class="popup__content needs-validation" novalidate>
+                <form id="tarif-max__form" class="popup__content needs-validation loading" novalidate>
                     <div class="popup__title">Завершите регистрацию</div>
                     <!-- <div class="popup__title text-primary">Уважаемый Иван</div> -->
                     <div class="popup__text">Выберите дату в которую вы желаете заселиться:</div>
 
                     <div class="mb-3">
                         <input type="date" name="date" placeholder="19.10.2021"
-                               class="form-control">
+                               class="form-control" id="date_input" required>
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="row mb-3">

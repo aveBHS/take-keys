@@ -15201,3 +15201,7 @@ header {
 .setting-item__btn {
   font-size: 18px;
 }
+
+.swal-text{
+  text-align: center;
+}

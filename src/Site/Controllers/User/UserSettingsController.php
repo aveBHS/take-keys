@@ -20,13 +20,19 @@ class UserSettingsController implements \Site\Controllers\Controller
         $request->setHeader("Content-Type", "application/json");
         $tg = new TelegramNotifyService(env("telegram_key"));
 
-        $date = DateTime::createFromFormat("Y-m-d H:i:s", $request->post("date")." 00:00:00")->getTimestamp();
-        $current_date = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d")." 00:00:00");
-        $next_day = $current_date->modify("+1 day");
+        $date = DateTime::createFromFormat("Y-m-d H:i:s", $request->post("date")." 06:00:00")->getTimestamp();
+        $current_date = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d")." 06:00:00");
         $current_date = $current_date->getTimestamp();
+
+        $next_day = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d")." 06:00:00");
+        $next_day->modify("+1 day");
         $next_day = $next_day->getTimestamp();
 
-        if(!is_null($date) || $date < $current_date){
+        $next_month = DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d")." 06:00:00");
+        $next_month->modify("+1 month");
+        $next_month = $next_month->getTimestamp();
+
+        if(!is_null($date) && !($date < $current_date) && !($date > $next_month)){
             global $auth;
 
             $payment = PaymentModel::find($auth()->id, "user_id");
@@ -43,8 +49,10 @@ class UserSettingsController implements \Site\Controllers\Controller
             $payment->user_id = $auth()->id;
             $payment->amount = env("recurrent_payment_amount") ?? -1;
             $payment->next_attempt = $date;
-            if($payment->next_attempt == $current_date || $payment->next_attempt == $next_day){
+            if($payment->next_attempt == $current_date){
                 $payment->next_attempt += 24 * 60 * 60;
+            } else if($payment->next_attempt == $next_day){
+                $payment->next_attempt += 6 * 60 * 60;
             }
             if($payment->amount < 0){
                 $tg->send(env("telegram_chat"), "Внимание! Сумма рекуррентного платежа не установлена!");
