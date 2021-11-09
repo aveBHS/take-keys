@@ -53,7 +53,7 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                     if(!$payment_exists)
                         $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Внимание, нарушение процесса подключения, дата платежа не указана, свяжитесь с клиентом ID{$user->id}");
                 } catch (\Exception $exception) {
-                    $request->show($exception->getMessage());
+                    bugReport($exception);
                 }
             } else {
                 $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Заявка не найдена, оплата успешная, ID{$user->id}");
