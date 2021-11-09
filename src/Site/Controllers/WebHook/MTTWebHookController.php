@@ -3,6 +3,7 @@
 namespace Site\Controllers\WebHook;
 
 use Site\Core\HttpRequest;
+use Site\Models\NotifyModel;
 use Site\Models\PhoneCallModel;
 
 class MTTWebHookController implements \Site\Controllers\Controller
@@ -23,6 +24,18 @@ class MTTWebHookController implements \Site\Controllers\Controller
                 } catch (\Exception $e) {
                     $request->show($e->getMessage());
                 }
+            }
+        } else if($request->json("event") == "callAds"){
+            $notify = NotifyModel::find($request->json("phone"), "address");
+            if($request->json("result") == 1){
+                $notify->status = 0;
+                try {
+                    $notify->save();
+                } catch (\Exception $e) {
+                    bugReport($e);
+                }
+            } else {
+                $notify->remove();
             }
         }
     }

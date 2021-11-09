@@ -1,5 +1,6 @@
 <?php
 
+use Site\Core\TelegramNotifyService;
 use Site\Middleware\Middleware;
 
 function render($request, $className, $classMethod, $args = [])
@@ -133,4 +134,10 @@ function getPhone($phone)
     $phone = str_replace(")", "", $phone);
     if ($phone[0] == "8") $phone = "7" . substr($phone, 1);
     return $phone;
+}
+
+function bugReport($exception){
+    $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
+    $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"),
+        var_export($exception->getMessage(), true) . "\n\n" . var_export(debug_backtrace(), true));
 }
