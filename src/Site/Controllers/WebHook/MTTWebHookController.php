@@ -26,16 +26,25 @@ class MTTWebHookController implements \Site\Controllers\Controller
                 }
             }
         } else if($request->json("event") == "callAds"){
-            $notify = NotifyModel::find($request->json("phone"), "address");
-            if($request->json("result") == 1){
-                $notify->status = 0;
-                try {
-                    $notify->save();
-                } catch (\Exception $e) {
-                    bugReport($e);
+            $notify = NotifyModel::select(
+                [ ["address", getPhone($request->json("number"))] ],
+                [ ["created", "DESC"] ],
+                1
+            );
+            if(!is_null($notify)) {
+                $notify = $notify[0];
+                if ($request->json("result") == 1){
+                    $notify->status = 0;
+                    try {
+                        $notify->save();
+                    } catch (\Exception $e) {
+                        bugReport($e);
+                    }
+                } else {
+                    $notify->remove();
                 }
             } else {
-                $notify->remove();
+                echo(getPhone($request->json("number")));
             }
         }
     }

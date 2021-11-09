@@ -45,6 +45,7 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                     $notify->user_id = $user->id;
                     $notify->type = NotifyModel::notifyType['SMS'];
                     $notify->text = view("notify.payment");
+                    $notify->status = 0;
                     if(!$payment_exists)
                         $notify->text = view("notify.payment_bad");
                     $notify->save();

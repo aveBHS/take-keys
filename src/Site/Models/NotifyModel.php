@@ -6,7 +6,7 @@ class NotifyModel extends Model
 {
     protected $tableName = "notifies";
     protected $fields = [
-        "user_id", "text", "type"
+        "user_id", "text", "type", "status"
     ];
     const notifyType = [
         "WHATSAPP" => "whatsapp",
