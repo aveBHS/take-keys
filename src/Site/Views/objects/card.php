@@ -158,8 +158,8 @@ if(!is_null($auth())){
                             <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
                             <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1" >Бронировать</button>
+                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                         <?php } else { ?>
                             <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
                             <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
@@ -398,8 +398,8 @@ if(!is_null($auth())){
         <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
-        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1">Связаться</button>
-        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-max-1" >Бронировать</button>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
     <?php } else { ?>
         <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
         <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
