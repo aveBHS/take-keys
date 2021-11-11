@@ -224,7 +224,7 @@ if(!is_null($auth())){
                 </div>
 
                 <div class="collapse map-collapse w-mobile-100">
-                    <div class="map mt-lg-4 pb-lg-5" style="background-image: url('/images/dist/map.jpg');"></div>
+                    <div class="item__map mt-lg-4 pb-lg-5" style="background-image: url('/images/dist/map.jpg');"></div>
                 </div>
 
                 <div class="desc">

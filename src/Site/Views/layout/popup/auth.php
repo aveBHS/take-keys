@@ -194,7 +194,7 @@ if (!isset($forceReg))
                                                             </div>
                                                         </div>
                                                         <div class="auth__terms form-check form-check-box mt-3">
-                                                            <input class="form-check-input" type="checkbox" value="" name="terms" id="auth__terms-reg" required>
+                                                            <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
                                                             <label class="form-check-label" for="auth__terms-reg">
                                                                 Нажимая на кнопку Создать вы подтверждаете согласие с <a href="#">условиями использования</a> Take-Keys и <a href="#">политикой</a> о <a href="#">данных пользователей</a>
                                                             </label>

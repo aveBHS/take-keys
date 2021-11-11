@@ -22,7 +22,7 @@ $name = $name ?? "пользователь";
                 <div class="tarif-take-keys__head" style="background-image: url('/images/dist/tarif-take-keys.jpg');"></div>
             </div>
             <div class="px-3 px-lg-4 pb-4">
-                <div class="popup__title text-center">Уважаемый Иван Иванов</div>
+                <div class="popup__title text-center">Уважаемый <?=$name?></div>
                 <div class="mb-4 text-center">Сейчас ваш тариф - "Бесплатный старт"<br/>В нем есть ограничения: невозможность связаться с владельцами.<br/>Для того, чтобы связаться с авторами объявлений, перейдите на тариф "Бери ключи".</div>
 
                 <div class="btn-group w-100 tarif-take-keys__switch mb-4">
@@ -227,9 +227,9 @@ $name = $name ?? "пользователь";
                     </div>
 
                     <button onclick="purchase()" class="btn px-1 fw-500 btn-primary w-100 rounded-pill mt-4 position-relative vibrate">
-                        <span class="fs-18">Перейти на тариф "Бери ключи"</span><br/><small>связывайтесь с владельцами без ограничений</small>
-                        <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger me-2">
-							В течение 30 минут действует скидка 83%
+                        <span class="fs-18">Продолжить на тарифе "Take Keys" за 99 ₽</span><br/><small>связывайтесь с владельцами без ограничений</small>
+                        <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-warning me-2">
+							До повышения цены 17 минут
 						</span>
                     </button>
                     <button class="btn p-1 fw-500 btn-outline-secondary w-100 rounded-pill mt-3" onclick="stayFree()">Продолжить бесплатно<br/><small>смотреть рекомендованные варианты</small></button>
@@ -248,7 +248,7 @@ $name = $name ?? "пользователь";
     document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
-            let fiveMinutes = 60 * 30
+            let fiveMinutes = 60 * 17
             startTimer(fiveMinutes, $('.tarif-take-keys-2-timer'))
         }, 2000);
 
@@ -306,7 +306,7 @@ $name = $name ?? "пользователь";
                     <div class="popup__text text-center text-secondary mb-3">98% пользователей заселяются в выбранный день.</div>
 
                     <div class="text-center">
-                        <div class="badge-yellow"><span class="tarif-take-keys-2-timer fw-semibold">30:00</span> до конца акции</div>
+                        <div class="badge-yellow"><span class="tarif-take-keys-2-timer fw-semibold">17:00</span> до повышения цены</div>
                     </div>
 
                     <img class="img-fluid w-100 mb-4" src="/images/dist/popup-tarif-take-keys-2.svg">
@@ -316,18 +316,10 @@ $name = $name ?? "пользователь";
                                class="form-control" required>
                         <div class="invalid-feedback"></div>
                     </div>
-                    <div class="row mb-3">
+                    <!--div class="row mb-3">
                         <div class="col-auto">
                             <div class="form-check form-check-box mb-2">
-                                <input class="form-check-input" type="checkbox" value="" name="date-checkbox-1" id="tarif-take-keys-2__checkbox-1" checked>
-                                <label class="form-check-label fs-14" for="tarif-take-keys-2__checkbox-1">
-                                    Как можно быстрее
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="form-check form-check-box mb-2">
-                                <input class="form-check-input" type="checkbox" value="" name="date-checkbox-2" id="tarif-take-keys-2__checkbox-2">
+                                <input class="form-check-input" type="radio" value="" name="date-choice" id="tarif-take-keys-2__checkbox-2" checked>
                                 <label class="form-check-label fs-14" for="tarif-take-keys-2__checkbox-2">
                                     Сегодня
                                 </label>
@@ -335,13 +327,13 @@ $name = $name ?? "пользователь";
                         </div>
                         <div class="col-auto">
                             <div class="form-check form-check-box mb-2">
-                                <input class="form-check-input" type="checkbox" value="" name="date-checkbox-3" id="tarif-take-keys-2__checkbox-3">
+                                <input class="form-check-input" type="radio" value="" name="date-choice" id="tarif-take-keys-2__checkbox-3">
                                 <label class="form-check-label fs-14" for="tarif-take-keys-2__checkbox-3">
                                     Завтра
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div-->
 
                     <div class="popup__buttons">
                         <button type="submit" class="btn btn-primary w-100 mt-3">Выбрать способ оплаты</button>
@@ -349,7 +341,7 @@ $name = $name ?? "пользователь";
                         <div class="form-check form-check-box mt-4 text-start tarif-take-keys-2__terms">
                             <input class="form-check-input" type="checkbox" value="" name="terms" id="tarif-take-keys-2__terms" required>
                             <label class="form-check-label fs-14" for="tarif-take-keys-2__terms">
-                                Подтверждаю, что уведомлен и согласен с условиями и порядком оплаты услуг, а также обязуюсь оплатить тариф “Бери ключи” стоимостью 7 990 рублей автамотическим платежом в выбранный день в независимости от факта заселения с банковской карты привязанной к сервису после регистрации.
+                                Подтверждаю, что уведомлён и согласен с <a href="https://take-keys.com/documents">условиями и порядком оплаты услуг</a>, обязуюсь оплатить 99 р., за активацию тарифа "Take keys" и в выбранный день заселения автоматическим платежем 5791 р. с банковской карты, привязанной к платежной системе сайта. Услуга действует до подписания договора с собственником, отменить можете в любой момент.
                             </label>
                         </div>
                     </div>
