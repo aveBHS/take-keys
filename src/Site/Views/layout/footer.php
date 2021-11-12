@@ -1,4 +1,12 @@
+<?php
+/**
+ * @var bool $render
+ */
+if(!isset($render))
+    $render = true;
+?>
 </div>
+<?php if($render) { ?>
 <div class="footer">
     <div class="container pb-3">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4">
@@ -55,7 +63,7 @@
         </div>
     </div>
 </div>
-
+<?php } ?>
 <script src="/js/app.min.js?5"></script>
 <script src="/js/catalog.js"></script>
 

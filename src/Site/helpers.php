@@ -136,8 +136,8 @@ function getPhone($phone)
     return $phone;
 }
 
-function bugReport($exception){
+function bugReport($exception, $message=null){
     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
     $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"),
-        var_export($exception->getMessage(), true) . "\n\n" . var_export(debug_backtrace(), true));
+        var_export($message ?? $exception->getMessage(), true) . "\n\n" . var_export(debug_backtrace(), true));
 }

@@ -12,6 +12,10 @@ class MTTWebHookController implements \Site\Controllers\Controller
 
     public function view(HttpRequest $request, $args)
     {
+        error_reporting(E_ALL);
+        ini_set('display_startup_errors', 1);
+        ini_set('display_errors', '1');
+
         $time = time();
         file_put_contents("./logs/mtt/mtt_json_$time.txt", var_export($request->json(), true));
 
@@ -32,6 +36,7 @@ class MTTWebHookController implements \Site\Controllers\Controller
                 [ ["created", "DESC"] ],
                 1
             );
+            bugReport(null, $request->json());
             if(!is_null($notify)) {
                 $notify = $notify[0];
                 $call_result = CallAdsModel::select(
@@ -51,14 +56,16 @@ class MTTWebHookController implements \Site\Controllers\Controller
                     }
                 } else {
                     if(!is_null($call_result)) {
+                        bugReport(null, "Agent");
                         $call_result->result = 1;
                     }
-                    $notify->remove();
                 }
                 if(!is_null($call_result)) {
                     $call_result->save();
+                    bugReport(null, "Saved");
                 }
             } else {
+                bugReport(null, "Not found");
                 echo(getPhone($request->json("number")));
             }
         }

@@ -427,7 +427,7 @@ if(!$purchased || is_null($auth())){
 echo(view("layout.popup.autocall"));
 ?>
 <script src="https://yastatic.net/share2/share.js"></script>
-<?=view("layout.footer")?>
+<?=view("layout.footer", ['render' => false])?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         function dynamicContent() {

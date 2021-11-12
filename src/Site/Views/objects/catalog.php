@@ -79,6 +79,6 @@ global $request;
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
 
-<?=view("layout.footer")?>
+<?=view("layout.footer", ['render' => false])?>
 
 <script src="/js/catalog.js"></script>
