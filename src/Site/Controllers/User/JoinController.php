@@ -92,7 +92,6 @@ class JoinController implements Controller
         } catch (\Exception $ex) {
             $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
             $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), var_export($ex->getMessage(), true));
-            return;
         }
         $request->show(json_encode([
             "result"  => "ERROR",
