@@ -9,7 +9,12 @@
             if (data['result'] === "OK") {
                 Modal.getOrCreateInstance($('#popup-autocall')).show()
             } else {
-                swal("Ошибка", data['reason'], "error");
+                swal({
+                    title: "Ошибка",
+                    text: data['reason'],
+                    icon: "error",
+                    buttons: ["Поддержка", "ОК"]
+                }).then(data => {if(!data) Chatra('openChat', true);});
             }
         })
         .fail(function(data) {

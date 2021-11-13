@@ -35,11 +35,21 @@ if (!isset($forceReg))
                             Modal.getOrCreateInstance($('#popup-auth')).hide()
                             Modal.getOrCreateInstance($('#popup-tarif-take-keys')).show()
                         } else {
-                            swal("Ошибка", data['reason'], "error");
+                            swal({
+                                title: "Ошибка",
+                                text: data['reason'],
+                                icon: "error",
+                                buttons: ["Поддержка", "ОК"]
+                            }).then(data => {if(!data) Chatra('openChat', true);});
                         }
                     })
                     .fail(function(data) {
-                        swal("Ошибка", data['reason'], "error");
+                        swal({
+                            title: "Ошибка",
+                            text: data['reason'],
+                            icon: "error",
+                            buttons: ["Поддержка", "ОК"]
+                        }).then(data => {if(!data) Chatra('openChat', true);});
                     })
                     .always(function() {
                         loader.removeClass('active')
