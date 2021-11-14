@@ -36,7 +36,6 @@ class MTTWebHookController implements \Site\Controllers\Controller
                 [ ["created", "DESC"] ],
                 1
             );
-            bugReport(null, $request->json());
             if(!is_null($notify)) {
                 $notify = $notify[0];
                 $call_result = CallAdsModel::select(
@@ -56,16 +55,13 @@ class MTTWebHookController implements \Site\Controllers\Controller
                     }
                 } else {
                     if(!is_null($call_result)) {
-                        bugReport(null, "Agent");
                         $call_result->result = 1;
                     }
                 }
                 if(!is_null($call_result)) {
                     $call_result->save();
-                    bugReport(null, "Saved");
                 }
             } else {
-                bugReport(null, "Not found");
                 echo(getPhone($request->json("number")));
             }
         }
