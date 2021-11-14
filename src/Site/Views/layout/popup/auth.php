@@ -105,8 +105,8 @@ if (!isset($forceReg))
                                             <!-- Slides -->
                                             <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Для продолжения пользования сервисом, создайте аккаунт</div>
-                                                    <div class="auth__desc">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
+                                                    <div class="auth__title">Моментальная регистрация</div>
+                                                    <div class="auth__desc">Экономьте время на поиск жилья с Take Keys. Узнавайте первыми о новых предложениях и моментально связывайтесь с владельцами без посредников и езды в офис.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form class="auth__form-reg" novalidate>
@@ -162,8 +162,8 @@ if (!isset($forceReg))
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Для продолжения пользования сервисом, создайте аккаунт</div>
-                                                    <div class="auth__desc">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
+                                                    <div class="auth__title">Моментальная регистрация</div>
+                                                    <div class="auth__desc">Экономьте время на поиск жилья с Take Keys. Узнавайте первыми о новых предложениях и моментально связывайтесь с владельцами без посредников и езды в офис.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form id="auth__send-reg" class="" novalidate>
