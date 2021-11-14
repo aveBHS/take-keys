@@ -15317,3 +15317,11 @@ header {
 .setting-item__btn {
   font-size: 18px;
 }
+
+.swal-footer{
+  text-align: center;
+}
+
+.swal-button--confirm{
+  background: #ACD15C;
+}
