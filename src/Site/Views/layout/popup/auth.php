@@ -104,17 +104,19 @@ if (!isset($forceReg))
                                         <div class="swiper-wrapper">
                                             <!-- Slides -->
                                             <div class="swiper-slide">
-                                                <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Моментальная регистрация</div>
-                                                    <div class="auth__desc">Экономьте время и деньги на поиск жилья с Take Keys. Узнавайте первыми о новых предложениях и моментально связывайтесь с владельцами без посредников и езды в офис.</div>
+                                                <div class="auth__form-reg" data-swiper-parallax="100%">
+                                                    <div class="auth__title">Для Take-Keys безопасность пользователей на первом месте</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Поэтому каждое объявление на сайте проходит специальную проверку. Основным этапом проверки является выписка из ЕГРН, которая подтверждает право собственности.
+
+                                                        <br>Такой уровень качества информации требует постоянной работы, по этому услуги предоставляются на платной основе.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form class="auth__form-reg" novalidate>
                                                         <div class="mb-3">
-                                                            <input form="auth__send-reg" type="email" name="email" placeholder="Ваш E-mail" class="form-control"
-                                                                   required>
-                                                            <div class="invalid-feedback">Пожалуйста, введите корректный Email
-                                                            </div>
+                                                            <label class="form-label">Как вас представить владельцу?</label>
+                                                            <input form="auth__send-reg" type="text" name="name" placeholder="Имя" class="form-control"
+                                                                   autocomplete required>
+                                                            <div class="invalid-feedback">Пожалуйста, введите ваше имя</div>
                                                         </div>
                                                         <div class="row align-items-center">
                                                             <div class="col">Шаг 1/2</div>
@@ -134,56 +136,43 @@ if (!isset($forceReg))
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                    </form>
-                                                    <!--div class="auth__soc">
-                                                        <div class="auth__soc__title mb-3"><span>Продолжить используя:</span></div>
-                                                        <div class="row row-cols-2 gx-3 gy-2">
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-vk.svg">Вконтакте</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-fb.svg">Facebook</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-ya.svg">Яндекс</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-apple.svg">Apple</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-mail.svg">Mail.ru</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <button class="btn auth__soc__btn"><img src="/images/icons/soc-google.svg">Google</button>
-                                                            </div>
+                                                        <div class="auth__terms form-check form-check-box mt-3">
+                                                            <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
+                                                            <label class="form-check-label" for="auth__terms-reg">
+                                                                Подтверждаю, что я не являюсь агентом и готов оплатить сборы за услуги сервиса
+                                                            </label>
+                                                            <div class="invalid-feedback">Это обязательное поле</div>
                                                         </div>
-                                                    </div-->
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Моментальная регистрация</div>
-                                                    <div class="auth__desc">Экономьте время и деньги на поиск жилья с Take Keys. Узнавайте первыми о новых предложениях и моментально связывайтесь с владельцами без посредников и езды в офис.</div>
+                                                    <div class="auth__title">Для Take-Keys безопасность пользователей на первом месте</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Поэтому каждое объявление на сайте проходит специальную проверку. Основным этапом проверки является выписка из ЕГРН, которая подтверждает право собственности.
+
+                                                        <br>Такой уровень качества информации требует постоянной работы, по этому услуги предоставляются на платной основе.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form id="auth__send-reg" class="" novalidate>
                                                         <div class="mb-3">
-                                                            <label class="form-label">Как вас представить заказчику?</label>
-                                                            <input form="auth__send-reg" type="text" name="name" placeholder="ФИО" class="form-control"
-                                                                   autocomplete required>
-                                                            <div class="invalid-feedback">Пожалуйста, введите пароль</div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <input form="auth__send-reg" type="tel" name="phone" placeholder="Телефон"
-                                                                   class="form-control" required data-mask="+{7} (000) 000-00-00"
-                                                                   autocomplete="phone">
-                                                            <div class="invalid-feedback">Пожалуйста, введите корректный номер
-                                                                телефона</div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <input form="auth__send-reg" type="password" name="password" placeholder="Пароль" class="form-control"
-                                                                   autocomplete="current-password" required>
-                                                            <div class="invalid-feedback">Пожалуйста, введите пароль</div>
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="tel" name="phone" placeholder="Телефон"
+                                                                       class="form-control" required data-mask="+{7} (000) 000-00-00"
+                                                                       autocomplete="phone">
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный номер
+                                                                    телефона</div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="email" name="email" placeholder="Ваш E-mail" class="form-control"
+                                                                       required>
+                                                                <div class="invalid-feedback">Пожалуйста, введите корректный Email</div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="password" name="password" placeholder="Пароль" class="form-control"
+                                                                       autocomplete="current-password" required>
+                                                                <div class="invalid-feedback">Пожалуйста, введите пароль</div>
+                                                            </div>
                                                         </div>
                                                         <div class="row align-items-center">
                                                             <div class="col">Шаг 2/2</div>
@@ -198,7 +187,7 @@ if (!isset($forceReg))
                                                                                       fill="#151A40" />
                                                                             </svg>
                                                                         </i>
-                                                                        Создать
+                                                                        Создать аккаунт
                                                                     </div>
                                                                 </button>
                                                             </div>
@@ -206,7 +195,7 @@ if (!isset($forceReg))
                                                         <div class="auth__terms form-check form-check-box mt-3">
                                                             <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
                                                             <label class="form-check-label" for="auth__terms-reg">
-                                                                Нажимая на кнопку Создать вы подтверждаете согласие с <a href="#">условиями использования</a> Take-Keys и <a href="#">политикой</a> о <a href="#">данных пользователей</a>
+                                                                Нажимая на кнопку Создать вы подтверждаете согласие с <a href="https://take-keys.com/documents">условиями использования</a> Take-Keys и <a href="https://take-keys.com/documents">политикой</a> о <a href="https://take-keys.com/documents">данных пользователей</a>
                                                             </label>
                                                             <div class="invalid-feedback">Это обязательное поле</div>
                                                         </div>
