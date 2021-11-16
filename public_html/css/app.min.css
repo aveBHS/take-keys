@@ -13892,7 +13892,7 @@ header {
 .tarif-max__terms .invalid-feedback {
   margin-left: -28px;
 }
-.tarif-max__terms .invalid-feedback img {
+.tarif-max__terms .invalid-feedback img, .tarif-max__terms .invalid-feedback svg {
   margin-right: 14px;
   margin-left: 3px;
 }
@@ -14425,15 +14425,7 @@ header {
 }
 
 .tarif-take-keys-2__terms .form-check-label {
-  color: #C4C4C4;
-}
-
-.was-validated .tarif-take-keys-2__terms .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
-  color: #C4C4C4;
-}
-
-.was-validated .tarif-take-keys-2__terms .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
-  color: #EF4F4F;
+  color: #C4C4C4 !important;
 }
 
 .badge-yellow {
@@ -14442,6 +14434,10 @@ header {
   padding: 8px;
   min-width: 220px;
   background-color: #FEEB9F;
+}
+
+.was-validated .form-check-input:invalid, .form-check-input.is-invalid {
+  box-shadow: 0 0 0 0.25rem rgba(239, 79, 79, 0.25);
 }
 
 .auth__reg, .auth__signin {
@@ -15321,7 +15317,6 @@ header {
 .swal-footer{
   text-align: center;
 }
-
 .swal-button--confirm{
   background: #ACD15C;
 }

@@ -6,6 +6,7 @@
  * @var bool $purchased
  **/
 global $auth;
+global $request;
 $page_url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $page_url = explode('?', $page_url);
 $page_url = $page_url[0];
@@ -420,7 +421,10 @@ if(is_null($auth())) {
     echo(view("layout.popup.auth", ['forceReg' => true]));
 }
 if(!$purchased || is_null($auth())){
-    echo(view("layout.popup.purchase", ['name' => $auth()->name]));
+    echo(view("layout.popup.purchase", [
+        'name'     => $auth()->name,
+        'continue' => $request->getFlash("action") == "continue" && !$purchased
+    ]));
     echo(view("layout.payment_widget", ["amount" => 99]));
     echo(view("layout.popup.payment_result"));
 }

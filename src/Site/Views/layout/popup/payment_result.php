@@ -30,7 +30,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#" class="btn text-white mb-4 px-4 position-absolute start-0 bottom-0">Служба поддержки</a>
+			<a onclick="Chatra('openChat', true)" class="btn text-white mb-4 px-4 position-absolute start-0 bottom-0">Поддержка</a>
 		</div>
 	</div>
 </div>

@@ -31,9 +31,7 @@ if (!isset($forceReg))
                 })
                     .done(function(data) {
                         if (data['result'] === "OK") {
-                            user_id = data['user_id'];
-                            Modal.getOrCreateInstance($('#popup-auth')).hide()
-                            Modal.getOrCreateInstance($('#popup-tarif-take-keys')).show()
+                            window.location.reload();
                         } else {
                             swal({
                                 title: "Ошибка",
