@@ -75,11 +75,13 @@ class JoinController implements Controller
                         "result" => "OK",
                         "user_id" => $user->id
                     ]));
+                    $request->setFlash("action", "continue");
 
                     $call = new PhoneCallModel();
                     $call->phone = $user->phone;
                     $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
                     $call->call_status = PhoneCallModel::callStatuses['NEW'];
+                    $call->next_attempt = time() + 54;
                     $call->save();
 
                     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
