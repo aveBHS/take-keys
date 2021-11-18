@@ -10,7 +10,7 @@ $amount = $amount ?? env("cloudpayments_subscribe_amount");
 <script>
 this.pay = function (user_id) {
     var widget = new cp.CloudPayments();
-    widget.pay('auth', // или 'charge'
+    widget.pay('charge', // или 'charge'
         { //options
             publicId: '<?=env("cloudpayments_public_key")?>', //id из личного кабинета
             description: '<?=env("cloudpayments_subscribe_desc")?>', //назначение

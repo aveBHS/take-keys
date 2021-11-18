@@ -20,7 +20,7 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
 
         $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
         $amount = (int)$request->post('PaymentAmount');
-        if ($amount != (int)env("first_payment_amount_sale") || $amount != (int)env("first_payment_amount")) {
+        if ($amount != (int)env("first_payment_amount_sale") && $amount != (int)env("first_payment_amount") || $request->post("Status") != "Completed") {
             $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Оплата на подмененную сумму - {$request->post('PaymentAmount')} руб, платеж отклонен, ID{$request->post('AccountId')}");
         } else {
             $user = UserModel::find($request->post('AccountId'));
@@ -54,9 +54,12 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                             $notify->text = view("notify.payment_bad");
                         $notify->save();
 
-                        $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Успешная оплата ID{$user->id}");
                         if (!$payment_exists)
                             $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Внимание, нарушение процесса подключения, дата платежа не указана, свяжитесь с клиентом ID{$user->id}");
+                        else{
+                            $checkout_date = date("d.m.Y H:i", $payment->next_attempt);
+                            $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Успешная оплата ID{$user->id}\nСумма списания: {$payment->amount}\nДата списания: {$checkout_date}");
+                        }
                     } catch (\Exception $exception) {
                         bugReport($exception);
                     }
