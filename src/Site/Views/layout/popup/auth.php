@@ -139,7 +139,7 @@ if (!isset($forceReg))
                                                             <label class="form-check-label" for="auth__terms-reg">
                                                                 Подтверждаю, что я не являюсь агентом и готов оплатить сборы за услуги сервиса
                                                             </label>
-                                                            <div class="invalid-feedback">Это обязательное поле</div>
+                                                            <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -195,7 +195,7 @@ if (!isset($forceReg))
                                                             <label class="form-check-label" for="auth__terms-reg">
                                                                 Нажимая на кнопку Создать вы подтверждаете согласие с <a href="https://take-keys.com/documents">условиями использования</a> Take-Keys и <a href="https://take-keys.com/documents">политикой</a> о <a href="https://take-keys.com/documents">данных пользователей</a>
                                                             </label>
-                                                            <div class="invalid-feedback">Это обязательное поле</div>
+                                                            <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
                                                         </div>
                                                     </form>
                                                 </div>

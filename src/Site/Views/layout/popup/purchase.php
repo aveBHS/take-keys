@@ -275,7 +275,7 @@ $name = $name ?? "пользователь";
                                 </div>
                             </div>
 
-                            <label class="form-check-label text-secondary fs-14" for="tarif-take-keys-2__terms" style="font-size: 10px;">
+                            <label class="auth__terms form-check-label text-dark fs-14" for="tarif-take-keys-2__terms" style="font-size: 10px;">
                                 Подтверждаю, что уведомлён и согласен с <a href="https://take-keys.com/documents">условиями и порядком оплаты услуг</a>, обязуюсь оплатить 99 р., за активацию тарифа "Take keys" и в выбранный день заселения автоматическим платежом 5791 р. с банковской карты, привязанной к платежной системе сайта. Услуга действует до подписания договора с собственником, отменить можете в любой момент.
                             </label>
                         </div>

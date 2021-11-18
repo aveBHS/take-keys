@@ -68,7 +68,7 @@ if(!is_null($auth())){
                             <span class="btn-colored bg-info">Рекомендуемые</span>
                         <?php } ?>
                         <?php if($object->isAd || $object->isAd == 1) { ?>
-                            <span class="btn-colored bg-white text-dark">Реклама</span>
+                            <span class="btn-colored bg-danger text-light">Горячее</span>
                         <?php } ?>
                         <?php if($object->status == 1 || $object->isAd == 1) { ?>
                             <span class="btn-colored bg-warning">На проверке</span>
@@ -167,7 +167,7 @@ if(!is_null($auth())){
                                 <span class="btn-colored bg-info">Рекомендуемые</span>
                             <?php } ?>
                             <?php if($object->isAd || $object->isAd == 1) { ?>
-                                <span class="btn-colored bg-white text-dark">Реклама</span>
+                                <span class="btn-colored bg-danger text-light">Горячее</span>
                             <?php } ?>
                             <?php if($object->status == 1 || $object->isAd == 1) { ?>
                                 <span class="btn-colored bg-warning">На проверке</span>
