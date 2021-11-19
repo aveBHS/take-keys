@@ -71,7 +71,7 @@ if(!is_null($auth())){
                             <span class="btn-colored bg-danger text-light">Горячее</span>
                         <?php } ?>
                         <?php if($object->status == 1 || $object->isAd == 1) { ?>
-                            <span class="btn-colored bg-warning">На проверке</span>
+                            <!--span class="btn-colored bg-warning">На проверке</span-->
                         <?php } ?>
                         <?php if($object->status == 2) { ?>
                             <span class="btn-colored bg-secondary">В архиве</span>
@@ -170,7 +170,7 @@ if(!is_null($auth())){
                                 <span class="btn-colored bg-danger text-light">Горячее</span>
                             <?php } ?>
                             <?php if($object->status == 1 || $object->isAd == 1) { ?>
-                                <span class="btn-colored bg-warning">На проверке</span>
+                                <!--span class="btn-colored bg-warning">На проверке</span-->
                             <?php } ?>
                             <?php if($object->status == 2) { ?>
                                 <span class="btn-colored bg-secondary">В архиве</span>

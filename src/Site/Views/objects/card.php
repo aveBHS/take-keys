@@ -329,7 +329,7 @@ if(!is_null($auth())){
 <!---->
 <!--                                </div>-->
                                 <?php if($object->isAd == 1 or $object->status == 1){ ?>
-                                    <div class="item__addictional-info text-warning">На проверке</div>
+                                    <!--div class="item__addictional-info text-warning">На проверке</div-->
                                 <?php } else if($object->status == 2){ ?>
                                     <div class="item__addictional-info text-danger">Архив</div>
                                 <?php } else { ?>
