@@ -425,7 +425,7 @@ if(!$purchased || is_null($auth())){
         'name'     => $auth()->name,
         'continue' => $request->getFlash("action") == "continue" && !$purchased
     ]));
-    echo(view("layout.payment_widget", ["amount" => 99]));
+    echo(view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")]));
     echo(view("layout.popup.payment_result"));
 }
 echo(view("layout.popup.autocall"));

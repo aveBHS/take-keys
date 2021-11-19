@@ -30,14 +30,14 @@ $name = $name ?? "пользователь";
             </div>
             <div class="px-3 px-lg-4 pb-4">
                 <div class="popup__title text-center"><?=$name?>, благодарим вас за регистрацию и желаем удачного заселения</div>
-                <div class="mb-4 text-center">Мы понимаем, что вы с нами еще не работали и чтобы заслужить ваше доверие, мы сначала предоставляем наши услуги по поиску квартиры, а потом уже берем основную оплату. В отличие от остальных мы работаем дистанционно и только до полного заселения, плюс вместо 100% от стоимости аренды, сборы за услуги сервиса фиксированные по акции всего 99 ₽ <sup class="opacity-50"><strike>990 ₽</strike></sup> на старте и 5791 ₽ <sup class="opacity-50"><strike>9871 ₽</strike></sup> по факту предоставления услуг.</div>
+                <div class="mb-4 text-center">Мы понимаем, что вы с нами еще не работали и чтобы заслужить ваше доверие, мы сначала предоставляем наши услуги по поиску квартиры, а потом уже берем основную оплату. В отличие от остальных мы работаем дистанционно и только до полного заселения, плюс вместо 100% от стоимости аренды, сборы за услуги сервиса фиксированные всего 1 ₽ <!--sup class="opacity-50"><strike>990 ₽</strike></sup--> на старте и 3621 ₽ <!--sup class="opacity-50"><strike>9871 ₽</strike></sup--> по факту предоставления услуг.</div>
 
-                <div class="text-center">
+                <!--div class="text-center">
                     <div class="badge-yellow">До конца акции <span class="tarif-take-keys-2-timer fw-semibold">24:00</span></div>
-                </div>
+                </div-->
 
                 <button onclick="purchase()" class="btn px-1 fw-500 btn-primary w-100 rounded-3 mt-4 position-relative" style="line-height: 1.2;">
-                    <span class="fs-18">Связаться с владельцем сейчас за 99 ₽</span><br/><small>пока предложение еще актуально</small>
+                    <span class="fs-18">Связаться с владельцем сейчас за 1 ₽</span><br/><small>пока предложение еще актуально</small>
                 </button>
 
                 <!--div class="btn-group w-100 tarif-take-keys__switch mb-4 mt-4">
@@ -139,7 +139,7 @@ $name = $name ?? "пользователь";
                     </div>
 
                     <button onclick="purchase()" class="btn px-1 fw-500 btn-primary w-100 rounded-3 mt-4 position-relative vibrate" style="line-height: 1.2;">
-                        <span class="fs-18">Связаться с владельцем сейчас за 99 ₽</span><br/><small>пока предложение еще актуально</small>
+                        <span class="fs-18">Связаться с владельцем сейчас за 1 ₽</span><br/><small>пока предложение еще актуально</small>
                     </button>
 
                     <button class="btn p-1 fw-500 btn-outline-secondary w-100 rounded-3 mt-3" onclick="stayFree()" style="line-height: 1.2;">
@@ -229,7 +229,7 @@ $name = $name ?? "пользователь";
                     <div class="popup__title text-center mb-2">По статистике 87% пользователей заселяются в выбранный день</div>
 
                     <div class="text-center">
-                        <div class="badge-yellow">До конца акции <span class="tarif-take-keys-2-timer fw-semibold">24:00</span></div>
+                        <!--div class="badge-yellow">До конца акции <span class="tarif-take-keys-2-timer fw-semibold">24:00</span></div-->
                     </div>
 
                     <img class="img-fluid w-100 mb-4" src="/images/dist/popup-tarif-take-keys-2.svg">
@@ -276,7 +276,7 @@ $name = $name ?? "пользователь";
                             </div>
 
                             <label class="auth__terms form-check-label text-dark fs-14" for="tarif-take-keys-2__terms" style="font-size: 10px;">
-                                Подтверждаю, что уведомлён и согласен с <a href="https://take-keys.com/documents">условиями и порядком оплаты услуг</a>, обязуюсь оплатить 99 р., за активацию тарифа "Take keys" и в выбранный день заселения автоматическим платежом 5791 р. с банковской карты, привязанной к платежной системе сайта. Услуга действует до подписания договора с собственником, отменить можете в любой момент.
+                                Подтверждаю, что уведомлён и согласен с <a href="https://take-keys.com/documents">условиями и порядком оплаты услуг</a>, обязуюсь оплатить 1 р., за активацию тарифа "Take keys" и в выбранный день заселения автоматическим платежом 3621 р. с банковской карты, привязанной к платежной системе сайта. Услуга действует до подписания договора с собственником, отменить можете в любой момент.
                             </label>
                         </div>
                     </div>
