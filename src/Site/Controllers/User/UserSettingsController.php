@@ -49,6 +49,7 @@ class UserSettingsController implements \Site\Controllers\Controller
             $payment->user_id = $auth()->id;
             $payment->amount = env("recurrent_payment_amount") ?? -1;
             $payment->next_attempt = $date;
+            $payment->status = PaymentModel::STATUSES["WAIT_FIRST"];
             if($payment->next_attempt == $current_date){
                 $payment->next_attempt += 24 * 60 * 60;
             } else if($payment->next_attempt == $next_day){
