@@ -35,8 +35,8 @@
                     <div class="popup__text">
                         <p>В понравившемся объекте кликните кнопку "связаться" и наш робот моментально позвонит владельцу, отсеит посредников и уведомит вас по смс о результате звонка, а если автор объявления не возьмет трубку, то робот перезвонит через время еще раз и снова уведомит вас о результате.</p>
                     </div>
-                    <div class="popup__buttons">
-                        <a href="/catalog/recommendations" class="btn btn-primary">Смотреть другие варианты</a>
+                    <div class="popup__buttons" style="margin-top: auto">
+                        <a href="/catalog/recommendations" class="btn btn-primary">Смотреть рекомендованные варианты</a>
                     </div>
                 </div>
             </div>

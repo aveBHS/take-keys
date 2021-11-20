@@ -5275,6 +5275,9 @@ textarea.form-control-lg {
   }
 }
 @media (max-width: 767.98px) {
+  .popup-autocall a{
+    width: 100%;
+  }
   .modal-fullscreen-md-down {
     width: 100vw;
     max-width: none;
@@ -13791,7 +13794,6 @@ header {
 }
 
 .popup__buttons {
-  margin-top: auto;
   text-align: center;
 }
 .popup__buttons .btn {
