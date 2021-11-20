@@ -111,6 +111,9 @@ return [
         "POST::~api[/]user[/]checkin-date[/]?$~" => [
             "controller" => [\Site\Controllers\User\UserSettingsController::class, "setPaymentDate"]
         ],
+        "POST::~api[/]user[/]filter[/]?$~" => [
+            "controller" => [\Site\Controllers\User\UserSettingsController::class, "setFilter"]
+        ],
 
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [

@@ -5275,9 +5275,6 @@ textarea.form-control-lg {
   }
 }
 @media (max-width: 767.98px) {
-  .popup-autocall a{
-    width: 100%;
-  }
   .modal-fullscreen-md-down {
     width: 100vw;
     max-width: none;
@@ -13794,6 +13791,7 @@ header {
 }
 
 .popup__buttons {
+  margin-top: auto;
   text-align: center;
 }
 .popup__buttons .btn {
@@ -14298,9 +14296,30 @@ header {
     align-items: stretch;
     justify-content: center;
   }
+  .filter .filter__item__list {
+    max-width: 100%;
+  }
+  .filter .filter__item.btn-group:not(:first-child) {
+    margin-left: 0;
+  }
+  .filter .filter__item > .btn {
+    border-radius: 0;
+  }
+  .filter .filter__item:first-child > .btn {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+  }
+  .filter .filter__item:last-child {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  .filter .filter__item + .filter__item {
+    margin-top: -1px;
+  }
 }
 .filter .filter__item {
   flex-grow: 1;
+  background-color: #fff;
 }
 @media (min-width: 992px) {
   .filter .filter__item {
@@ -14316,6 +14335,11 @@ header {
   padding: 11px 0.75rem;
   cursor: pointer;
 }
+@media (max-width: 991.98px) {
+  .filter .filter__item__list .dropdown-item {
+    white-space: normal;
+  }
+}
 .filter .filter__item__list .btn-check + .btn {
   border: none;
 }
@@ -14325,9 +14349,6 @@ header {
 }
 .filter .filter__item__location {
   border-radius: 4px;
-}
-.filter .filter__item__val {
-  white-space: nowrap;
 }
 
 .btn-loading:not([disabled]) .spinner-border {
@@ -14440,6 +14461,39 @@ header {
 
 .was-validated .form-check-input:invalid, .form-check-input.is-invalid {
   box-shadow: 0 0 0 0.25rem rgba(239, 79, 79, 0.25);
+}
+
+.filter__price-range {
+  width: 100%;
+  min-width: 320px;
+  padding: 1rem 1.5rem;
+  padding-right: 2rem;
+}
+
+.filter__price-value {
+  min-width: 155px;
+  display: inline-block;
+}
+
+.swal-footer {
+  text-align: center;
+}
+
+.swal-button {
+  font-size: 16px;
+}
+
+.swal-text {
+  line-height: 1.5;
+  text-align: center;
+}
+
+.swal-button--confirm {
+  background-color: #A3CC4A;
+}
+
+.swal-button--confirm:not([disabled]):hover {
+  background-color: #acd15c;
 }
 
 .auth__reg, .auth__signin {
@@ -15314,11 +15368,4 @@ header {
 }
 .setting-item__btn {
   font-size: 18px;
-}
-
-.swal-footer{
-  text-align: center;
-}
-.swal-button--confirm{
-  background: #ACD15C;
 }

@@ -141,3 +141,8 @@ function bugReport($exception, $message=null){
     $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"),
         var_export($message ?? $exception->getMessage(), true) . "\n\n" . var_export(debug_backtrace(), true));
 }
+
+function filter($regex, $value): bool{
+    preg_match('/^'.$regex.'$/', $value, $match);
+    return !empty($match);
+}

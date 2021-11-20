@@ -5,7 +5,7 @@ namespace Site\Controllers\Objects;
 use Site\Core\HttpRequest;
 use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
-use Site\Models\RequestModel;
+use Site\Models\ObjectTypeModel;
 
 class CatalogController implements \Site\Controllers\Controller
 {
@@ -85,13 +85,17 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects = ImageModel::selectObjectsImages($objects);
 
+        $objects_types = ObjectTypeModel::select([]);
+
         $request->show(view("objects.catalog", [
             "objects_count"     => $totalObjects,
             "objects"           => $objects,
+            "objects_types"     => $objects_types,
             "title"             => "Рекомендации недвижимости",
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
-            "origin_url"        => "/catalog/recommendations"
+            "origin_url"        => "/catalog/recommendations",
+            "filter_type"       => 1
         ]));
     }
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var array $objects
+ * @var array $objects_types
  * @var array $images
  * @var bool $purchased
  * @var string $title
@@ -9,6 +10,8 @@
  * @var int $current_page
  * @var int $elements_per_page
  * @var string $origin_url
+ *
+ * @var int $filter_type
  **/
 
 global $auth;
@@ -18,7 +21,14 @@ global $request;
 <?=view("layout.header", ["_page_title" => $title])?>
 
 <div class="container">
-    <h1 class="h1 item__title my-2 my-lg-0"><?=$title?></h1>
+    <h1 class="h1 item__title mb-2 mt-5"><?=$title?></h1>
+
+    <?php
+    if($filter_type == 1){
+        echo(view("layout.filters.settings", ["objects_types" => $objects_types]));
+    }
+    ?>
+
     <div class="h-48 fs-18"><?=(count($objects) > 0) ? $objects_count : "Нет"?> вариантов</div>
 
     <div class="row gx-3 gy-2 align-items-center mb-3">

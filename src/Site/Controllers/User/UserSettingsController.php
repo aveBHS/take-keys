@@ -5,6 +5,7 @@ namespace Site\Controllers\User;
 use DateTime;
 use Site\Core\HttpRequest;
 use Site\Core\TelegramNotifyService;
+use Site\Models\ObjectTypeModel;
 use Site\Models\PaymentModel;
 
 class UserSettingsController implements \Site\Controllers\Controller
@@ -77,6 +78,61 @@ class UserSettingsController implements \Site\Controllers\Controller
         } else {
             $request->show(json_encode([
                 "result" => "incorrect_date"
+            ]));
+        }
+    }
+
+    public function setFilter(HttpRequest $request, $args)
+    {
+        $request->setHeader("Content-Type", "application/json");
+
+        if(
+            filter("\d+\;\d+", $request->post("filter-price")) &&
+            filter("\d+(\.\d+)?", $request->post("filter-radius")) &&
+            filter("\d+(\.\d+)?", $request->post("geo_lon")) &&
+            filter("\d+(\.\d+)?", $request->post("geo_lat")) &&
+            strlen($request->post("filter-object-type")) > 0 &&
+            strlen($request->post("filter-address")) > 0)
+        {
+            $object_type = ObjectTypeModel::find($request->post("filter-object-type"), "object_type_slug");
+            if(!is_null($object_type)) {
+                global $auth;
+                $req = $auth()->request;
+
+                $req->price_min = (int)explode(";", $request->post("filter-price"))[0];
+                $req->price_max = (int)explode(";", $request->post("filter-price"))[1];
+                $req->distance = (int)(((float) $request->post("filter-radius") * 1000));
+
+                $req->address = $request->post("filter-address");
+                $req->lat = (float)$request->post("geo_lat");
+                $req->lng = (float)$request->post("geo_lon");
+
+                $req->recommendations = "";
+                $req->object_type = $object_type->object_type_id;
+
+                try {
+                    $req->save();
+                    $request->show(json_encode([
+                        "result" => "OK"
+                    ]));
+                } catch (\Exception $exception) {
+                    var_dump($exception);
+                    bugReport($exception);
+                    $request->show(json_encode([
+                        "result" => "ERROR",
+                        "reason" => "Произошла ошибка, мы уже знаем о ней и скоро все исправим, пожалуйста, попробуйте позднее"
+                    ]));
+                }
+            } else {
+                $request->show(json_encode([
+                    "result" => "ERROR",
+                    "reason" => "Форма заполнена некорректно, пожалуйста, обновите страницу"
+                ]));
+            }
+        } else {
+            $request->show(json_encode([
+                "result" => "ERROR",
+                "reason" => "Форма заполнена некорректно, проверьте заполнение полей"
             ]));
         }
     }
