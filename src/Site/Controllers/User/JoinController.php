@@ -58,7 +58,8 @@ class JoinController implements Controller
 
         $req->lat = $reqInfo->lat;
         $req->lng = $reqInfo->lng;
-        $req->price = $reqInfo->cost;
+        $req->price_min = $reqInfo->cost;
+        $req->price_max = $reqInfo->cost;
         $req->address = $reqInfo->address;
         $req->distance = 15000;
 

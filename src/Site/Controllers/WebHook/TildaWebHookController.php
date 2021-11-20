@@ -41,7 +41,8 @@ class TildaWebHookController implements Controller
             $objectInfo->lat = 0;
             $objectInfo->lng = 0;
             $objectInfo->address = $request->post("Address");
-            $objectInfo->price = $request->post("Price");
+            $objectInfo->price_min = $request->post("Price");
+            $objectInfo->price_max = $request->post("Price");
             $objectInfo->distance = (int) $request->post("AreaRange") * 1000;
             if($objectInfo->distance < 1) $objectInfo->distance = null;
             $objectInfo->type = $request->post("ObjectType");
@@ -60,7 +61,8 @@ class TildaWebHookController implements Controller
         }
         $object->lat = (float)$objectInfo->lat;
         $object->lng = (float)$objectInfo->lng;
-        $object->price = (int)$objectInfo->price;
+        $object->price_min = (int)$objectInfo->price;
+        $object->price_max = (int)$objectInfo->price;
         $object->address = $objectInfo->address;
         $object->distance = (int)($objectInfo->distance ?? 1000);
         if ($object->distance < 1) $object->distance = 1000;
