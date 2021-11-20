@@ -251,5 +251,8 @@ $_page_title = "Поиск по карте | Take Keys";
     }
 </style>
 
+<button onclick="Chatra('openChat', true)" class="btn btn-dark btn-icon btn-chat">
+    <i class="icon"><img src="/images/icons/chat.svg"></i>
+</button>
 
 <?=view("layout.footer")?>

@@ -357,5 +357,8 @@ $_page_title = "Главная страница | Take Keys";
     </div>
 </section>
 
+<button onclick="Chatra('openChat', true)" class="btn btn-dark btn-icon btn-chat">
+    <i class="icon"><img src="/images/icons/chat.svg"></i>
+</button>
 
 <?=view("layout.footer")?>
