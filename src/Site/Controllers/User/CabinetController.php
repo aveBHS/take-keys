@@ -10,13 +10,7 @@ class CabinetController implements \Site\Controllers\Controller
 
     public function view(HttpRequest $request, $args)
     {
-        global $auth;
-        $requestModel = RequestModel::find($auth()->request_id);
-        if(is_null($requestModel)){
-            $auth->logout();
-            $request->redirect("/login");
-        }
-        $request->show(view("cabinet.index", ["request" => $requestModel]));
+        $request->redirect("/catalog/recommendations");
     }
 
     public function disableRecommendations(HttpRequest $request, $args)
