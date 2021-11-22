@@ -88,7 +88,7 @@ class JoinController implements Controller
                     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
                     $site_url = env("url");
                     $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Новая регистрация\n{$user->name} ID{$user->id}"
-                        . "\nНомер: +{$user->phone}\nОбъект-источник: https://$site_url/id/{$reqInfo->id}/");
+                        . "\nНомер: +{$user->phone}\nПочта: {$user->login}\nОбъект-источник: https://$site_url/id/{$reqInfo->id}/");
                     return;
                 }
             }
