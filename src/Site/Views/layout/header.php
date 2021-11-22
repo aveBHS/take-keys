@@ -6,7 +6,7 @@
  * @var array $_custom_button
  */
 global $auth;
-
+$_show_favorites = !is_null($auth());
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -90,6 +90,7 @@ global $auth;
                             <ul class="topline__menu">
                                 <li><a href="https://take-keys.com/">О сервисе</a></li>
                                 <li><a href="/catalog">Каталог</a></li>
+                                <?=$_show_favorites?'<li><a href="/catalog/favorites">Избранные</a></li>':''?>
                                 <li><a href="https://take-keys.com/help">Справочный центр</a></li>
                             </ul>
                         </div>
