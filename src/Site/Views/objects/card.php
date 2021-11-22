@@ -44,18 +44,19 @@ if(!is_null($auth())){
         align-items: center !important;
     }
 </style>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=map_all_offers" type="text/javascript"></script>
 <div class="d-none d-lg-block">
     <?=view("layout.breadcrumb", ["url" => ["Каталог", [$object->title, $page_url]]])?>
 </div>
 <div class="item">
     <div class="item__top-menu-mobile">
-        <i class="icon"><img src="/images/icons/arrow-left-dark.svg"></i>
+        <i class="icon" onclick="history.back();"><img src="/images/icons/arrow-left-dark.svg"></i>
         <button onclick="Chatra('openChat', true)" class="btn btn-dark btn-icon btn-chat-top ms-3">
             <i class="icon"><img src="/images/icons/chat-16.svg"></i>
         </button>
-        <i class="icon ms-auto"><img src="/images/icons/search.svg"></i>
-        <i class="icon"><img src="/images/icons/share.svg"></i>
-        <span onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
+        <!--i class="icon ms-auto"><img src="/images/icons/search.svg"></i>
+        <i class="icon"><img src="/images/icons/share.svg"></i-->
+        <span class="icon ms-auto" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
         <?php if($is_favorite) { ?>
             <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
         <?php } else { ?>
@@ -82,10 +83,10 @@ if(!is_null($auth())){
                         <div class="col-auto">
                             <span class="views-counter"><?=rand(100, 999)?> просмотров</span>
                         </div>
-                        <div class="col-auto ms-auto">
+                        <!--div class="col-auto ms-auto">
                             <i class="icon"><img src="/images/icons/share.svg"></i>
-                        </div>
-                        <div class="col-auto ms-2">
+                        </div-->
+                        <div class="col-auto ms-auto">
                             <button class="btn btn-outline-light btn-icon" onclick="setFavorite(this)" data-object-id="<?=$object->id?>">
                                 <?php if($is_favorite) { ?>
                                     <i class="icon"><img src="/images/icons/heart_checked.svg"></i>
@@ -225,7 +226,7 @@ if(!is_null($auth())){
                 </div>
 
                 <div class="collapse map-collapse w-mobile-100">
-                    <div class="item__map mt-lg-4 pb-lg-5" style="background-image: url('/images/dist/map.jpg');"></div>
+                    <div id="map" class="item__map mt-lg-4 pb-lg-5"></div>
                 </div>
 
                 <div class="desc">
@@ -431,6 +432,7 @@ if(!$purchased || is_null($auth())){
 echo(view("layout.popup.autocall"));
 ?>
 <script src="https://yastatic.net/share2/share.js"></script>
+<br><br>
 <?=view("layout.footer", ['render' => false])?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -443,5 +445,22 @@ echo(view("layout.popup.autocall"));
         $(window).scroll(function () {
             dynamicContent()
         })
+
+        ymaps.ready(init);
+        function init() {
+            var map = new ymaps.Map("map", {
+                center: [<?=$object->lat?>, <?=$object->lng?>],
+                zoom: 15,
+                controls: ['zoomControl', 'geolocationControl', 'fullscreenControl', 'rulerControl']
+            });
+            map.geoObjects.add(new ymaps.Placemark(map.getCenter(), {
+                hintContent: '<?=$object->address?>',
+                balloonContent: '<b><?=$object->title?></b><br><?=$object->address?>'
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: "/images/icons/home-on-map.svg",
+                iconImageSize: [40, 40]
+            }));
+        }
     })
 </script>
