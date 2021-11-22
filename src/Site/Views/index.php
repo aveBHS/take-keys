@@ -58,6 +58,7 @@ $_page_title = "Главная страница | Take Keys";
                     <div class="catalog__item__title">Длительная аренда</div>
 
                     <ul class="catalog__item__list list-unstyled">
+                        <li><a class="link-dark" href="/catalog/">Комнаты</a></li>
                         <li><a class="link-dark" href="/catalog/">Студии</a></li>
                         <li><a class="link-dark" href="/catalog/">1-комнатные квартиры</a></li>
                         <li><a class="link-dark" href="/catalog/">2-комнатные квартиры</a></li>
@@ -176,10 +177,10 @@ $_page_title = "Главная страница | Take Keys";
                     <div class="catalog__item__img" style="background-image: url('/images/dist/home-catalog/8.png');"></div>
                 </div>
                 <div class="catalog__item__info">
-                    <div class="catalog__item__title">Земеные участки</div>
+                    <div class="catalog__item__title">Земельные участки</div>
 
                     <ul class="catalog__item__list list-unstyled">
-                        <li><a class="link-dark" href="/catalog/">Земпя промназначения</a></li>
+                        <li><a class="link-dark" href="/catalog/">Земля промназначения</a></li>
                         <li><a class="link-dark" href="/catalog/">Земля сельхозназначения</a></li>
                         <li><a class="link-dark" href="/catalog/">Купить землю для поселения</a></li>
                         <li><a class="link-dark" href="/catalog/">Снять участок</a></li>
@@ -255,15 +256,11 @@ $_page_title = "Главная страница | Take Keys";
                             <i class="icon">1</i>
                         </button>
                     </div>
-                    <div class="setting-item__title mt-4">
-                        Экономьте время на поиске жилья
-                    </div>
                     <div class="setting-item__desc mt-3">
-                        Подключите услугу авто подбор подходящих вариантов и система автоматически выберет самые лучшие варианты по
-                        цене, местоположению, условиям и дате заезда.
+                        Мы собираем данные со всех известных сайтов недвижимости, что позволяет нам владеть самой обширной базой данных.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="#" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -275,14 +272,11 @@ $_page_title = "Главная страница | Take Keys";
                             <i class="icon">2</i>
                         </button>
                     </div>
-                    <div class="setting-item__title mt-4">
-                        Узнавайте первыми о новых объявлениях
-                    </div>
                     <div class="setting-item__desc mt-3">
-                        Звоните собственникам уже через секунду после появления объекта. Мы уведомим на почту и в месседжер.
+                        Работаем дистанционно, к нам не нужно ехать в офис и переплачивать 50-100%. Наши услуги фиксированные и доступны каждому.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="#" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -294,15 +288,11 @@ $_page_title = "Главная страница | Take Keys";
                             <i class="icon">3</i>
                         </button>
                     </div>
-                    <div class="setting-item__title mt-4">
-                        Экономьте время на поиске жилья
-                    </div>
                     <div class="setting-item__desc mt-3">
-                        Подключите услугу авто подбор подходящих вариантов и система автоматически выберет самые лучшие варианты по
-                        цене, местоположению, условиям и дате заезда.
+                        Большой выбор эксклюзивных предложений, которых нет в открытом доступе. Мы привлекаем собственников через рекламные компании в Яндекс, Google, YouTube и соцсетей.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="#" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>
