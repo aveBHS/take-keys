@@ -215,7 +215,7 @@ if(!is_null($auth())){
                                 <div class="w-mobile-100">
                                     <button class="btn btn-icon w-100 collapsed" data-bs-toggle="collapse" data-bs-target=".map-collapse">
                                         <div class="d-flex align-items-center">
-                                            Показать на карте<i class="icon icon-arrow-up ms-auto"><img src="/images/icons/arrow-up.svg"></i>
+                                            Открыть карту<i class="icon icon-arrow-up ms-auto"><img src="/images/icons/arrow-up.svg"></i>
                                         </div>
                                     </button>
                                 </div>

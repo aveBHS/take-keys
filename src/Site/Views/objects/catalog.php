@@ -40,7 +40,7 @@ global $request;
             </button>
         </div>
         <div class="col-auto">
-            <a href="/catalog/map" class="btn btn-icon">Показать на карте</a>
+            <a href="/catalog/map" class="btn btn-icon">Открыть карту</a>
         </div>
         <div class="w-100 d-sm-none"></div>
         <div class="col-auto">
