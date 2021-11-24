@@ -2,6 +2,7 @@
 
 use Site\Core\TelegramNotifyService;
 use Site\Middleware\Middleware;
+use Site\Models\LogModel;
 
 function render($request, $className, $classMethod, $args = [])
 {
@@ -136,13 +137,29 @@ function getPhone($phone)
     return $phone;
 }
 
-function bugReport($exception, $message=null){
+function bugReport($exception, $message=null)
+{
     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
     $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"),
         var_export($message ?? $exception->getMessage(), true) . "\n\n" . var_export(debug_backtrace(), true));
 }
 
-function filter($regex, $value): bool{
+function filter($regex, $value): bool
+{
     preg_match('/^'.$regex.'$/', $value, $match);
     return !empty($match);
+}
+
+function userLog($title, $text, $user_id=Null)
+{
+    try {
+        global $auth;
+        $log = new LogModel();
+        $log->title = $title;
+        $log->content = $text;
+        $log->user_id = $user_id ?? $auth()->id ?? 0;
+        $log->save();
+    } catch (Exception $exception){
+        bugReport($exception);
+    }
 }

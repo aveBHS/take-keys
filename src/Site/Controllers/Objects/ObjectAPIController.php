@@ -167,6 +167,13 @@ class ObjectAPIController implements \Site\Controllers\Controller
                 $auth()->request->favorites = $favorite_objects;
                 try {
                     $auth()->request->save();
+                    if($result == "ADDED"){
+                        userLog("Добавление объекта в избранное",
+                            "Объект: ID {$object->id}");
+                    } else {
+                        userLog("Удаление объекта из избранного",
+                            "Объект: ID {$object->id}");
+                    }
                 } catch (\Exception $ex) {
                     $result = "ERROR";
                 }

@@ -66,6 +66,8 @@ class UserSettingsController implements \Site\Controllers\Controller
 
             try {
                 $payment->save();
+                userLog("Установка предполагаемой даты заселения",
+                    "Дата установлена на {$request->post('date')}");
                 $request->show(json_encode([
                     "result" => "ok"
                 ]));
@@ -112,6 +114,9 @@ class UserSettingsController implements \Site\Controllers\Controller
 
                 try {
                     $req->save();
+                    userLog("Изменение настроек подбора",
+                        "Адрес: {$req->address} ({$req->lat}; {$req->lng})\nРадиус: {$req->distance} м\n" .
+                        "Тип объекта: {$object_type->object_type_slug}\nЦена: {$req->price_min} руб - {$req->price_max} руб");
                     $request->show(json_encode([
                         "result" => "OK"
                     ]));

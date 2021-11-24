@@ -36,7 +36,7 @@ class HttpRequest
         }
     }
 
-    public function log()
+    public function requestLog()
     {
         global $auth;
 

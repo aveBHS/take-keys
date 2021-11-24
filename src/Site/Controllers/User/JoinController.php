@@ -61,7 +61,7 @@ class JoinController implements Controller
         $req->price_min = $reqInfo->cost;
         $req->price_max = $reqInfo->cost;
         $req->address = $reqInfo->address;
-        $req->distance = 15000;
+        $req->distance = 5000;
 
         $reqType = ObjectTypeModel::find($reqInfo->categoryId, "inpars_id");
         $req->object_type = (int)($reqType->object_type_id ?? 1);
@@ -84,6 +84,12 @@ class JoinController implements Controller
                     $call->call_status = PhoneCallModel::callStatuses['NEW'];
                     $call->next_attempt = time() + 54;
                     $call->save();
+
+                    userLog("Регистрация пользователя под ID {$user->id}", "Номер: +{$user->phone}\nПочта: {$user->login}\nОбъект-источник: ID{$reqInfo->id}", $user->id);
+                    $obj_type = $reqType->object_type_slug ?? 'Комната';
+                    userLog("Изменение настроек подбора [первоначальная установка]",
+                        "Адрес: {$req->address} ({$req->lat}; {$req->lng})\nРадиус: {$req->distance} м\n" .
+                        "Тип объекта: {$obj_type}\nЦена: {$req->price_min} руб - {$req->price_max} руб", $user->id);
 
                     $tg = new TelegramNotifyService(env('TELEGRAM_KEY'));
                     $site_url = env("url");

@@ -17,6 +17,10 @@ return [
             "controller" => [\Site\Controllers\User\CabinetController::class, "view"],
             "middleware" => UserMiddleware::class
         ],
+        "~lk[/]report[/]?$~" => [
+            "controller" => [\Site\Controllers\User\CabinetController::class, "report"],
+            "middleware" => UserMiddleware::class
+        ],
         "~login[/]?$~" => [
             "controller" => [\Site\Controllers\User\LoginController::class, "view"],
             "middleware" => GuestMiddleware::class

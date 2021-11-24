@@ -3,6 +3,7 @@
 namespace Site\Controllers\User;
 
 use Site\Core\HttpRequest;
+use Site\Models\LogModel;
 use Site\Models\RequestModel;
 
 class CabinetController implements \Site\Controllers\Controller
@@ -11,6 +12,13 @@ class CabinetController implements \Site\Controllers\Controller
     public function view(HttpRequest $request, $args)
     {
         $request->redirect("/catalog/recommendations");
+    }
+
+    public function report(HttpRequest $request, $args)
+    {
+        global $auth;
+        $logs = LogModel::select([["user_id", $auth()->id]]);
+        $request->show(view("cabinet.report", ['logs' => $logs]));
     }
 
     public function disableRecommendations(HttpRequest $request, $args)

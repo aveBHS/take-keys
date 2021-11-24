@@ -92,6 +92,12 @@ abstract class Model
 
     public static function select(array $where, array $order = null, int $limit = null, int $offset = null, bool $need_total = false)
     {
+        /**
+         * where struct:
+         * [ ["field", "value"], ..., ["field", ["values", "action"] ]
+         * order struct:
+         * [ ["field", "method"] ]
+         */
         $className = static::class;
         $model = new $className();
         $tableName = $model->tableName ?? getTableName(static::class);
