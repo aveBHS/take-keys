@@ -18,7 +18,13 @@ global $auth;
 global $request;
 ?>
 
-<?=view("layout.header", ["_page_title" => $title])?>
+<?php
+if($filter_type == 1){
+    echo view("layout.header", ["_page_title" => $title, "_custom_button" => ["logout", "Выход"]]);
+} else {
+    echo view("layout.header", ["_page_title" => $title]);
+}
+?>
 
 <div class="container">
     <h1 class="h1 item__title mb-2 mt-5"><?=$title?></h1>
