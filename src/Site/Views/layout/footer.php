@@ -57,7 +57,7 @@ if(!isset($render))
                     </div>
                 </div>
                 <div class="col text-center fs-12">
-                    <a href="https://take-keys.com/documents">Политика конфиденциальности</a>
+                    <a href="https://take-keys.com/documents#!/tab/359162567-2">Политика конфиденциальности</a>
                 </div>
             </div>
         </div>
