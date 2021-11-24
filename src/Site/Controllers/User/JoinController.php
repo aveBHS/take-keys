@@ -63,7 +63,7 @@ class JoinController implements Controller
         $req->address = $reqInfo->address;
         $req->distance = 15000;
 
-        $reqType = ObjectTypeModel::find($reqInfo->category_id, "inpars_id");
+        $reqType = ObjectTypeModel::find($reqInfo->categoryId, "inpars_id");
         $req->object_type = (int)($reqType->object_type_id ?? 1);
         $req->recommendations = "";
 
