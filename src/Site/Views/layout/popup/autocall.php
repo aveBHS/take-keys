@@ -25,7 +25,7 @@
 </script>
 <div class="modal fade main-modal" id="popup-autocall" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" style="height: auto !important;">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="popup__wrp" style="background: url('/images/dist/popup-bg/robot.svg') no-repeat right 24px bottom 24px">
                 <div class="popup__content">
