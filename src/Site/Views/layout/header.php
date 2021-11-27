@@ -44,7 +44,7 @@ $_show_favorites = !is_null($auth());
     </style>
     <!-- /Chatra {/literal} -->
 
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=<?=env("yandex_maps_key")?>&lang=ru_RU" type="text/javascript"></script>
+    <script charset="UTF-8" src="//web.webpushs.com/js/push/e985353f732857f9e413f3965c36d4e5_1.js" async></script>
     <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
 
     <!-- Yandex.Metrika counter -->
@@ -65,6 +65,7 @@ $_show_favorites = !is_null($auth());
         <?php } ?>
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/85688374" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
     <!-- /Yandex.Metrika counter -->
 
 </head>
