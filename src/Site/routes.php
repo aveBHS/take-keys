@@ -11,6 +11,9 @@ return [
         "~^[/]?$~" => [
             "controller" => [\Site\Controllers\MainController::class, "view"],
         ],
+        "~test[/]?$~" => [
+            "controller" => [\Site\Controllers\MainController::class, "test"],
+        ],
 
         // Users
         "~lk[/]?$~" => [

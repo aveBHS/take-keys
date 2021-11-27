@@ -28,4 +28,9 @@ class MainController implements Controller
             "reviews" => $reviews
         ]));
     }
+
+    public function test(HttpRequest $request, $args)
+    {
+        $request->show(view("test"));
+    }
 }
