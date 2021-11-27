@@ -59,6 +59,10 @@ $_show_favorites = !is_null($auth());
             accurateTrackBounce:true,
             webvisor:true
         });
+
+        <?php if(!is_null($auth())) { ?>
+        ym(85688374, 'setUserID', <?=$auth()->id?>);
+        <?php } ?>
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/85688374" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->

@@ -21,6 +21,7 @@ this.pay = function (user_id) {
         },
         {
             onSuccess: function (options) {
+                ym(85688374,'reachGoal','subscribed');
                 $("#mobile_action_block").html(`
                     <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
                     <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>`)
