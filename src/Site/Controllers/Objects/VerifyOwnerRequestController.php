@@ -28,7 +28,7 @@ class VerifyOwnerRequestController implements \Site\Controllers\Controller
             userLog("Запрос прозвона объекта",
                 "Объект: ID {$object->id}");
             $tg->send(env("TELEGRAM_CALL_REQUESTS_CHAT"),
-                "Запрос прозвона объекта https://take-keys.ru/id/{$object->id}\nТелефон объекта: +{$object->phones}\nПользователь ID{$auth()->id}\nТелефон пользователя: +{$auth()->request->phone}"
+                "Запрос прозвона объекта https://take-keys.ru/id/{$object->id}\nИсточник: {$object->origin}\nТелефон объекта: +{$object->phones}\nПользователь ID{$auth()->id}\nТелефон пользователя: +{$auth()->request->phone}"
             );
             $request->show(json_encode([
                 "result" => "OK"
