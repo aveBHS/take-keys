@@ -3,6 +3,7 @@
 namespace Site\Controllers;
 
 use \Site\Core\HttpRequest;
+use Site\Core\SendPulseService;
 use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;

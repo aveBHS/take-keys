@@ -4,6 +4,7 @@ namespace Site\Controllers\User;
 
 use Site\Controllers\Controller;
 use Site\Core\HttpRequest;
+use Site\Core\SendPulseService;
 use Site\Core\TelegramNotifyService;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
@@ -84,6 +85,13 @@ class JoinController implements Controller
                     $call->call_status = PhoneCallModel::callStatuses['NEW'];
                     $call->next_attempt = time() + 54;
                     $call->save();
+
+                    try {
+                        $email_confirm = new SendPulseService(env("sendpulse_user_id"), env("sendpulse_api_token"), env("sendpulse_sender"));
+                        $email_confirm->createSubscriber(env("sendpulse_book_id"), $user);
+                    } catch (\Exception $exception){
+                        bugReport($exception);
+                    }
 
                     userLog("Регистрация пользователя под ID {$user->id}", "Номер: +{$user->phone}\nПочта: {$user->login}\nОбъект-источник: ID{$reqInfo->id}", $user->id);
                     $obj_type = $reqType->object_type_slug ?? 'Комната';
