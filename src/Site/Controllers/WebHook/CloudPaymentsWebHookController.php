@@ -42,14 +42,11 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                         $req->purchased = 1;
 
                         $payment = PaymentModel::find($user->id, "user_id");
-                        $payment_exists = true;
                         if (is_null($payment)) {
-                            $payment_exists = false;
-                            $req->purchased = 0;
                             $payment = new PaymentModel();
                             $payment->user_id = $user->id;
                             $payment->amount = env("recurrent_payment_amount");
-                            $payment->next_attempt = -1;
+                            $payment->next_attempt = time() + (24 * 60 * 60);
                         }
                         $payment->status = PaymentModel::STATUSES['READY'];
                         $payment->token = $request->post("Token");
@@ -63,16 +60,10 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                             $notify->type = NotifyModel::notifyType['SMS'];
                             $notify->text = view("notify.payment");
                             $notify->status = 0;
-                            if (!$payment_exists)
-                                $notify->text = view("notify.payment_bad");
                             $notify->save();
 
-                            if (!$payment_exists)
-                                $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Внимание, нарушение процесса подключения, дата платежа не указана, свяжитесь с клиентом ID{$user->id}");
-                            else {
-                                $checkout_date = date("d.m.Y H:i", $payment->next_attempt);
-                                $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Успешная оплата ID{$user->id}\nСумма списания: {$payment->amount}\nДата списания: {$checkout_date}");
-                            }
+                            $checkout_date = date("d.m.Y H:i", $payment->next_attempt);
+                            $tg->send(env("TELEGRAM_USERS_ACTIONS_CHAT"), "Успешная оплата ID{$user->id}\nСумма списания: {$payment->amount}\nДата списания: {$checkout_date}");
                         } catch (\Exception $exception) {
                             bugReport($exception);
                         }

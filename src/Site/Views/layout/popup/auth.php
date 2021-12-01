@@ -7,6 +7,8 @@ if (!isset($forceReg))
 ?>
 
 <script>
+    let user_mail_domain = undefined;
+
     document.addEventListener('DOMContentLoaded', () => {
         $('[data-bs-target="#auth__modal"]').click()
 
@@ -24,6 +26,7 @@ if (!isset($forceReg))
 
             if (checkValidate(this)) {
                 loader.addClass('active')
+                user_mail_domain = this.email.value.split("@")[1];
                 $.ajax({
                     url: "/join",
                     data: $(this).serialize() + `&object=${object_id}`,
@@ -31,7 +34,9 @@ if (!isset($forceReg))
                 })
                     .done(function(data) {
                         if (data['result'] === "OK") {
-                            window.location.reload();
+                            $("#login_suggestion").css({"display": "none"})
+                            $("#auth__back-accordion").css({"display": "none"})
+                            document.querySelector('.auth__steps-reg').swiper.slideNext()
                         } else {
                             swal({
                                 title: "Ошибка",
@@ -57,7 +62,17 @@ if (!isset($forceReg))
             event.stopPropagation()
         })
 
+        $('#open-email').submit(function (event) {
+           window.location = `https://${user_mail_domain ?? gmail.com}/`;
+            event.preventDefault()
+            event.stopPropagation()
+        });
     })
+
+
+    function skipEmailValidation(){
+        window.location.reload();
+    }
 
 </script>
 
@@ -103,10 +118,10 @@ if (!isset($forceReg))
                                             <!-- Slides -->
                                             <div class="swiper-slide">
                                                 <div class="auth__form-reg" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Для Take-Keys безопасность пользователей на первом месте</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">Поэтому каждое объявление на сайте проходит специальную проверку. Основным этапом проверки является выписка из ЕГРН, которая подтверждает право собственности.
-
-                                                        <br>Такой уровень качества информации требует постоянной работы, по этому услуги предоставляются на платной основе.</div>
+                                                    <div class="auth__title">Мы знаем, как сложно найти подходящий вариант в интернете, поэтому, чтобы вы заселились легко - мы создали систему недвижимости Take-Keys</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">
+                                                        Это инструмент для поиска подходящего жилья в сжатые сроки.<br>
+                                                        Система 24/7 мониторит все сайты недвижимости, доски объявлений и привлекает собственников через рекламные компании в Яндекс, Google, YouTube и социальные сети, что позволяет, первыми узнавать о новых подходящих вариантах и моментально связываться с владельцами.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form class="auth__form-reg" novalidate>
@@ -137,7 +152,7 @@ if (!isset($forceReg))
                                                         <div class="auth__terms form-check form-check-box mt-3">
                                                             <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
                                                             <label class="form-check-label" for="auth__terms-reg">
-                                                                Подтверждаю, что я не являюсь агентом и готов оплатить сборы за услуги сервиса
+                                                                Подтверждаю, что я не являюсь агентом
                                                             </label>
                                                             <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
                                                         </div>
@@ -146,10 +161,8 @@ if (!isset($forceReg))
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Для Take-Keys безопасность пользователей на первом месте</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">Поэтому каждое объявление на сайте проходит специальную проверку. Основным этапом проверки является выписка из ЕГРН, которая подтверждает право собственности.
-
-                                                        <br>Такой уровень качества информации требует постоянной работы, по этому услуги предоставляются на платной основе.</div>
+                                                    <div class="auth__title">Укажите контакты для связи</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Подтвердите почту, чтобы первыми получать уведомления о новых, подходящих вариантах и моментально связываться с владельцами.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form id="auth__send-reg" class="" novalidate>
@@ -200,10 +213,52 @@ if (!isset($forceReg))
                                                     </form>
                                                 </div>
                                             </div>
+                                            <div class="swiper-slide">
+                                                <div class="" data-swiper-parallax="100%">
+                                                    <div class="auth__title">Чтобы своевременно видеть важные уведомления - подтвердите сейчас почту</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Если вы не получили письмо, проверьте папки «Спам» и «Удаленные», так как письмо могло автоматически туда перейти</div>
+                                                </div>
+                                                <div class="mt-5" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
+                                                    <form id="open-email" novalidate>
+                                                        <div class="row align-items-center m-auto">
+                                                            <div class="col-auto w-100">
+                                                                <button class="btn btn-primary auth__btn w-100" type="submit">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="svg-wrp me-3">
+                                                                            <svg width="6" height="10" viewBox="0 0 6 10"
+                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                                      d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+                                                                                      fill="#151A40" />
+                                                                            </svg>
+                                                                        </i>
+                                                                        Открыть почту
+                                                                    </div>
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto w-100">
+                                                            <button class="btn btn-secondary auth__btn w-100 mt-2" type="button" onclick="skipEmailValidation()">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="svg-wrp me-3">
+                                                                        <svg width="6" height="10" viewBox="0 0 6 10"
+                                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
+                                                                                  fill="#151A40" />
+                                                                        </svg>
+                                                                    </i>
+                                                                    Пропустить
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="auth__switch">
+                                <div class="auth__switch" id="login_suggestion">
                                     У вас есть аккаунт?
                                     <a class="ms-3 link text-primary" href="/login">Войти</a>
                                 </div>
