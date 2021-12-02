@@ -33,7 +33,7 @@ class SendPulseService
     /**
      * @throws Exception
      */
-    public function createSubscriber($book_id, UserModel $user){
+    public function createSubscriber($book_id, UserModel $user, $confirm=true){
         $SPApiClient = new ApiClient($this->user_id, $this->api_token, new FileStorage());
 
         $request = RequestModel::find($user->request_id);
@@ -46,9 +46,13 @@ class SendPulseService
                 )
             )
         );
-        $SPApiClient->addEmails($book_id, $subscriber, [
-            'confirmation' => 'force',
-            'sender_email' => $this->sender
-        ]);
+        if($confirm){
+            $SPApiClient->addEmails($book_id, $subscriber, [
+                'confirmation' => 'force',
+                'sender_email' => $this->sender
+            ]);
+        } else {
+            $SPApiClient->addEmails($book_id, $subscriber);
+        }
     }
 }
