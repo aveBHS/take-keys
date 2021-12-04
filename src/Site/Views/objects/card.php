@@ -106,7 +106,7 @@ if(!is_null($auth())){
                         <div class="item__price h-64"><?=$object->cost?> ₽/мес.</div>
                     </div>
                     <div class="col-auto col-lg-12">
-                        <div class="h-48 text-secondary mb-3"><s><?=($object->cost)*1.25?> ₽</s></div>
+                        <div class="h-48 text-secondary mb-3"><s><?=($object->cost)*1.1?> ₽</s></div>
                     </div>
                 </div>
 
@@ -330,7 +330,7 @@ if(!is_null($auth())){
 <!---->
 <!--                                </div>-->
                                 <?php if($object->isAd == 1 or $object->status == 1){ ?>
-                                    <!--div class="item__addictional-info text-warning">На проверке</div-->
+                                    <div class="item__addictional-info text-warning">На проверке</div>
                                 <?php } else if($object->status == 2){ ?>
                                     <div class="item__addictional-info text-danger">Архив</div>
                                 <?php } else { ?>

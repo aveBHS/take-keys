@@ -71,7 +71,7 @@ if(!is_null($auth())){
                             <span class="btn-colored bg-danger text-light">Горячее</span>
                         <?php } ?>
                         <?php if($object->status == 1 || $object->isAd == 1) { ?>
-                            <!--span class="btn-colored bg-warning">На проверке</span-->
+                            <span class="btn-colored bg-warning">На проверке</span>
                         <?php } ?>
                         <?php if($object->status == 2) { ?>
                             <span class="btn-colored bg-secondary">В архиве</span>
@@ -85,9 +85,20 @@ if(!is_null($auth())){
                 </div>
                 <div class="catalog__item__price">
                     <span class="catalog__item__price-new"><?=$object->cost?> ₽/мес.</span>
-                    <s class="catalog__item__price-old"><?=$object->cost*1.25?> ₽</s>
+                    <s class="catalog__item__price-old"><?=$object->cost*1.1?> ₽</s>
                 </div>
                 <div class="catalog__item__address"><?=$object->address?></div>
+                <?php if(!is_null($object->metroSlug)) { ?>
+                <div class="catalog__item__metro row">
+                    <div class="col-12 order-lg-2">
+                        <div class="row g-0">
+                            <div class="col-auto item__metro">
+                                <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
                 <div class="catalog__item__param d-none d-lg-flex">
                     <i class="icon"><img src="/images/icons/home.svg"></i>1
                     <i class="ms-4 icon"><img src="/images/icons/box.svg"></i><?=$object->sq?> м²
@@ -170,7 +181,7 @@ if(!is_null($auth())){
                                 <span class="btn-colored bg-danger text-light">Горячее</span>
                             <?php } ?>
                             <?php if($object->status == 1 || $object->isAd == 1) { ?>
-                                <!--span class="btn-colored bg-warning">На проверке</span-->
+                                <span class="btn-colored bg-warning">На проверке</span>
                             <?php } ?>
                             <?php if($object->status == 2) { ?>
                                 <span class="btn-colored bg-secondary">В архиве</span>
@@ -186,9 +197,20 @@ if(!is_null($auth())){
                         </div>
                         <div class="catalog__item__price">
                             <span class="catalog__item__price-new"><?=$object->cost?> ₽/мес.</span>
-                            <s class="catalog__item__price-old"><?=$object->cost*1.25?> ₽</s>
+                            <s class="catalog__item__price-old"><?=$object->cost*1.1?> ₽</s>
                         </div>
                         <div class="catalog__item__address"><?=$object->address?></div>
+                        <?php if(!is_null($object->metroSlug)) { ?>
+                            <div class="catalog__item__metro row">
+                                <div class="col-12 order-lg-2">
+                                    <div class="row g-0">
+                                        <div class="col-auto item__metro">
+                                            <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <div class="catalog__item__desc">
                             <?=mb_strlen($object->description) > 250 ?
                                 mb_substr($object->description, 0, 250) . "..." :
