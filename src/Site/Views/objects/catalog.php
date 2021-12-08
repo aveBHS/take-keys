@@ -19,7 +19,7 @@ global $request;
 ?>
 
 <?php
-if($filter_type == 1){
+if($filter_type == FILTER_RECOMMENDATIONS_CONFIG){
     echo view("layout.header", ["_page_title" => $title, "_custom_button" => ["logout", "Выход"]]);
 } else {
     echo view("layout.header", ["_page_title" => $title]);
@@ -30,8 +30,10 @@ if($filter_type == 1){
     <h1 class="h1 item__title mb-2 mt-5"><?=$title?></h1>
 
     <?php
-    if($filter_type == 1){
+    if($filter_type == FILTER_RECOMMENDATIONS_CONFIG){
         echo(view("layout.filters.settings", ["objects_types" => $objects_types]));
+    } else if ($filter_type == FILTER_CATALOG){
+        echo(view("layout.filters.search", ["objects_types" => $objects_types]));
     }
     ?>
 

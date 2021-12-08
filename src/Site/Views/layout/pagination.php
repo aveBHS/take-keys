@@ -27,16 +27,25 @@ if($current_page >= $max_pages){
         $page_range = range(1, $max_pages);
     }
 }
+
+$params = $_SERVER['QUERY_STRING'];
+if(strpos($params, "&") !== false){
+    $params = explode("&", $params);
+    unset($params[0]);
+    $params = "?".implode("&", $params);
+} else {
+    $params = "";
+}
 ?>
 
 <div class="pagination">
     <?php if ($current_page != 1) { ?>
-    <a href="<?=$origin_url?>/1" class="btn pagination__item"><img src="/images/icons/arrow-left-dark.svg"></a>
+    <a href="<?=$origin_url?>/1<?=$params?>" class="btn pagination__item"><img src="/images/icons/arrow-left-dark.svg"></a>
     <?php } ?>
     <?php foreach($page_range as $page_id){ ?>
-        <a href="<?=$origin_url?>/<?=$page_id?>" class="btn pagination__item <?=$page_id == ($current_page) ? "active": ""?>"><?=$page_id?></a>
+        <a href="<?=$origin_url?>/<?=$page_id?><?=$params?>" class="btn pagination__item <?=$page_id == ($current_page) ? "active": ""?>"><?=$page_id?></a>
     <?php } ?>
     <?php if ($current_page != $pages_count) { ?>
-        <a href="<?=$origin_url?>/<?=$pages_count?>" class="btn pagination__item"><img src="/images/icons/arrow-right-dark.svg"></a>
+        <a href="<?=$origin_url?>/<?=$pages_count?><?=$params?>" class="btn pagination__item"><img src="/images/icons/arrow-right-dark.svg"></a>
     <?php } ?>
 </div>

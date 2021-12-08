@@ -23,6 +23,36 @@ class CatalogController implements \Site\Controllers\Controller
         $filter = [ ["status", 0] ];
         if($auth()->request->purchased)
             $filter = [ ["status", 0], ['isAd', 0] ];
+        if(!is_null($request->get("filter-object-type"))){
+            $objects_type = ObjectTypeModel::find($request->get("filter-object-type"), "object_type_slug");
+            if(!is_null($objects_type)){
+                array_push($filter, ["categoryId", $objects_type->inpars_id]);
+            }
+        }
+        if(!is_null($request->get("filter-rooms")) and (int) $request->get("filter-rooms") > 0){
+            array_push($filter, ["rooms", (int) $request->get("filter-rooms")]);
+        }
+        if(!is_null($request->get("filter-price"))){
+            $min_price = (int) explode(";", $request->get("filter-price"))[0];
+            $max_price = (int) explode(";", $request->get("filter-price"))[1];
+            if(!is_null($max_price) and !is_null($min_price)){
+                if($min_price > $max_price){
+                    list($min_price, $max_price) = [$max_price, $max_price];
+                }
+                array_push($filter, ["cost", [$min_price, ">="]]);
+                array_push($filter, ["cost", [$max_price, "<="]]);
+            }
+        }
+        if(!is_null($request->get("geo_lon")) and !is_null($request->get("geo_lat"))){
+            if((float) $request->get("geo_lon") > 0 and (float) $request->get("geo_lat") and (float) $request->get("filter-radius") > 0){
+                $search = calcCircle((float) $request->get("geo_lat"), (float) $request->get("geo_lon"), (float) $request->get("filter-radius") * 1000);
+                array_push($filter, ["lat", [$search[0][0], "<="]]);
+                array_push($filter, ["lat", [$search[3][0], ">="]]);
+                array_push($filter, ["lng", [$search[1][1], "<="]]);
+                array_push($filter, ["lng", [$search[2][1], ">="]]);
+            }
+        }
+
         $objects = ObjectModel::select(
             $filter,
             [ ["created", "DESC"] ],
@@ -44,13 +74,17 @@ class CatalogController implements \Site\Controllers\Controller
             $request->setCookie("catalog_view_mode", "tiles");
         }
 
+        $objects_types = ObjectTypeModel::select([]);
+
         $request->show(view("objects.catalog", [
             "objects_count"     => $totalObjects,
             "objects"           => $objects,
             "title"             => "Каталог недвижимости",
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
-            "origin_url"        => "/catalog"
+            "origin_url"        => "/catalog",
+            "objects_types"     => $objects_types,
+            "filter_type"       => FILTER_CATALOG
         ]));
     }
 
@@ -95,7 +129,7 @@ class CatalogController implements \Site\Controllers\Controller
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
             "origin_url"        => "/catalog/recommendations",
-            "filter_type"       => 1
+            "filter_type"       => FILTER_RECOMMENDATIONS_CONFIG
         ]));
     }
 
@@ -130,13 +164,17 @@ class CatalogController implements \Site\Controllers\Controller
         $objects = ImageModel::selectObjectsImages($objects);
         $objects = array_reverse($objects);
 
+        $objects_types = ObjectTypeModel::select([]);
+
         $request->show(view("objects.catalog", [
             "objects_count"     => $totalObjects,
             "objects"           => $objects,
             "title"             => "Избранные объявления",
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
-            "origin_url"        => "/catalog/favorites"
+            "origin_url"        => "/catalog/favorites",
+            "objects_types"     => $objects_types,
+            "filter_type"       => FILTER_NONE
         ]));
     }
 
