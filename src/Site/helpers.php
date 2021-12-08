@@ -163,3 +163,31 @@ function userLog($title, $text, $user_id=Null)
         bugReport($exception);
     }
 }
+
+function coordsDistance($lat1, $long1, $lat2, $long2){
+    $lat1 = $lat1 * M_PI / 180;
+    $lat2 = $lat2 * M_PI / 180;
+    $long1 = $long1 * M_PI / 180;
+    $long2 = $long2 * M_PI / 180;
+
+    $y = sqrt(pow(cos($lat2) * sin($long2 - $long1), 2) + pow(cos($lat1) * sin($lat2) - sin($lat1) * cos($lat2) * cos($long2 - $long1), 2));
+    $x = sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($long2 - $long1);
+
+    return atan2($y, $x) * EARTH_RADIUS;
+}
+
+function calcCircle($lat, $lng, $length): array
+{
+    $lat_length = coordsDistance(1, $lng, 2, $lng);
+    $lng_length = coordsDistance($lat, 1, $lat, 2);
+
+    $deltaLat = $length / $lat_length;
+    $deltaLng = $length / $lng_length;
+
+    return [
+        [$lat + $deltaLat, $lng],
+        [$lat, $lng + $deltaLng],
+        [$lat, $lng - $deltaLng],
+        [$lat - $deltaLat, $lng]
+    ];
+}
