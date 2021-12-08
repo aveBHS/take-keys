@@ -111,7 +111,7 @@ $_show_favorites = !is_null($auth());
                                     </div>
                                 <?php } else { ?>
                                     <div class="col-12 col-lg-auto">
-                                        <a href="/lk" class="btn btn-primary topline__btn">Личный кабинет</a>
+                                        <a href="/lk" class="btn btn-primary topline__btn">Рекомендации</a>
                                     </div>
                                 <?php } ?>
                             </div>

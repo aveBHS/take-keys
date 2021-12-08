@@ -44,7 +44,7 @@ if(!is_null($auth())){
         align-items: center !important;
     }
 </style>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&onload=map_all_offers" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <div class="d-none d-lg-block">
     <?=view("layout.breadcrumb", ["url" => ["Каталог", [$object->title, $page_url]]])?>
 </div>
@@ -157,7 +157,17 @@ if(!is_null($auth())){
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                             </form>
                         <?php } else if($purchased) { ?>
-                            <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
+                            <?php if ($object->isAd == 1){ ?>
+                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3">
+                                    <?= preg_replace(
+                                        '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
+                                        '+\1 (\2) \3-\4-\5',
+                                        (string) $object->phones
+                                    ) ?>
+                                </button>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
+                            <?php } ?>
                             <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
                             <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>

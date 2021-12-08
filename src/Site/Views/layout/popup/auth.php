@@ -34,9 +34,10 @@ if (!isset($forceReg))
                 })
                     .done(function(data) {
                         if (data['result'] === "OK") {
-                            $("#login_suggestion").css({"display": "none"})
-                            $("#auth__back-accordion").css({"display": "none"})
-                            document.querySelector('.auth__steps-reg').swiper.slideNext()
+                            Modal.getOrCreateInstance($("#popup-msg-1")).show()
+                            // $("#login_suggestion").css({"display": "none"})
+                            // $("#auth__back-accordion").css({"display": "none"})
+                            // document.querySelector('.auth__steps-reg').swiper.slideNext()
                         } else {
                             swal({
                                 title: "Ошибка",
@@ -67,11 +68,17 @@ if (!isset($forceReg))
             event.preventDefault()
             event.stopPropagation()
         });
+        document.getElementById('popup-msg-1').addEventListener('hidden.bs.modal', function (event) {
+            window.location.reload();
+        })
     })
 
 
     function skipEmailValidation(){
         window.location.reload();
+    }
+    function showRecommendations(){
+        window.location = "/catalog/recommendations";
     }
 
 </script>
@@ -150,8 +157,8 @@ if (!isset($forceReg))
                                                             </div>
                                                         </div>
                                                         <div class="auth__terms form-check form-check-box mt-3">
-                                                            <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
-                                                            <label class="form-check-label" for="auth__terms-reg">
+                                                            <input class="form-check-input" type="checkbox" name="terms" id="auth__agent-reg" required>
+                                                            <label class="form-check-label" for="auth__agent-reg">
                                                                 Подтверждаю, что я не являюсь агентом
                                                             </label>
                                                             <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
@@ -213,48 +220,48 @@ if (!isset($forceReg))
                                                     </form>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide">
-                                                <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Чтобы своевременно видеть важные уведомления - подтвердите сейчас почту</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">Если вы не получили письмо, проверьте папки «Спам» и «Удаленные», так как письмо могло автоматически туда перейти</div>
-                                                </div>
-                                                <div class="mt-5" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
-                                                    <form id="open-email" novalidate>
-                                                        <div class="row align-items-center m-auto">
-                                                            <div class="col-auto w-100">
-                                                                <button class="btn btn-primary auth__btn w-100" type="submit">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="svg-wrp me-3">
-                                                                            <svg width="6" height="10" viewBox="0 0 6 10"
-                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                                      d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
-                                                                                      fill="#151A40" />
-                                                                            </svg>
-                                                                        </i>
-                                                                        Открыть почту
-                                                                    </div>
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-auto w-100">
-                                                            <button class="btn btn-secondary auth__btn w-100 mt-2" type="button" onclick="skipEmailValidation()">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="svg-wrp me-3">
-                                                                        <svg width="6" height="10" viewBox="0 0 6 10"
-                                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
-                                                                                  fill="#151A40" />
-                                                                        </svg>
-                                                                    </i>
-                                                                    Пропустить
-                                                                </div>
-                                                            </button>
-                                                        </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+<!--                                            <div class="swiper-slide">-->
+<!--                                                <div class="" data-swiper-parallax="100%">-->
+<!--                                                    <div class="auth__title">Чтобы своевременно видеть важные уведомления - подтвердите сейчас почту</div>-->
+<!--                                                    <div class="auth__desc" style="font-size: 12px;">Если вы не получили письмо, проверьте папки «Спам» и «Удаленные», так как письмо могло автоматически туда перейти</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mt-5" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">-->
+<!--                                                    <form id="open-email" novalidate>-->
+<!--                                                        <div class="row align-items-center m-auto">-->
+<!--                                                            <div class="col-auto w-100">-->
+<!--                                                                <button class="btn btn-primary auth__btn w-100" type="submit">-->
+<!--                                                                    <div class="d-flex align-items-center">-->
+<!--                                                                        <i class="svg-wrp me-3">-->
+<!--                                                                            <svg width="6" height="10" viewBox="0 0 6 10"-->
+<!--                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                                                                <path fill-rule="evenodd" clip-rule="evenodd"-->
+<!--                                                                                      d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"-->
+<!--                                                                                      fill="#151A40" />-->
+<!--                                                                            </svg>-->
+<!--                                                                        </i>-->
+<!--                                                                        Открыть почту-->
+<!--                                                                    </div>-->
+<!--                                                                </button>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="col-auto w-100">-->
+<!--                                                            <button class="btn btn-secondary auth__btn w-100 mt-2" type="button" onclick="skipEmailValidation()">-->
+<!--                                                                <div class="d-flex align-items-center">-->
+<!--                                                                    <i class="svg-wrp me-3">-->
+<!--                                                                        <svg width="6" height="10" viewBox="0 0 6 10"-->
+<!--                                                                             fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                                                            <path fill-rule="evenodd" clip-rule="evenodd"-->
+<!--                                                                                  d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"-->
+<!--                                                                                  fill="#151A40" />-->
+<!--                                                                        </svg>-->
+<!--                                                                    </i>-->
+<!--                                                                    Пропустить-->
+<!--                                                                </div>-->
+<!--                                                            </button>-->
+<!--                                                        </div>-->
+<!--                                                        </div>-->
+<!--                                                    </form>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -266,6 +273,27 @@ if (!isset($forceReg))
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade main-modal" id="popup-msg-1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="popup__wrp">
+                <div class="popup__content align-items-center">
+
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/take-keys-circle.png">
+                    <div class="popup__text mt-4 text-center popup-msg-1__text">
+                        Каждую минуту алгоритмы так кейс, сохраняют объявления с самых популярных сайтов недвижимости, блокируют фэйки и посредников, чтобы вы получали только актуальную информацию напрямую от собственников.
+                    </div>
+
+                    <div class="popup__buttons">
+                        <button class="btn btn-primary px-3" onclick="showRecommendations()">Смотреть рекомендации</button>
+                    </div>
                 </div>
             </div>
         </div>
