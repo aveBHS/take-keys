@@ -60,6 +60,11 @@ return [
             "middleware" => AdminMiddleware::class
         ],
 
+        "GET::~panel[/]users[/]report[/](\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\UsersController::class, "report"],
+            "middleware" => AdminMiddleware::class
+        ],
+
         "GET::~panel[/]objects[/]create[/]?$~" => [
             "controller" => [\Site\Controllers\Admin\ObjectsController::class, "createView"],
             "middleware" => AdminMiddleware::class

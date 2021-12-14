@@ -4,6 +4,7 @@
  **/
 
 global $request;
+global $auth;
 $flash_error = $request->getFlash("login_error");
 $_page_title = "Отчет работы системы | Take Keys";
 
@@ -12,7 +13,8 @@ $_page_title = "Отчет работы системы | Take Keys";
 <?=view("layout.header", ["_page_title" => $_page_title])?>
 
 <div class="container">
-    <h1 class="h1 item__title mb-4 mt-5">Отчет работы системы Take-Keys</h1>
+    <h1 class="h1 item__title mb-1 mt-5">Отчет работы системы Take-Keys</h1>
+    <h3 class="h3 item__title mb-4">Системный UUID: <?=$auth()->id?></h3>
 
     <ul>
         <?php foreach($logs as $log){ ?>
