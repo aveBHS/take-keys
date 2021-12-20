@@ -121,7 +121,7 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects_types = ObjectTypeModel::select([]);
 
-        $request->show(view("objects.catalog", [
+        $request->show(view("cabinet.lk_catalog", [
             "objects_count"     => $totalObjects,
             "objects"           => $objects,
             "objects_types"     => $objects_types,
@@ -129,7 +129,8 @@ class CatalogController implements \Site\Controllers\Controller
             "elements_per_page" => env("elements_per_page") ?? 25,
             "current_page"      => $page,
             "origin_url"        => "/catalog/recommendations",
-            "filter_type"       => FILTER_RECOMMENDATIONS_CONFIG
+            "filter_type"       => FILTER_RECOMMENDATIONS_CONFIG,
+            "current_page_slug" => LK_RECOMMENDATIONS_PAGE
         ]));
     }
 
@@ -166,7 +167,7 @@ class CatalogController implements \Site\Controllers\Controller
 
         $objects_types = ObjectTypeModel::select([]);
 
-        $request->show(view("objects.catalog", [
+        $request->show(view("cabinet.lk_catalog", [
             "objects_count"     => $totalObjects,
             "objects"           => $objects,
             "title"             => "Избранные объявления",
@@ -174,7 +175,65 @@ class CatalogController implements \Site\Controllers\Controller
             "current_page"      => $page,
             "origin_url"        => "/catalog/favorites",
             "objects_types"     => $objects_types,
-            "filter_type"       => FILTER_NONE
+            "filter_type"       => FILTER_NONE,
+            "current_page_slug" => LK_FAVORITES_PAGE
+        ]));
+    }
+
+    public function recent(HttpRequest $request, $args)
+    {
+        $recently_viewed = $request->getCookie("recently_viewed", true);
+        do {
+            if (!is_null($recently_viewed)) {
+
+                $page = 0;
+                if (isset($args[0])) {
+                    $page = ((int)$args[0]) - 1;
+                    if ($page < 0) $page = 0;
+                }
+
+                try {
+                    $recently_viewed = json_decode($recently_viewed);
+                    if (is_null($recently_viewed)) {
+                        break;
+                    }
+                } catch (\Exception $exception) {
+                    break;
+                }
+                $recently_viewed = array_reverse($recently_viewed);
+
+                $objects = ObjectModel::select(
+                        [
+                            ["id", [$recently_viewed, "in"]]
+                        ],
+                        null,
+                        env("elements_per_page") ?? 25,
+                        env("elements_per_page") ?? 25 * $page,
+                        true
+                    ) ?? [];
+
+                if (is_null($objects) and $page > 0) {
+                    $request->redirect("/catalog/recent");
+                    return;
+                }
+
+                $totalObjects = $objects['total'] ?? 0;
+                $objects = $objects['result'] ?? [];
+
+                $objects = ImageModel::selectObjectsImages($objects);
+                $objects = array_reverse($objects);
+            }
+        } while(false);
+
+        $request->show(view("cabinet.lk_catalog", [
+            "objects_count"     => $totalObjects ?? 0,
+            "objects"           => $objects ?? [],
+            "title"             => "Недавно просмотренные объявления",
+            "elements_per_page" => env("elements_per_page") ?? 25,
+            "current_page"      => $page ?? 0,
+            "origin_url"        => "/catalog/recent",
+            "filter_type"       => FILTER_NONE,
+            "current_page_slug" => LK_RECENT_PAGE
         ]));
     }
 

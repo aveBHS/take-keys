@@ -119,7 +119,7 @@ foreach ($objects_types as $object_type){
     </div>
 
     <div class="btn-group filter__item border d-flex align-items-center p-3">
-        <button type="submit" class="ms-auto btn btn-primary rounded-pill px-4 flex-grow-0">Сохранить параметры</button>
+        <button type="submit" class="ms-auto btn btn-primary rounded-pill px-4 flex-grow-0">Сохранить</button>
     </div>
 </form>
 <script>
