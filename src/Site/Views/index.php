@@ -101,7 +101,7 @@ $_page_title = "Главная страница | Take Keys";
                 </div>
             </div>
         </div>
-        <div class="col">
+        <!--div class="col">
             <div class="catalog__item">
                 <div class="ratio ratio-16x9">
                     <div class="catalog__item__img" style="background-image: url('/images/dist/home-catalog/4.png');"></div>
@@ -187,7 +187,7 @@ $_page_title = "Главная страница | Take Keys";
                     </ul>
                 </div>
             </div>
-        </div>
+        </div-->
         <!-- <div class="col">
             <div class="catalog__item">
                 <div class="ratio ratio-16x9">
