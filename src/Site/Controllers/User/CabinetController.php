@@ -21,6 +21,11 @@ class CabinetController implements \Site\Controllers\Controller
         $request->show(view("cabinet.report", ['logs' => $logs]));
     }
 
+    public function notifications(HttpRequest $request, $args)
+    {
+        $request->show(view("cabinet.notifies"));
+    }
+
     public function disableRecommendations(HttpRequest $request, $args)
     {
         global $auth;

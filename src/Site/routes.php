@@ -24,6 +24,10 @@ return [
             "controller" => [\Site\Controllers\User\CabinetController::class, "report"],
             "middleware" => UserMiddleware::class
         ],
+        "~notifies[/]?$~" => [
+            "controller" => [\Site\Controllers\User\CabinetController::class, "notifications"],
+            "middleware" => UserMiddleware::class
+        ],
         "~login[/]?$~" => [
             "controller" => [\Site\Controllers\User\LoginController::class, "view"],
             "middleware" => GuestMiddleware::class
