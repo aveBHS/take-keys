@@ -176,6 +176,9 @@ return [
         "MIXED::~whook[/]mtt[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\MTTWebHookController::class, "view"]
         ],
+        "MIXED::~api[/]zvnk[/]new[/]([^/]+)[/]?$~" => [
+            "controller" => [\Site\Controllers\WebHook\ZvonokWebHook::class, "successful_call"]
+        ],
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
