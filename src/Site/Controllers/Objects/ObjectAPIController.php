@@ -3,6 +3,7 @@
 namespace Site\Controllers\Objects;
 
 use Site\Core\HttpRequest;
+use Site\Models\CallResultModel;
 use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
 use Site\Models\RequestModel;
@@ -182,5 +183,31 @@ class ObjectAPIController implements \Site\Controllers\Controller
         $request->show(json_encode([
             "result" => $result
         ]));
+    }
+
+    public function callResult(HttpRequest $request, $args)
+    {
+        $request->setHeader("Content-Type", "application/json");
+        $result = CallResultModel::find($args[0]);
+        if(!is_null($result)){
+            global $auth;
+            if($result->owner_id == $auth()->id){
+                $object = ObjectModel::find($result->object_id);
+                $request->show(json_encode([
+                    "result" => "ok",
+                    "phone" => $object->phones
+                ]));
+            } else {
+                $request->show(json_encode([
+                    "result" => "error",
+                    "reason" => "Ошибка доступа"
+                ]));
+            }
+        } else {
+            $request->show(json_encode([
+                "result" => "error",
+                "reason" => "Заявка не найдена"
+            ]));
+        }
     }
 }

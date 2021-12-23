@@ -13992,14 +13992,6 @@ header {
   background-repeat: no-repeat;
   background-position: right 16px center;
 }
-.select-list .btn-check:checked + .btn:hover {
-  background-color: #EAEFEE;
-}
-@media (max-width: 991.98px) {
-  .select-list .btn:hover {
-    background-color: #fff;
-  }
-}
 
 .popup-owner-questions__done {
   display: none;
@@ -14285,6 +14277,10 @@ header {
   min-height: 42.857em;
 }
 
+.btn-outline-light:hover {
+  background-color: #fff;
+}
+
 .filter {
   width: 100%;
   box-shadow: 0px 4px 4px rgba(123, 97, 255, 0.05);
@@ -14329,7 +14325,7 @@ header {
 }
 .filter .filter__item__list {
   padding: 0;
-  box-shadow: 0px 4px 4px 4px rgba(123, 97, 255, 0.05);
+  box-shadow: 0px 4px 4px rgba(123, 97, 255, 0.05);
 }
 .filter .filter__item__list .dropdown-item {
   padding: 11px 0.75rem;
@@ -14343,12 +14339,6 @@ header {
   text-align: left;
   padding: 1rem;
   width: 100%;
-}
-.filter .filter__item__btn .filter__item__arrow {
-  transition: 0.2s;
-}
-.filter .filter__item__btn.show .filter__item__arrow {
-  transform: rotate(180deg);
 }
 .filter .filter__item__location {
   border-radius: 4px;
@@ -14529,10 +14519,6 @@ header {
 .lk .list-group-item-action.active .badge.bg-primary {
   background-color: #fff !important;
   color: #A3CC4A;
-}
-
-.dropdown-menu {
-  z-index: 1051;
 }
 
 .auth__reg, .auth__signin {

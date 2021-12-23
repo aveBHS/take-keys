@@ -402,7 +402,7 @@ if(!is_null($auth())){
 
 </div>
 
-<div class="item__fixed-buttons p-3" id="mobile_action_block">
+<div class="item__fixed-buttons p-2" id="mobile_action_block">
     <?php if($object->status > 1) { ?>
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Связаться</button>
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Бронировать</button>

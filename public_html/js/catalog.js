@@ -34,3 +34,34 @@ function setFavorite(event){
         );
     }
 }
+
+function getPhone(request_id){
+    $.get(`/api/objects/call_result/${request_id}`).then(response => {
+        if(response['result'] === "ok"){
+            let phone = ("+" + response['phone']).split('');
+            if(phone.length){
+                phone.splice(2,0, " (");
+                phone.splice(6,0, ") ");
+                phone.splice(10,0, "-");
+                phone.splice(13,0, "-");
+            }else if(phone.length){
+                phone.splice(3,0, " (");
+                phone.splice(7,0, ") ");
+                phone.splice(11,0, "-");
+                phone.splice(14,0, "-");
+            }
+            swal({
+                title: phone.join(''),
+                text: "Свяжитесь с собственником по этому номеру",
+                buttons: ["Поддержка", "Закрыть"]
+            }).then(data => {if(!data) Chatra('openChat', true);});
+        } else {
+            swal({
+                title: "Ошибка",
+                text: response['reason'],
+                icon: "error",
+                buttons: ["Поддержка", "ОК"]
+            }).then(data => {if(!data) Chatra('openChat', true);});
+        }
+    })
+}

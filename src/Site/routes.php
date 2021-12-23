@@ -122,6 +122,10 @@ return [
             "controller" => [\Site\Controllers\Objects\VerifyOwnerRequestController::class, "request"],
             "middleware" => PaidUserMiddleware::class
         ],
+        "GET::~api[/]objects[/]call_result[/](\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "callResult"],
+            "middleware" => PaidUserMiddleware::class
+        ],
         "POST::~api[/]objects[/]favorite[/](\d+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "setFavorite"]
         ],

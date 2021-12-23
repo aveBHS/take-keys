@@ -6,7 +6,6 @@
  * @var array $_custom_button
  */
 global $auth;
-$_show_favorites = !is_null($auth());
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -95,7 +94,6 @@ $_show_favorites = !is_null($auth());
                             <ul class="topline__menu">
                                 <li><a href="https://take-keys.com/">О сервисе</a></li>
                                 <li><a href="/catalog">Каталог</a></li>
-                                <?=$_show_favorites?'<li><a href="/catalog/favorites">Избранные</a></li>':''?>
                                 <li><a href="https://take-keys.com/help">Справочный центр</a></li>
                             </ul>
                         </div>
@@ -111,7 +109,7 @@ $_show_favorites = !is_null($auth());
                                     </div>
                                 <?php } else { ?>
                                     <div class="col-12 col-lg-auto">
-                                        <a href="/lk" class="btn btn-primary topline__btn">Рекомендации</a>
+                                        <a href="/lk" class="btn btn-primary topline__btn">Кабинет</a>
                                     </div>
                                 <?php } ?>
                             </div>

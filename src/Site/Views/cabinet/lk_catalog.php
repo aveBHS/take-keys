@@ -19,13 +19,7 @@ global $auth;
 global $request;
 ?>
 
-<?php
-if($filter_type == FILTER_RECOMMENDATIONS_CONFIG){
-    echo view("layout.header", ["_page_title" => $title, "_custom_button" => ["logout", "Выход"]]);
-} else {
-    echo view("layout.header", ["_page_title" => $title]);
-}
-?>
+<?=view("layout.header", ["_page_title" => $title, "_custom_button" => ["logout", "Выход"]])?>
 
 <?=view("layout.lk.templ_open", ["current_page" => $current_page_slug])?>
 <div class="lk-notifications">
@@ -98,6 +92,6 @@ if($filter_type == FILTER_RECOMMENDATIONS_CONFIG){
     <i class="icon"><img src="/images/icons/chat.svg"></i>
 </button>
 
-<?=view("layout.footer", ['render' => false])?>
+<?=view("layout.footer")?>
 
 <script src="/js/catalog.js"></script>

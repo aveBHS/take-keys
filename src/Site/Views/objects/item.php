@@ -80,9 +80,9 @@ if(!is_null($auth())){
                 </div>
             </div>
             <div class="catalog__item__info">
-                <div class="catalog__item__title">
+                <a href="/id/<?=$object->id?>" class="catalog__item__title">
                     <?=$object->title?>
-                </div>
+                </a>
                 <div class="catalog__item__price">
                     <span class="catalog__item__price-new"><?=$object->cost?> ₽/мес.</span>
                     <s class="catalog__item__price-old"><?=$object->cost*1.1?> ₽</s>
@@ -125,7 +125,7 @@ if(!is_null($auth())){
                     </div>
                     <div class="col-12 col-lg-auto order-lg-1">
                         <a href="/id/<?=$object->id?>">
-                            <button class="btn btn-outline-dark catalog__item__btn-show">Смотреть</button>
+                            <button class="btn btn-primary catalog__item__btn-show">Смотреть</button>
                         </a>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ if(!is_null($auth())){
         <div class="catalog__item">
             <div class="row">
                 <div class="col-12 col-lg-5">
-                    <div class="catalog__item-slider h-100">
+                    <a href="/id/<?=$object->id?>" class="catalog__item-slider h-100">
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
@@ -188,13 +188,13 @@ if(!is_null($auth())){
                             <?php } ?>
                         </div>
 
-                    </div>
+                    </a>
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="catalog__item__info h-100">
-                        <div class="catalog__item__title">
+                        <a class="catalog__item__title" href="/id/<?=$object->id?>">
                             <?=$object->title?>
-                        </div>
+                        </a>
                         <div class="catalog__item__price">
                             <span class="catalog__item__price-new"><?=$object->cost?> ₽/мес.</span>
                             <s class="catalog__item__price-old"><?=$object->cost*1.1?> ₽</s>
@@ -219,7 +219,7 @@ if(!is_null($auth())){
                         <div class="row gx-0 justify-content-between mt-auto">
                             <div class="col-auto">
                                 <a href="/id/<?=$object->id?>">
-                                    <button class="btn btn-outline-dark catalog__item__btn-show">Смотреть</button>
+                                    <button class="btn btn-primary catalog__item__btn-show">Смотреть</button>
                                 </a>
                             </div>
                             <div class="col-auto ms-auto">

@@ -29,10 +29,10 @@ global $auth;
 
         <form class="filter btn-group">
             <div class="btn-group filter__item">
-                <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown">
+                <button type="button" class="btn btn-outline-light filter__item__btn" onclick="$('.filter__item__location').focus()" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <div class="fs-14 fw-semibold">Местоположение</div>
+                            <div class="filter__item__name">Местоположение</div>
                             <div class="filter__item__name">Москва</div>
                             <input type="hidden" name="filter-address" value="Москва"/>
                             <input type="hidden" name="geo_lon"/>
@@ -56,7 +56,12 @@ global $auth;
                             />
                         </div>
                     </li>
-                    <div class="address-autocomplete__list">
+                    <div class="dropdown-menu filter__item__list">
+                        <div>
+                            <button class="btn btn-primary w-100" type="submit">Найти</button>
+                        </div>
+                        <div><input type="text" class="form-control filter__item__location address-autocomplete border-primary" placeholder="Введите адрес..."/></div>
+                        <div class="address-autocomplete__list"></div>
                     </div>
                 </ul>
             </div>
@@ -80,7 +85,7 @@ global $auth;
                 </div>
             </div> -->
             <div class="btn-group filter__item">
-                <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown">
+                <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <div class="fs-14 fw-semibold">Тип жилья</div>
