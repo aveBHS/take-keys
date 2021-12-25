@@ -156,7 +156,6 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         $('.filter').submit(function (e) {
             Dropdown.getInstance($('.filter__item__btn.show')).hide()
             e.preventDefault();
-            filterSend()
         });
 
         $('.filter-my-location').click(function (e) {
@@ -166,19 +165,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
 
         $('.filter input').change(function (e) {
             e.preventDefault();
-            filterSend()
         });
-
-        function filterSend() {
-            let form = $('form.filter')
-            $.ajax({
-                type: 'POST',
-                url: 'https://take-keys.ru/api/filter/',
-                data: form.serialize(),
-            }).done(function (data) {
-
-            })
-        }
 
         // $('body').on('click', '.filter__item__val', function () {
         // 	$(this).parents('.filter__item').find('.filter__item__name').html($(this).html())
