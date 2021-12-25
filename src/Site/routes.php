@@ -2,10 +2,10 @@
 
 use Site\Middleware\AdminMiddleware;
 use Site\Middleware\GuestMiddleware;
-use Site\Middleware\MegafonMiddleware;
 use Site\Middleware\PaidUserMiddleware;
 use Site\Middleware\UserMiddleware;
 
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
 return [
     "routes" => [
         "~^[/]?$~" => [

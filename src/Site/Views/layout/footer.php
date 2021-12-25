@@ -64,8 +64,8 @@ if(!isset($render))
     </div>
 </div>
 <?php } ?>
-<script src="/js/app.min.js?7"></script>
-<script src="/js/catalog.js?7"></script>
+<script src="/js/app.min.js?8"></script>
+<script src="/js/catalog.js?8"></script>
 
 </body>
 

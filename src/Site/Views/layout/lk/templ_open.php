@@ -32,7 +32,7 @@ try {
 
             <div class="item__owner my-4 active">
                 <div class="item__owner__avatar">
-                    <img src="/images/dist/ava.png" alt="">
+                    <img src="/images/dist/ava.png" width=50 alt="">
                 </div>
                 <div class="ms-3 text-start">
                     <div class="fw-semibold"><?=$auth()->name?></div>

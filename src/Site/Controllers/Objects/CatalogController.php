@@ -23,14 +23,20 @@ class CatalogController implements \Site\Controllers\Controller
         $filter = [ ["status", 0] ];
         if($auth()->request->purchased)
             $filter = [ ["status", 0], ['isAd', 0] ];
-        if(!is_null($request->get("filter-object-type"))){
-            $objects_type = ObjectTypeModel::find($request->get("filter-object-type"), "object_type_slug");
-            if(!is_null($objects_type)){
-                array_push($filter, ["categoryId", $objects_type->inpars_id]);
+        if(!is_null($request->get("filter-object-type")) && !in_array("any", $request->get("filter-object-type"))){
+            $categories = [];
+            foreach($request->get("filter-object-type") as $object_type) {
+                $objects_type = ObjectTypeModel::find($object_type, "object_type_slug");
+                if(!is_null($objects_type)) {
+                    array_push($categories, $objects_type->inpars_id);
+                }
+            }
+            if(!empty($categories)){
+                array_push($filter, ["categoryId", [$categories, "in"]]);
             }
         }
-        if(!is_null($request->get("filter-rooms")) and (int) $request->get("filter-rooms") > 0){
-            array_push($filter, ["rooms", (int) $request->get("filter-rooms")]);
+        if(!is_null($request->get("filter-rooms")) and !in_array("any", $request->get("filter-rooms"))){
+            array_push($filter, ["rooms", [$request->get("filter-rooms"), "in"]]);
         }
         if(!is_null($request->get("filter-price"))){
             $min_price = (int) explode(";", $request->get("filter-price"))[0];

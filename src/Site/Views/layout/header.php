@@ -26,7 +26,7 @@ global $auth;
     <meta property="og:description" content="<?=$_page_desc?>">
     <meta property="og:image" content="<?=$_page_img??'/images/favicon.svg'?>">
 
-    <link rel="stylesheet" href="/css/app.min.css?5">
+    <link rel="stylesheet" href="/css/app.min.css?6">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Chatra {literal} -->
