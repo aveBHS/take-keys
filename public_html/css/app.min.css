@@ -14480,6 +14480,10 @@ header {
   line-height: 1.5;
 }
 
+.swal-button--danger {
+  background-color: #df4740 !important;
+}
+
 .swal-button--confirm {
   background-color: #A3CC4A;
 }
@@ -15417,4 +15421,7 @@ header {
 }
 .setting-item__btn {
   font-size: 18px;
+}
+.swal-text{
+  text-align: center;
 }

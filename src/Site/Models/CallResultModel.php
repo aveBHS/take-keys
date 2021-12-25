@@ -8,7 +8,7 @@ class CallResultModel extends Model
     protected $fields = [
         "object_id",
         "owner_id",
-        "result_id",
-        "created_at"
+        "call_id",
+        "show_at"
     ];
 }

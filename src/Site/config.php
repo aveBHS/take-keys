@@ -27,3 +27,10 @@ const LK_NOTIFIES_PAGE = "notifies";
 const LK_FAVORITES_PAGE = "favorites";
 const LK_RECENT_PAGE = "recent";
 const LK_RECOMMENDATIONS_PAGE = "recommendations";
+
+// Calls statues
+const OBJECT_CALL_NEW = 0;
+const OBJECT_CALL_IN_PROCESS = 1;
+const OBJECT_CALL_DONE = 2;
+const OBJECT_CALL_RETRY = 3;
+const OBJECT_CALL_FAILED = 4;

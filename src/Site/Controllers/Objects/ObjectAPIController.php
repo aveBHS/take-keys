@@ -191,7 +191,7 @@ class ObjectAPIController implements \Site\Controllers\Controller
         $result = CallResultModel::find($args[0]);
         if(!is_null($result)){
             global $auth;
-            if($result->owner_id == $auth()->id){
+            if($result->owner_id == $auth()->id && $request->call_status == OBJECT_CALL_DONE){
                 $object = ObjectModel::find($result->object_id);
                 $request->show(json_encode([
                     "result" => "ok",

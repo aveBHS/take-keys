@@ -5,6 +5,7 @@ namespace Site\Controllers\User;
 use Site\Core\HttpRequest;
 use Site\Models\CallResultModel;
 use Site\Models\LogModel;
+use Site\Models\ObjectCallModel;
 use Site\Models\ObjectModel;
 use Site\Models\RequestModel;
 
@@ -26,9 +27,10 @@ class CabinetController implements \Site\Controllers\Controller
     public function notifications(HttpRequest $request, $args)
     {
         global $auth;
-        $notifies = CallResultModel::select([["owner_id", $auth()->id]]);
+        $notifies = CallResultModel::select([["owner_id", $auth()->id]], [["id", "desc"]]);
         for($i = 0; $i < count($notifies); $i++){
             $notifies[$i]->object = ObjectModel::find($notifies[$i]->object_id);
+            $notifies[$i]->result = ObjectCallModel::find($notifies[$i]->call_id);
         }
         $request->show(view("cabinet.notifies", ["notifies" => $notifies]));
     }

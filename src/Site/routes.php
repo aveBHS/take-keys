@@ -122,6 +122,10 @@ return [
             "controller" => [\Site\Controllers\Objects\VerifyOwnerRequestController::class, "request"],
             "middleware" => PaidUserMiddleware::class
         ],
+        "POST::~api[/]objects[/]cancel_call[/](\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Objects\VerifyOwnerRequestController::class, "cancel_request"],
+            "middleware" => PaidUserMiddleware::class
+        ],
         "GET::~api[/]objects[/]call_result[/](\d+)[/]?$~" => [
             "controller" => [\Site\Controllers\Objects\ObjectAPIController::class, "callResult"],
             "middleware" => PaidUserMiddleware::class

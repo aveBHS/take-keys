@@ -8,6 +8,13 @@
         .done(function(data) {
             if (data['result'] === "OK") {
                 Modal.getOrCreateInstance($('#popup-autocall')).show()
+            } else if (data['result'] === "INFO") {
+                swal({
+                    title: "Уведомление",
+                    text: data['reason'],
+                    icon: "info",
+                    buttons: ["Закрыть", "Мои заявки"]
+                }).then(data => {if(data) window.location="/notifies/";});
             } else {
                 swal({
                     title: "Ошибка",
