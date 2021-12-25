@@ -15,7 +15,7 @@ class ZvonokWebHook implements \Site\Controllers\Controller
         $phone = getPhone($args[0]);
         $number_funnel = new NumberFunnelModel();
         $number_funnel->phone = $phone;
-        $notify = NotifyModel::find($phone, "address");
+        $notify = NotifyModel::select([["address", $phone], ["status", "-1"]], [["id", "desc"]], 1)[0];
         $notify->status = 0;
         try {
             $notify->save();
