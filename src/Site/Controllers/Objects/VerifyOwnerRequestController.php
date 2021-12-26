@@ -56,6 +56,7 @@ class VerifyOwnerRequestController implements \Site\Controllers\Controller
                         $call_request = new ObjectCallModel();
                         $call_request->object_id = $object->id;
                         $call_request->result_time = 0;
+                        $call_request->call_status = OBJECT_CALL_NEW;
                         $call_request->save();
                     } else {
                         $call_request = $call_request[0];

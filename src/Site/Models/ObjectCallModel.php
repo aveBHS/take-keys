@@ -6,6 +6,6 @@ class ObjectCallModel extends Model
 {
     protected $tableName = "objects_calls";
     protected $fields = [
-        "object_id", "result_time"
+        "call_status", "object_id", "result_time"
     ];
 }

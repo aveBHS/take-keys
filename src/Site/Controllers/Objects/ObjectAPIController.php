@@ -5,6 +5,7 @@ namespace Site\Controllers\Objects;
 use Site\Core\HttpRequest;
 use Site\Models\CallResultModel;
 use Site\Models\ImageModel;
+use Site\Models\ObjectCallModel;
 use Site\Models\ObjectModel;
 use Site\Models\RequestModel;
 
@@ -191,7 +192,8 @@ class ObjectAPIController implements \Site\Controllers\Controller
         $result = CallResultModel::find($args[0]);
         if(!is_null($result)){
             global $auth;
-            if($result->owner_id == $auth()->id && $request->call_status == OBJECT_CALL_DONE){
+            $call_result = ObjectCallModel::find($result->call_id);
+            if($result->owner_id == $auth()->id && $call_result->call_status == OBJECT_CALL_DONE){
                 $object = ObjectModel::find($result->object_id);
                 $request->show(json_encode([
                     "result" => "ok",
