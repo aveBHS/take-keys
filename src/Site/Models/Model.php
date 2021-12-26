@@ -232,7 +232,9 @@ abstract class Model
             $types .= "s";
         }
 
+        $is_new = true;
         if($this->$indexField){
+            $is_new = false;
             $updateFields = [];
             foreach($fields as $field){
                 array_push($updateFields, "`$field`=?");
@@ -256,7 +258,8 @@ abstract class Model
         }
         $query = $this->db->prepare($sql);
         if($query && $query->bind_param($types, ...$values) && $query->execute()){
-            $this->$indexField = $query->insert_id;
+            if($is_new)
+                $this->$indexField = $query->insert_id;
             return true;
         } else {
             throw new Exception($this->db->error);
