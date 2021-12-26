@@ -24,7 +24,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div><input type="text" class="form-control filter__item__location address-autocomplete border-primary" placeholder="Введите адрес..." value="<?=is_null($request->get("filter-address")) ? "":$request->get("filter-address")?>"/></div>
             <div class="address-autocomplete__list"></div>
@@ -42,7 +42,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         </button>
         <div class="dropdown-menu filter__item__list w-100">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div class="p-3">
                 <input type="text" class="js-range-filter-radius" name="filter-radius" value=""
@@ -68,7 +68,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div class="btn-group-vertical select-list">
                 <input type="checkbox" class="btn-check" name="filter-object-type[]" <?=(empty($current_object_type) || in_array("any", $current_object_type))?"checked":""?> value="any" id="filter-value-0" autocomplete="off">
@@ -97,7 +97,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
 
             <div class="filter__price-range">
@@ -128,7 +128,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div class="btn-group-vertical select-list">
                 <input type="checkbox" class="btn-check" name="filter-rooms[]" value="any" id="filter-value-13" autocomplete="off" <?=(empty($current_object_rooms) || in_array("any", $current_object_rooms))?"checked":""?>>

@@ -29,7 +29,7 @@ foreach ($objects_types as $object_type){
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div><input type="text" class="form-control filter__item__location address-autocomplete border-primary" placeholder="Введите адрес..." value="<?=$request->address?>"/></div>
             <div class="address-autocomplete__list"></div>
@@ -47,7 +47,7 @@ foreach ($objects_types as $object_type){
         </button>
         <div class="dropdown-menu filter__item__list w-100">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div class="p-3">
                 <input type="text" class="js-range-filter-radius" name="filter-radius" value=""
@@ -73,7 +73,7 @@ foreach ($objects_types as $object_type){
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
             <div class="btn-group-vertical select-list">
 
@@ -100,7 +100,7 @@ foreach ($objects_types as $object_type){
         </button>
         <div class="dropdown-menu filter__item__list">
             <div>
-                <button class="btn btn-primary w-100" type="submit">Найти</button>
+                <button class="btn btn-primary w-100" type="submit">Применить</button>
             </div>
 
             <div class="filter__price-range">
@@ -120,6 +120,7 @@ foreach ($objects_types as $object_type){
     </div>
 
     <div class="btn-group filter__item border d-flex align-items-center p-3 ps-lg-0 flex-grow-0">
+        <button type="button" class="btn filter__addictional flex-grow-0"><img src="/images/icons/filter.svg"></button>
         <button type="submit" class="ms-auto btn btn-primary rounded-pill px-4 flex-grow-0">Сохранить</button>
     </div>
 </form>
