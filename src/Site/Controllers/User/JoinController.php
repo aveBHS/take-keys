@@ -88,7 +88,7 @@ class JoinController implements Controller
 
                     try {
                         $email_confirm = new SendPulseService(env("sendpulse_user_id"), env("sendpulse_api_token"), env("sendpulse_sender"));
-                        $email_confirm->createSubscriber(env("sendpulse_book_id"), $user);
+                        $email_confirm->createSubscriber(env("sendpulse_book_id"), $user, false);
                     } catch (\Exception $exception){
                         bugReport($exception);
                     }
