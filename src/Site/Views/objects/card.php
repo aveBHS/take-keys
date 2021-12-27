@@ -474,3 +474,5 @@ echo(view("layout.popup.autocall"));
         }
     })
 </script>
+<link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
+<script type="text/javascript" src="https://cdn.envybox.io/widget/cbk.js?wcb_code=0f1796835bf1b1db96122e55ddc8cc83" charset="UTF-8" async></script>
