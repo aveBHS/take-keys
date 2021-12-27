@@ -51,6 +51,9 @@ class VerifyOwnerRequestController implements \Site\Controllers\Controller
                     return;
                 }
                 try {
+                    $tg->send(env("TELEGRAM_CALL_REQUESTS_CHAT"),
+                        "Запрос прозвона объекта https://take-keys.ru/id/{$object->id}\nИсточник: {$object->origin}\nТелефон объекта: +{$object->phones}\nПользователь ID{$auth()->id}\nТелефон пользователя: +{$auth()->request->phone}\n[Запрос обрабатывается автоматически]"
+                    );
                     $call_request = ObjectCallModel::select([["object_id", $object->id]]);
                     if(empty($call_request)){
                         $call_request = new ObjectCallModel();
