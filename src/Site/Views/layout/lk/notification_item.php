@@ -11,20 +11,20 @@
                 <?php if($notify->result->call_status == OBJECT_CALL_DONE) { ?>
                     <?php if($notify->result->result_id == OBJECT_CALL_RESULT_IRRELEVANT) { ?>
                         Объект не актуальный, владелец закрыл объявление.<br>
-                        Время последней проверки: <?=date("d.m.Y в h:i", $notify->result->result_time)?>
+                        Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
                     <?php } else if (in_array($notify->result->result_id, [OBJECT_CALL_RESULT_ACTUAL_HAVE_COMMISSION, OBJECT_CALL_RESULT_AGENT])) { ?>
                         Объект на модерации, наш робот распознал ключевую фразу по которой мы определяем агентов, возможно это агент, по этому объект передан на ручную модерацию.
                         Время последней проверки: 25.12.2021 20:46
                     <?php } else if ($notify->result->result_id == OBJECT_CALL_RESULT_ACTUAL) { ?>
                         Объект актуальный, можете связаться с владельцем.<br>
-                        Время последней проверки: <?=date("d.m.Y в h:i", $notify->result->result_time)?>
+                        Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
                     <?php } else { ?>
                         Произошла ошибка при проверке объекта, пожалуйста, свяжитесь с <a href="#" onclick="Chatra('openChat', true)">поддержкой</a>
                     <?php } ?>
                 <?php } else if (in_array($notify->result->call_status, [OBJECT_CALL_IN_PROCESS, OBJECT_CALL_NEW])) { ?>
                     <span class="fw-bold">Статус проверки: </span>Совершается звонок собственнику
                 <?php } else if ($notify->result->call_status == OBJECT_CALL_RETRY) { ?>
-                    <span class="fw-bold">Статус проверки: </span>Мы не смогли дозовниться до собственника, следующая попытка вызова будет <?=date("d.m.Y в h:i", $notify->result->next_attempt)?>
+                    <span class="fw-bold">Статус проверки: </span>Мы не смогли дозовниться до собственника, следующая попытка вызова будет <?=date("d.m.Y в H:i", $notify->result->next_attempt)?>
                 <?php } else if ($notify->result->call_status == OBJECT_CALL_FAILED) { ?>
                     Мы не смогли связаться с собственником, возможно объявление устарело, попробуйте отправить заявку по этому объекту позднее
                 <?php } ?>
