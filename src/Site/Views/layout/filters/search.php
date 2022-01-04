@@ -145,6 +145,41 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
             </div>
         </div>
     </div>
+    <div class="btn-group filter__item">
+        <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown">
+            <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                    <div class="fs-14 fw-semibold">Актуальность</div>
+                    <div class="filter__item__subname">За все время</div>
+                </div>
+                <div class="ms-3"><img src="images/icons/arrow-down.svg"></div>
+            </div>
+        </button>
+        <div class="dropdown-menu filter__item__list">
+            <div class="btn-group-vertical select-list">
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-20" autocomplete="off" value="all" checked>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-20">За все время</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-1" autocomplete="off" value="12" <?=$request->get("filter-actuality")=="12"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-1">12 часов</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-2" autocomplete="off" value="24" <?=$request->get("filter-actuality")=="24"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-2">24 часа</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-3" autocomplete="off" value="48" <?=$request->get("filter-actuality")=="48"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-3">2 дня</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-4" autocomplete="off" value="72" <?=$request->get("filter-actuality")=="72"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-4">3 дня</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-5" autocomplete="off" value="168" <?=$request->get("filter-actuality")=="168"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-5">Неделя</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-6" autocomplete="off" value="720" <?=$request->get("filter-actuality")=="720"?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-6">Месяц</label>
+            </div>
+        </div>
+    </div>
     <div class="btn-group filter__item border d-flex align-items-center p-3 ps-lg-0 flex-grow-0">
         <button type="button" class="btn filter__addictional flex-grow-0"><img src="images/icons/filter.svg"></button>
         <button type="submit" class="ms-auto btn btn-primary rounded-pill px-4 flex-grow-0">Найти</button>
@@ -167,13 +202,13 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
             e.preventDefault();
         });
 
-        // $('body').on('click', '.filter__item__val', function () {
-        // 	$(this).parents('.filter__item').find('.filter__item__name').html($(this).html())
-        // })
+        $('body').on('click', '.filter__item__val', function () {
+            $(this).parents('.filter__item').find('.filter__item__subname').html($(this).html())
+        })
 
-        // $('.filter__item__list [type="radio"]:checked').each(function () {
-        // 	$(this).parents('.filter__item').find('.filter__item__name').html($(this).val())
-        // })
+        $('.filter__item__list [type="radio"]:checked').each(function () {
+            $(this).parents('.filter__item').find('.filter__item__subname').html($(this).next('label').html())
+        })
 
         $('body').on('click', '.address-autocomplete__list .filter__item__val', function () {
             const parent = $(this).parents('.filter__item')

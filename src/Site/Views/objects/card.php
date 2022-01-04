@@ -170,8 +170,13 @@ if(!is_null($auth())){
                             <?php } ?>
                             <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
+                            <?php if ($object->isAd == 1){ ?>
+                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-owner-message">Связаться</button>
+                                <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-owner-message" >Бронировать</button>
+                            <?php } else { ?>
+                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+                                <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
+                            <?php } ?>
                         <?php } else { ?>
                             <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
                             <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
@@ -410,8 +415,13 @@ if(!is_null($auth())){
         <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
-        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
-        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
+        <?php if ($object->isAd == 1){ ?>
+            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-owner-message">Связаться</button>
+            <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-owner-message" >Бронировать</button>
+        <?php } else { ?>
+            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+            <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
+        <?php } ?>
     <?php } else { ?>
         <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
         <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
@@ -436,6 +446,7 @@ if(!$purchased || is_null($auth())){
         'name'     => $auth()->name,
         'continue' => $request->getFlash("action") == "continue" && !$purchased
     ]));
+    echo(view("layout.popup.anket"));
     echo(view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")]));
     echo(view("layout.popup.payment_result"));
 }

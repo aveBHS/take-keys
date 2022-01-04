@@ -48,10 +48,10 @@ $name = $name ?? "пользователь";
                 <div class="mb-4 text-center">
                     Мы понимаем, что вы с нами ещё не работали, и знаем, что в сфере недвижимости много недобросовестных участников рынка. Поэтому, чтобы заслужить ваше доверие, а так же обезопасить от ошибок и досадных просчетов, мы сначала предоставляем наши услуги по поиску квартиры, а потом уже берём основную оплату.
                     <br><br>
-                    В отличие от остальных мы работаем только до полного заселения, плюс вместо 100% от стоимости аренды, цена "Take Keys" фиксированная всего 99₽ на старте и 2990₽ по факту предоставления услуг.
+                    В отличие от остальных мы работаем только до полного заселения, плюс вместо 100% от стоимости аренды, цена "Take Keys" фиксированная всего 209₽ на старте и 5791₽ по факту предоставления услуг.
                 </div>
 
-                <div class="fw-semibold fs-18 mb-3" style="margin-top: 25px;">На старте за 99₽ вы получаете:</div>
+                <div class="fw-semibold fs-18 mb-3" style="margin-top: 25px;">На старте за 209₽ вы получаете:</div>
                 <div class="accordion" id="tarif-take-keys__desc">
 
                     <div class="tarif-take-keys__desc-1" data-parent="#tarif-take-keys__desc">
@@ -155,7 +155,7 @@ $name = $name ?? "пользователь";
                                 Продолжить бесплатно<br/><small style="font-size: 0.75em;">смотреть рекомендованные варианты</small></button>
 
                             <button type="submit" class="btn px-1 fw-500 btn-primary w-100 rounded-3 mt-4 position-relative vibrate" style="line-height: 1.2;">
-                                <span class="fs-18">Получить доступ на связь с владельцами за 99₽</span>
+                                <span class="fs-18">Получить доступ на связь с владельцами за 209₽</span>
                             </button>
 
                             <div class="form-check form-check-box mt-5 text-start tarif-max__terms">
@@ -171,7 +171,7 @@ $name = $name ?? "пользователь";
                                 </div>
 
                                 <label class="auth__terms form-check-label text-dark fs-14" for="tarif-take-keys-2__terms" style="font-size: 10px;">
-                                    Подтверждаю, что <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-3   ">уведомлен и согласен с условиями обслуживания и порядком оплаты услуг</a>. По факту предоставления услуг соглашаюсь оплатить <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-4">тариф "Take Keys"</a> стоимостью 2990₽, платёж осуществляется автоматически с привязанной к сервису карты после первой оплаты и действует до полного заселения.
+                                    Подтверждаю, что <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-3   ">уведомлен и согласен с условиями обслуживания и порядком оплаты услуг</a>. По факту предоставления услуг соглашаюсь оплатить <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-4">тариф "Take Keys"</a> стоимостью 5791₽, платёж осуществляется автоматически с привязанной к сервису карты после первой оплаты и действует до полного заселения.
                                 </label>
                             </div>
                         </div>
@@ -201,7 +201,7 @@ $name = $name ?? "пользователь";
                                     </div>
 
                                     <label class="auth__terms form-check-label text-dark fs-14 disabled" for="tarif-take-keys-2__terms" style="font-size: 10px;">
-                                        Подтверждаю, что <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-3   ">уведомлен и согласен с условиями обслуживания и порядком оплаты услуг</a>. По факту предоставления услуг соглашаюсь оплатить <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-4">тариф "Take Keys"</a> стоимостью 2990₽, платёж осуществляется автоматически с привязанной к сервису карты после первой оплаты и действует до полного заселения.
+                                        Подтверждаю, что <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-3   ">уведомлен и согласен с условиями обслуживания и порядком оплаты услуг</a>. По факту предоставления услуг соглашаюсь оплатить <a style="color:#a3cc4a" href="https://take-keys.com/documents#!/tab/359162567-4">тариф "Take Keys"</a> стоимостью 5791₽, платёж осуществляется автоматически с привязанной к сервису карты после первой оплаты и действует до полного заселения.
                                     </label>
                                 </div>
                             </div>

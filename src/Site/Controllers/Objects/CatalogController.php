@@ -58,6 +58,10 @@ class CatalogController implements \Site\Controllers\Controller
                 array_push($filter, ["lng", [$search[2][1], ">="]]);
             }
         }
+        if(!is_null($request->get("filter-actuality")) && ((int) $request->get("filter-actuality") > 0)){
+            $time = time() - ((int) $request->get("filter-actuality")) * 3600;
+            array_push($filter, ["created", [date("Y-m-d 00:00:00", $time), ">="]]);
+        }
 
         $objects = ObjectModel::select(
             $filter,

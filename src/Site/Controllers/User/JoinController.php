@@ -79,12 +79,12 @@ class JoinController implements Controller
                     ]));
                     $request->setFlash("action", "continue");
 
-                    $call = new PhoneCallModel();
+                    /**$call = new PhoneCallModel();
                     $call->phone = $user->phone;
                     $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
                     $call->call_status = PhoneCallModel::callStatuses['NEW'];
-                    $call->next_attempt = time() + 54;
-                    $call->save();
+                    $call->next_attempt = 0;
+                    $call->save();*/
 
                     try {
                         $email_confirm = new SendPulseService(env("sendpulse_user_id"), env("sendpulse_api_token"), env("sendpulse_sender"));
@@ -112,7 +112,7 @@ class JoinController implements Controller
         }
         $request->show(json_encode([
             "result"  => "ERROR",
-            "reason"  => "Телефон или почта уже заняты"
+            "reason"  => "Введённые вами телефон или почта уже заняты, если это ваши данные, пожалуйста, авторизуйтесь используя данные, указанные при регистрации, или обратитесь в поддержку"
         ]));
     }
 }
