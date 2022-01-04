@@ -77,6 +77,10 @@ return [
             "controller" => [\Site\Controllers\Admin\ObjectsController::class, "create"],
             "middleware" => AdminMiddleware::class
         ],
+        "GET::~panel[/]objects[/]catalog_sell[/]?(\d+)?[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\CatalogController::class, "view"],
+            "middleware" => AdminMiddleware::class
+        ],
 
         // Objects
         "~id/([^/]+)[/]?$~" => [
