@@ -81,6 +81,14 @@ return [
             "controller" => [\Site\Controllers\Admin\CatalogController::class, "view"],
             "middleware" => AdminMiddleware::class
         ],
+        "GET::~panel[/]objects[/]catalog_sell[/]id[/]([^/]+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\CardController::class, "view"],
+            "middleware" => AdminMiddleware::class
+        ],
+        "GET::~panel[/]objects[/]catalog_sell[/]public[/]([^/]+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "publishObject"],
+            "middleware" => AdminMiddleware::class
+        ],
 
         // Objects
         "~id/([^/]+)[/]?$~" => [

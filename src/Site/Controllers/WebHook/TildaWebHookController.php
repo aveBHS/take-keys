@@ -67,7 +67,7 @@ class TildaWebHookController implements Controller
         $object->distance = (int)($objectInfo->distance ?? 1000);
         if ($object->distance < 1) $object->distance = 1000;
 
-        $objectType = ObjectTypeModel::find($objectInfo->type ?? "");
+        $objectType = ObjectTypeModel::find($objectInfo->type ?? "", "object_type_slug");
         $object->object_type = (int)($objectType->object_type_id ?? 1);
 
         $object->recommendations = "";

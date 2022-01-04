@@ -9,6 +9,6 @@ class ObjectModel extends Model
         "id", "title", "description", "address", "lat", "lng", "cost",
         "name", "phones", "rooms", "floor", "floors", "sq",
         "categoryId", "sectionId", "typeAd", "cityId", "regionId",
-        "metroSlug", "materialSlug", "isAd", "status"
+        "metroSlug", "materialSlug", "isAd", "status", "origin"
     ];
 }
