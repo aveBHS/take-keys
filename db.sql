@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 12 2021 г., 15:19
+-- Время создания: Янв 05 2022 г., 13:57
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.3.26
 
@@ -61,10 +61,11 @@ CREATE TABLE `calls_ads` (
 
 CREATE TABLE `call_results` (
   `id` int NOT NULL,
-  `is_owner` int NOT NULL,
-  `is_actual` int NOT NULL,
-  `record` text NOT NULL,
-  `created` datetime NOT NULL
+  `object_id` bigint NOT NULL,
+  `owner_id` int NOT NULL,
+  `call_id` int NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `show_at` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -82,6 +83,20 @@ CREATE TABLE `images` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `user_id` int NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `megafon_links`
 --
 
@@ -90,6 +105,73 @@ CREATE TABLE `megafon_links` (
   `number` text NOT NULL,
   `link` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `moscow_rent`
+--
+
+CREATE TABLE `moscow_rent` (
+  `id` int NOT NULL,
+  `url` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `deal_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `creation_date` date NOT NULL,
+  `updated` date NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `realtor_phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `realtor_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `price` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `metro_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `images_string` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `latitude` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `longitude` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `rooms` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `floors_total` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `floor` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `building_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `area` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `category` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lease_period` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `source` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `deleted` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `moscow_sell`
+--
+
+CREATE TABLE `moscow_sell` (
+  `id` int NOT NULL,
+  `origin` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `deal_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `creation_date` date NOT NULL,
+  `updated` date NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phones` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `cost` int NOT NULL,
+  `metroSlug` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `images` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lat` float NOT NULL,
+  `lng` float NOT NULL,
+  `rooms` int NOT NULL DEFAULT '1',
+  `floors` int NOT NULL,
+  `floor` int NOT NULL,
+  `materialSlug` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `sq` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `categoryId` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `source` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `deleted` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -131,7 +213,7 @@ CREATE TABLE `objects` (
   `sq` float NOT NULL,
   `categoryId` int NOT NULL,
   `sectionId` int NOT NULL,
-  `typeAd` int NOT NULL,
+  `typeAd` int NOT NULL COMMENT '1 - аренда\r\n2 - продажа',
   `cityId` int NOT NULL,
   `regionId` int NOT NULL,
   `metroSlug` text,
@@ -139,6 +221,26 @@ CREATE TABLE `objects` (
   `source` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `isAd` int NOT NULL DEFAULT '0' COMMENT '0 - нет, 1 - да',
   `status` int NOT NULL DEFAULT '0' COMMENT '0 - активен\r\n1 - проверка\r\n2 - архив',
+  `verified` int NOT NULL DEFAULT '0' COMMENT '0 - нет\r\n1 - да',
+  `origin` text NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `objects_calls`
+--
+
+CREATE TABLE `objects_calls` (
+  `id` int NOT NULL,
+  `call_id` varchar(25) DEFAULT NULL,
+  `object_id` bigint NOT NULL,
+  `call_status` int NOT NULL DEFAULT '0' COMMENT '0 - Новая заявка\r\n1 - Заявка отправлена\r\n2 - Получен результат\r\n3 - Звонок не удался\r\n4 - Попытки закончились',
+  `attempts` int NOT NULL DEFAULT '0',
+  `next_attempt` int DEFAULT NULL,
+  `result_id` int DEFAULT NULL,
+  `result_time` bigint DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -163,7 +265,9 @@ CREATE TABLE `object_types` (
 INSERT INTO `object_types` (`object_type_id`, `object_type_slug`, `price_adder`, `price_subtractor`, `inpars_id`) VALUES
 (1, 'Комната', 5000, 5000, 32),
 (2, '1-к квартира', 10000, 10000, 28),
-(3, 'Студия', 10000, 10000, 47);
+(3, 'Студия', 10000, 10000, 47),
+(4, '3-к квартира', 10000, 10000, 0),
+(5, '2-к квартира', 10000, 10000, 0);
 
 -- --------------------------------------------------------
 
@@ -178,7 +282,7 @@ CREATE TABLE `payments` (
   `token` text,
   `attempts` int NOT NULL DEFAULT '0',
   `next_attempt` int DEFAULT NULL,
-  `status` int NOT NULL DEFAULT '0' COMMENT '0 - Не оплачена регистрация\r\n1 - Ожидание времени оплаты\r\n2 - Оплачено\r\n3 - Попытки закончились',
+  `status` int NOT NULL DEFAULT '0' COMMENT '0 - Не оплачена регистрация\r\n1 - Ожидание времени оплаты\r\n2 - Ожидание второй попытки оплатить\r\n3 - Ожидание попытки оплаты половины\r\n4 - Остановить оплату',
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -194,7 +298,8 @@ CREATE TABLE `requests` (
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `messenger` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `object_type` int NOT NULL,
-  `price` int NOT NULL,
+  `price_min` int NOT NULL,
+  `price_max` int NOT NULL,
   `distance` int NOT NULL DEFAULT '1000',
   `address` varchar(255) DEFAULT NULL,
   `lat` float NOT NULL DEFAULT '0',
@@ -304,11 +409,29 @@ ALTER TABLE `images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `megafon_links`
 --
 ALTER TABLE `megafon_links`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `number` (`number`(11));
+
+--
+-- Индексы таблицы `moscow_rent`
+--
+ALTER TABLE `moscow_rent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `moscow_sell`
+--
+ALTER TABLE `moscow_sell`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `notifies`
@@ -320,6 +443,12 @@ ALTER TABLE `notifies`
 -- Индексы таблицы `objects`
 --
 ALTER TABLE `objects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `objects_calls`
+--
+ALTER TABLE `objects_calls`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -390,9 +519,27 @@ ALTER TABLE `images`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `megafon_links`
 --
 ALTER TABLE `megafon_links`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `moscow_rent`
+--
+ALTER TABLE `moscow_rent`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `moscow_sell`
+--
+ALTER TABLE `moscow_sell`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -408,10 +555,16 @@ ALTER TABLE `objects`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `objects_calls`
+--
+ALTER TABLE `objects_calls`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `object_types`
 --
 ALTER TABLE `object_types`
-  MODIFY `object_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `object_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `payments`
