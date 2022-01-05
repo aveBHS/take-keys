@@ -2,7 +2,7 @@
     <footer class="py-4 bg-light mt-auto">
         <div class="container-fluid px-4">
             <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Take-Keys 2021</div>
+                <div class="text-muted">Copyright &copy; Take-Keys 2021 | <a target="_blank" href="https://t.me/pavelkdtr">Техподдержка</a></div>
             </div>
         </div>
     </footer>

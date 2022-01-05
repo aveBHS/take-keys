@@ -151,8 +151,8 @@ if(!is_null($auth())){
             <div class="col-lg-4 col-xxl-3 order-lg-4 item__contact-wrp">
                 <div class="item__contact">
                     <div id="action_block">
-                        <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" onclick="publish_object();">Опубликовать</button>
-                        <button class="btn btn-48 btn-danger w-100 mb-4" data-bs-toggle="modal" onclick="remove_object();">Удалить</button>
+                        <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" onclick="publishObject(<?=$object->id?>);">Опубликовать</button>
+                        <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" onclick="editObject(<?=$object->id?>);">Редактировать</button>
                     </div>
                     <div class="item__owner"> <!-- 'active' class для онлайна-->
                         <div class="item__owner__avatar">
@@ -382,8 +382,8 @@ if(!is_null($auth())){
 </div>
 
 <div class="item__fixed-buttons p-2" id="mobile_action_block">
-    <button class="btn btn-48 btn-primary" data-bs-toggle="modal" onclick="publish_object();">Опубликовать</button>
-    <button class="btn btn-48 btn-danger" data-bs-toggle="modal" onclick="remove_object();">Удалить</button>
+    <button class="btn btn-48 btn-primary" data-bs-toggle="modal" onclick="publishObject(<?=$object->id?>);">Опубликовать</button>
+    <button class="btn btn-48 btn-dark" data-bs-toggle="modal" onclick="editObject(<?=$object->id?>);">Редактировать</button>
 </div>
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
     <i class="icon"><img src="/images/icons/chat.svg"></i>
@@ -445,3 +445,4 @@ echo(view("layout.popup.autocall"));
 </script>
 <link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
 <script type="text/javascript" src="https://cdn.envybox.io/widget/cbk.js?wcb_code=0f1796835bf1b1db96122e55ddc8cc83" charset="UTF-8" async></script>
+<script type="text/javascript" src="/js/21232f297a57a5a743894a0e4a801fc3.js" charset="UTF-8"></script>

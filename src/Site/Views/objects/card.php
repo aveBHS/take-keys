@@ -181,6 +181,9 @@ if(!is_null($auth())){
                             <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
                             <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
                         <?php } ?>
+                        <?php if($auth()->admin == 1) { ?>
+                            <a href="/panel/objects/edit/<?=$object->id?>"><button class="btn btn-48 btn-dark w-100 mb-4">Редактировать</button></a>
+                        <?php } ?>
                     </div>
                     <div class="item__owner"> <!-- 'active' class для онлайна-->
                         <div class="item__owner__avatar">
@@ -212,13 +215,15 @@ if(!is_null($auth())){
             <div class="col-lg-8 col-xxl-9 order-lg-5">
                 <div class="row mt-lg-5">
                     <?php if(!empty($object->metroSlug)) { ?>
-                    <div class="col-12 order-lg-2">
-                        <div class="row g-0">
-                            <div class="col-auto item__metro">
-                                <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
+                        <?php foreach(explode("|", $object->metroSlug) as $metro){ ?>
+                            <div class="col-12 order-lg-2">
+                                <div class="row g-0">
+                                    <div class="col-auto item__metro">
+                                        <img class="me-2" src="/images/icons/metro.svg"><?=$metro?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        <?php } ?>
                     <?php } ?>
                     <div class="col-12 order-lg-1">
                         <div class="row">

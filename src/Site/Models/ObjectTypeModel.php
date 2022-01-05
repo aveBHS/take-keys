@@ -9,6 +9,7 @@ class ObjectTypeModel extends Model
     protected $fields = [
         "object_type_slug",
         "price_adder",
-        "price_subtractor"
+        "price_subtractor",
+        "inpars_id"
     ];
 }

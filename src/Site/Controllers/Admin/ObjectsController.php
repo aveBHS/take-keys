@@ -5,6 +5,7 @@ namespace Site\Controllers\Admin;
 use Site\Core\HttpRequest;
 use Site\Models\AdsObjectSellModel;
 use Site\Models\ImageModel;
+use Site\Models\Model;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
 
@@ -21,13 +22,27 @@ class ObjectsController implements \Site\Controllers\Controller
         $request->show(view("admin.objects.new", ['object_types' => $object_types]));
     }
 
-    public function create(HttpRequest $request, $args)
+    public function editView(HttpRequest $request, $args)
     {
-        $object = new ObjectModel();
+        $object_types = ObjectTypeModel::select([]);
+        if($args[0] < 0){
+            $object = AdsObjectSellModel::find($args[0]*-1);
+        } else {
+            $object = ObjectModel::find($args[0]);
+            $images = ImageModel::selectObjectImages($object->id);
+        }
+        if(!is_null($object)){
+            $request->show(view("admin.objects.edit", ['object' => $object, 'object_types' => $object_types, 'images' => $images ?? null, 'is_unpublished' => $args[0] < 0]));
+        } else {
+            $request->redirect("/panel/");
+        }
+    }
 
+    private function saveObject(HttpRequest $request, Model $object, $dont_modify_category = false): bool{
         $object->title = $request->post("object_title");
         $object->cost = $request->post("object_cost");
-        $object->categoryId = $request->post("object_type");
+        if(!$dont_modify_category)
+            $object->categoryId = $request->post("object_type");
         $object->typeAd = $request->post("object_ad");
         $object->regionId = $request->post("object_region");
         $object->cityId = $request->post("object_city");
@@ -45,9 +60,9 @@ class ObjectsController implements \Site\Controllers\Controller
         $object->phones = $request->post("object_owner_phone");
         $object->isAd = is_null($request->post("object_ads")) ? 0 : 1;
 
-        $object->origin = "";
-        $object->sectionId = 6; // Жилое помещение
-        $object->status = 0; // Автоматически актуально
+        $object->origin = $object->origin ?? "";
+        $object->sectionId = $object->sectionId ?? 6; // Жилое помещение
+        $object->status = $object->status ?? 0; // Автоматически актуально
 
         try {
             $object->save();
@@ -65,10 +80,11 @@ class ObjectsController implements \Site\Controllers\Controller
                         }
                     }
                 }
+                $time = time();
                 for ($i = 0; $i < count($files); $i++) {
                     try{
                         $file = $files[$i];
-                        $name = "{$object->id}_$i.jpg";
+                        $name = "{$object->id}_{$time}_$i.jpg";
                         move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/$name");
 
                         $image = new ImageModel();
@@ -81,11 +97,49 @@ class ObjectsController implements \Site\Controllers\Controller
                     }
                 }
             }
-
-            $request->redirect("/id/{$object->id}");
+            return true;
         } catch (\Exception $exception){
             $request->setFlash("system_error", $exception->getMessage());
             $request->redirect_back();
+        }
+        return false;
+    }
+
+    public function create(HttpRequest $request, $args)
+    {
+        $object = new ObjectModel();
+        if($this->saveObject($request, $object)){
+            $request->redirect("/id/{$object->id}");
+        }
+    }
+
+    public function edit(HttpRequest $request, $args)
+    {
+        if($args[0] < 0){
+            $object = AdsObjectSellModel::find($args[0]*-1);
+            $_FILES['object_images'] = null;
+        } else {
+            $object = ObjectModel::find($args[0]);
+        }
+        if(!is_null($object)){
+            if($this->saveObject($request, $object, $args[0] < 0)){
+                $request->redirect_back();
+            }
+        } else {
+            $request->setFlash("system_error", "Объект не найден");
+            $request->redirect_back();
+        }
+    }
+
+    public function removePhoto(HttpRequest $request, $args)
+    {
+        $image = ImageModel::find($args[0]);
+        if(!is_null($image)){
+            $image->remove();
+            try{
+                $filename = basename($image->path);
+                unlink($_SERVER['DOCUMENT_ROOT'] . "/uploads/$filename");
+            } catch (\Exception $exception) {}
         }
     }
 
@@ -99,9 +153,10 @@ class ObjectsController implements \Site\Controllers\Controller
         if(!is_null($object)){
             $images = explode("|", $object->images);
             $new_images = [];
+            $time = time();
             for($i = 0; $i < count($images); $i++){
                 $img = new ImageModel();
-                $img->path = "//".env("url")."/uploads/{$object->id}_$i.jpg";
+                $img->path = "//".env("url")."/uploads/{$object->id}_{$time}_$i.jpg";
                 exec("wget -O /var/www/site/public_html/uploads/{$object->id}_$i.jpg $images[$i]");
                 array_push($new_images, $img);
             }
@@ -110,9 +165,7 @@ class ObjectsController implements \Site\Controllers\Controller
                 $rooms = $object->rooms > 0 ? $object->rooms : 1;
                 $object->categoryId = "$rooms-к квартира";
             }
-            var_dump($object->categoryId);
             $category = ObjectTypeModel::find($object->categoryId, "object_type_slug")->object_type_id;
-            var_dump($category);
             if(is_null($category)){
                 $category = new ObjectTypeModel();
                 $category->object_type_slug = mb_strtoupper($object->categoryId[0]).mb_substr($object->categoryId, 1);
@@ -123,7 +176,6 @@ class ObjectsController implements \Site\Controllers\Controller
                     $category->save();
                     $category=$category->object_type_id;
                 } catch (\Exception $ex){
-                    var_dump($ex);
                     bugReport($ex);
                     $request->show(json_encode([
                         "result" => "error",
@@ -132,7 +184,6 @@ class ObjectsController implements \Site\Controllers\Controller
                     return;
                 }
             }
-            echo("\n-----------------------\n");
 
 
             $new_object = new ObjectModel();
@@ -168,8 +219,11 @@ class ObjectsController implements \Site\Controllers\Controller
                     $image->save();
                 }
                 $object->remove();
+                $request->show(json_encode([
+                    "result" => "ok",
+                    "object_id" => $new_object->id
+                ]));
             } catch (\Exception $ex){
-                var_dump($ex);
                 bugReport($ex);
                 $request->show(json_encode([
                     "result" => "error",

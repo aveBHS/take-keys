@@ -77,6 +77,18 @@ return [
             "controller" => [\Site\Controllers\Admin\ObjectsController::class, "create"],
             "middleware" => AdminMiddleware::class
         ],
+        "GET::~panel[/]objects[/]edit[/]([-]?\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "editView"],
+            "middleware" => AdminMiddleware::class
+        ],
+        "POST::~panel[/]objects[/]edit[/]([-]?\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "edit"],
+            "middleware" => AdminMiddleware::class
+        ],
+        "POST::~panel[/]objects[/]remove_pic[/](\d+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "removePhoto"],
+            "middleware" => AdminMiddleware::class
+        ],
         "GET::~panel[/]objects[/]catalog_sell[/]?(\d+)?[/]?$~" => [
             "controller" => [\Site\Controllers\Admin\CatalogController::class, "view"],
             "middleware" => AdminMiddleware::class
@@ -85,7 +97,7 @@ return [
             "controller" => [\Site\Controllers\Admin\CardController::class, "view"],
             "middleware" => AdminMiddleware::class
         ],
-        "GET::~panel[/]objects[/]catalog_sell[/]public[/]([^/]+)[/]?$~" => [
+        "POST::~panel[/]objects[/]catalog_sell[/]public[/]([^/]+)[/]?$~" => [
             "controller" => [\Site\Controllers\Admin\ObjectsController::class, "publishObject"],
             "middleware" => AdminMiddleware::class
         ],

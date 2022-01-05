@@ -90,13 +90,15 @@ if(!is_null($auth())){
                 <div class="catalog__item__address"><?=$object->address?></div>
                 <?php if(!is_null($object->metroSlug)) { ?>
                 <div class="catalog__item__metro row">
-                    <div class="col-12 order-lg-2">
-                        <div class="row g-0">
-                            <div class="col-auto item__metro">
-                                <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
+                    <?php foreach(explode("|", $object->metroSlug) as $metro){ ?>
+                        <div class="col-12 order-lg-2">
+                            <div class="row g-0">
+                                <div class="col-auto item__metro">
+                                    <img class="me-2" src="/images/icons/metro.svg"><?=$metro?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <?php } ?>
                 <div class="catalog__item__param d-none d-lg-flex">
@@ -202,13 +204,15 @@ if(!is_null($auth())){
                         <div class="catalog__item__address"><?=$object->address?></div>
                         <?php if(!is_null($object->metroSlug)) { ?>
                             <div class="catalog__item__metro row">
-                                <div class="col-12 order-lg-2">
-                                    <div class="row g-0">
-                                        <div class="col-auto item__metro">
-                                            <img class="me-2" src="/images/icons/metro.svg"><?=$object->metroSlug?>
+                                <?php foreach(explode("|", $object->metroSlug) as $metro){ ?>
+                                    <div class="col-12 order-lg-2">
+                                        <div class="row g-0">
+                                            <div class="col-auto item__metro">
+                                                <img class="me-2" src="/images/icons/metro.svg"><?=$metro?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         <?php } ?>
                         <div class="catalog__item__desc">
