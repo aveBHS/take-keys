@@ -56,11 +56,11 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
             </div>
         </div>
     </div>
-    <div class="btn-group filter__item">
+    <!--div class="btn-group filter__item">
         <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown" data-bs-auto-close="outside">
             <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
-                    <!-- <div class="fs-14 fw-semibold">Тип жилья</div> -->
+                    <!- <div class="fs-14 fw-semibold">Тип жилья</div>->
                     <div class="filter__item__name">Тип жилья</div>
                 </div>
                 <div class="ms-3"><img class="filter__item__arrow" src="/images/icons/arrow-down.svg"></div>
@@ -83,7 +83,7 @@ $current_object_rooms = $request->get("filter-rooms") ?? [];
 
             </div>
         </div>
-    </div>
+    </div-->
 
     <div class="btn-group filter__item">
         <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown" data-bs-auto-close="outside">
