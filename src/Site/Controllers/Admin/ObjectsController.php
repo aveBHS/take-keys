@@ -157,7 +157,7 @@ class ObjectsController implements \Site\Controllers\Controller
             for($i = 0; $i < count($images); $i++){
                 $img = new ImageModel();
                 $img->path = "//".env("url")."/uploads/{$object->id}_{$time}_$i.jpg";
-                exec("wget -O /var/www/site/public_html/uploads/{$object->id}_$i.jpg $images[$i]");
+                exec("wget -O /var/www/site/public_html/uploads/{$object->id}_{$time}_$i.jpg $images[$i]");
                 array_push($new_images, $img);
             }
 
