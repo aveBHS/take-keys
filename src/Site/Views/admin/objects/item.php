@@ -59,25 +59,6 @@ if(!is_null($auth())){
                         <img class="me-2" src="/images/icons/photo-white.svg">
                         <span class="total"><?=count($images)?></span>
                     </div>
-
-                    <div class="item__tags">
-                        <!--span class="btn-colored bg-danger">Лучшая цена</span-->
-                        <?php if(isNew($object->created)) { ?>
-                            <span class="btn-colored bg-primary">Новое</span>
-                        <?php } ?>
-                        <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
-                            <span class="btn-colored bg-info">Рекомендуемые</span>
-                        <?php } ?>
-                        <?php if($object->isAd || $object->isAd == 1) { ?>
-                            <span class="btn-colored bg-danger text-light">Горячее</span>
-                        <?php } ?>
-                        <?php if($object->status == 1 || $object->isAd == 1) { ?>
-                            <!--span class="btn-colored bg-warning">На проверке</span-->
-                        <?php } ?>
-                        <?php if($object->status == 2) { ?>
-                            <span class="btn-colored bg-secondary">В архиве</span>
-                        <?php } ?>
-                    </div>
                 </div>
             </div>
             <div class="catalog__item__info">
