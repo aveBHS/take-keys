@@ -60,10 +60,10 @@ class CatalogController implements \Site\Controllers\Controller
                 array_push($filter, ["lng", [$search[2][1], ">="]]);
             }
         }
-        if(!is_null($request->get("filter-date-from"))){
+        if(!empty($request->get("filter-date-from"))){
             array_push($filter, ["creation_date", [$request->get("filter-date-from"), ">="]]);
         }
-        if(!is_null($request->get("filter-date-to"))){
+        if(!empty($request->get("filter-date-to"))){
             array_push($filter, ["creation_date", [$request->get("filter-date-to"), "<="]]);
         }
 
