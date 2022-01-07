@@ -18,7 +18,7 @@ class RequestModel extends Model
 {
     protected $fields = [
         'email', 'phone', 'object_type', 'price_min', 'price_max',
-        'distance', 'address', 'lat', 'lng', 'purchased',
+        'distance', 'address', 'lat', 'lng', 'purchased', 'actual_filter',
         'is_free', 'recommendations', 'favorites', 'status'
     ];
 }

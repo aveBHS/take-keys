@@ -56,9 +56,6 @@ try {
 
                 <a href="/catalog/recommendations" class="list-group-item d-flex justify-content-between align-items-center py-3 list-group-item-action <?=$current_page==LK_RECOMMENDATIONS_PAGE?'active':''?>">
                     Рекомендованные
-                    <?php if(!empty($auth()->request->recommendations)) { ?>
-                        <span class="badge bg-primary rounded-pill"><?=count(explode(",", $auth()->request->recommendations))?></span>
-                    <?php } ?>
                 </a>
 
                 <a href="/notifies" class="list-group-item d-flex justify-content-between align-items-center py-3 list-group-item-action <?=$current_page==LK_NOTIFIES_PAGE?'active':''?>">

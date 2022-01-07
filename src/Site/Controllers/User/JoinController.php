@@ -56,6 +56,7 @@ class JoinController implements Controller
         $req->purchased = 0;
         $req->is_free = 0;
         $req->status = 1;
+        $req->actual_filter = DATE_FILTER_HOURS_DEFAULT;
 
         $req->lat = $reqInfo->lat;
         $req->lng = $reqInfo->lng;

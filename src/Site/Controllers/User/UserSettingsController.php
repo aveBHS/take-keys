@@ -93,6 +93,7 @@ class UserSettingsController implements \Site\Controllers\Controller
             filter("\d+(\.\d+)?", $request->post("filter-radius")) &&
             filter("\d+(\.\d+)?", $request->post("geo_lon")) &&
             filter("\d+(\.\d+)?", $request->post("geo_lat")) &&
+            in_array((int) $request->post("filter-actuality"), DATE_FILTER_HOURS) &&
             strlen($request->post("filter-object-type")) > 0 &&
             strlen($request->post("filter-address")) > 0)
         {
@@ -108,6 +109,7 @@ class UserSettingsController implements \Site\Controllers\Controller
                 $req->address = $request->post("filter-address");
                 $req->lat = (float)$request->post("geo_lat");
                 $req->lng = (float)$request->post("geo_lon");
+                $req->actual_filter = (int) $request->post("filter-actuality");
 
                 $req->recommendations = "";
                 $req->object_type = $object_type->object_type_id;

@@ -115,7 +115,9 @@ class CatalogController implements \Site\Controllers\Controller
         $objects = ObjectModel::select(
                 [
                     ["status", [[0, 1], 'in']],
-                    ["id", [explode(",", $auth()->request->recommendations), "in"]]
+                    ["id", [explode(",", $auth()->request->recommendations), "in"]],
+                    ["created", [">=", date("Y-m-d H:i:s",
+                        $auth()->request->actual_filter > 0 ? time()-(3600*$auth()->request->actual_filter) : 0)]]
                 ],
                 [ ["created", "DESC"] ],
                 env("elements_per_page") ?? 25,
