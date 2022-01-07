@@ -21,6 +21,9 @@ const MONTHS_RP = [
     "dec"  => "декабря"
 ];
 
+const DATE_FILTER_HOURS = [0,12,24,48,72,168,720];
+const DATE_FILTER_HOURS_DEFAULT = DATE_FILTER_HOURS[2];
+
 // Menu pages slugs
 const UNDEFINED_PAGE = null;
 const LK_NOTIFIES_PAGE = "notifies";

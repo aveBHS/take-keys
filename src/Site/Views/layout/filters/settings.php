@@ -19,7 +19,7 @@ foreach ($objects_types as $object_type){
             <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                     <!-- <div class="fs-14 fw-semibold">Местоположение</div> -->
-                    <div class="filter__item__name">Местоположение</div>
+                    <div class="filter__item__name">Адрес</div>
                     <input type="hidden" name="filter-address" value="<?=$request->address?>"/>
                     <input type="hidden" name="geo_lon" value="<?=$request->lng?>"/>
                     <input type="hidden" name="geo_lat" value="<?=$request->lat?>"/>
@@ -39,7 +39,7 @@ foreach ($objects_types as $object_type){
         <button type="submit" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown" data-bs-auto-close="outside">
             <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
-                    <div class="fs-14 fw-semibold">Радиус поиска</div>
+                    <div class="fs-14 fw-semibold">Радиус</div>
                     <div class="filter__item__name filter__radius-value"><?=(int)$request->distance/1000?> км</div>
                 </div>
                 <div class="ms-3"><img class="filter__item__arrow" src="/images/icons/arrow-down.svg"></div>
@@ -118,7 +118,40 @@ foreach ($objects_types as $object_type){
 
         </div>
     </div>
+    <div class="btn-group filter__item">
+        <button type="button" class="btn btn-outline-light filter__item__btn" data-bs-toggle="dropdown">
+            <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                    <div class="fs-14 fw-semibold">Актуальность</div>
+                </div>
+                <div class="ms-3"><img src="/images/icons/arrow-down.svg"></div>
+            </div>
+        </button>
+        <div class="dropdown-menu filter__item__list">
+            <div class="btn-group-vertical select-list">
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-20" autocomplete="off" value="0" <?=$request->actual_filter==0?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-20" >За все время</label>
 
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-1" autocomplete="off" value="12" <?=$request->actual_filter==12?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-1">12 часов</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-2" autocomplete="off" value="24" <?=$request->actual_filter==24?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-2">24 часа</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-3" autocomplete="off" value="48" <?=$request->actual_filter==48?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-3">2 дня</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-4" autocomplete="off" value="72" <?=$request->actual_filter==72?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-4">3 дня</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-5" autocomplete="off" value="168" <?=$request->actual_filter==128?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-5">Неделя</label>
+
+                <input type="radio" class="btn-check" name="filter-actuality" id="filter-actuality-6" autocomplete="off" value="720" <?=$request->actual_filter==720?"checked":""?>>
+                <label class="btn btn-outline-light filter__item__val" for="filter-actuality-6">Месяц</label>
+            </div>
+        </div>
+    </div>
     <div class="btn-group filter__item border d-flex align-items-center p-3 ps-lg-0 flex-grow-0">
         <button type="button" class="btn filter__addictional flex-grow-0"><img src="/images/icons/filter.svg"></button>
         <button type="submit" class="ms-auto btn btn-primary rounded-pill px-4 flex-grow-0">Сохранить</button>
