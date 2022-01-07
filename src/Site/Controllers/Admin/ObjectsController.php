@@ -118,12 +118,14 @@ class ObjectsController implements \Site\Controllers\Controller
         if($args[0] < 0){
             $object = AdsObjectSellModel::find($args[0]*-1);
             $_FILES['object_images'] = null;
+            $redirect = "/panel/objects/catalog_sell/id/".($args[0]*-1)."/";
         } else {
             $object = ObjectModel::find($args[0]);
+            $redirect = "/id/".($args[0])."/";
         }
         if(!is_null($object)){
             if($this->saveObject($request, $object, $args[0] < 0)){
-                $request->redirect_back();
+                $request->redirect($redirect);
             }
         } else {
             $request->setFlash("system_error", "Объект не найден");
