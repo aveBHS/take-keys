@@ -94,11 +94,11 @@ class UserSettingsController implements \Site\Controllers\Controller
             filter("\d+(\.\d+)?", $request->post("geo_lon")) &&
             filter("\d+(\.\d+)?", $request->post("geo_lat")) &&
             in_array((int) $request->post("filter-actuality"), DATE_FILTER_HOURS) &&
-            strlen($request->post("filter-object-type")) > 0 &&
+            count($request->post("filter-object-type")) > 0 &&
             strlen($request->post("filter-address")) > 0)
         {
-            $object_type = ObjectTypeModel::find($request->post("filter-object-type"), "object_type_slug");
-            if(!is_null($object_type)) {
+            $object_types = ObjectTypeModel::findAll($request->post("filter-object-type"), "object_type_slug");
+            if(!empty($object_types)) {
                 global $auth;
                 $req = $auth()->request;
 
@@ -112,13 +112,21 @@ class UserSettingsController implements \Site\Controllers\Controller
                 $req->actual_filter = (int) $request->post("filter-actuality");
 
                 $req->recommendations = "";
-                $req->object_type = $object_type->object_type_id;
+
+                $object_types_ids = [];
+                $object_types_slugs = [];
+                foreach($object_types as $object_type) {
+                    array_push($object_types_ids, (int) $object_type->object_type_id);
+                    array_push($object_types_slugs, $object_type->object_type_slug);
+                }
+                $object_types_slugs = implode(", ", $object_types_slugs);
+                $req->object_type = implode(",", $object_types_ids);
 
                 try {
                     $req->save();
                     userLog("Изменение настроек подбора",
                         "Адрес: {$req->address} ({$req->lat}; {$req->lng})\nРадиус: {$req->distance} м\n" .
-                        "Тип объекта: {$object_type->object_type_slug}\nЦена: {$req->price_min} руб - {$req->price_max} руб");
+                        "Тип объекта: {$object_types_slugs}\nЦена: {$req->price_min} руб - {$req->price_max} руб");
                     $request->show(json_encode([
                         "result" => "OK"
                     ]));

@@ -5,10 +5,10 @@
 
 global $auth;
 $request = $auth()->request;
-$current_object_type = Null;
+$current_object_types = [];
 foreach ($objects_types as $object_type){
-    if($object_type->object_type_id == $request->object_type){
-        $current_object_type = $object_type;
+    if(in_array("$object_type->object_type_id", explode(",", $request->object_type))){
+        array_push($current_object_types, $object_type->object_type_id);
     }
 }
 ?>
@@ -79,7 +79,7 @@ foreach ($objects_types as $object_type){
 
                 <?php for($i = 0; $i < count($objects_types); $i++){ $object_type = $objects_types[$i]; ?>
 
-                    <input <?=$object_type==$current_object_type?"checked":""?> type="radio" class="btn-check" name="filter-object-type" id="filter-value-<?=$i+1?>" autocomplete="off" value="<?=$object_type->object_type_slug?>">
+                    <input <?=in_array($object_type->object_type_id, $current_object_types)?"checked":""?> type="checkbox" class="btn-check" name="filter-object-type[]" id="filter-value-<?=$i+1?>" autocomplete="off" value="<?=$object_type->object_type_slug?>">
                     <label class="btn btn-outline-light filter__item__val" for="filter-value-<?=$i+1?>"><?=$object_type->object_type_slug?></label>
 
                 <?php } ?>
