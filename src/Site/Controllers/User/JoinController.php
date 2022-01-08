@@ -80,12 +80,12 @@ class JoinController implements Controller
                     ]));
                     $request->setFlash("action", "continue");
 
-                    /**$call = new PhoneCallModel();
+                    $call = new PhoneCallModel();
                     $call->phone = $user->phone;
                     $call->call_type = PhoneCallModel::callTypes['REGISTRATION'];
                     $call->call_status = PhoneCallModel::callStatuses['NEW'];
                     $call->next_attempt = 0;
-                    $call->save();*/
+                    $call->save();
 
                     try {
                         $email_confirm = new SendPulseService(env("sendpulse_user_id"), env("sendpulse_api_token"), env("sendpulse_sender"));
