@@ -15,7 +15,7 @@ class MainController implements Controller
     {
         $objects = ObjectModel::select(
             [
-                ["categoryId", ObjectTypeModel::find(1, 'object_type_id')->inpars_id],
+                ["categoryId", ObjectTypeModel::find(1, 'object_type_id')->object_type_id],
                 ["cost", ["15000", ">="]]
             ],
             [ ["created", "DESC"] ],

@@ -30,7 +30,7 @@ class CatalogController implements \Site\Controllers\Controller
             foreach($request->get("filter-object-type") as $object_type) {
                 $objects_type = ObjectTypeModel::find($object_type, "object_type_slug");
                 if(!is_null($objects_type)) {
-                    array_push($categories, $objects_type->inpars_id);
+                    array_push($categories, $objects_type->object_type_id);
                 }
             }
             if(!empty($categories)){

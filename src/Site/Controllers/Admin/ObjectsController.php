@@ -38,10 +38,10 @@ class ObjectsController implements \Site\Controllers\Controller
         }
     }
 
-    private function saveObject(HttpRequest $request, Model $object, $dont_modify_category = false): bool{
+    private function saveObject(HttpRequest $request, Model $object, $modify_category = true): bool{
         $object->title = $request->post("object_title");
         $object->cost = $request->post("object_cost");
-        if(!$dont_modify_category)
+        if($modify_category)
             $object->categoryId = $request->post("object_type");
         $object->typeAd = $request->post("object_ad");
         $object->regionId = $request->post("object_region");
@@ -124,7 +124,7 @@ class ObjectsController implements \Site\Controllers\Controller
             $redirect = "/id/".($args[0])."/";
         }
         if(!is_null($object)){
-            if($this->saveObject($request, $object, $args[0] < 0)){
+            if($this->saveObject($request, $object, $args[0] > 0)){
                 $request->redirect($redirect);
             }
         } else {

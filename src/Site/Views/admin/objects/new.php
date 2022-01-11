@@ -25,7 +25,7 @@
             <label class="my-1 mr-2" for="object_type">Тип объекта</label>
             <select class="form-control" id="object_type" name="object_type" required>
                 <?php foreach($object_types as $object_type){
-                   echo("<option value='{$object_type->inpars_id}'>{$object_type->object_type_slug}</option>");
+                   echo("<option value='{$object_type->object_type_id}'>{$object_type->object_type_slug}</option>");
                 } ?>
             </select>
         </div>
