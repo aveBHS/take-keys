@@ -157,7 +157,7 @@ if(!is_null($auth())){
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                             </form>
                         <?php } else if($purchased) { ?>
-                            <?php if ($object->isAd == 1){ ?>
+                            <?php if ($object->isAd == 1 and false){ ?>
                                 <button type="button" class="btn btn-48 btn-primary w-100 mb-3">
                                     <?= preg_replace(
                                         '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
@@ -171,8 +171,8 @@ if(!is_null($auth())){
                             <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
                             <?php if ($object->isAd == 1){ ?>
-                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-owner-message">Связаться</button>
-                                <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-owner-message" >Бронировать</button>
+                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+                                <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                             <?php } else { ?>
                                 <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
                                 <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
@@ -421,8 +421,8 @@ if(!is_null($auth())){
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
         <?php if ($object->isAd == 1){ ?>
-            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-owner-message">Связаться</button>
-            <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-owner-message" >Бронировать</button>
+            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+            <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
         <?php } else { ?>
             <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
             <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
