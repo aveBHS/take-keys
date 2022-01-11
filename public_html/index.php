@@ -23,6 +23,11 @@ $auth = new AuthService($request);
 
 $request->requestLog();
 
+if(env("site_closed") and $request->getCookie("dev") != "dev_mode"){
+    render($request, $routes['exceptions'][503][0], $routes['exceptions'][503][1]);
+    die();
+}
+
 foreach ($routes['routes'] as $regex => $render)
 {
     $fetch = $request->fetchRoute($regex);

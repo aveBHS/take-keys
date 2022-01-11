@@ -27,8 +27,8 @@
 </head>
 <body>
 <div>
-    <div style="font-size: 250px"><?=$error->code?></div>
-    <div style="font-size: 72px"><?=$error->message?></div>
+    <h1><?=$error->code?></h1>
+    <h3><?=$error->message?></h3>
 </div>
 </body>
 </html>

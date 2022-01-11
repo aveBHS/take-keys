@@ -210,6 +210,7 @@ return [
     ],
     "exceptions" => [
         404 => [\Site\Controllers\Exceptions\NotFoundController::class, "view"],
-        500 => [\Site\Controllers\Exceptions\InternalServerErrorController::class, "view"]
+        500 => [\Site\Controllers\Exceptions\InternalServerErrorController::class, "view"],
+        503 => [\Site\Controllers\Exceptions\ClosedController::class, "view"]
     ]
 ];
