@@ -57,6 +57,6 @@ const POSTER_ACTIVE_STATUS = 2;
 
 // Messengers communication scenarios
 const MESSENGER_SCENARIOS = [
-    "telegram",
-    "whatsapp"
+    "Если для себя, то говорим хорошо, сейчас есть время можете позвонить на 2-3 минуты, обсудим вопросы и если все хорошо договоримся о встрече или пишите здесь в чате, но лучше конечно голосом.",
+    "Версия для телеги, ссылка: [URL]"
 ];

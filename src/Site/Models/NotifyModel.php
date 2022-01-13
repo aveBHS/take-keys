@@ -12,5 +12,6 @@ class NotifyModel extends Model
         "WHATSAPP" => "whatsapp",
         "SMS" => "sms",
         "ROBOT_CALL" => "call",
+        "PACT" => "pact"
     ];
 }
