@@ -49,3 +49,14 @@ const OBJECT_CALL_RESULT_AGENT = 6;
 // Object deal type
 const OBJECT_RENT_TYPE = 1;
 const OBJECT_SELL_TYPE = 2;
+
+// Poster statuses
+const POSTER_NEW_STATUS = 0;
+const POSTER_IN_WORK_STATUS = 1;
+const POSTER_ACTIVE_STATUS = 2;
+
+// Messengers communication scenarios
+const MESSENGER_SCENARIOS = [
+    "telegram",
+    "whatsapp"
+];

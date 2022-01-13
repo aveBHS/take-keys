@@ -2,6 +2,7 @@
 
 use Site\Middleware\AdminMiddleware;
 use Site\Middleware\GuestMiddleware;
+use Site\Middleware\ObjectPosterMiddleware;
 use Site\Middleware\PaidUserMiddleware;
 use Site\Middleware\UserMiddleware;
 
@@ -206,6 +207,14 @@ return [
         ],
         "MIXED::~api[/]zvnk[/]new[/]([^/]+)[/]?$~" => [
             "controller" => [\Site\Controllers\WebHook\ZvonokWebHook::class, "successful_call"]
+        ],
+        "GET::~api[/]posting[/]new_objects[/]?$~" => [
+            "controller" => [\Site\Controllers\API\ObjectPosterController::class, "get_objects"],
+            "middleware" => ObjectPosterMiddleware::class
+        ],
+        "POST::~api[/]posting[/]confirm[/]?$~" => [
+            "controller" => [\Site\Controllers\API\ObjectPosterController::class, "confirm_request"],
+            "middleware" => ObjectPosterMiddleware::class
         ],
     ],
     "exceptions" => [
