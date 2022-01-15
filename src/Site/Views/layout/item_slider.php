@@ -38,14 +38,14 @@ global $auth;
     <div class="item__tags">
         <!--span class="btn-colored bg-danger">Лучшая цена</span-->
         <?php if(isNew($object->created)) { ?>
-            <span class="btn-colored bg-primary">Новое</span>
+            <span class="btn-colored bg-primary">Проверено в ЕРГН</span>
         <?php } ?>
         <!--span class="btn-colored bg-warning">Горячее</span-->
         <?php if(!is_null($auth()) && strpos($auth()->request->recommendations, "{$object->id}") !== false) { ?>
             <span class="btn-colored bg-info">Рекомендуемые</span>
         <?php } ?>
         <?php if($object->isAd || $object->isAd == 1) { ?>
-            <span class="btn-colored bg-danger text-light">Горячее</span>
+            <!--span class="btn-colored bg-danger text-light">Горячее</span-->
         <?php } ?>
         <?php if($object->status == 1 || $object->isAd == 1) { ?>
             <!--span class="btn-colored bg-warning">На проверке</span-->
