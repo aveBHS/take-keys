@@ -128,6 +128,8 @@ class TildaWebHookController implements Controller
             if (!is_null($requestObject)) {
                 $requestObject->purchased = 1;
                 $notify = new NotifyModel();
+                $notify->message_id = 0;
+                $notify->address = -1;
                 $notify->user_id = UserModel::find($requestObject->id, "request_id")->id;
                 $notify->text = view("notifies.payment_success");
                 $notify->type = NotifyModel::notifyType['WHATSAPP'];

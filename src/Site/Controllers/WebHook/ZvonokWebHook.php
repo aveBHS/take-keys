@@ -17,6 +17,12 @@ class ZvonokWebHook implements \Site\Controllers\Controller
         $number_funnel->phone = $phone;
         $notify = NotifyModel::select([["address", $phone], ["status", "-1"]], [["id", "desc"]], 1)[0];
         $notify->status = 0;
+        if(empty($notify->message_id)){
+            $notify->message_id = -1;
+        }
+        if(empty($notify->address)){
+            $notify->address = -1;
+        }
         try {
             $notify->save();
             $number_funnel->save();

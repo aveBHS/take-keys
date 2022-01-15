@@ -56,6 +56,8 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                             $req->save();
 
                             $notify = new NotifyModel();
+                            $notify->message_id = 0;
+                            $notify->address = -1;
                             $notify->user_id = $user->id;
                             $notify->type = NotifyModel::notifyType['SMS'];
                             $notify->text = view("notify.payment");
