@@ -11,6 +11,15 @@ use Site\Models\PhoneCallModel;
 class PactNotifyController implements \Site\Controllers\Controller
 {
 
+    private function getMessage(string $text): string{
+        $special_symbols_regex = '/[^а-яА-Яa-zA-Z\s]/';
+        $text = trim(preg_replace($special_symbols_regex, ' ', strtolower($text)));
+        while(strpos($text, "  ") !== false){
+            $text = str_replace("  ", " ", $text);
+        }
+        return $text;
+    }
+
     public function view(HttpRequest $request, $args)
     {
         /**
@@ -98,28 +107,42 @@ class PactNotifyController implements \Site\Controllers\Controller
                         }
                     }
 
-                    if($communication_config->scenario_stage == 1) {
-                        if ($data['type'] == "message" && $data['data']['income']) {
-                            $notify = new NotifyModel();
-                            $notify->user_id = -1;
-                            $notify->message_id = 0;
-                            $notify->address = $communication_config->conversation_id;
-                            $notify->type = NotifyModel::notifyType['PACT'];
-                            $notify->text = MESSENGER_SCENARIOS[$communication_config->scenario];
-                            $notify->status = 0;
-                            $communication_config->scenario_stage = 2;
-                            try {
-                                $notify->save();
-                                $communication_config->save();
-                            } catch (\Exception $e) {
-                                var_dump($e);
-                                bugReport($e);
-                                return;
-                            }
+                    /**
+                     * 0, 1 - первое сообщение
+                     * 2 - ожидание звонка
+                     * 3 - звонок произошел
+                     */
+                    $isNewMessage = false;
+                    $notify = new NotifyModel();
+                    $notify->user_id = -1;
+                    $notify->message_id = 0;
+                    $notify->address = $communication_config->conversation_id;
+                    $notify->type = NotifyModel::notifyType['PACT'];
+                    $notify->status = 0;
+
+                    if ($data['type'] == "message" && $data['data']['income']) {
+                        switch ($communication_config->scenario_stage) {
+                            case 0:
+                            case 1:
+                                $notify->text = MESSENGER_SCENARIOS[0];
+                                $communication_config->scenario_stage = 2;
+                                $isNewMessage = true;
+                            break;
+                        }
+                    }
+
+                    if($isNewMessage) {
+                        try {
+                            $notify->save();
+                            $communication_config->save();
+                        } catch (\Exception $e) {
+                            var_dump($e);
+                            bugReport($e);
+                            return;
                         }
                     }
                 }
-                break;
+            break;
         }
     }
 }
