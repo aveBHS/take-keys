@@ -6,6 +6,7 @@ use Site\Core\HttpRequest;
 use Site\Models\AdsObjectSellModel;
 use Site\Models\ImageModel;
 use Site\Models\Model;
+use Site\Models\NumberFunnelModel;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
 
@@ -152,6 +153,16 @@ class ObjectsController implements \Site\Controllers\Controller
         $requestParams = [(int) $args[0]];
         $object = AdsObjectSellModel::find($requestParams[0]);
 
+        $number = NumberFunnelModel::select([['status', POSTER_NEW_STATUS]]);
+        if(empty($number)){
+            $request->show(json_encode([
+                "result" => "error",
+                "reason" => "Нет свободных номеров для публикации"
+            ]));
+            return;
+        }
+        $number = $number[0];
+
         if(!is_null($object)){
             $images = explode("|", $object->images);
             $new_images = [];
@@ -221,6 +232,12 @@ class ObjectsController implements \Site\Controllers\Controller
                     $image->save();
                 }
                 $object->remove();
+
+                $number->object_id = $new_object->id;
+                $number->status = POSTER_IN_WORK_STATUS;
+                $number->updated = mysqlNOW();
+                $number->save();
+
                 $request->show(json_encode([
                     "result" => "ok",
                     "object_id" => $new_object->id

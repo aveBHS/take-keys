@@ -191,3 +191,7 @@ function calcCircle($lat, $lng, $length): array
         [$lat - $deltaLat, $lng]
     ];
 }
+
+function mysqlNOW(){
+    return date('Y-m-d H:i:s');
+}

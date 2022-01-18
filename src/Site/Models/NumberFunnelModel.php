@@ -6,6 +6,6 @@ class NumberFunnelModel extends Model
 {
     protected $tableName = "number_list";
     protected $fields = [
-        "phone"
+        "status", "object_id", "updated"
     ];
 }
