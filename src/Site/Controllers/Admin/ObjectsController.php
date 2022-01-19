@@ -6,7 +6,7 @@ use Site\Core\HttpRequest;
 use Site\Models\AdsObjectSellModel;
 use Site\Models\ImageModel;
 use Site\Models\Model;
-use Site\Models\NumberFunnelModel;
+use Site\Models\PublicNumberModel;
 use Site\Models\ObjectModel;
 use Site\Models\ObjectTypeModel;
 
@@ -147,13 +147,14 @@ class ObjectsController implements \Site\Controllers\Controller
     }
 
     function publishObject(HttpRequest $request, $args){
+        ini_set('display_errors', '1');ini_set('display_startup_errors', '1');error_reporting(E_ALL);
         $request->setHeader("Content-Type", "application/json");
 
         if(!$args[0]) $request->redirect("/");
         $requestParams = [(int) $args[0]];
         $object = AdsObjectSellModel::find($requestParams[0]);
 
-        $number = NumberFunnelModel::select([['status', POSTER_NEW_STATUS]]);
+        $number = PublicNumberModel::select([['status', POSTER_NEW_STATUS]]);
         if(empty($number)){
             $request->show(json_encode([
                 "result" => "error",
@@ -226,6 +227,8 @@ class ObjectsController implements \Site\Controllers\Controller
             $new_object->status = 0;
 
             try{
+                Model::startTransaction();
+
                 $new_object->save();
                 foreach($new_images as $image){
                     $image->object_id = $new_object->id;
@@ -238,11 +241,14 @@ class ObjectsController implements \Site\Controllers\Controller
                 $number->updated = mysqlNOW();
                 $number->save();
 
+                Model::commitTransaction();
+
                 $request->show(json_encode([
                     "result" => "ok",
                     "object_id" => $new_object->id
                 ]));
             } catch (\Exception $ex){
+                Model::rollbackTransaction();
                 bugReport($ex);
                 $request->show(json_encode([
                     "result" => "error",
