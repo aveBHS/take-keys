@@ -23,6 +23,24 @@ abstract class Model
         return (in_array($name, $this->fields) or $name == ($this->tableId ?? 'id')) ? $this->$name : null;
     }
 
+    public static function startTransaction()
+    {
+        global $db;
+        $db->begin_transaction();
+    }
+
+    public static function commitTransaction()
+    {
+        global $db;
+        $db->commit();
+    }
+
+    public static function rollbackTransaction()
+    {
+        global $db;
+        $db->rollback();
+    }
+
     public static function find($objectId, string $index = null)
     {
         $className = static::class;
