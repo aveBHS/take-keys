@@ -30,6 +30,12 @@ function publishObject(object_id){
                             window.location = `/panel/objects/catalog_sell/`;
                         }
                     })
+                } else {
+                    swal({
+                        title: "Ошибка",
+                        text: result['reason'],
+                        icon: "error",
+                    })
                 }
             })
         }
