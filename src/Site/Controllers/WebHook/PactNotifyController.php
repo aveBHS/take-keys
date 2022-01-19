@@ -88,7 +88,19 @@ class PactNotifyController implements \Site\Controllers\Controller
                     if($data['type']=="message"){
                         $communication_config = CommunicatorModel::find($data['data']['conversation_id'], "conversation_id");
                         if (is_null($communication_config)) {
-                            return;
+                            $communication_config = CommunicatorModel::find($data['data']['external_public_id'], "phone");
+                            if (is_null($communication_config)) {
+                                return;
+                            }
+                        }
+                        if((int) $communication_config->conversation_id < 0){
+                            $communication_config->conversation_id = $data['data']['conversation_id'];
+                            try {
+                                $communication_config->save();
+                            } catch (\Exception $e) {
+                                bugReport($e);
+                                return;
+                            }
                         }
                     } else {
                         $communication_config = CommunicatorModel::find($data['data']['sender_external_id'], "phone");
