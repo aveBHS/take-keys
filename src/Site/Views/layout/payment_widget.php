@@ -23,10 +23,10 @@ this.pay = function (user_id) {
             onSuccess: function (options) {
                 ym(85688374,'reachGoal','subscribed');
                 $("#mobile_action_block").html(`
-                    <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
+                    <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Записаться на встречу</button>
                     <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>`)
                 $("#action_block").html(`
-                    <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
+                    <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Записаться на встречу</button>
                     <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>`)
                 Modal.getOrCreateInstance($("#popup-tarif-pay-success")).show()
             },

@@ -64,9 +64,12 @@ if(!isset($render))
     </div>
 </div>
 <?php } ?>
-<script src="/js/app.min.js?8"></script>
-<script src="/js/catalog.js?8"></script>
-<script src="/js/cabinet.js?8"></script>
+<script src="/js/app.min.js?9"></script>
+<script src="/js/catalog.js?9"></script>
+<script src="/js/cabinet.js?9"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/video.js"></script>
 
 </body>
 

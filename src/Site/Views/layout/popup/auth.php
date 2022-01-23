@@ -68,9 +68,6 @@ if (!isset($forceReg))
             event.preventDefault()
             event.stopPropagation()
         });
-        document.getElementById('popup-msg-1').addEventListener('hidden.bs.modal', function (event) {
-            window.location.reload();
-        })
     })
 
 
@@ -125,10 +122,9 @@ if (!isset($forceReg))
                                             <!-- Slides -->
                                             <div class="swiper-slide">
                                                 <div class="auth__form-reg" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Мы знаем, как сложно найти подходящий вариант в интернете, поэтому, чтобы вы заселились легко - мы создали систему недвижимости Take-Keys</div>
+                                                    <div class="auth__title">Для просмотра объекта недвижимости заполните анкету</div>
                                                     <div class="auth__desc" style="font-size: 12px;">
-                                                        Это инструмент для поиска подходящего жилья в сжатые сроки.<br>
-                                                        Система 24/7 мониторит все сайты недвижимости, доски объявлений и привлекает собственников через рекламные кампании в Яндекс, Google, YouTube и социальные сети, что позволяет, первыми узнавать о новых подходящих вариантах и моментально связываться с владельцами.</div>
+                                                        Расскажите о своей кандидатуре, мы проверим, если вас нет в чёрном списке - то отправим анкету владельцу.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form class="auth__form-reg" novalidate>
@@ -159,7 +155,7 @@ if (!isset($forceReg))
                                                         <div class="auth__terms form-check form-check-box mt-3">
                                                             <input class="form-check-input" type="checkbox" name="terms" id="auth__agent-reg" required>
                                                             <label class="form-check-label" for="auth__agent-reg">
-                                                                Подтверждаю, что я не являюсь агентом
+                                                                Обязуюсь не использовать сервис в коммерческих целях и подтверждаю что не являюсь агентом или сотрудником агенства недвижимости
                                                             </label>
                                                             <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
                                                         </div>
@@ -169,7 +165,7 @@ if (!isset($forceReg))
                                             <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
                                                     <div class="auth__title">Укажите контакты для связи</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">Подтвердите почту, чтобы первыми получать уведомления о новых, подходящих вариантах и моментально связываться с владельцами.</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Подтвердите почту, чтобы получать уведомления от владельцев.</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form id="auth__send-reg" class="" novalidate>
@@ -279,7 +275,7 @@ if (!isset($forceReg))
     </div>
 </div>
 
-<div class="modal fade main-modal" id="popup-msg-1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade main-modal" id="popup-msg-2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

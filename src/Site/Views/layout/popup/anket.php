@@ -1,5 +1,14 @@
+<?php
+/**
+ * @var bool $continue
+ */
+?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        if (<?=$continue ? "true" : "false"?>) {
+            Modal.getOrCreateInstance($('#popup-msg-1')).show()
+        }
 
         $('#anket_form').submit(function (event) {
             event.preventDefault()
@@ -12,10 +21,15 @@
                 data: form.serialize(),
             }).done(function (data) {
                 Modal.getOrCreateInstance($('#popup-owner-questions')).hide()
-                Modal.getOrCreateInstance($('#popup-msg-1')).show()
+                Modal.getOrCreateInstance($('#popup-notification')).show()
             });
         });
     });
+
+    function showPay(){
+        Modal.getOrCreateInstance($('#popup-msg-1')).hide()
+        Modal.getOrCreateInstance($('#popup-tarif-take-keys')).show()
+    }
 </script>
 
 <div class="modal fade main-modal" id="popup-owner-message" tabindex="-1">
@@ -39,10 +53,10 @@
 
 <div class="modal fade main-modal main-modal-steps" id="popup-owner-questions" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" style="height: 500px">
             <div class="popup__wrp">
                 <div class="popup__content">
-                    <div class="popup__title">Для более конкретного общения с владельцем ответьте на несколько вопросов</div>
+                    <div class="popup__title"> </div>
                     <!-- Slider main container -->
                     <form id="anket_form">
                         <div class="modal-swiper" data-swiper-speed="500">
@@ -206,7 +220,7 @@
                                                    class="form-control">
                                             <div class="invalid-feedback"></div>
                                         </div>
-                                        <div class="row mb-3">
+                                        <!--div class="row mb-3">
                                             <div class="col-auto">
                                                 <div class="form-check form-check-box mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" name="questions-6" id="owner-questions-21" checked>
@@ -231,7 +245,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div-->
 
 
                                         <div class="popup__subtitle mt-5">Укажите время встречи</div>
@@ -240,7 +254,7 @@
                                                    class="form-control">
                                             <div class="invalid-feedback"></div>
                                         </div>
-                                        <div class="row mb-3">
+                                        <!--div class="row mb-3">
                                             <div class="col-auto">
                                                 <div class="form-check form-check-box mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" name="questions-11" id="owner-questions-24" checked>
@@ -265,7 +279,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div-->
 
 
                                     </div>
@@ -287,18 +301,23 @@
 
 <div class="modal fade main-modal" id="popup-msg-1" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content" style="height: 500px">
             <div class="popup__wrp">
                 <div class="popup__content align-items-center">
 
-                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/take-keys-circle.png">
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/message.svg">
+                    <div class="popup__title">Ваша анкета успешно доставлена владельцу</div>
                     <div class="popup__text mt-4 text-center popup-msg-1__text">
-                        Информация обновляется каждую минуту, в Take keys вы получите в кратном колличестве больше актуальных вариантов, чем на любом сайте. Проверьте - это удобно и специально для вас, чтобы вы сохранил свое время, деньги и хорошее настроение).
+                        Обычно собственники отвечают в течение 5 минут, но иногда требуется больше времени
                     </div>
 
                     <div class="popup__buttons">
-                        <button class="btn btn-primary px-3" data-bs-target="#popup-tarif-take-keys" data-bs-toggle="modal" data-bs-dismiss="modal">Подключить тариф</button>
+                        <button class="btn px-4 btn-primary mt-4 position-relative" onclick="showPay()">
+                            <span class="fs-18">Подробнее о лицензии Take-Keys</span>
+                            <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger me-2">
+							Оплатите сборы за услуги
+						</span>
+                        </button>
                     </div>
                 </div>
             </div>

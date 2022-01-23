@@ -14,7 +14,7 @@
                         Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
                     <?php } else if (in_array($notify->result->result_id, [OBJECT_CALL_RESULT_ACTUAL_HAVE_COMMISSION, OBJECT_CALL_RESULT_AGENT])) { ?>
                         Объект на модерации, наш робот распознал ключевую фразу по которой мы определяем агентов, возможно это агент, по этому объект передан на ручную модерацию.
-                        Время последней проверки: 25.12.2021 20:46
+                        Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
                     <?php } else if ($notify->result->result_id == OBJECT_CALL_RESULT_ACTUAL) { ?>
                         Объект актуальный, можете связаться с владельцем.<br>
                         Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
