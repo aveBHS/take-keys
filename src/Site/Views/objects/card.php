@@ -22,6 +22,8 @@ if(!is_null($auth())){
         $is_favorite = true;
     }
 }
+
+$contact_button_text = $purchased?"Связаться":"Записаться на встречу";
 ?>
 
 <?=view("layout.header", ["_page_title" => $object->title])?>
@@ -153,7 +155,7 @@ if(!is_null($auth())){
                     <div id="action_block">
                         <?php if($object->status > 1) { ?>
                             <form>
-                                <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-3">Связаться</button>
+                                <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-3"><?=$contact_button_text?></button>
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                             </form>
                         <?php } else if($purchased) { ?>
@@ -166,22 +168,23 @@ if(!is_null($auth())){
                                     ) ?>
                                 </button>
                             <?php } else { ?>
-                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();">Связаться</button>
+                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();"><?=$contact_button_text?></button>
                             <?php } ?>
                             <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
                             <?php if ($object->isAd == 1){ ?>
-                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
                                 <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                             <?php } else { ?>
-                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+                                <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
                                 <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                             <?php } ?>
                         <?php } else { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
+                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-owner-questions"><?=$contact_button_text?></button>
+                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-owner-questions">Бронировать</button>
                         <?php } ?>
                         <?php if($auth()->admin == 1) { ?>
+                            <button class="btn btn-48 btn-danger w-100 mb-3" onclick="publishObjectPlatforms(<?=$object->id?>);">Опубликовать Avito</button>
                             <a href="/panel/objects/edit/<?=$object->id?>"><button class="btn btn-48 btn-dark w-100 mb-4">Редактировать</button></a>
                         <?php } ?>
                     </div>
@@ -414,22 +417,22 @@ if(!is_null($auth())){
 
 <div class="item__fixed-buttons p-2" id="mobile_action_block">
     <?php if($object->status > 1) { ?>
-        <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Связаться</button>
+        <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary"><?=$contact_button_text?></button>
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Бронировать</button>
     <?php } else if($purchased) { ?>
-        <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();">Связаться</button>
+        <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();"><?=$contact_button_text?></button>
         <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
         <?php if ($object->isAd == 1){ ?>
-            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
             <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
         <?php } else { ?>
-            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Связаться</button>
+            <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
             <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
         <?php } ?>
     <?php } else { ?>
-        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-auth">Связаться</button>
-        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-auth">Бронировать</button>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-owner-questions"><?=$contact_button_text?></button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-owner-questions">Бронировать</button>
     <?php } ?>
 </div>
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
@@ -447,11 +450,11 @@ if(is_null($auth())) {
     echo(view("layout.popup.auth", ['forceReg' => true]));
 }
 if(!$purchased || is_null($auth())){
-    echo(view("layout.popup.purchase", [
-        'name'     => $auth()->name,
+    echo(view("layout.popup.purchase"));
+    echo(view("layout.popup.anket", [
         'continue' => $request->getFlash("action") == "continue" && !$purchased
     ]));
-    echo(view("layout.popup.anket"));
+    echo(view("layout.popup.notify"));
     echo(view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")]));
     echo(view("layout.popup.payment_result"));
 }
@@ -492,3 +495,6 @@ echo(view("layout.popup.autocall"));
 </script>
 <link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
 <script type="text/javascript" src="https://cdn.envybox.io/widget/cbk.js?wcb_code=0f1796835bf1b1db96122e55ddc8cc83" charset="UTF-8" async></script>
+<?php if($auth()->admin == 1) { ?>
+    <script type="text/javascript" src="/js/21232f297a57a5a743894a0e4a801fc3.js" charset="UTF-8"></script>
+<?php } ?>
