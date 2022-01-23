@@ -3,6 +3,7 @@
 namespace Site\Controllers\API;
 
 use Site\Core\HttpRequest;
+use Site\Models\ImageModel;
 use Site\Models\ObjectModel;
 use Site\Models\PublicNumberModel;
 
@@ -25,7 +26,7 @@ class ObjectPosterController implements \Site\Controllers\Controller
             foreach($requests as $req){
                 array_push($object_ids, $req->object_id);
             }
-            $objects = ObjectModel::findAll($object_ids);
+            $objects = ImageModel::selectObjectsImages(ObjectModel::findAll($object_ids));
             foreach($requests as $req){
                 foreach($objects as $object){
                     if($req->object_id == $object->id){
