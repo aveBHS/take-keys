@@ -102,6 +102,10 @@ return [
             "controller" => [\Site\Controllers\Admin\ObjectsController::class, "publishObject"],
             "middleware" => AdminMiddleware::class
         ],
+        "POST::~panel[/]objects[/]public[/]([^/]+)[/]?$~" => [
+            "controller" => [\Site\Controllers\Admin\ObjectsController::class, "publishObjectPlatforms"],
+            "middleware" => AdminMiddleware::class
+        ],
 
         // Objects
         "~id/([^/]+)[/]?$~" => [

@@ -42,6 +42,37 @@ function publishObject(object_id){
     })
 }
 
+function publishObjectPlatforms(object_id){
+    swal({
+        title: "Подтверждение",
+        text: "Вы действительно хотите опубликовать этот объект на Avito?",
+        buttons: ["Отменить", "Продолжить"],
+        icon: "warning",
+        dangerMode: true
+    }).then(result => {
+        if(result){
+            $.post({
+                url: `/panel/objects/public/${object_id}`
+            }).then(result => {
+                console.log(result);
+                if(result['result'].toLowerCase() === "ok"){
+                    swal({
+                        title: "Успешно",
+                        text: result['reason'],
+                        icon: "success",
+                    })
+                } else {
+                    swal({
+                        title: "Ошибка",
+                        text: result['reason'],
+                        icon: "error",
+                    })
+                }
+            })
+        }
+    })
+}
+
 function removePhoto(target, photo_id){
     swal({
         title: "Подтверждение",

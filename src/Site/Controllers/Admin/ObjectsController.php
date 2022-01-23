@@ -146,13 +146,31 @@ class ObjectsController implements \Site\Controllers\Controller
         }
     }
 
-    function publishObject(HttpRequest $request, $args){
+    function publishObjectPlatforms(HttpRequest $request, $args)
+    {
         ini_set('display_errors', '1');ini_set('display_startup_errors', '1');error_reporting(E_ALL);
         $request->setHeader("Content-Type", "application/json");
 
         if(!$args[0]) $request->redirect("/");
         $requestParams = [(int) $args[0]];
-        $object = AdsObjectSellModel::find($requestParams[0]);
+        $object = ObjectModel::find($requestParams[0]);
+        if(empty($object)){
+            $request->show(json_encode([
+                "result" => "error",
+                "reason" => "Объект не найден"
+            ]));
+            return;
+        }
+
+        $number = PublicNumberModel::select([['object_id', $object->id]]);
+        if(!empty($number)){
+            $number = $number[0];
+            $request->show(json_encode([
+                "result" => "error",
+                "reason" => "К объекту уже привязан номер телефона +{$number->phone}"
+            ]));
+            return;
+        }
 
         $number = PublicNumberModel::select([['status', POSTER_NEW_STATUS]]);
         if(empty($number)){
@@ -163,6 +181,25 @@ class ObjectsController implements \Site\Controllers\Controller
             return;
         }
         $number = $number[0];
+
+        $number->object_id = $object->id;
+        $number->status = POSTER_IN_WORK_STATUS;
+        $number->updated = mysqlNOW();
+        $number->save();
+
+        $request->show(json_encode([
+            "result" => "ok",
+            "reason" => "Объект отправлен на публикацию и привязан к номеру +{$number->phone}"
+        ]));
+    }
+
+    function publishObject(HttpRequest $request, $args){
+        //ini_set('display_errors', '1');ini_set('display_startup_errors', '1');error_reporting(E_ALL);
+        $request->setHeader("Content-Type", "application/json");
+
+        if(!$args[0]) $request->redirect("/");
+        $requestParams = [(int) $args[0]];
+        $object = AdsObjectSellModel::find($requestParams[0]);
 
         if(!is_null($object)){
             $images = explode("|", $object->images);
@@ -235,11 +272,6 @@ class ObjectsController implements \Site\Controllers\Controller
                     $image->save();
                 }
                 $object->remove();
-
-                $number->object_id = $new_object->id;
-                $number->status = POSTER_IN_WORK_STATUS;
-                $number->updated = mysqlNOW();
-                $number->save();
 
                 Model::commitTransaction();
 
