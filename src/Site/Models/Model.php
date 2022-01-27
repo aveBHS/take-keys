@@ -196,7 +196,7 @@ abstract class Model
                 $query = $model->db->prepare(
                     "SELECT COUNT(*) as `total` FROM `$tableName`"
                 );
-                if(!empty($conditionTypes))
+                if(!empty($conditionTypes) || !empty($conditionsPlaces))
                     $query = $model->db->prepare(
                         "SELECT COUNT(*) as `total` FROM `$tableName` WHERE $conditionsPlaces"
                     );
