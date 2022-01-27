@@ -20,9 +20,9 @@
                 <div class="popup__content">
                     <div class="accordion" id="notif-switch">
                         <div class="notif-on" data-parent="#notif-switch">
-                            <div class="popup__title">Анкета успешно создана</div>
+                            <div class="popup__title">Чтобы не упустить важных событий настройте уведомления</div>
                             <p class="popup__text">
-                                Выберите, где вас уведомить о результате?
+                                Выберите каналы по которым вам будет удобно получать сообщения и предложения от собственников:
                             </p>
                         </div>
                     </div>

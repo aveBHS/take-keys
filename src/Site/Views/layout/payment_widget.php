@@ -3,18 +3,19 @@
  * @var int $amount
  */
 
-$amount = $amount ?? env("cloudpayments_subscribe_amount");
+$full_amount = env("first_payment_amount") ?? $amount;
+$part_amount = env("first_payment_amount_sale") ?? $amount;
 
 ?>
 
 <script>
-this.pay = function (user_id) {
+this.pay = function (user_id, full_amount=false) {
     var widget = new cp.CloudPayments();
     widget.pay('charge',
         {
             publicId: '<?=env("cloudpayments_public_key")?>',
             description: '<?=env("cloudpayments_subscribe_desc")?>',
-            amount: <?=$amount?>,
+            amount: full_amount?<?=$full_amount?>:<?=$part_amount?>,
             currency: 'RUB',
             accountId: user_id,
             skin: "mini"
@@ -31,7 +32,7 @@ this.pay = function (user_id) {
                 Modal.getOrCreateInstance($("#popup-tarif-pay-success")).show()
             },
             onFail: function (reason, options) {
-                Modal.getOrCreateInstance($("#popup-tarif-pay-fail")).show()
+                Modal.getOrCreateInstance($("#popup-tarif-take-keys")).show()
             }
         }
     )

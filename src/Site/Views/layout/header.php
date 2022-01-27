@@ -26,7 +26,7 @@ global $auth;
     <meta property="og:description" content="<?=$_page_desc?>">
     <meta property="og:image" content="<?=$_page_img??'/images/favicon.svg'?>">
 
-    <link rel="stylesheet" href="/css/app.min.css?6">
+    <link rel="stylesheet" href="/css/app.min.css?7">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Chatra {literal} -->
@@ -64,6 +64,10 @@ global $auth;
         <?php } ?>
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/85688374" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <script>
+        let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
+    </script>
 
     <!-- /Yandex.Metrika counter -->
 

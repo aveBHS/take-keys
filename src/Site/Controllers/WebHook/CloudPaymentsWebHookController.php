@@ -48,7 +48,12 @@ class CloudPaymentsWebHookController implements \Site\Controllers\Controller
                             $payment->amount = env("recurrent_payment_amount");
                             $payment->next_attempt = time() + (24 * 60 * 60);
                         }
-                        $payment->status = PaymentModel::STATUSES['READY'];
+
+                        if ($amount == (int)env("first_payment_amount")){
+                            $payment->status = PaymentModel::STATUSES['DONE'];
+                        } else {
+                            $payment->status = PaymentModel::STATUSES['READY'];
+                        }
                         $payment->token = $request->post("Token");
 
                         try {

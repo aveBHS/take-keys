@@ -392,7 +392,6 @@ if(!is_null($auth())){
 
 <script>
     let object_id = <?=$object->id?>;
-    let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
 </script>
 
 <?php

@@ -180,8 +180,8 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
                                 <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                             <?php } ?>
                         <?php } else { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-owner-questions"><?=$contact_button_text?></button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-owner-questions">Бронировать</button>
+                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#contact-popup-first"><?=$contact_button_text?></button>
+                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#contact-popup-first">Бронировать</button>
                         <?php } ?>
                         <?php if($auth()->admin == 1) { ?>
                             <button class="btn btn-48 btn-danger w-100 mb-3" onclick="publishObjectPlatforms(<?=$object->id?>);">Опубликовать Avito</button>
@@ -431,8 +431,8 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
             <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
         <?php } ?>
     <?php } else { ?>
-        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-owner-questions"><?=$contact_button_text?></button>
-        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-owner-questions">Бронировать</button>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#contact-popup-first"><?=$contact_button_text?></button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#contact-popup-first">Бронировать</button>
     <?php } ?>
 </div>
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
@@ -442,7 +442,6 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
 
 <script>
     let object_id = <?=$object->id?>;
-    let user_id = <?=is_null($auth()) ? -1 : $auth()->id?>;
 </script>
 
 <?php

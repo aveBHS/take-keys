@@ -17,6 +17,7 @@ global $auth;
         echo view("layout.lk.notification_item", ["notify" => $notify]);
     } ?>
 </div>
+<?=$auth()->request->purchased == 1 ?"":view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")])?>
 <?=view("layout.lk.templ_close")?>
 
 <?=view("layout.footer")?>

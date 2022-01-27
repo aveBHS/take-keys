@@ -2,7 +2,10 @@ $(document).ready(function () {
     $('.slider').slick({
         dots: true,
         adaptiveHeight: true,
+        slidesToScroll: 1,
     });
+    //$('.slider').slickPlay()
+    //setTimeout($('.slider').slickPause(), 300)
 });
 
 function findVideos() {

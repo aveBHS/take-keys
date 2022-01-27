@@ -15442,6 +15442,7 @@ h1,h2,h3,h4,h5,h6 {
   font-family: Gilroy, sans-serif;
   font-size: 20px;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .slider__city {
@@ -15457,6 +15458,7 @@ h1,h2,h3,h4,h5,h6 {
   overflow: hidden;
   margin: 0 auto;
   max-width: 480px;
+  max-height: 490px;
 }
 
 .slider {
@@ -15469,7 +15471,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .slick-arrow {
   position: absolute;
-  top: 50%;
+  top: 201px;
   z-index: 10;
   font-size: 0;
   width: 60px;
@@ -15721,3 +15723,15 @@ h1,h2,h3,h4,h5,h6 {
     max-width: 220px;
   }
 } */
+
+.slick-slide {
+  position:relative;
+}
+.slick-slide img{
+  position: absolute;
+  margin: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}

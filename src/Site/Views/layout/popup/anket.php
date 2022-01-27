@@ -2,6 +2,15 @@
 /**
  * @var bool $continue
  */
+
+global $auth;
+$d = DateTime::createFromFormat('Y-m-d H:i:s', $auth()->joined);
+if ($d === false) {
+    $free_contact_at = "";
+} else {
+    $free_contact_at = date("H:i", $d->getTimestamp()+8532);
+}
+
 ?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +36,7 @@
     });
 
     function showPay(){
-        Modal.getOrCreateInstance($('#popup-msg-1')).hide()
+        Modal.getOrCreateInstance($('#popup-сontact-ads')).hide()
         Modal.getOrCreateInstance($('#popup-tarif-take-keys')).show()
     }
 </script>
@@ -53,10 +62,10 @@
 
 <div class="modal fade main-modal main-modal-steps" id="popup-owner-questions" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="height: 500px">
+        <div class="modal-content h-auto">
             <div class="popup__wrp">
                 <div class="popup__content">
-                    <div class="popup__title"> </div>
+                    <div class="popup__title">Все собственники, которые сдают жилье, похожее на то, что вы ищите, увидят вашу анкету</div>
                     <!-- Slider main container -->
                     <form id="anket_form">
                         <div class="modal-swiper" data-swiper-speed="500">
@@ -65,7 +74,7 @@
                                 <!-- Slides -->
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle mb-4">Какой вид сделки Вы хотите предложить владельцу?</div>
+                                        <div class="fs-4 mb-4">Какой вид сделки Вы хотите предложить владельцу?</div>
 
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="questions-1" id="owner-questions-1" checked>
@@ -102,10 +111,10 @@
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle">Срок аренды?</div>
+                                        <div class="fs-4 mb-4">Срок аренды?</div>
 
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="questions-2" id="owner-questions-6" checked>
+                                            <input class="form-check-input" type="radio" name="questions-2" id="owner-questions-6">
                                             <label class="form-check-label" for="owner-questions-6">
                                                 До 1 мес.
                                             </label>
@@ -129,7 +138,7 @@
                                             </label>
                                         </div>
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="questions-2" id="owner-questions-10">
+                                            <input class="form-check-input" type="radio" name="questions-2" id="owner-questions-10" checked>
                                             <label class="form-check-label" for="owner-questions-10">
                                                 От 12+ мес.
                                             </label>
@@ -138,36 +147,54 @@
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle">С кем будете проживать?</div>
+                                        <div class="fs-4 mb-4">Кто будет проживать?</div>
 
                                         <div class="form-check form-check-box mb-3">
                                             <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-11" checked>
                                             <label class="form-check-label" for="owner-questions-11">
-                                                С детьми
+                                                Один парень
                                             </label>
                                         </div>
                                         <div class="form-check form-check-box mb-3">
                                             <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-12">
                                             <label class="form-check-label" for="owner-questions-12">
-                                                С животными
+                                                Одна девушка
                                             </label>
                                         </div>
                                         <div class="form-check form-check-box mb-3">
                                             <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-13">
                                             <label class="form-check-label" for="owner-questions-13">
-                                                С компанией
+                                                Семейная пара без детей
                                             </label>
                                         </div>
                                         <div class="form-check form-check-box mb-3">
                                             <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-14">
                                             <label class="form-check-label" for="owner-questions-14">
-                                                Один
+                                                Семейная пара с детьми
                                             </label>
                                         </div>
                                         <div class="form-check form-check-box mb-3">
                                             <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-15">
                                             <label class="form-check-label" for="owner-questions-15">
-                                                Еще не знаю
+                                                Есть животные
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-box mb-3">
+                                            <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-150">
+                                            <label class="form-check-label" for="owner-questions-150">
+                                                Девушки студентки
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-box mb-3">
+                                            <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-151">
+                                            <label class="form-check-label" for="owner-questions-151">
+                                                Парни студенты
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-box mb-3">
+                                            <input class="form-check-input" type="checkbox" name="questions-3" id="owner-questions-152">
+                                            <label class="form-check-label" for="owner-questions-152">
+                                                Сотрудники
                                             </label>
                                         </div>
 
@@ -175,31 +202,34 @@
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle">Национальность</div>
+                                        <div class="fs-4 mb-4">Национальность</div>
 
                                         <div class="btn-group-vertical select-list">
                                             <input type="radio" class="btn-check" name="questions-4" id="owner-questions-16" autocomplete="off" checked>
-                                            <label class="btn btn-outline-light" for="owner-questions-16">Россия</label>
+                                            <label class="btn btn-outline-light" for="owner-questions-16">Славяне</label>
                                             <input type="radio" class="btn-check" name="questions-4" id="owner-questions-17" autocomplete="off">
-                                            <label class="btn btn-outline-light" for="owner-questions-17">Беларусь</label>
-                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-18" autocomplete="off">
-                                            <label class="btn btn-outline-light" for="owner-questions-18">Украина</label>
+                                            <label class="btn btn-outline-light" for="owner-questions-17">Татары</label>
                                             <input type="radio" class="btn-check" name="questions-4" id="owner-questions-19" autocomplete="off">
-                                            <label class="btn btn-outline-light" for="owner-questions-19">Грузия</label>
-                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-20" autocomplete="off">
-                                            <label class="btn btn-outline-light" for="owner-questions-20">Другая</label>
+                                            <label class="btn btn-outline-light" for="owner-questions-19">Чеченцы</label>
+                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-21" autocomplete="off">
+                                            <label class="btn btn-outline-light" for="owner-questions-21">Армяне</label>
+                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-22" autocomplete="off">
+                                            <label class="btn btn-outline-light" for="owner-questions-22">Азербайджанцы</label>
+                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-23" autocomplete="off">
+                                            <label class="btn btn-outline-light" for="owner-questions-23">Казахи</label>
+                                            <input type="radio" class="btn-check" name="questions-4" id="owner-questions-24" autocomplete="off">
+                                            <label class="btn btn-outline-light" for="owner-questions-24">Другие</label>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle">Предложение по цене</div>
+                                        <div class="fs-4 mb-4">Предложение по цене</div>
                                         <div class="popup__text">Предлагая большую сумму, вы значительно выделяетесь среди других соискателей</div>
                                         <div class="popup__text fw-semibold">Цена, ₽</div>
 
-                                        <input type="text" class="js-range-slider" name="questions-5" value=""
-                                               data-type="int"
+                                        <input type="text" class="js-range-slider" name="questions-5" value=""О
                                                data-min="500"
                                                data-max="200000"
                                                data-from="10000"
@@ -213,11 +243,11 @@
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="slider-content" style="background: none" data-swiper-parallax-opacity="0.0" data-swiper-parallax="50%">
-                                        <div class="popup__subtitle">В какой день вам удобно встретиться?</div>
+                                        <div class="fs-4 mb-4">В какой день вам удобно встретиться?</div>
 
                                         <div class="mb-3">
                                             <input type="date" name="questions-9" placeholder="19.10.2021"
-                                                   class="form-control">
+                                                   class="form-control" required>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <!--div class="row mb-3">
@@ -248,10 +278,10 @@
                                         </div-->
 
 
-                                        <div class="popup__subtitle mt-5">Укажите время встречи</div>
+                                        <div class="fs-4 mb-4 mt-5">Укажите время встречи</div>
                                         <div class="mb-3">
                                             <input type="time" name="questions-10" placeholder="9:00"
-                                                   class="form-control">
+                                                   class="form-control" required>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <!--div class="row mb-3">
@@ -288,9 +318,9 @@
                             <div class="swiper-scrollbar"><div class="swiper-scrollbar-drag"></div></div>
                         </div>
                         <div class="popup__buttons position-relative">
-                            <button class="btn btn-light px-4 px-lg-5 popup-owner-questions__next">Дальше</button>
-                            <button class="btn btn-primary px-4 px-lg-5 popup-owner-questions__done">Готово</button>
-                            <button class="btn px-0 px-lg-4 position-absolute start-0 bottom-0 popup-owner-questions__back">Назад</button>
+                            <button class="btn btn-light px-4 px-lg-5 popup-owner-questions__next" type="button">Дальше</button>
+                            <button class="btn btn-primary px-4 px-lg-5 popup-owner-questions__done" type="submit">Готово</button>
+                            <button class="btn px-0 px-lg-4 position-absolute start-0 bottom-0 popup-owner-questions__back" type="button">Назад</button>
                         </div>
                     </form>
                 </div>
@@ -301,21 +331,46 @@
 
 <div class="modal fade main-modal" id="popup-msg-1" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="height: 500px">
+        <div class="modal-content h-auto">
             <div class="popup__wrp">
                 <div class="popup__content align-items-center">
 
-                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/message.svg">
-                    <div class="popup__title">Ваша анкета успешно доставлена владельцу</div>
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/Security_on_re.png">
+                    <div class="popup__title">Отлично, вы заполнили анкету и успешно прошли проверку!</div>
                     <div class="popup__text mt-4 text-center popup-msg-1__text">
-                        Обычно собственники отвечают в течение 5 минут, но иногда требуется больше времени
+                        Мы автоматически отправили вашу анкету всем собственникам которые сдают жилье похожее на то, что вы ищите. Если кто-то заинтересуется вашей анкетой, мы отправим вам уведомление.
+                    </div>
+
+                    <div class="popup__buttons">
+                        <button class="btn px-4 btn-primary mt-4 position-relative" data-bs-toggle="modal" data-bs-target="#popup-сontact-ads">
+                            <span class="fs-18">Связаться с владельцем</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade main-modal" id="popup-сontact-ads" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content h-auto">
+            <div class="popup__wrp">
+                <div class="popup__content align-items-center">
+
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/Connection_re_lcud.png">
+                    <div class="popup__text mt-4 text-center popup-msg-1__text">
+                        Возможность связаться с собственником <b>бесплатно</b> будет <b>завтра в <?=$free_contact_at?></b>
+                    </div>
+                    <div class="popup__text mt-4 text-center popup-msg-1__text">
+                        В течение суток, после размещения любого объявления на сайте, контактная информация в нем открыта только для тех, кто оказал помощь нашему проекту подключив "Услугу лицензия Take Keys VIP"
                     </div>
 
                     <div class="popup__buttons">
                         <button class="btn px-4 btn-primary mt-4 position-relative" onclick="showPay()">
                             <span class="fs-18">Подробнее о лицензии Take-Keys</span>
                             <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger me-2">
-							Оплатите сборы за услуги
+							Приоритетный доступ
 						</span>
                         </button>
                     </div>

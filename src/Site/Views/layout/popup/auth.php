@@ -34,6 +34,8 @@ if (!isset($forceReg))
                 })
                     .done(function(data) {
                         if (data['result'] === "OK") {
+                            window.location.reload();
+                            Modal.getOrCreateInstance($("#popup-auth")).hide()
                             Modal.getOrCreateInstance($("#popup-msg-1")).show()
                             // $("#login_suggestion").css({"display": "none"})
                             // $("#auth__back-accordion").css({"display": "none"})
@@ -67,6 +69,15 @@ if (!isset($forceReg))
            window.location = `https://${user_mail_domain ?? gmail.com}/`;
             event.preventDefault()
             event.stopPropagation()
+        });
+
+        $('#contact-popup-form').submit(function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+            if (checkValidate(this)) {
+                Modal.getOrCreateInstance($("#contact-popup-first")).hide()
+                Modal.getOrCreateInstance($("#popup-owner-questions")).show()
+            }
         });
     })
 
@@ -121,55 +132,18 @@ if (!isset($forceReg))
                                         <div class="swiper-wrapper">
                                             <!-- Slides -->
                                             <div class="swiper-slide">
-                                                <div class="auth__form-reg" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Для просмотра объекта недвижимости заполните анкету</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">
-                                                        Расскажите о своей кандидатуре, мы проверим, если вас нет в чёрном списке - то отправим анкету владельцу.</div>
-                                                </div>
-                                                <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
-                                                    <form class="auth__form-reg" novalidate>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Как вас представить владельцу?</label>
-                                                            <input form="auth__send-reg" type="text" name="name" placeholder="Имя" class="form-control"
-                                                                   autocomplete required>
-                                                            <div class="invalid-feedback">Пожалуйста, введите ваше имя</div>
-                                                        </div>
-                                                        <div class="row align-items-center">
-                                                            <div class="col">Шаг 1/2</div>
-                                                            <div class="col-auto">
-                                                                <button class="btn btn-primary auth__btn" type="submit">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="svg-wrp me-3">
-                                                                            <svg width="6" height="10" viewBox="0 0 6 10"
-                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                                      d="M0.46967 0.46967C0.762563 0.176777 1.23744 0.176777 1.53033 0.46967L5.53033 4.46967C5.67098 4.61032 5.75 4.80109 5.75 5C5.75 5.19891 5.67098 5.38968 5.53033 5.53033L1.53033 9.53033C1.23744 9.82322 0.762562 9.82322 0.469669 9.53033C0.176776 9.23744 0.176776 8.76256 0.469669 8.46967L3.93934 5L0.46967 1.53033C0.176777 1.23744 0.176777 0.762563 0.46967 0.46967Z"
-                                                                                      fill="#A3CC4A" />
-                                                                            </svg>
-                                                                        </i>
-                                                                        Продолжить
-                                                                    </div>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="auth__terms form-check form-check-box mt-3">
-                                                            <input class="form-check-input" type="checkbox" name="terms" id="auth__agent-reg" required>
-                                                            <label class="form-check-label" for="auth__agent-reg">
-                                                                Обязуюсь не использовать сервис в коммерческих целях и подтверждаю что не являюсь агентом или сотрудником агенства недвижимости
-                                                            </label>
-                                                            <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
                                                 <div class="" data-swiper-parallax="100%">
-                                                    <div class="auth__title">Укажите контакты для связи</div>
-                                                    <div class="auth__desc" style="font-size: 12px;">Подтвердите почту, чтобы получать уведомления от владельцев.</div>
+                                                    <div class="auth__title">Укажите контакты</div>
+                                                    <div class="auth__desc" style="font-size: 12px;">Как вас представить собственникам?</div>
                                                 </div>
                                                 <div class="" data-swiper-parallax="30%" data-swiper-parallax-opacity="0">
                                                     <form id="auth__send-reg" class="" novalidate>
                                                         <div class="mb-3">
+                                                            <div class="mb-3">
+                                                                <input form="auth__send-reg" type="text" name="name" placeholder="ФИО" class="form-control"
+                                                                       autocomplete required>
+                                                                <div class="invalid-feedback">Пожалуйста, введите ваше имя</div>
+                                                            </div>
                                                             <div class="mb-3">
                                                                 <input form="auth__send-reg" type="tel" name="phone" placeholder="Телефон"
                                                                        class="form-control" required data-mask="+{7} (000) 000-00-00"
@@ -189,7 +163,6 @@ if (!isset($forceReg))
                                                             </div>
                                                         </div>
                                                         <div class="row align-items-center">
-                                                            <div class="col">Шаг 2/2</div>
                                                             <div class="col-auto">
                                                                 <button class="btn btn-dark auth__btn" type="submit">
                                                                     <div class="d-flex align-items-center">
@@ -201,7 +174,7 @@ if (!isset($forceReg))
                                                                                       fill="#151A40" />
                                                                             </svg>
                                                                         </i>
-                                                                        Создать аккаунт
+                                                                        Создать анкету
                                                                     </div>
                                                                 </button>
                                                             </div>
@@ -275,21 +248,30 @@ if (!isset($forceReg))
     </div>
 </div>
 
-<div class="modal fade main-modal" id="popup-msg-2" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade main-modal" id="contact-popup-first" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content h-auto">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="popup__wrp">
                 <div class="popup__content align-items-center">
 
-                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/take-keys-circle.png">
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/contact-popup-bg.jpg">
+                    <div class="popup__title mt-4 text-center">Для связи с владельцем подтвердите, что вы не агент</div>
                     <div class="popup__text mt-4 text-center popup-msg-1__text">
-                        Каждую минуту алгоритмы Take Keys, сохраняют объявления с самых популярных сайтов недвижимости, блокируют фэйки и посредников, чтобы вы получали только актуальную информацию напрямую от собственников.
+                        Мы проверим, если вас нет в чёрном списке - сможете продолжить пользоваться сервисом
                     </div>
-
-                    <div class="popup__buttons">
-                        <button class="btn btn-primary px-3" onclick="showRecommendations()">Смотреть рекомендации</button>
-                    </div>
+                    <form class="contact-popup-form" id="contact-popup-form" novalidate>
+                        <div class="popup__buttons">
+                            <button class="btn btn-primary px-3 w-100">Продолжить</button>
+                        </div>
+                        <div class="auth__terms form-check form-check-box mt-3">
+                            <input class="form-check-input" type="checkbox" name="terms" id="im-natural-client" required>
+                            <label class="form-check-label" for="im-natural-client">
+                                Подтверждаю что не являюсь агентом или сотрудником агентства недвижимости
+                            </label>
+                            <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
