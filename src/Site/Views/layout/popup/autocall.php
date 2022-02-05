@@ -32,23 +32,26 @@
 </script>
 <div class="modal fade main-modal" id="popup-autocall" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="height: auto !important;">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="popup__wrp" style="background: url('/images/dist/popup-bg/robot.svg') no-repeat right 24px bottom 24px">
-                <div class="popup__content">
-                    <div class="popup__title"><?php global $auth; echo $auth()->name ?? "Уважаемый пользователь"?>, для вашего удобства и безопасности мы берём первичные переговоры с авторами объявлений на себя.</div>
-                    <div class="popup__text text-center">Операторы уже получили заявку, обычно прозвон 1 объекта занимает 2 минуты, но иногда может потребоваться больше времени. Мы за свой счёт связываемся с авторами объявлений и информируем вас о результате каждого звонка, а если не дозвонимся с первого раза, то перезвоним ещё раз.
-                        Уведомление о результате звонка вы получите на почту, пожалуйста ожидайте.</div>
-                    <div class="popup__title">Зачем это необходимо?</div>
-                    <div class="popup__text">
-                        <p>Если вы не в первый раз ищите жильё, то уже знаете, что при попытке звонка можно связаться с собственником и договориться о встрече, но чаще всего не удаётся с первого раза дозвониться в силу разных, индивидуальных ситуаций. Объект может быть уже не актуален или автор объявления занят на работе, отдыхе, укладывают детей спать, за рулём, едет в лифте без сети, могут банально не ответить по многим другим причинам. Но основная причина по которой мы берём переговоры на себя, это недобросовестные участники рынка недвижимости, к сожалению многие посредники работают не честно, публикуют фэйковые, не реальные варианты в корыстных целях. По статистике, каждый второй пользователь при самостоятельных поисках попадал в нежелательные ситуации, подвергаясь введению в заблуждение тратив время, деньги и хорошее настроение. По этому мы принимаем ответственность за наших пользователей и поддерживаем вас на каждом этапе. </p>
+        <div class="modal-content h-auto">
+            <div class="popup__wrp">
+                <div class="popup__content align-items-center">
+
+                    <img class="img-fluid mt-3 popup-msg-1__img" src="/images/dist/popup-bg/call_request_sent.png">
+                    <div class="popup__title">Ваш запрос принят и мы уже его обрабатываем</div>
+                    <div class="popup__text mt-4 text-center popup-msg-1__text">
+                        Обычно связь с владельцами устанавливается за 5-30 минут, но иногда нужно больше времени. Пожалуйста ожидайте, как только мы получим информацию - моментально вас уведомим.
                     </div>
-                    <div class="popup__buttons" style="margin-top: auto">
-                        <a href="/catalog/recommendations" class="btn btn-primary">Показать <?=count(explode(",", $auth()->request->recommendations))?> объявлений</a>
+
+                    <div class="popup__buttons">
+                        <a href="/catalog/recommendations"><button class="btn px-4 btn-primary mt-4 position-relative w-100" style="max-width: 500px">
+                                <span class="fs-18">Смотреть похожие объявления</span>
+                            </button></a>
+                        <a href="https://take-keys.online/booking"><button class="btn px-4 btn-dark mt-1 position-relative w-100" style="max-width: 500px">
+                                <span class="fs-18">Подробные условия онлайн бронирования</span>
+                            </button></a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

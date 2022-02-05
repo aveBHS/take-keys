@@ -2,9 +2,11 @@
 
 namespace Site\Controllers\User;
 
+use DateTime;
 use Site\Core\HttpRequest;
 use Site\Models\CallResultModel;
 use Site\Models\LogModel;
+use Site\Models\NotifyCustomModel;
 use Site\Models\ObjectCallModel;
 use Site\Models\ObjectModel;
 use Site\Models\RequestModel;
@@ -28,10 +30,23 @@ class CabinetController implements \Site\Controllers\Controller
     {
         global $auth;
         $notifies = CallResultModel::select([["owner_id", $auth()->id]], [["id", "desc"]]);
-        for($i = 0; $i < count($notifies); $i++){
+        for($i = 0; $i < count($notifies ?? []); $i++){
             $notifies[$i]->object = ObjectModel::find($notifies[$i]->object_id);
             $notifies[$i]->result = ObjectCallModel::find($notifies[$i]->call_id);
+            $notifies[$i]->type = "call";
+            $d = DateTime::createFromFormat('Y-m-d H:i:s', $notifies[$i]->created_at);
+            $notifies[$i]->time = $d->getTimestamp();;
         }
+        $custom_notifies = NotifyCustomModel::select([["owner_id", $auth()->id]], [["show_at", "desc"]]);
+        for($i = 0; $i < count($custom_notifies ?? []); $i++){
+            $custom_notifies[$i]->type = "custom";
+            $d = DateTime::createFromFormat('Y-m-d H:i:s', $custom_notifies[$i]->created_at);
+            $custom_notifies[$i]->time = empty($custom_notifies[$i]->show_at) ? $d->getTimestamp() : $custom_notifies[$i]->show_at;
+        }
+        $notifies = array_merge($notifies ?? [], $custom_notifies ?? []);
+        $time_sort = array_column($notifies, 'time');
+        array_multisort($time_sort, SORT_DESC, $notifies);
+
         $request->show(view("cabinet.notifies", ["notifies" => $notifies]));
     }
 

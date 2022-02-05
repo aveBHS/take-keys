@@ -68,7 +68,7 @@ try {
                     <span class="badge bg-primary rounded-pill"></span>
                 </a>
 
-                <a href="https://take-keys.com/obrazci-doc" target="_blank" class="list-group-item d-flex justify-content-between align-items-center py-3 list-group-item-action <?=$current_page==UNDEFINED_PAGE?'active':''?>">
+                <a href="https://take-keys.online/obrazci-doc" target="_blank" class="list-group-item d-flex justify-content-between align-items-center py-3 list-group-item-action <?=$current_page==UNDEFINED_PAGE?'active':''?>">
                     Документы
                     <span class="badge bg-primary rounded-pill"></span>
                 </a>

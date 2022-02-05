@@ -7,7 +7,33 @@
             data: form.serialize(),
         }).done(function (data) {
             Modal.getOrCreateInstance($('#popup-notification')).hide()
-            Modal.getOrCreateInstance($('#popup-auth')).show()
+            $.ajax({
+                url: "/api/objects/call",
+                data: `object=${object_id}`,
+                method: "POST"
+            })
+                .done(function(data) {
+                    if (data['result'] === "OK") {
+                        Modal.getOrCreateInstance($('#popup-msg-1')).show()
+                    } else if (data['result'] === "INFO") {
+                        swal({
+                            title: "Уведомление",
+                            text: data['reason'],
+                            icon: "info",
+                            buttons: ["Закрыть", "Мои заявки"]
+                        }).then(data => {if(data) window.location="/notifies/";});
+                    } else {
+                        swal({
+                            title: "Ошибка",
+                            text: data['reason'],
+                            icon: "error",
+                            buttons: ["Поддержка", "ОК"]
+                        }).then(data => {if(!data) Chatra('openChat', true);});
+                    }
+                })
+                .fail(function(data) {
+                    swal("Ошибка", "Повторите попытку позже", "error");
+                })
         });
     }
 </script>

@@ -13,6 +13,6 @@ class UserModel extends Model
 {
     protected $fields = [
         'login', 'password', 'name', 'request_id',
-        'remember_token', 'email_token', 'reset_token'
+        'remember_token', 'email_token', 'reset_token', 'anket'
     ];
 }

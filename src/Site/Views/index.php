@@ -14,8 +14,8 @@ $_page_title = "Главная страница | Take Keys";
         <div class="container">
             <div class="row gy-4 justify-content-center">
                 <div class="col-12">
-                    <h1 class="h1 mb-4">Найдите дом своей мечты</h1>
-                    <div class="home-header__desc mx-auto">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div>
+                    <h1 class="h1 mb-4">Получите бесплатно за 30 секунд 17 подходящих вариантов по цене, местоположению и условиям</h1>
+                    <!--div class="home-header__desc mx-auto">Take Keys объединяет объявления о недвижимости самых популярных площадок Рунета, чтобы сделать подбор жилья максимально удобным для Вас</div-->
                 </div>
                 <div class="col-12 col-lg">
                     <div class="home-header__item">
@@ -41,6 +41,7 @@ $_page_title = "Главная страница | Take Keys";
                         </div>
                     </div>
                 </div>
+                <!--button type="button" class="btn btn-48 btn-primary w-100 mb-3">Оставить заявку на подбор</button-->
             </div>
         </div>
     </div>
@@ -216,7 +217,7 @@ $_page_title = "Главная страница | Take Keys";
 </section>
 <div class="container mt-5">
     <?php if(!is_null($objects)) { ?>
-    <div class="h1 item__desc-title d-block mt-3 mt-lg-5">Рекомендуемое для Вас</div>
+    <div class="h1 item__desc-title d-block mt-3 mt-lg-5">Новые объявления</div>
     <div class="catalog pb-4">
         <div class="row g-3">
             <?php
@@ -260,7 +261,7 @@ $_page_title = "Главная страница | Take Keys";
                         Мы собираем данные со всех известных сайтов недвижимости, что позволяет нам владеть самой обширной базой данных.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.online/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -276,7 +277,7 @@ $_page_title = "Главная страница | Take Keys";
                         Работаем дистанционно, к нам не нужно ехать в офис и переплачивать 50-100%. Наши услуги фиксированные и доступны каждому.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.online/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>
@@ -292,7 +293,7 @@ $_page_title = "Главная страница | Take Keys";
                         Большой выбор эксклюзивных предложений, которых нет в открытом доступе. Мы привлекаем собственников через рекламные компании в Яндекс, Google, YouTube и соцсетей.
                     </div>
                     <div class="setting-item__btn mt-auto">
-                        <a href="https://take-keys.com/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
+                        <a href="https://take-keys.online/" class="btn btn-outline-dark rounded-pill px-4 mt-3">Подробнее</a>
                     </div>
                 </div>
             </div>

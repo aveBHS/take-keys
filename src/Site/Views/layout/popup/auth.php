@@ -182,7 +182,7 @@ if (!isset($forceReg))
                                                         <div class="auth__terms form-check form-check-box mt-3">
                                                             <input class="form-check-input" type="checkbox" name="terms" id="auth__terms-reg" required>
                                                             <label class="form-check-label" for="auth__terms-reg">
-                                                                Нажимая на кнопку Создать вы подтверждаете согласие с <a href="https://take-keys.com/documents#!/tab/359162567-1">условиями использования</a> Take-Keys и <a href="https://take-keys.com/documents#!/tab/359162567-2">политикой о данных пользователей</a>
+                                                                Нажимая на кнопку Создать вы подтверждаете согласие с <a href="https://take-keys.online/documents#!/tab/359162567-1">условиями использования</a> Take-Keys и <a href="https://take-keys.online/documents#!/tab/359162567-2">политикой о данных пользователей</a>
                                                             </label>
                                                             <div class="invalid-feedback">Пожалуйста, заполните все обязательные поля</div>
                                                         </div>

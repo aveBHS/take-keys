@@ -8,7 +8,13 @@
         <div class="col-md col-12 me-auto mb-4 mb-md-0">
             <div class="lk-notifications__item__title fw-bold"><?=$notify->object->title?> (<?=$notify->object->cost?> руб)</div>
             <div class="lk-notifications__item__title">
-                <?php if($notify->result->call_status == OBJECT_CALL_DONE) { ?>
+                <?php if($notify->call_id == -1) { ?>
+                    <?php if((int) $notify->show_at <= time()) { ?>
+                        Этот объект забронирован, если бронь отменят вы получите уведомление
+                    <?php } else { ?>
+                        <span class="fw-bold">Статус проверки: </span>Совершается звонок собственнику
+                    <?php } ?>
+                <?php } else { if($notify->result->call_status == OBJECT_CALL_DONE) { ?>
                     <?php if($notify->result->result_id == OBJECT_CALL_RESULT_IRRELEVANT) { ?>
                         Объект не актуальный, владелец закрыл объявление.<br>
                         Время последней проверки: <?=date("d.m.Y в H:i", $notify->result->result_time)?>
@@ -27,19 +33,25 @@
                     <span class="fw-bold">Статус проверки: </span>Мы не смогли дозовниться до собственника, следующая попытка вызова будет <?=date("d.m.Y в H:i", $notify->result->next_attempt)?>
                 <?php } else if ($notify->result->call_status == OBJECT_CALL_FAILED) { ?>
                     Мы не смогли связаться с собственником, возможно объявление устарело, попробуйте отправить заявку по этому объекту позднее
-                <?php } ?>
+                <?php }} ?>
             </div>
             <div class="lk-notifications__item__link">
                 <a href="/id/<?=$notify->object_id?>" target="_blank" class="link-dark fw-light">Смотреть объявление</a>
             </div>
         </div>
-        <?php if($notify->result->call_status == OBJECT_CALL_DONE) { ?>
+        <?php if($notify->call_id == -1) { ?>
+            <?php if((int) $notify->show_at <= time()) { ?>
+                <div class="col-md-auto d-flex flex-column justify-content-center">
+                    <a target="_blank" href="https://take-keys.online/booking"><button class="btn btn-primary px-4 w-100">Условия онлайн бронирования</button></a>
+                </div>
+            <?php } ?>
+        <?php } else { if($notify->result->call_status == OBJECT_CALL_DONE) { ?>
             <?php if ($notify->result->result_id == OBJECT_CALL_RESULT_ACTUAL) { ?>
                 <div class="col-md-auto col-6 d-flex flex-column justify-content-center">
                     <button class="btn btn-primary px-4 w-100" onclick="getPhone(<?=$notify->id?>);">Позвонить</button>
                 </div>
                 <div class="col-md-auto col-6 d-flex flex-column justify-content-center">
-                    <a href="https://take-keys.com/booking" target="_blank"><button class="btn btn-dark px-4 w-100">Забронировать</button></a>
+                    <a href="https://take-keys.online/booking" target="_blank"><button class="btn btn-dark px-4 w-100">Забронировать</button></a>
                 </div>
             <?php } ?>
         <?php } else if (in_array($notify->result->call_status, [OBJECT_CALL_IN_PROCESS, OBJECT_CALL_NEW])) { ?>
@@ -54,6 +66,6 @@
             <!--div class="col-md-auto col-6 d-flex flex-column justify-content-center">
                 <button class="btn btn-dark px-4 w-100 text-light">Повторить попытку</button>
             </div-->
-        <?php } ?>
+        <?php }} ?>
     </div>
 </div>

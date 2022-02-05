@@ -21,25 +21,25 @@ if(!isset($render))
                 <ul class="list-unstyled">
                     <li><a class="foot-link" href="/catalog">Снять</a></li>
                     <li><a class="foot-link" href="/catalog">Купить</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/price">Тарифы</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/documents">Документы</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/price">Тарифы</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/documents">Документы</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h5>Собственникам</h5>
                 <ul class="list-unstyled">
-                    <li><a class="foot-link" href="https://take-keys.com/#popup:ads">Сдать</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/#popup:ads">Продать</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/documents">Документы</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/#popup:ads">Сдать</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/#popup:ads">Продать</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/documents">Документы</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h5>Take Keys</h5>
                 <ul class="list-unstyled">
-                    <li><a class="foot-link" href="https://take-keys.com/#rec356317620">О сервисе</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/contacts">Контакты</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/documents">Правила сервиса</a></li>
-                    <li><a class="foot-link" href="https://take-keys.com/help">Помощь</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/#rec356317620">О сервисе</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/contacts">Контакты</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/documents">Правила сервиса</a></li>
+                    <li><a class="foot-link" href="https://take-keys.online/help">Помощь</a></li>
                 </ul>
             </div>
         </div>
@@ -57,7 +57,7 @@ if(!isset($render))
                     </div>
                 </div>
                 <div class="col text-center fs-12">
-                    <a href="https://take-keys.com/documents#!/tab/359162567-2">Политика конфиденциальности</a>
+                    <a href="https://take-keys.online/documents#!/tab/359162567-2">Политика конфиденциальности</a>
                 </div>
             </div>
         </div>

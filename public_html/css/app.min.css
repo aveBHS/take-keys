@@ -13758,7 +13758,7 @@ header {
 }
 @media (max-width: 767.98px) {
   .popup__wrp {
-    background-image: none !important;
+    /*background-image: none !important;*/
   }
 }
 
@@ -13844,6 +13844,7 @@ header {
   overflow: hidden;
   border: none;
   border-radius: 8px;
+  height: 644px;
 }
 @media (min-width: 992px) {
   .main-modal .modal-content {

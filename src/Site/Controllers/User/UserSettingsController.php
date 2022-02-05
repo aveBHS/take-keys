@@ -151,4 +151,20 @@ class UserSettingsController implements \Site\Controllers\Controller
             ]));
         }
     }
+
+    public function setAnket(HttpRequest $request, $args)
+    {
+        global $auth;
+
+        if(is_null($auth)){
+            $request->setCookie("user_anket", json_encode($request->post()));
+        } else {
+            try {
+                $auth()->anket = json_encode($request->post());
+                $auth()->save();
+            } catch (\Exception $ex){
+                bugReport($ex);
+            }
+        }
+    }
 }

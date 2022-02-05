@@ -96,9 +96,9 @@ global $auth;
                     <div class="row align-items-center">
                         <div class="col-12 col-lg-auto mx-auto mt-3 mt-lg-0">
                             <ul class="topline__menu">
-                                <li><a href="https://take-keys.com/">О сервисе</a></li>
+                                <li><a href="https://take-keys.online/">О сервисе</a></li>
                                 <li><a href="/catalog">Каталог</a></li>
-                                <li><a href="https://take-keys.com/help">Справочный центр</a></li>
+                                <li><a href="https://take-keys.online/help">Справочный центр</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto">

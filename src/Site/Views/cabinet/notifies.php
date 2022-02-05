@@ -14,7 +14,14 @@ global $auth;
 <div class="lk-notifications">
     <?=view("layout.lk.notification_vip")?>
     <?php foreach($notifies as $notify) {
-        echo view("layout.lk.notification_item", ["notify" => $notify]);
+        switch ($notify->type){
+            case "call":
+                echo view("layout.lk.notification_item", ["notify" => $notify]);
+                break;
+            case "custom":
+                echo view("layout.lk.notification_custom", ["notify" => $notify]);
+                break;
+        }
     } ?>
 </div>
 <?=$auth()->request->purchased == 1 ?"":view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")])?>

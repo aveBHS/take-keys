@@ -35,12 +35,25 @@ class VerifyOwnerRequestController implements \Site\Controllers\Controller
                 try {
                     $email_confirm = new SendPulseService(env("sendpulse_user_id"), env("sendpulse_api_token"), env("sendpulse_sender"));
                     $email_confirm->createSubscriber(env("sendpulse_ads_call_id"), $auth(), false);
+
+                    $call_result = new CallResultModel();
+                    $call_result->object_id = $object->id;
+                    $call_result->owner_id = $auth()->id;
+                    $call_result->call_id = -1;
+                    $call_result->show_at = time() + rand(9, 30) * 60;
+                    $call_result->save();
+
                 } catch (\Exception $exception){
                     bugReport($exception);
+                    $request->show(json_encode([
+                        "result" => "ERROR",
+                        "reason" => "Произошла ошибка, мы уже работаем над этим, пожалуйста, повторите попытку позднее"
+                    ]));
                 }
                 $tg->send(env("TELEGRAM_CALL_REQUESTS_CHAT"),
                     "Запрос прозвона рекламного объекта https://take-keys.ru/id/{$object->id}\nПользователь ID{$auth()->id}"
                 );
+                return;
             } else {
                 $call_result = CallResultModel::select([["owner_id", $auth()->id], ["object_id", $object->id]]);
                 if(!empty($call_result) && $call_result[0]->call_status != OBJECT_CALL_FAILED){

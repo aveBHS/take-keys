@@ -14,7 +14,8 @@ $name = $name ?? "пользователь";
     function setPartPay(v){
         full_amount = v;
         Modal.getOrCreateInstance($('#popup-tarif-take-keys')).hide()
-        pay(user_id, v);
+        Modal.getOrCreateInstance($('#popup-tarif-select-date')).show()
+        document.getElementsByClassName("slick-prev")[1].click();
     }
     function stayFree(){
         window.location = "/catalog/recommendations"
@@ -24,10 +25,12 @@ $name = $name ?? "пользователь";
         setTimeout(() => {
             let seconds = 60 * 60 * 24 // часы
             startTimer(seconds, $('.tarif-take-keys-vip-timer'))
+            startTimer(seconds, $('.tarif-take-keys-vip-second-timer'))
         }, 2000);
 
         $('#popup-tarif-take-keys')[0].addEventListener('shown.bs.modal', function (event) {
-            $(".slick-prev").click()
+            document.getElementsByClassName("slick-prev")[0].click();
+            // Array.prototype.slice.call(document.getElementsByClassName("slick-prev")).forEach(el => el.click());
         })
     });
 </script>
@@ -38,19 +41,207 @@ $name = $name ?? "пользователь";
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
             <div class="px-3 px-lg-4 py-4">
-            <p class="text-center fs-5 mb-2 text-muted text-uppercase">Только для тех, кто ищет жильё для себя, готов встречаться с собственниками и заключать договор аренды</p>
-            <p class="text-center fs-4 mb-4">"Без езды в офис и бешеных риелторских переплат"</p>
+            <p class="text-center fs-5 mb-2 text-muted text-uppercase">Пожалуйста ознакомьтесь с условиями и порядком оплаты услуг</p>
+            <p class="text-center fs-4 mb-4">Мы понимаем, что вы с нами еще не работали, и знаем, что в сфере недвижимости много недобросовестных риелторов. <span class="fw-light">Поэтому, чтобы заслужить ваше доверие, мы сначала предоставляем наши услуги по поиску квартиры, а потом уже берем основную оплату</span></p>
 
-            <p class="text-center mb-4">
+            <!--p class="text-center mb-4">
                 <iframe style="width: 100%;height: 256px;" src="https://www.youtube.com/embed/yN_SL1jN5B8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </p>
-            <p class="text-center">Специальная цена действует только:</p>
-            <div class="text-center mb-2">
-                <div class="badge-yellow" style="background: #fc0"><span class="tarif-take-keys-vip-timer fw-500">24:00:00</span>
-                </div>
+            </p-->
+
+            <div class="slider">
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/Hv_P92E-8Es/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Артём заселился в день обращения</h3>
+                            <p class="slider__city">г. Нижний Новгород</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/30dhXI7fC0U/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">София заселилась в день обращения</h3>
+                            <p class="slider__city">г. Санкт-Петербург</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/iAqPOvYpPos/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Максим заселился в день обращения</h3>
+                            <p class="slider__city">г. Волгоград</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/sF-UmWyQIBk/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Виктория заселилась в день обращения</h3>
+                            <p class="slider__city">г. Санкт-Петербург</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/qi-C5rlz3-k/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Игорь заселился в день обращения</h3>
+                            <p class="slider__city">г. Воронеж</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/tt2hm17IcZs/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Александра заселилась в день обращения</h3>
+                            <p class="slider__city">г. Краснодар</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/IyqRp7UMOHY/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Шамиль заселился в день обращения</h3>
+                            <p class="slider__city">г. Новосибирск</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/qDcYfU4jbMg/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Екатерина заселилась в день обращения</h3>
+                            <p class="slider__city">г. Новороссийск</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/UMxV-81ZQvY/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Любовь заселилась в день обращения</h3>
+                            <p class="slider__city">г. Краснодар</p>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/mMzJ9RCEcQ8/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Екатерина заселилась в день обращения</h3>
+                            <p class="slider__city">г. Краснодар</p>
+                        </div>
+                    </div>
+
+
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/V1o03urNKH0/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Максим и Вероника заселились в день обращения</h3>
+                            <p class="slider__city">г. Москва</p>
+                        </div>
+                    </div>
             </div>
-            <p class="fs-4 mb-0 text-center">Получите лицензию Take-Keys VIP</p>
-            <p class="fs-4 text-center fw-bold">И связывайтесь с собственниками уже через минуту после размещения объявления</p>
+
+            <p class="fs-4 mt-4 mb-0 text-center">В отличие от остальных мы работаем только до полного заселения</p>
+            <p class="fs-4 text-center fw-bold">Плюс вместо 100% от стоимости аренды, цена обслуживания фиксированная всего 99 ₽ на старте и 8990 ₽ по факту предоставления услуги.</p>
 
             <div class="fw-500 fs-18 mb-3 text-uppercase text-center text-muted">Вы получаете:</div>
 
@@ -65,19 +256,7 @@ $name = $name ?? "пользователь";
                                           fill="#A3CC4A" />
                                 </svg>
                             </div>
-                            <div class="col">VIP доступ</div>
-                        </div>
-                    </div>
-                    <div class="icon-list__item">
-                        <div class="row gx-3 align-items-center">
-                            <div class="col-auto lh-0">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M3.55763 0.00138038L3.58038 0.00288871C3.99659 0.0387193 4.35897 0.246846 4.68852 0.570498L4.7904 0.673562C5.42274 1.33803 6.5616 2.86433 6.74741 3.40531L6.76742 3.47617C6.88069 4.02296 6.76013 4.37805 6.40048 5.00618L6.31355 5.16056C6.14855 5.46331 6.12333 5.58818 6.17433 5.73115C6.95877 7.66089 8.29738 9.00621 10.1957 9.78552C10.3755 9.85112 10.5111 9.81369 10.8906 9.59488L11.0893 9.48187C11.6229 9.18766 11.9612 9.09455 12.4601 9.19856C12.885 9.28786 14.2587 10.298 15.0522 11.0075L15.2713 11.2101L15.35 11.2884C15.6726 11.6203 15.8802 11.985 15.9164 12.4317C15.9545 13.5175 14.6365 15.0462 13.8328 15.5057C12.9187 16.1639 11.7584 16.1528 10.4567 15.5438C7.05442 14.1207 1.85012 8.92298 0.463212 5.50736L0.380234 5.3164C-0.146102 4.0518 -0.134514 2.95851 0.468204 2.13525C1.01752 1.21907 2.50415 -0.0476334 3.55763 0.00138038ZM3.53538 1.17942L3.49199 1.17109L3.42317 1.17472C2.88254 1.24705 1.79674 2.1867 1.43645 2.78327L1.37411 2.87656C1.06325 3.38592 1.09917 4.08598 1.53211 5.04357L1.6149 5.23838C3.01208 8.39031 7.84967 13.1854 10.9258 14.4725L11.0953 14.5483C11.9857 14.9278 12.6591 14.911 13.2044 14.5218L13.2447 14.4958C13.4135 14.3779 13.8027 14.0224 14.1025 13.6747C14.5236 13.1863 14.7621 12.7388 14.7544 12.5006C14.746 12.3987 14.6678 12.2614 14.5247 12.114L14.4599 12.0496C13.9052 11.5159 12.3919 10.3801 12.2228 10.3445C12.0497 10.3085 11.9075 10.3572 11.5192 10.5818L11.3232 10.6925C10.7509 11.0027 10.3469 11.0859 9.77713 10.8776C7.56779 9.97115 5.99929 8.39479 5.08798 6.15166C4.87209 5.55182 4.98838 5.12766 5.36406 4.46982L5.45332 4.31203C5.62392 4.00252 5.65992 3.87118 5.62737 3.71404C5.59292 3.54664 4.55132 2.14674 4.01368 1.55311L3.87508 1.40721L3.80165 1.34006C3.70083 1.25343 3.6113 1.20086 3.53538 1.17942Z"
-                                          fill="#A3CC4A" />
-                                </svg>
-                            </div>
-                            <div class="col">Связывайтесь с собственниками одними из первых</div>
+                            <div class="col">VIP доступ, связывайтесь с собственниками одними из первых</div>
                         </div>
                     </div>
                     <div class="icon-list__item">
@@ -122,6 +301,18 @@ $name = $name ?? "пользователь";
                                           fill="#A3CC4A" />
                                 </svg>
                             </div>
+                            <div class="col">Помощь в торге, многие собственники предоставляют скидки на весь срок аренды, в среднем 6000 - 60 000 руб в год</div>
+                        </div>
+                    </div>
+                    <div class="icon-list__item">
+                        <div class="row gx-3 align-items-center">
+                            <div class="col-auto lh-0">
+                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M9.12564 0.0106286C9.0882 0.00365127 9.04955 0 9.01004 0C8.97052 0 8.93188 0.00365127 8.89443 0.0106286H3.76355C1.72143 0.0106286 0 1.63582 0 3.61809V12.2465C0 14.341 1.64581 16.0005 3.76355 16.0005H10.3227C12.3369 16.0005 14 14.2593 14 12.2465V4.86406C14 4.70812 13.9385 4.55822 13.8284 4.44573L9.66998 0.196357C9.55387 0.077702 9.39345 0.0106286 9.22578 0.0106286H9.12564ZM8.39427 1.21697L3.76359 1.21761C2.39128 1.21761 1.23157 2.31249 1.23157 3.61695V12.2454C1.23157 13.68 2.33369 14.7913 3.76359 14.7913H10.3227C11.6382 14.7913 12.7685 13.6079 12.7685 12.2454L12.768 5.62429L12.0491 5.62669C11.7752 5.62636 11.4636 5.6258 11.1171 5.62502C9.66429 5.62201 8.47862 4.50492 8.39858 3.09875L8.39427 2.94702V1.21697ZM12.094 4.41677L11.1198 4.4169C10.2943 4.41519 9.6258 3.75763 9.6258 2.94702V1.89466L12.094 4.41677ZM8.85417 10.3154C9.19425 10.3154 9.46993 10.5859 9.46993 10.9195C9.46993 11.2253 9.23828 11.4781 8.93773 11.5181L8.85417 11.5236H4.42314C4.08306 11.5236 3.80737 11.2531 3.80737 10.9195C3.80737 10.6137 4.03903 10.361 4.33958 10.321L4.42314 10.3154H8.85417ZM7.79387 6.93084C7.79387 6.59722 7.51818 6.32677 7.17811 6.32677H4.42277L4.33921 6.33229C4.03866 6.37229 3.80701 6.62502 3.80701 6.93084C3.80701 7.26445 4.08269 7.5349 4.42277 7.5349H7.17811L7.26166 7.52938C7.56222 7.48938 7.79387 7.23665 7.79387 6.93084Z"
+                                          fill="#A3CC4A" />
+                                </svg>
+                            </div>
                             <div class="col">Выписку на право собственности из ЕГРН "Снимаем все риски"</div>
                         </div>
                     </div>
@@ -135,18 +326,6 @@ $name = $name ?? "пользователь";
                                 </svg>
                             </div>
                             <div class="col">Юридический пакет документов: договор найма, опись имущества, расписка</div>
-                        </div>
-                    </div>
-                    <div class="icon-list__item">
-                        <div class="row gx-3 align-items-center">
-                            <div class="col-auto lh-0">
-                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M9.12564 0.0106286C9.0882 0.00365127 9.04955 0 9.01004 0C8.97052 0 8.93188 0.00365127 8.89443 0.0106286H3.76355C1.72143 0.0106286 0 1.63582 0 3.61809V12.2465C0 14.341 1.64581 16.0005 3.76355 16.0005H10.3227C12.3369 16.0005 14 14.2593 14 12.2465V4.86406C14 4.70812 13.9385 4.55822 13.8284 4.44573L9.66998 0.196357C9.55387 0.077702 9.39345 0.0106286 9.22578 0.0106286H9.12564ZM8.39427 1.21697L3.76359 1.21761C2.39128 1.21761 1.23157 2.31249 1.23157 3.61695V12.2454C1.23157 13.68 2.33369 14.7913 3.76359 14.7913H10.3227C11.6382 14.7913 12.7685 13.6079 12.7685 12.2454L12.768 5.62429L12.0491 5.62669C11.7752 5.62636 11.4636 5.6258 11.1171 5.62502C9.66429 5.62201 8.47862 4.50492 8.39858 3.09875L8.39427 2.94702V1.21697ZM12.094 4.41677L11.1198 4.4169C10.2943 4.41519 9.6258 3.75763 9.6258 2.94702V1.89466L12.094 4.41677ZM8.85417 10.3154C9.19425 10.3154 9.46993 10.5859 9.46993 10.9195C9.46993 11.2253 9.23828 11.4781 8.93773 11.5181L8.85417 11.5236H4.42314C4.08306 11.5236 3.80737 11.2531 3.80737 10.9195C3.80737 10.6137 4.03903 10.361 4.33958 10.321L4.42314 10.3154H8.85417ZM7.79387 6.93084C7.79387 6.59722 7.51818 6.32677 7.17811 6.32677H4.42277L4.33921 6.33229C4.03866 6.37229 3.80701 6.62502 3.80701 6.93084C3.80701 7.26445 4.08269 7.5349 4.42277 7.5349H7.17811L7.26166 7.52938C7.56222 7.48938 7.79387 7.23665 7.79387 6.93084Z"
-                                          fill="#A3CC4A" />
-                                </svg>
-                            </div>
-                            <div class="col">Ежемесячные скидки на аренду, в среднем 6000 - 60 000 руб, в год за счёт торга - это ваш бонус за подключение лицензии</div>
                         </div>
                     </div>
                     <div class="icon-list__item">
@@ -176,13 +355,20 @@ $name = $name ?? "пользователь";
                 </div>
             </div>
             <?php if(!$is_done){ ?>
+
             <div class="border-top border-4 px-4 tarif-take-keys-vip-margin mt-4"></div>
 
-            <div class="text-center text-uppercase text-muted mb-2 mt-4">Обычная цена: <s class="rub text-nowrap">12 900</s>
+            <div class="text-center text-uppercase text-muted mb-2 mt-4">Обычная цена: <s class="rub text-nowrap">24 297 </s>
                 ₽</div>
-            <div class="text-center text-uppercase mb-2 fw-bold">Ваша цена: <span class="rub text-nowrap">4 773</span> ₽
+            <div class="text-center text-uppercase mb-2 fw-bold">Ваша цена: <span class="rub text-nowrap">8 990</span> ₽
             </div>
-            <div class="text-center small text-muted">Скидка 63%, экономия <span class="rub text-nowrap">8 127</span> ₽
+            <div class="text-center small text-muted">Скидка 63%, экономия <span class="rub text-nowrap">15 307</span> ₽
+            </div>
+
+            <p class="mt-3 text-center">Время на оформление заказа:</p>
+            <div class="text-center mb-2">
+                <div class="badge-yellow" style="background: #fc0"><span class="tarif-take-keys-vip-timer fw-500">24:00:00</span>
+                </div>
             </div>
 
             <div class="tarif-take-keys__pay-method mt-3">Способы оплаты:
@@ -190,242 +376,50 @@ $name = $name ?? "пользователь";
                 <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google-pay" class="svg-inline--fa fa-google-pay fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M105.72,215v41.25h57.1a49.66,49.66,0,0,1-21.14,32.6c-9.54,6.55-21.72,10.28-36,10.28-27.6,0-50.93-18.91-59.3-44.22a65.61,65.61,0,0,1,0-41l0,0c8.37-25.46,31.7-44.37,59.3-44.37a56.43,56.43,0,0,1,40.51,16.08L176.47,155a101.24,101.24,0,0,0-70.75-27.84,105.55,105.55,0,0,0-94.38,59.11,107.64,107.64,0,0,0,0,96.18v.15a105.41,105.41,0,0,0,94.38,59c28.47,0,52.55-9.53,70-25.91,20-18.61,31.41-46.15,31.41-78.91A133.76,133.76,0,0,0,205.38,215Zm389.41-4c-10.13-9.38-23.93-14.14-41.39-14.14-22.46,0-39.34,8.34-50.5,24.86l20.85,13.26q11.45-17,31.26-17a34.05,34.05,0,0,1,22.75,8.79A28.14,28.14,0,0,1,487.79,248v5.51c-9.1-5.07-20.55-7.75-34.64-7.75-16.44,0-29.65,3.88-39.49,11.77s-14.82,18.31-14.82,31.56a39.74,39.74,0,0,0,13.94,31.27c9.25,8.34,21,12.51,34.79,12.51,16.29,0,29.21-7.3,39-21.89h1v17.72h22.61V250C510.25,233.45,505.26,220.34,495.13,211ZM475.9,300.3a37.32,37.32,0,0,1-26.57,11.16A28.61,28.61,0,0,1,431,305.21a19.41,19.41,0,0,1-7.77-15.63c0-7,3.22-12.81,9.54-17.42s14.53-7,24.07-7C470,265,480.3,268,487.64,273.94,487.64,284.07,483.68,292.85,475.9,300.3Zm-93.65-142A55.71,55.71,0,0,0,341.74,142H279.07V328.74H302.7V253.1h39c16,0,29.5-5.36,40.51-15.93.88-.89,1.76-1.79,2.65-2.68A54.45,54.45,0,0,0,382.25,158.26Zm-16.58,62.23a30.65,30.65,0,0,1-23.34,9.68H302.7V165h39.63a32,32,0,0,1,22.6,9.23A33.18,33.18,0,0,1,365.67,220.49ZM614.31,201,577.77,292.7h-.45L539.9,201H514.21L566,320.55l-29.35,64.32H561L640,201Z"></path></svg>,
                 Банковские карты</div>
 
-            <button class="btn px-1 btn-warning w-100 rounded-pill mt-3 vibrate text-dark" style="background: #fc0" onclick="setPartPay(true);" type="button">
-                <span class="text-uppercase fw-500">Получить лицензию по специальной цене</span>
-            </button>
-
-            <div class="text-center text-uppercase fw-bold mt-4">Или воспользуйтесь рассрочкой:<br />3 платежа по <span
-                        class="rub text-nowrap">1 591</span> ₽</div>
-            <button class="btn px-1 fw-500 btn-primary w-100 rounded-pill mt-3" onclick="setPartPay(false);" type="button">
-                <span class="text-uppercase fw-500">Получить лицензию за <span class="rub text-nowrap">1 591</span> ₽</span>
-            </button>
-            <div class="text-center mt-2 text-muted lh-sm"><small>* Для граждан РФ действуют и другие варианты рассрочки — <br/>
-                    <a href="https://wa.me/message/I5XX3SNKRRS4I1" target="_blank">пишите менеджеру в WhatsApp и он расскажет вам все подробности.</a></small></div>
-            <?php } ?>
-            <div class="fw-500 mt-3 text-center fs-4 fw-bold">Посмотрите на отзывы и результаты пользователей:</div>
-
-            <div class="slider">
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/Hv_P92E-8Es/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Артём заселился в день обращения</h3>
-                        <p class="slider__city">г. Нижний Новгород</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/30dhXI7fC0U/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">София заселилась в день обращения</h3>
-                        <p class="slider__city">г. Санкт-Петербург</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/iAqPOvYpPos/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Максим заселился в день обращения</h3>
-                        <p class="slider__city">г. Волгоград</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/sF-UmWyQIBk/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Виктория заселилась в день обращения</h3>
-                        <p class="slider__city">г. Санкт-Петербург</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/qi-C5rlz3-k/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Игорь заселился в день обращения</h3>
-                        <p class="slider__city">г. Воронеж</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/tt2hm17IcZs/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Александра заселилась в день обращения</h3>
-                        <p class="slider__city">г. Краснодар</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/IyqRp7UMOHY/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Шамиль заселился в день обращения</h3>
-                        <p class="slider__city">г. Новосибирск</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/qDcYfU4jbMg/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Екатерина заселилась в день</h3>
-                        <p class="slider__city">г. Новороссийск</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/UMxV-81ZQvY/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Любовь заселилась в день обращения</h3>
-                        <p class="slider__city">г. Краснодар</p>
-                    </div>
-                </div>
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/rgaty5K-Sks/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Екатерина заселилась в день обращения</h3>
-                        <p class="slider__city">г. Краснодар</p>
-                    </div>
-                </div>
-
-
-                <div class="slider__item">
-                    <div class="slider__item-inner">
-                        <div class="slider__video slider__video--enabled">
-                            <img class="slider__img" src="https://img.youtube.com/vi/V1o03urNKH0/0.jpg">
-                            <button class="slider__btn" aria-label="Запустить видео">
-                                <svg width="68" height="48" viewBox="0 0 68 48">
-                                    <path class="slider__button-shape"
-                                          d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                    </path>
-                                    <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <h3 class="slider__heading">Максим и Вероника заселились в день обращения</h3>
-                        <p class="slider__city">г. Москва</p>
-                    </div>
-                </div>
+            <div class="popup__buttons">
+                <button class="btn btn-dark px-1 w-100 rounded-pill mt-3 vibrate text-light position-relative" type="button" onclick="setPartPay(0);">
+                    <span class="fs-18">Оплатить 8990 ₽ одним платежом<br><small>Только для тех, кому нужна приоритетная поддержка</small></span>
+                    <span class="position-absolute top-0 end-0 translate-middle-y badge rounded-pill bg-danger me-2">
+                        Гарантированное заселение за 24 часа
+                    </span>
+                </button>
             </div>
 
-                <p class="mt-5 mb-5 pt-3 pb-3 fs-4 text-center fw-bold"><b>Для заселения без ошибок и досадных просчетов следуйте этим шагам</b></p>
+            <div class="text-center mt-2 text-muted lh-sm"><small>Или воспользуйтесь рассрочкой:<br />Оплатите 99 ₽ на старте, а <span
+                            class="rub text-nowrap">8891</span> ₽ по факту предоставления услуг.</small></div>
+
+            <button class="btn px-1 fw-500 btn-primary w-100 rounded-pill mt-3" onclick="setPartPay(2);" type="button" >
+                <span class="text-uppercase fw-500">Получить доступ на связь с владельцами за <span class="rub text-nowrap">99</span> ₽</span>
+            </button>
+
+            <div class="text-center fw-500 mt-4">Мы настолько уверены в программе заселения Take-Keys VIP, что гарантируем
+                <p class="fs-2 fw-lighter mt-3">100% ВОЗВРАТ СРЕДСТВ</p>
+                Если вы арендуете жильё которого нет в нашей системе, то мы просто вернём ваши деньги без лишних вопросов.</div>
+
+            <?php } ?>
+            <!--div class="fw-500 mt-3 text-center fs-4 fw-bold">Посмотрите на отзывы и результаты пользователей:</div-->
+
+            <p class="mt-5 mb-5 pt-3 pb-3 fs-4 text-center fw-bold"><b>Регламент заселения</b></p>
 
             <div class="border border-primary border-3 rounded-3">
                 <div class="p-3">
-                    <p class="fw-500 mt-3 fs-5">1 ШАГ: ПОДКЛЮЧИТЕ ЛИЦЕНЗИЮ</p>
-                    <p>1. Получите полный доступ к сервису</p>
+                    <p class="fw-500 mt-3 fs-5">1 ШАГ: ОПЛАТИТЕ ДОСТУП</p>
 
-                    <p>2. Выбирайте понравившиеся варианты, ваш персональный менеджер проведёт телефонные переговоры и поможет организовать встречу.</p>
+                    <p>Ваш персональный менеджер проведёт телефонные переговоры и поможет организовать встречу.</p>
 
                     <p class="fw-500 mt-4 mb-3 fs-5">РЕЗУЛЬТАТ:</p>
-                    <p>Вы сможете связываться с собственниками, договариваться о встрече, а так же проверять объекты в ЕГРН.</p>
+                    <p>Вы сможете связываться с собственниками и договариваться о встрече.</p>
                 </div>
                 <div class="bg-light p-3 fs-5">
-                    <p class="fw-500">2 ШАГ: ПРОВЕРКА ДОКУМЕНТОВ НА ПРАВО СОБСТВЕННОСТИ</p>
-                    <p>1. Прежде чем заключить договор необходимо заказать выписку из ЕГРН.</p>
-
-                    <p>2. Выписка поступает до 48 часов, если с документами все в порядке рекомендуем заключать договор.</p>
+                    <p class="fw-500">2 ШАГ: ПРОСМОТР ОБЪЕКТА</p>
+                    <p>Для гарантий мы заказываем выписку из ЕГРН которая поступает до 48 часов, если с документами все в порядке рекомендуем заключать договор.</p>
 
                     <p class="fw-500 mt-4 mb-3 fs-5">РЕЗУЛЬТАТ:</p>
                     <p>Вы без рисков снимите юридически чистый объект недвижимости.</p>
                 </div>
                 <div class="p-3">
-                    <p class="fw-500 mt-4 fs-5">3 ШАГ: ЗАКЛЮЧИТЬ ДОГОВОР С СОБСТВЕННИКОМ</p>
-                    <p>1. Прежде чем ехать на встречу, в личном кабинете скачайте юридический пакет документов включающий в себя (Договора найма, расписку и опись имущества).</p>
-
-                    <p>2. Вместе с собственником заполните бланки описи имущества.</p>
-
-                    <p>3. Сделайте короткую видео опись имущества, снимите на камеру ремонт, мебель, технику, а так же показатели счётчика чтобы сохранить начальное состояние квартиры и не допустить спорных вопросов при съезде.</p>
-
-                    <p>4. Если будете оплачивать аренду наличными, берите с собственника каждый раз роспись в бланке "Расписка" о получение денег.</p>
+                    <p class="fw-500 mt-4 fs-5">3 ШАГ: ЗАКЛЮЧЕНИЕ ДОГОВОРА С СОБСТВЕННИКОМ</p>
+                    <p>Вместе с собственником заполните договор аренды, бланки расписки и описи имущества.</p>
                 </div>
 
             </div>
@@ -435,7 +429,7 @@ $name = $name ?? "пользователь";
             <p class="border border-primary border-3 rounded-3 border-dashed text-center fw-500 p-3">Вы снимите подходящий вариант по лучшим условиям напрямую от собственника и будете довольны</p>
 
             <?php if(!$is_done){ ?>
-                <button class="btn px-1 fw-500 btn-primary w-100 rounded-pill" onclick="setPartPay(true);" type="button">
+                <button class="btn px-1 fw-500 btn-primary w-100 rounded-pill" onclick="setPartPay(0);" type="button">
                     <span class="fs-18">Получить лицензию Take-Keys VIP</span>
                 </button>
             <?php } else { ?>
@@ -443,10 +437,6 @@ $name = $name ?? "пользователь";
                     <span class="fs-18">Лицензия активна</span>
                 </button>
             <?php } ?>
-
-            <div class="text-center fw-500 mt-4">Мы настолько уверены в программе заселения Take-Keys VIP, что гарантируем
-                <p class="fs-2 fw-lighter mt-3">100% ВОЗВРАТ СРЕДСТВ</p>
-                Если вы арендуете жильё которого нет в нашей системе, то мы просто вернём ваши деньги без лишних вопросов.</div>
         </div>
     </div>
     </div>

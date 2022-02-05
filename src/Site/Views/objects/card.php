@@ -23,10 +23,16 @@ if(!is_null($auth())){
     }
 }
 
-$contact_button_text = $purchased?"Связаться":"Записаться на встречу";
+$contact_button_text = "Связаться";
 ?>
 
-<?=view("layout.header", ["_page_title" => $object->title])?>
+<?=view("layout.header", [
+    "_page_title" => $object->title,
+    "_page_desc" => mb_strlen($object->description) > 250 ?
+        mb_substr($object->description, 0, 250) . "..." :
+        $object->description,
+    "_page_img" => $images[0]->path
+])?>
 <style>
     .ya-share2__icon{
         background-image: url("/images/icons/share.svg") !important;
@@ -159,18 +165,12 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
                                 <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary w-100 mb-4">Бронировать</button>
                             </form>
                         <?php } else if($purchased) { ?>
-                            <?php if ($object->isAd == 1 and false){ ?>
-                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3">
-                                    <?= preg_replace(
-                                        '/^(\d)(\d{3})(\d{3})(\d{2})(\d{2})$/',
-                                        '+\1 (\2) \3-\4-\5',
-                                        (string) $object->phones
-                                    ) ?>
-                                </button>
+                            <?php if (empty($auth()->anket)){ ?>
+                                <button type="button" class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-owner-message"><?=$contact_button_text?></button>
                             <?php } else { ?>
                                 <button type="button" class="btn btn-48 btn-primary w-100 mb-3" onclick="send_call_request();"><?=$contact_button_text?></button>
                             <?php } ?>
-                            <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
+                            <a href="https://take-keys.online/booking"><button class="btn btn-48 btn-dark w-100 mb-4">Бронировать</button></a>
                         <?php } else if(!is_null($auth())) { ?>
                             <?php if ($object->isAd == 1){ ?>
                                 <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
@@ -180,8 +180,8 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
                                 <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
                             <?php } ?>
                         <?php } else { ?>
-                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#contact-popup-first"><?=$contact_button_text?></button>
-                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#contact-popup-first">Бронировать</button>
+                            <button class="btn btn-48 btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
+                            <button class="btn btn-48 btn-dark w-100 mb-4" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Бронировать</button>
                         <?php } ?>
                         <?php if($auth()->admin == 1) { ?>
                             <button class="btn btn-48 btn-danger w-100 mb-3" onclick="publishObjectPlatforms(<?=$object->id?>);">Опубликовать Avito</button>
@@ -420,8 +420,12 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary"><?=$contact_button_text?></button>
         <button type="button" onclick="object_archived();" class="btn btn-48 btn-secondary">Бронировать</button>
     <?php } else if($purchased) { ?>
-        <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();"><?=$contact_button_text?></button>
-        <a href="https://take-keys.com/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
+        <?php if (empty($auth()->anket)){ ?>
+            <button type="button" class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-owner-message"><?=$contact_button_text?></button>
+        <?php } else { ?>
+            <button type="button" class="btn btn-48 btn-primary" onclick="send_call_request();"><?=$contact_button_text?></button>
+        <?php } ?>
+        <a href="https://take-keys.online/booking"><button class="btn btn-48 btn-dark">Бронировать</button></a>
     <?php } else if(!is_null($auth())) { ?>
         <?php if ($object->isAd == 1){ ?>
             <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
@@ -431,8 +435,8 @@ $contact_button_text = $purchased?"Связаться":"Записаться н�
             <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys" >Бронировать</button>
         <?php } ?>
     <?php } else { ?>
-        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#contact-popup-first"><?=$contact_button_text?></button>
-        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#contact-popup-first">Бронировать</button>
+        <button class="btn btn-48 btn-primary" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys"><?=$contact_button_text?></button>
+        <button class="btn btn-48 btn-dark" data-bs-toggle="modal" data-bs-target="#popup-tarif-take-keys">Бронировать</button>
     <?php } ?>
 </div>
 <button onclick="Chatra('openChat', true)" class="btn btn-warning btn-icon btn-chat">
@@ -450,12 +454,15 @@ if(is_null($auth())) {
 }
 if(!$purchased || is_null($auth())){
     echo(view("layout.popup.purchase"));
-    echo(view("layout.popup.anket", [
-        'continue' => $request->getFlash("action") == "continue" && !$purchased
-    ]));
-    echo(view("layout.popup.notify"));
+    echo(view("layout.popup.select_date"));
     echo(view("layout.payment_widget", ["amount" => env("first_payment_amount_sale")]));
     echo(view("layout.popup.payment_result"));
+} else if(!is_null($auth())){
+    echo(view("layout.popup.anket", [
+        'continue' => $request->getFlash("action") == "continue"
+    ]));
+    echo(view("layout.popup.notify"));
+    echo(view("layout.popup.contact_messages"));
 }
 echo(view("layout.popup.autocall"));
 ?>

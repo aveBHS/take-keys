@@ -171,6 +171,9 @@ return [
         "POST::~api[/]user[/]filter[/]?$~" => [
             "controller" => [\Site\Controllers\User\UserSettingsController::class, "setFilter"]
         ],
+        "POST::~api[/]user[/]anket[/]?$~" => [
+            "controller" => [\Site\Controllers\User\UserSettingsController::class, "setAnket"]
+        ],
 
         // Megafon CRM
         "MIXED::~business[/]mcrm[/]?$~" => [
