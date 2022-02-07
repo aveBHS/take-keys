@@ -13,6 +13,7 @@ class ZvonokWebHook implements \Site\Controllers\Controller
     public function view(HttpRequest $request, $args) { }
 
     public function successful_call(HttpRequest $request, $args){
+        return;
         $phone = getPhone($args[0]);
 
         $link_notify = NotifyModel::select([["address", $phone], ["object_id", [-1, ">"]]], [["id", "desc"]], 1)[0];

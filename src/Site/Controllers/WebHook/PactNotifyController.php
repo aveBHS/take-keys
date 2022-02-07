@@ -136,7 +136,12 @@ class PactNotifyController implements \Site\Controllers\Controller
                         switch ($communication_config->scenario_stage) {
                             case 0:
                             case 1:
-                                $notify->text = MESSENGER_SCENARIOS[0];
+                                $link_notify = NotifyModel::select([["address", getPhone($data['data']['external_public_id'])], ["object_id", [-1, ">"]]], [["id", "desc"]], 1)[0];
+
+                                $notify->text = str_replace("[URL]", "https://take-keys.ru/", MESSENGER_SCENARIOS[1]);
+                                if(!is_null($link_notify))
+                                    $notify->text = str_replace("[URL]", "https://take-keys.ru/id/$link_notify->object_id", MESSENGER_SCENARIOS[1]);
+
                                 $communication_config->scenario_stage = 2;
                                 $isNewMessage = true;
                             break;
