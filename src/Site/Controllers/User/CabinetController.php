@@ -37,7 +37,7 @@ class CabinetController implements \Site\Controllers\Controller
             $d = DateTime::createFromFormat('Y-m-d H:i:s', $notifies[$i]->created_at);
             $notifies[$i]->time = $d->getTimestamp();;
         }
-        $custom_notifies = NotifyCustomModel::select([["owner_id", $auth()->id]], [["show_at", "desc"]]);
+        $custom_notifies = NotifyCustomModel::select([["owner_id", $auth()->id], ["show_at", [time(), "<="]]], [["show_at", "desc"]]);
         for($i = 0; $i < count($custom_notifies ?? []); $i++){
             $custom_notifies[$i]->type = "custom";
             $d = DateTime::createFromFormat('Y-m-d H:i:s', $custom_notifies[$i]->created_at);
