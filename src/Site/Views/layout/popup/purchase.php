@@ -23,7 +23,7 @@ $name = $name ?? "пользователь";
     document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
-            let seconds = 60 * 60 * 24 // часы
+            let seconds = 60 * 60 * 0.5 // часы
             startTimer(seconds, $('.tarif-take-keys-vip-timer'))
             startTimer(seconds, $('.tarif-take-keys-vip-second-timer'))
         }, 2000);
@@ -202,24 +202,6 @@ $name = $name ?? "пользователь";
                             <p class="slider__city">г. Краснодар</p>
                         </div>
                     </div>
-                    <div class="slider__item">
-                        <div class="slider__item-inner">
-                            <div class="slider__video slider__video--enabled">
-                                <img class="slider__img" src="https://img.youtube.com/vi/mMzJ9RCEcQ8/0.jpg">
-                                <button class="slider__btn" aria-label="Запустить видео">
-                                    <svg width="68" height="48" viewBox="0 0 68 48">
-                                        <path class="slider__button-shape"
-                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
-                                        </path>
-                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <h3 class="slider__heading">Екатерина заселилась в день обращения</h3>
-                            <p class="slider__city">г. Краснодар</p>
-                        </div>
-                    </div>
-
 
                     <div class="slider__item">
                         <div class="slider__item-inner">
@@ -236,6 +218,24 @@ $name = $name ?? "пользователь";
                             </div>
                             <h3 class="slider__heading">Максим и Вероника заселились в день обращения</h3>
                             <p class="slider__city">г. Москва</p>
+                        </div>
+                    </div>
+
+                    <div class="slider__item">
+                        <div class="slider__item-inner">
+                            <div class="slider__video slider__video--enabled">
+                                <img class="slider__img" src="https://img.youtube.com/vi/mMzJ9RCEcQ8/0.jpg">
+                                <button class="slider__btn" aria-label="Запустить видео">
+                                    <svg width="68" height="48" viewBox="0 0 68 48">
+                                        <path class="slider__button-shape"
+                                              d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z">
+                                        </path>
+                                        <path class="slider__button-icon" d="M 45,24 27,14 27,34"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="slider__heading">Екатерина заселилась в день обращения</h3>
+                            <p class="slider__city">г. Краснодар</p>
                         </div>
                     </div>
             </div>
@@ -367,7 +367,7 @@ $name = $name ?? "пользователь";
 
             <p class="mt-3 text-center">Время на оформление заказа:</p>
             <div class="text-center mb-2">
-                <div class="badge-yellow" style="background: #fc0"><span class="tarif-take-keys-vip-timer fw-500">24:00:00</span>
+                <div class="badge-yellow" style="background: #fc0"><span class="tarif-take-keys-vip-timer fw-500">00:30:00</span>
                 </div>
             </div>
 

@@ -59,11 +59,11 @@
                     <form id="tarif-max__form" class="popup__content needs-validation loading" novalidate>
                         <div class="popup__title">Выберите день в который вам необходимо заселиться</div>
                         <!-- <div class="popup__title text-primary">Уважаемый Иван</div> -->
-                        <div class="popup__text">К выбранному дню мы подберем для вас подходящие варианты по цене, местоположению и условиям, а так-же организуем график просмотра 3-4 объектов</div>
+                        <div class="popup__text">Мы подберём подходящие варианты по цене, местоположению, условиям и дате заезда + закажим выписку в ЕГРН чтобы вы удачно заселились.</div>
 
                         <p class="fw-500 mt-4 fs-5 text-center fs-4 fw-bold">РЕЗУЛЬТАТ</p>
 
-                        <p class="border border-primary border-3 rounded-3 border-dashed text-center fw-500 p-3">Вы снимите подходящий вариант по лучшим условиям напрямую от собственника и будете довольны</p>
+                        <p class="border border-primary border-3 rounded-3 border-dashed text-center fw-500 p-3">Вы арендуете лучший вариант на самых выгодных условиях в желаемый день и будете довольны!</p>
 
 
                         <div class="text-center fw-500 mt-4">Мы настолько уверены в программе заселения Take-Keys VIP, что гарантируем
@@ -126,11 +126,11 @@
                     <form id="tarif-max__form" class="popup__content needs-validation loading" novalidate>
                         <div class="popup__title">Выберите день в который вам необходимо заселиться</div>
                         <!-- <div class="popup__title text-primary">Уважаемый Иван</div> -->
-                        <div class="popup__text">К выбранному дню мы подберем для вас подходящие варианты по цене, местоположению и условиям, а так-же организуем график просмотра 3-4 объектов</div>
+                        <div class="popup__text">Мы подберём подходящие варианты по цене, местоположению, условиям и дате заезда + закажим выписку в ЕГРН чтобы вы удачно заселились.</div>
 
                         <p class="fw-500 mt-4 fs-5 text-center fs-4 fw-bold">РЕЗУЛЬТАТ</p>
 
-                        <p class="border border-primary border-3 rounded-3 border-dashed text-center fw-500 p-3">Вы снимите подходящий вариант по лучшим условиям напрямую от собственника и будете довольны</p>
+                        <p class="border border-primary border-3 rounded-3 border-dashed text-center fw-500 p-3">Вы арендуете лучший вариант на самых выгодных условиях в желаемый день и будете довольны!</p>
 
 
                         <div class="text-center fw-500 mt-4">Мы настолько уверены в программе заселения Take-Keys VIP, что гарантируем
